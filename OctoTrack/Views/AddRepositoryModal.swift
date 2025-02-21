@@ -23,7 +23,7 @@ struct AddRepositoryModal: View {
                 Task {
                     await repo = viewModel.getRepo()
                     if let repo = repo {
-                        appViewModel.userApp?.repoList.append(repo)
+                        appViewModel.addRepoToUser(repo: repo)
                     }
                 }
             }) {
