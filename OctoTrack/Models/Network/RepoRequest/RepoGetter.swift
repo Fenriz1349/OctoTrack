@@ -1,13 +1,13 @@
 //
-//  UserRequest.swift
+//  RepoGetter.swift
 //  OctoTrack
 //
-//  Created by Julien Cotte on 17/02/2025.
+//  Created by Julien Cotte on 21/02/2025.
 //
 
 import Foundation
 
-final class UserLoader {
+final class RepoGetter {
 
     private let client: HTTPClient
 
@@ -15,10 +15,10 @@ final class UserLoader {
         self.client = client
     }
 
-    func userLoader(from request: URLRequest) async throws -> User {
+    func repoGetter(from request: URLRequest) async throws -> Repository {
         let (data, response) = try await client.request(from: request)
-        let user =  try UserMapper.map(data, and: response)
+        let repo =  try RepoMapper.map(data, and: response)
 
-        return user
+        return repo
     }
 }

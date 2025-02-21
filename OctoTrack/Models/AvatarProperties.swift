@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct AvatarProperties: Codable {
+    let name: String
+    let url: String
+}

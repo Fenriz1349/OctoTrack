@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct RepoRow: View {
+    let repository: Repository
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationLink(destination: RepoDetailView(repository: repository) ) {
+            HStack {
+                AsyncAvatarImage(avatar: repository.avatar, size: 50)
+                Text(repository.name)
+                Spacer()
+                Image(systemName: "chevron.forward")
+                    .padding(.leading, 5)
+            }
+            .padding(.horizontal, 20)
+        }
     }
 }
 
 #Preview {
-    RepoRow()
+    RepoRow(repository: PreviewModels.repositories.first!)
 }

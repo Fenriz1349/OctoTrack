@@ -1,0 +1,50 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Add Item" : {
+
+    },
+    "Ajouter un Repo" : {
+
+    },
+    "AuthenticationView" : {
+
+    },
+    "chercher les repos de :" : {
+
+    },
+    "Github" : {
+
+    },
+    "owner" : {
+
+    },
+    "repo" : {
+
+    },
+    "Repo : %lld ajouté" : {
+
+    },
+    "Repo suivis: %lld" : {
+
+    },
+    "repoAdd" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a Repo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter un Repo"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

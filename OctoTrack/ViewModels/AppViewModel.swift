@@ -5,4 +5,29 @@
 //  Created by Julien Cotte on 13/02/2025.
 //
 
-import Foundation
+import SwiftUI
+
+@Observable final class AppViewModel {
+
+    var username: String = "Fenriz1349"
+    var userApp: User?
+
+    private let userRequest: UserLoader = UserLoader()
+    init() {
+        Task {
+            await getUser()
+        }
+    }
+    
+    func getUser() async {
+        do {
+            let request = try UserEndpoint.request(with: username)
+            let user = try await userRequest.userLoader(from: request)
+
+            userApp = User(id: user.id, login: user.login, avatarURL: user.avatarURL, repoList: user.repoList)
+            print("chargement du user \(userApp?.login)")
+        } catch {
+            print(error)
+        }
+    }
+}

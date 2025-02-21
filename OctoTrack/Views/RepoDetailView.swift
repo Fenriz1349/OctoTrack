@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct RepoDetailView: View {
+    let repository: Repository
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(repository.name)
     }
 }
 
 #Preview {
-    RepoDetailView()
+    RepoDetailView(repository: PreviewModels.previewRepo)
 }

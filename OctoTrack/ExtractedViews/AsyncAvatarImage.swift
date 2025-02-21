@@ -8,29 +8,29 @@
 import SwiftUI
 
 struct AsyncAvatarImage: View {
-    let user : User
-    let size : CGFloat
+    @State private var viewModel = AsyncAvatarViewModel()
+    
+    let avatar: AvatarProperties
+    let size: CGFloat
+    
+    private var imageToDisplay: Image {
+        if let uiImage = viewModel.downloadedImage {
+            return Image(uiImage: uiImage)
+        } else if let localImage = UIImage(named: avatar.name) {
+            return Image(uiImage: localImage)
+        } else {
+            return Image("defaultAvatar")
+        }
+    }
     
     var body: some View {
-            // Vérifier si l'image provient des assets (nom de l'image local)
-            if let _ = UIImage(named: imageUrl) {
-                Image(imageUrl)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: size, height: size)
-                    .clipShape(Circle())
-            } else {
-                AsyncImage(url: URL(string: imageUrl)) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: size, height: size)
-                        .clipShape(Circle())
-                } placeholder: {
-                    ProgressView()
-                        .frame(width: size, height: size)
-                        .clipShape(Circle())
-                }
+        imageToDisplay
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: size, height: size)
+            .clipShape(Circle())
+            .task {
+                await viewModel.loadImage(from: avatar.url)
             }
-        }
+    }
 }

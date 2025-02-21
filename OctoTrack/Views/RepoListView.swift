@@ -10,20 +10,29 @@ import SwiftData
 
 struct RepoListView: View {
     @Environment(\.modelContext) private var modelContext
+    @State var appViewModel: AppViewModel
     @Query private var items: [Item]
-
+    var repositories: [Repository]? {
+        appViewModel.userApp?.repoList
+    }
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+        NavigationStack {
+            if let user = appViewModel.userApp {
+                UserHeader(user: user)
+            }
+            NavigationLink(destination: AddRepositoryModal(appViewModel: appViewModel)) {
+                CustomButtonLabel(icon: nil, message: .localized(.repoAdd), color: .black)
+                    .padding(.horizontal, 30)
+            }
+            ScrollView {
+                ForEach(repositories ?? []) { repository in
+                    RepoRow(repository: repository)
                 }
                 .onDelete(perform: deleteItems)
             }
+           
+
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
@@ -34,18 +43,16 @@ struct RepoListView: View {
                     }
                 }
             }
-        } detail: {
-            Text("Select an item")
         }
     }
-
+    
     private func addItem() {
         withAnimation {
             let newItem = Item(timestamp: Date())
             modelContext.insert(newItem)
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
@@ -56,6 +63,6 @@ struct RepoListView: View {
 }
 
 #Preview {
-    RepoListView()
+    RepoListView(appViewModel: AppViewModel())
         .modelContainer(for: Item.self, inMemory: true)
 }

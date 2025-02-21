@@ -10,6 +10,7 @@ import SwiftData
 
 @main
 struct OctoTrackApp: App {
+    @State var viewModel = AppViewModel()
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -25,7 +26,7 @@ struct OctoTrackApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RepoListView(appViewModel: viewModel)
         }
         .modelContainer(sharedModelContainer)
     }

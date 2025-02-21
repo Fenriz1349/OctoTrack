@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct UserHeader: View {
+    var user: User
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            AsyncAvatarImage(avatar: user.avatar, size: 150)
+            VStack(alignment: .leading, spacing: 20) {
+                Text(user.login)
+                Link("Github", destination: URL(string: "https://github.com/users/" + user.login)!)
+                Text("Repo suivis: \(user.repoList.count)")
+            }
+        }
     }
 }
 
 #Preview {
-    UserHeader()
+    UserHeader(user: PreviewModels.previewUser)
 }
