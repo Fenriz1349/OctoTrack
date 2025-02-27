@@ -9,11 +9,11 @@ import Foundation
 
 struct PreviewModels {
     static let compagny = User(id: 1, login: "BatmanInteractive", avatarURL: "https://avatars.githubusercontent.com/u/198871564?v=4")
-    static let previewRepo: Repository = Repository(id: 1, name: "Project 1", avatar: avatarCompagny, createdAt: Date())
+    static let previewRepo: Repository = Repository(id: 1, name: "Project 1", isPrivate: false, avatar: avatarCompagny, createdAt: Date())
     static var repositories: [Repository] {[
-        Repository(id: 0, name: "Project 1", avatar: avatarPreviewUser, createdAt: Date()),
-        Repository(id: 1, name: "Project 2", avatar: avatarCompagny, createdAt: Date()),
-        Repository(id: 2, name: "Project 3", avatar: avatarCompagny, createdAt: Date())
+        Repository(id: 0, name: "Project 1", isPrivate: true, avatar: avatarPreviewUser, createdAt: Date()),
+        Repository(id: 1, name: "Project 2", isPrivate: false, avatar: avatarCompagny, createdAt: Date()),
+        Repository(id: 2, name: "Project 3", isPrivate: false, avatar: avatarCompagny, createdAt: Date())
         
     ]}
     static var avatarCompagny: AvatarProperties {

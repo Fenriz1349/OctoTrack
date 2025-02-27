@@ -14,7 +14,7 @@ struct AddRepositoryModal: View {
     @State var repo: Repository?
     var body: some View {
         VStack {
-            Text("Ajouter un Repo")
+            Text(LK.repoAdd.rawValue)
             HStack {
                 TextField("owner", text: $viewModel.owner)
                 TextField("repo", text: $viewModel.repoName)

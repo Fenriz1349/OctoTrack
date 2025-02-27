@@ -4,25 +4,37 @@
     "Add Item" : {
 
     },
-    "Ajouter un Repo" : {
-
-    },
-    "AuthenticationView" : {
-
-    },
     "chercher les repos de :" : {
 
     },
     "Github" : {
 
     },
+    "Key" : {
+      "extractionState" : "manual"
+    },
     "owner" : {
+
+    },
+    "private" : {
+      "extractionState" : "manual"
+    },
+    "Privé" : {
+
+    },
+    "public" : {
+      "extractionState" : "manual"
+    },
+    "Public" : {
 
     },
     "repo" : {
 
     },
     "Repo : %lld ajouté" : {
+
+    },
+    "Repo List" : {
 
     },
     "Repo suivis: %lld" : {
@@ -44,6 +56,9 @@
           }
         }
       }
+    },
+    "welcome" : {
+
     }
   },
   "version" : "1.0"

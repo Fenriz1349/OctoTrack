@@ -11,6 +11,7 @@ struct Repository: Identifiable, Codable {
     let id: Int
     let name: String
     var description: String?
+    let isPrivate: Bool
     var pullRequests : [PullRequest] = []
     var commits : [Commit] = []
     let avatar: AvatarProperties
