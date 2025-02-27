@@ -4,9 +4,6 @@
     "Add Item" : {
 
     },
-    "Ajouter un Repo" : {
-
-    },
     "AuthenticationView" : {
 
     },
@@ -16,7 +13,22 @@
     "Github" : {
 
     },
+    "Key" : {
+      "extractionState" : "manual"
+    },
     "owner" : {
+
+    },
+    "private" : {
+      "extractionState" : "manual"
+    },
+    "Privé" : {
+
+    },
+    "public" : {
+      "extractionState" : "manual"
+    },
+    "Public" : {
 
     },
     "repo" : {

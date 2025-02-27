@@ -12,13 +12,19 @@ enum RepoMapper {
     struct RepoDTO: Decodable {
         let id: Int
         let name: String
+        let isPrivate: Bool
         let owner: OwnerDTO
         let created_at: Date
         let language: String?
         
+        private enum CodingKeys: String, CodingKey {
+                case id, name, owner, created_at, language
+                case isPrivate = "private"
+            }
+        
         func toRepo() -> Repository {
             let avatar = AvatarProperties(name: owner.login, url: owner.avatar_url)
-            return Repository(id: id, name: name, avatar: avatar, createdAt: created_at, language: language.map { [$0] } ?? [])
+            return Repository(id: id, name: name, isPrivate: isPrivate, avatar: avatar, createdAt: created_at, language: language.map { [$0] } ?? [])
         }
     }
     

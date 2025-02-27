@@ -11,6 +11,7 @@ import SwiftUI
 
     var username: String = "Fenriz1349"
     var userApp: User?
+    var isLoogged: Bool = false
 
     private let userRequest: UserLoader = UserLoader()
     init() {

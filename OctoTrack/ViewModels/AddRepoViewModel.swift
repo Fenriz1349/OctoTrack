@@ -12,7 +12,6 @@ import Foundation
 
     var owner: String = "Fenriz1349"
     var repoName: String = "DA-iOS_P5"
-//    var repo: Repository?
 
     private let repoGetter: RepoGetter = RepoGetter()
     
