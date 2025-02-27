@@ -4,9 +4,6 @@
     "Add Item" : {
 
     },
-    "AuthenticationView" : {
-
-    },
     "chercher les repos de :" : {
 
     },
@@ -37,6 +34,9 @@
     "Repo : %lld ajouté" : {
 
     },
+    "Repo List" : {
+
+    },
     "Repo suivis: %lld" : {
 
     },
@@ -56,6 +56,9 @@
           }
         }
       }
+    },
+    "welcome" : {
+
     }
   },
   "version" : "1.0"

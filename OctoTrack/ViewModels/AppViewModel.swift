@@ -9,27 +9,19 @@ import SwiftUI
 
 @Observable final class AppViewModel {
 
-    var username: String = "Fenriz1349"
     var userApp: User?
-    var isLoogged: Bool = false
-
-    private let userRequest: UserLoader = UserLoader()
-    init() {
-        Task {
-            await getUser()
+    var isLogged: Bool = false
+    var authenticationViewModel: AuthenticationViewModel {
+        return AuthenticationViewModel { [weak self]  user in
+            DispatchQueue.main.async {
+                self?.loginUser(user: user)
+            }
         }
     }
     
-    func getUser() async {
-        do {
-            let request = try UserEndpoint.request(with: username)
-            let user = try await userRequest.userLoader(from: request)
-
-            userApp = User(id: user.id, login: user.login, avatarURL: user.avatarURL, repoList: user.repoList)
-            print("chargement du user \(userApp?.login)")
-        } catch {
-            print(error)
-        }
+    func loginUser(user: User) {
+        self.isLogged = true
+        self.userApp = user
     }
     
     func addRepoToUser(repo: Repository) {

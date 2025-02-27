@@ -15,7 +15,7 @@ enum TokenMapper {
         case invalidUUID
     }
     
-    static func getToken(from key: String) throws -> UUID {
+    static func getTokenString(from key: String) throws -> String {
         let keychain = KeychainStore()
         guard !key.isEmpty else {
             throw Error.emptyKey
@@ -25,7 +25,12 @@ enum TokenMapper {
               let tokenString = String(data: data, encoding: .utf8) else {
             throw Error.retrieveFailed
         }
-        guard let token = UUID(uuidString: tokenString) else {
+        return tokenString
+    }
+    
+    static func getToken(from key: String) throws -> UUID {
+        guard let tokenString = try? getTokenString(from: key),
+            let token = UUID(uuidString: tokenString) else {
             throw Error.invalidUUID
         }
         return token

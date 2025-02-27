@@ -26,7 +26,28 @@ struct OctoTrackApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RepoListView(appViewModel: viewModel)
+            Group {
+                if viewModel.isLogged {
+                    TabView {
+                        RepoListView(appViewModel: viewModel)
+                            .tabItem {
+                                Image(systemName: "folder.fill")
+                                Text("Repo List")
+                            }
+                        
+//                        AddRepositoryModal(appViewModel: viewModel)
+//                            .tabItem {
+//                                Image(systemName: "plus.app.fill")
+//                                Text("Add Repo")
+//                            }
+                    }
+                    
+                } else {
+                    AuthenticationView(viewModel: viewModel.authenticationViewModel)
+                        .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),
+                                                removal: .move(edge: .top).combined(with: .opacity)))
+                }
+            }
         }
         .modelContainer(sharedModelContainer)
     }
