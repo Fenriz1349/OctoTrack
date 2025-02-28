@@ -6,16 +6,14 @@
 //
 
 import SwiftUI
-
+@MainActor
 @Observable final class AppViewModel {
 
     var userApp: User?
     var isLogged: Bool = false
     var authenticationViewModel: AuthenticationViewModel {
         return AuthenticationViewModel { [weak self]  user in
-            DispatchQueue.main.async {
-                self?.loginUser(user: user)
-            }
+            self?.loginUser(user: user)
         }
     }
     
@@ -25,7 +23,8 @@ import SwiftUI
     }
     
     func addRepoToUser(repo: Repository) {
-        guard let user = userApp, !user.repoList.contains(where: { $0.id == repo.id }) else {
+        guard let user = userApp,
+              !user.repoList.contains(where: { $0.id == repo.id }) else {
             return
         }
         userApp?.repoList.append(repo)

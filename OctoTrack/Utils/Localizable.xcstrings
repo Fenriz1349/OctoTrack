@@ -4,6 +4,9 @@
     "Add Item" : {
 
     },
+    "Authentication error: %@" : {
+
+    },
     "chercher les repos de :" : {
 
     },
@@ -57,7 +60,7 @@
         }
       }
     },
-    "welcome" : {
+    "welcome on Octotrack" : {
 
     }
   },

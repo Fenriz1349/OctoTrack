@@ -11,6 +11,7 @@ enum TextFieldType {
     case email
     case password
     case decimal
+    case alphaNumber
 }
 
 // Permet de gérer l'affichage de tous les Textfields de l'app suivant leur type
@@ -47,11 +48,15 @@ struct CustomTextField: View {
 
 extension CustomTextField {
     
+    /// Configure the keyboardtype for CustomTextField
+    /// - Parameter type: the texfieldType enum
+    /// - Returns: the keyboard wanted, is isSecured, if is autocorrection disable
     func configureTextField(type: TextFieldType) -> (UIKeyboardType, Bool, Bool) {
         switch type {
         case .email: return (.emailAddress, false, true)
         case .password: return (.default, true, false)
         case .decimal: return (.decimalPad, false, false)
+        case .alphaNumber: return (.namePhonePad, false, true)
         }
     }
 }

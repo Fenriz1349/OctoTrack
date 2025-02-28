@@ -13,30 +13,32 @@ protocol KeychainServiceProtocol {
     func delete(key: String) throws
 }
 
-final class KeychainStore: KeychainServiceProtocol {
+final class KeychainService: KeychainServiceProtocol {
     
     enum Error: Swift.Error {
-        case emptyKey
-        case insertFailed
-        case retrieveFailed
-        case deleteFailed
+       
     }
     
     func insert(key: String, data: Data) throws {
-        guard key.isEmpty else {
-            throw Error.emptyKey
+        guard !key.isEmpty else {
+            throw Errors.emptyKey
         }
-        guard let tokenString = String(data: data, encoding: .utf8),
-              UUID(uuidString: tokenString) != nil else {
-            throw Error.insertFailed
-        }
+        
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key,
             kSecValueData as String: data
         ]
         
+        // Supprimez d'abord toute valeur existante pour cette clé
         SecItemDelete(query as CFDictionary)
+        
+        // Ajoutez la nouvelle valeur
+        let status = SecItemAdd(query as CFDictionary, nil)
+        
+        guard status == errSecSuccess else {
+            throw Errors.insertFailed
+        }
     }
     
     func retrieve(key: String) throws -> Data {
@@ -51,23 +53,23 @@ final class KeychainStore: KeychainServiceProtocol {
         let status = SecItemCopyMatching(query, &result)
         
         guard status == noErr, let data = result as? Data else {
-            throw Error.retrieveFailed
+            throw Errors.retrieveFailed
         }
-        
+        print("token storage sucess with key \(key)")
         return data
     }
     
     func delete(key: String) throws {
-        //        if existsInKeychain(key: key) {
-        let query = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: key as Any
-        ] as CFDictionary
-        
-        guard SecItemDelete(query) == noErr else {
-            throw Error.deleteFailed
+        if existsInKeychain(key: key) {
+            let query = [
+                kSecClass: kSecClassGenericPassword,
+                kSecAttrAccount: key as Any
+            ] as CFDictionary
+            
+            guard SecItemDelete(query) == noErr else {
+                throw Errors.deleteFailed
+            }
         }
-        //        }
     }
     
     func existsInKeychain(key: String) -> Bool {

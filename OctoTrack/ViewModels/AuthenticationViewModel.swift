@@ -8,42 +8,64 @@
 import Foundation
 
 @Observable final class AuthenticationViewModel {
-
-    var username: String = "Fenriz1349"
-    var password: String = ""
-
-    private let authenticator: Authenticator
-    private let keychain = KeychainStore()
+    
+    private var token: String?
+    var isAuthenticated: Bool = false
+    var isAuthenticating: Bool = false
+    var authError: Error?
+    private let authenticator = GitHubAuthenticator()
+    private let keychain = KeychainService()
     let onLoginSucceed: (User) -> Void
-
-    init(authenticator: Authenticator = Authenticator(),
-         _ callback: @escaping (User) -> Void) {
-        self.authenticator = authenticator
+    
+    
+    init(_ callback: @escaping (User) -> Void) {
+        self.isAuthenticated = authenticator.isAuthenticated
         self.onLoginSucceed = callback
     }
-
+    
+    @MainActor
     func login() async throws {
-        do {
-            //            let request = try AuthenticationEndpoint.request(with: username, and: password)
-            //            let token = try await authenticator.requestToken(from: request)
-            //            if let data = token.data(using: .utf8) {
-            //                try keychain.delete(key: username)
-            //                try keychain.insert(key: username, data: data)
-            try await onLoginSucceed(getUser())
-        }
-        catch {
-            print(error)
-            throw error
+        guard !isAuthenticating else { return }
+        
+        isAuthenticating = true
+        authError = nil
+        
+        Task {
+            do {
+                let token = try await authenticator.authenticate()
+                self.token = token
+                self.isAuthenticated = true
+                self.isAuthenticating = false
+                try await onLoginSucceed(getUser())
+            } catch {
+                self.authError = error
+                self.isAuthenticating = false
+            }
         }
     }
     
-    func getUser() async throws -> User{
+    func signOut() {
+            do {
+                try authenticator.signOut()
+                token = nil
+                isAuthenticated = false
+            } catch {
+                authError = error
+            }
+        }
+    
+    func checkAuthenticationStatus() {
+        isAuthenticated = authenticator.isAuthenticated
+        }
+    
+    func getUser() async throws -> User {
+        guard let token = token else {
+            throw Errors.missingToken
+        }
+        let userRequest: UserLoader = UserLoader()
+        let request = UserEndpoint.userInfoRequest(with: token)
         do {
-            let userRequest: UserLoader = UserLoader()
-            let request = try UserEndpoint.request(with: username)
-            let user = try await userRequest.userLoader(from: request)
-
-            return User(id: user.id, login: user.login, avatarURL: user.avatarURL, repoList: user.repoList)
+            return try await userRequest.userLoader(from: request)
         } catch {
             print(error)
             throw error

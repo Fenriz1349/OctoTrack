@@ -16,8 +16,8 @@ struct AddRepositoryModal: View {
         VStack {
             Text(LK.repoAdd.rawValue)
             HStack {
-                TextField("owner", text: $viewModel.owner)
-                TextField("repo", text: $viewModel.repoName)
+                CustomTextField(color: .gray, placeholder: "owner", text: $viewModel.owner, type: .alphaNumber)
+                CustomTextField(color: .gray,placeholder: "repo", text: $viewModel.repoName, type: .alphaNumber)
             }
             Button(action: {
                 Task {
@@ -29,10 +29,10 @@ struct AddRepositoryModal: View {
             }) {
                 CustomButtonLabel(icon: nil, message: "ajouter", color: .green)
             }
-            TextField("chercher les repos de :", text: $viewModel.owner)
-            if let repo = repo {
-                Text("Repo : \(repo.id) ajouté")
-            }
+//            TextField("chercher les repos de :", text: $viewModel.owner)
+//            if let repo = repo {
+//                Text("Repo : \(repo.id) ajouté")
+//            }
         }
     }
 }

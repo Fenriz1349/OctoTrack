@@ -6,6 +6,52 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		68D6AAEC2D71DA05001E5E6C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68D6AAD42D71DA05001E5E6C /* Preview Assets.xcassets */; };
+		68D6AAED2D71DA05001E5E6C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 68D6AAD72D71DA05001E5E6C /* Localizable.xcstrings */; };
+		68D6AAEE2D71DA05001E5E6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68D6AAE82D71DA05001E5E6C /* Assets.xcassets */; };
+		68D6AAEF2D71DA05001E5E6C /* AsyncAvatarImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAB72D71DA05001E5E6C /* AsyncAvatarImage.swift */; };
+		68D6AAF02D71DA05001E5E6C /* CustomButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAB82D71DA05001E5E6C /* CustomButtonLabel.swift */; };
+		68D6AAF12D71DA05001E5E6C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAB92D71DA05001E5E6C /* CustomTextField.swift */; };
+		68D6AAF22D71DA05001E5E6C /* RepoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AABA2D71DA05001E5E6C /* RepoRow.swift */; };
+		68D6AAF32D71DA05001E5E6C /* UserHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AABB2D71DA05001E5E6C /* UserHeader.swift */; };
+		68D6AAF42D71DA05001E5E6C /* GitHubAuthenticationEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AABD2D71DA05001E5E6C /* GitHubAuthenticationEndpoint.swift */; };
+		68D6AAF52D71DA05001E5E6C /* GitHubAuthenticationMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AABE2D71DA05001E5E6C /* GitHubAuthenticationMapper.swift */; };
+		68D6AAF62D71DA05001E5E6C /* GitHubAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AABF2D71DA05001E5E6C /* GitHubAuthenticator.swift */; };
+		68D6AAF72D71DA05001E5E6C /* RepoEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAC12D71DA05001E5E6C /* RepoEndpoint.swift */; };
+		68D6AAF82D71DA05001E5E6C /* RepoGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAC22D71DA05001E5E6C /* RepoGetter.swift */; };
+		68D6AAF92D71DA05001E5E6C /* RepoMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAC32D71DA05001E5E6C /* RepoMapper.swift */; };
+		68D6AAFA2D71DA05001E5E6C /* UserEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAC52D71DA05001E5E6C /* UserEndpoint.swift */; };
+		68D6AAFB2D71DA05001E5E6C /* UserLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAC62D71DA05001E5E6C /* UserLoader.swift */; };
+		68D6AAFC2D71DA05001E5E6C /* UserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAC72D71DA05001E5E6C /* UserMapper.swift */; };
+		68D6AAFD2D71DA05001E5E6C /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAC92D71DA05001E5E6C /* URLSessionHTTPClient.swift */; };
+		68D6AAFE2D71DA05001E5E6C /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AACB2D71DA05001E5E6C /* KeyChainService.swift */; };
+		68D6AAFF2D71DA05001E5E6C /* TokenMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AACC2D71DA05001E5E6C /* TokenMapper.swift */; };
+		68D6AB002D71DA05001E5E6C /* AvatarProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AACE2D71DA05001E5E6C /* AvatarProperties.swift */; };
+		68D6AB012D71DA05001E5E6C /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AACF2D71DA05001E5E6C /* Commit.swift */; };
+		68D6AB022D71DA05001E5E6C /* PullRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAD02D71DA05001E5E6C /* PullRequest.swift */; };
+		68D6AB032D71DA05001E5E6C /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAD12D71DA05001E5E6C /* Repository.swift */; };
+		68D6AB042D71DA05001E5E6C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAD22D71DA05001E5E6C /* User.swift */; };
+		68D6AB052D71DA05001E5E6C /* PreviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAD52D71DA05001E5E6C /* PreviewModels.swift */; };
+		68D6AB062D71DA05001E5E6C /* LocalizableKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAD82D71DA05001E5E6C /* LocalizableKeys.swift */; };
+		68D6AB072D71DA05001E5E6C /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAD92D71DA05001E5E6C /* String+Ext.swift */; };
+		68D6AB082D71DA05001E5E6C /* User+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AADA2D71DA05001E5E6C /* User+Ext.swift */; };
+		68D6AB092D71DA05001E5E6C /* AddRepoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AADC2D71DA05001E5E6C /* AddRepoViewModel.swift */; };
+		68D6AB0A2D71DA05001E5E6C /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AADD2D71DA05001E5E6C /* AppViewModel.swift */; };
+		68D6AB0B2D71DA05001E5E6C /* AsyncAvatarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AADE2D71DA05001E5E6C /* AsyncAvatarViewModel.swift */; };
+		68D6AB0C2D71DA05001E5E6C /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AADF2D71DA05001E5E6C /* AuthenticationViewModel.swift */; };
+		68D6AB0D2D71DA05001E5E6C /* RepoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAE02D71DA05001E5E6C /* RepoDetailViewModel.swift */; };
+		68D6AB0E2D71DA05001E5E6C /* RepoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAE12D71DA05001E5E6C /* RepoListViewModel.swift */; };
+		68D6AB0F2D71DA05001E5E6C /* AddRepositoryModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAE32D71DA05001E5E6C /* AddRepositoryModal.swift */; };
+		68D6AB102D71DA05001E5E6C /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAE42D71DA05001E5E6C /* AuthenticationView.swift */; };
+		68D6AB112D71DA05001E5E6C /* RepoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAE52D71DA05001E5E6C /* RepoDetailView.swift */; };
+		68D6AB122D71DA05001E5E6C /* RepoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAE62D71DA05001E5E6C /* RepoListView.swift */; };
+		68D6AB132D71DA05001E5E6C /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAE92D71DA05001E5E6C /* Item.swift */; };
+		68D6AB142D71DA05001E5E6C /* OctoTrackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AAEA2D71DA05001E5E6C /* OctoTrackApp.swift */; };
+		68D6AB162D71DCAB001E5E6C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AB152D71DCAB001E5E6C /* Errors.swift */; };
+		68D6AB182D71EA4E001E5E6C /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6AB172D71EA4E001E5E6C /* AccountView.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		683613012D5D31EE00805615 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,14 +73,52 @@
 		683612EE2D5D31EC00805615 /* OctoTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OctoTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		683613002D5D31EE00805615 /* OctoTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OctoTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6836130A2D5D31EE00805615 /* OctoTrackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OctoTrackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		68D6AAB72D71DA05001E5E6C /* AsyncAvatarImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAvatarImage.swift; sourceTree = "<group>"; };
+		68D6AAB82D71DA05001E5E6C /* CustomButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonLabel.swift; sourceTree = "<group>"; };
+		68D6AAB92D71DA05001E5E6C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		68D6AABA2D71DA05001E5E6C /* RepoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoRow.swift; sourceTree = "<group>"; };
+		68D6AABB2D71DA05001E5E6C /* UserHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeader.swift; sourceTree = "<group>"; };
+		68D6AABD2D71DA05001E5E6C /* GitHubAuthenticationEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthenticationEndpoint.swift; sourceTree = "<group>"; };
+		68D6AABE2D71DA05001E5E6C /* GitHubAuthenticationMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthenticationMapper.swift; sourceTree = "<group>"; };
+		68D6AABF2D71DA05001E5E6C /* GitHubAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthenticator.swift; sourceTree = "<group>"; };
+		68D6AAC12D71DA05001E5E6C /* RepoEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoEndpoint.swift; sourceTree = "<group>"; };
+		68D6AAC22D71DA05001E5E6C /* RepoGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoGetter.swift; sourceTree = "<group>"; };
+		68D6AAC32D71DA05001E5E6C /* RepoMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoMapper.swift; sourceTree = "<group>"; };
+		68D6AAC52D71DA05001E5E6C /* UserEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEndpoint.swift; sourceTree = "<group>"; };
+		68D6AAC62D71DA05001E5E6C /* UserLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoader.swift; sourceTree = "<group>"; };
+		68D6AAC72D71DA05001E5E6C /* UserMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMapper.swift; sourceTree = "<group>"; };
+		68D6AAC92D71DA05001E5E6C /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
+		68D6AACB2D71DA05001E5E6C /* KeyChainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainService.swift; sourceTree = "<group>"; };
+		68D6AACC2D71DA05001E5E6C /* TokenMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenMapper.swift; sourceTree = "<group>"; };
+		68D6AACE2D71DA05001E5E6C /* AvatarProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarProperties.swift; sourceTree = "<group>"; };
+		68D6AACF2D71DA05001E5E6C /* Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
+		68D6AAD02D71DA05001E5E6C /* PullRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequest.swift; sourceTree = "<group>"; };
+		68D6AAD12D71DA05001E5E6C /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		68D6AAD22D71DA05001E5E6C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		68D6AAD42D71DA05001E5E6C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		68D6AAD52D71DA05001E5E6C /* PreviewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewModels.swift; sourceTree = "<group>"; };
+		68D6AAD72D71DA05001E5E6C /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		68D6AAD82D71DA05001E5E6C /* LocalizableKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableKeys.swift; sourceTree = "<group>"; };
+		68D6AAD92D71DA05001E5E6C /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		68D6AADA2D71DA05001E5E6C /* User+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Ext.swift"; sourceTree = "<group>"; };
+		68D6AADC2D71DA05001E5E6C /* AddRepoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRepoViewModel.swift; sourceTree = "<group>"; };
+		68D6AADD2D71DA05001E5E6C /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		68D6AADE2D71DA05001E5E6C /* AsyncAvatarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAvatarViewModel.swift; sourceTree = "<group>"; };
+		68D6AADF2D71DA05001E5E6C /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		68D6AAE02D71DA05001E5E6C /* RepoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailViewModel.swift; sourceTree = "<group>"; };
+		68D6AAE12D71DA05001E5E6C /* RepoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListViewModel.swift; sourceTree = "<group>"; };
+		68D6AAE32D71DA05001E5E6C /* AddRepositoryModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRepositoryModal.swift; sourceTree = "<group>"; };
+		68D6AAE42D71DA05001E5E6C /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		68D6AAE52D71DA05001E5E6C /* RepoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailView.swift; sourceTree = "<group>"; };
+		68D6AAE62D71DA05001E5E6C /* RepoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListView.swift; sourceTree = "<group>"; };
+		68D6AAE82D71DA05001E5E6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		68D6AAE92D71DA05001E5E6C /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		68D6AAEA2D71DA05001E5E6C /* OctoTrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctoTrackApp.swift; sourceTree = "<group>"; };
+		68D6AB152D71DCAB001E5E6C /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		68D6AB172D71EA4E001E5E6C /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		683612F02D5D31EC00805615 /* OctoTrack */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = OctoTrack;
-			sourceTree = "<group>";
-		};
 		683613032D5D31EE00805615 /* OctoTrackTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = OctoTrackTests;
@@ -75,7 +159,7 @@
 		683612E52D5D31EC00805615 = {
 			isa = PBXGroup;
 			children = (
-				683612F02D5D31EC00805615 /* OctoTrack */,
+				68D6AAEB2D71DA05001E5E6C /* OctoTrack */,
 				683613032D5D31EE00805615 /* OctoTrackTests */,
 				6836130D2D5D31EE00805615 /* OctoTrackUITests */,
 				683612EF2D5D31EC00805615 /* Products */,
@@ -92,6 +176,144 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		68D6AABC2D71DA05001E5E6C /* ExtractedViews */ = {
+			isa = PBXGroup;
+			children = (
+				68D6AAB72D71DA05001E5E6C /* AsyncAvatarImage.swift */,
+				68D6AAB82D71DA05001E5E6C /* CustomButtonLabel.swift */,
+				68D6AAB92D71DA05001E5E6C /* CustomTextField.swift */,
+				68D6AABA2D71DA05001E5E6C /* RepoRow.swift */,
+				68D6AABB2D71DA05001E5E6C /* UserHeader.swift */,
+			);
+			path = ExtractedViews;
+			sourceTree = "<group>";
+		};
+		68D6AAC02D71DA05001E5E6C /* AuthenticationRequest */ = {
+			isa = PBXGroup;
+			children = (
+				68D6AABD2D71DA05001E5E6C /* GitHubAuthenticationEndpoint.swift */,
+				68D6AABE2D71DA05001E5E6C /* GitHubAuthenticationMapper.swift */,
+				68D6AABF2D71DA05001E5E6C /* GitHubAuthenticator.swift */,
+			);
+			path = AuthenticationRequest;
+			sourceTree = "<group>";
+		};
+		68D6AAC42D71DA05001E5E6C /* RepoRequest */ = {
+			isa = PBXGroup;
+			children = (
+				68D6AAC12D71DA05001E5E6C /* RepoEndpoint.swift */,
+				68D6AAC32D71DA05001E5E6C /* RepoMapper.swift */,
+				68D6AAC22D71DA05001E5E6C /* RepoGetter.swift */,
+			);
+			path = RepoRequest;
+			sourceTree = "<group>";
+		};
+		68D6AAC82D71DA05001E5E6C /* UserRequest */ = {
+			isa = PBXGroup;
+			children = (
+				68D6AAC52D71DA05001E5E6C /* UserEndpoint.swift */,
+				68D6AAC72D71DA05001E5E6C /* UserMapper.swift */,
+				68D6AAC62D71DA05001E5E6C /* UserLoader.swift */,
+			);
+			path = UserRequest;
+			sourceTree = "<group>";
+		};
+		68D6AACA2D71DA05001E5E6C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				68D6AAC02D71DA05001E5E6C /* AuthenticationRequest */,
+				68D6AAC42D71DA05001E5E6C /* RepoRequest */,
+				68D6AAC82D71DA05001E5E6C /* UserRequest */,
+				68D6AAC92D71DA05001E5E6C /* URLSessionHTTPClient.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		68D6AACD2D71DA05001E5E6C /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				68D6AACB2D71DA05001E5E6C /* KeyChainService.swift */,
+				68D6AACC2D71DA05001E5E6C /* TokenMapper.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		68D6AAD32D71DA05001E5E6C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				68D6AACE2D71DA05001E5E6C /* AvatarProperties.swift */,
+				68D6AACF2D71DA05001E5E6C /* Commit.swift */,
+				68D6AAD02D71DA05001E5E6C /* PullRequest.swift */,
+				68D6AAD12D71DA05001E5E6C /* Repository.swift */,
+				68D6AAD22D71DA05001E5E6C /* User.swift */,
+				68D6AB152D71DCAB001E5E6C /* Errors.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		68D6AAD62D71DA05001E5E6C /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				68D6AAD42D71DA05001E5E6C /* Preview Assets.xcassets */,
+				68D6AAD52D71DA05001E5E6C /* PreviewModels.swift */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		68D6AADB2D71DA05001E5E6C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				68D6AAD72D71DA05001E5E6C /* Localizable.xcstrings */,
+				68D6AAD82D71DA05001E5E6C /* LocalizableKeys.swift */,
+				68D6AAD92D71DA05001E5E6C /* String+Ext.swift */,
+				68D6AADA2D71DA05001E5E6C /* User+Ext.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		68D6AAE22D71DA05001E5E6C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				68D6AADC2D71DA05001E5E6C /* AddRepoViewModel.swift */,
+				68D6AADD2D71DA05001E5E6C /* AppViewModel.swift */,
+				68D6AADE2D71DA05001E5E6C /* AsyncAvatarViewModel.swift */,
+				68D6AADF2D71DA05001E5E6C /* AuthenticationViewModel.swift */,
+				68D6AAE02D71DA05001E5E6C /* RepoDetailViewModel.swift */,
+				68D6AAE12D71DA05001E5E6C /* RepoListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		68D6AAE72D71DA05001E5E6C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				68D6AAE32D71DA05001E5E6C /* AddRepositoryModal.swift */,
+				68D6AAE42D71DA05001E5E6C /* AuthenticationView.swift */,
+				68D6AAE52D71DA05001E5E6C /* RepoDetailView.swift */,
+				68D6AAE62D71DA05001E5E6C /* RepoListView.swift */,
+				68D6AB172D71EA4E001E5E6C /* AccountView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		68D6AAEB2D71DA05001E5E6C /* OctoTrack */ = {
+			isa = PBXGroup;
+			children = (
+				68D6AAEA2D71DA05001E5E6C /* OctoTrackApp.swift */,
+				68D6AACD2D71DA05001E5E6C /* Storage */,
+				68D6AACA2D71DA05001E5E6C /* Network */,
+				68D6AAD32D71DA05001E5E6C /* Models */,
+				68D6AADB2D71DA05001E5E6C /* Utils */,
+				68D6AAE22D71DA05001E5E6C /* ViewModels */,
+				68D6AABC2D71DA05001E5E6C /* ExtractedViews */,
+				68D6AAE72D71DA05001E5E6C /* Views */,
+				68D6AAD62D71DA05001E5E6C /* Preview Content */,
+				68D6AAE82D71DA05001E5E6C /* Assets.xcassets */,
+				68D6AAE92D71DA05001E5E6C /* Item.swift */,
+			);
+			path = OctoTrack;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,9 +328,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				683612F02D5D31EC00805615 /* OctoTrack */,
 			);
 			name = OctoTrack;
 			packageProductDependencies = (
@@ -212,6 +431,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68D6AAEC2D71DA05001E5E6C /* Preview Assets.xcassets in Resources */,
+				68D6AAED2D71DA05001E5E6C /* Localizable.xcstrings in Resources */,
+				68D6AAEE2D71DA05001E5E6C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +458,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68D6AAEF2D71DA05001E5E6C /* AsyncAvatarImage.swift in Sources */,
+				68D6AAF02D71DA05001E5E6C /* CustomButtonLabel.swift in Sources */,
+				68D6AAF12D71DA05001E5E6C /* CustomTextField.swift in Sources */,
+				68D6AAF22D71DA05001E5E6C /* RepoRow.swift in Sources */,
+				68D6AB182D71EA4E001E5E6C /* AccountView.swift in Sources */,
+				68D6AAF32D71DA05001E5E6C /* UserHeader.swift in Sources */,
+				68D6AAF42D71DA05001E5E6C /* GitHubAuthenticationEndpoint.swift in Sources */,
+				68D6AAF52D71DA05001E5E6C /* GitHubAuthenticationMapper.swift in Sources */,
+				68D6AB162D71DCAB001E5E6C /* Errors.swift in Sources */,
+				68D6AAF62D71DA05001E5E6C /* GitHubAuthenticator.swift in Sources */,
+				68D6AAF72D71DA05001E5E6C /* RepoEndpoint.swift in Sources */,
+				68D6AAF82D71DA05001E5E6C /* RepoGetter.swift in Sources */,
+				68D6AAF92D71DA05001E5E6C /* RepoMapper.swift in Sources */,
+				68D6AAFA2D71DA05001E5E6C /* UserEndpoint.swift in Sources */,
+				68D6AAFB2D71DA05001E5E6C /* UserLoader.swift in Sources */,
+				68D6AAFC2D71DA05001E5E6C /* UserMapper.swift in Sources */,
+				68D6AAFD2D71DA05001E5E6C /* URLSessionHTTPClient.swift in Sources */,
+				68D6AAFE2D71DA05001E5E6C /* KeyChainService.swift in Sources */,
+				68D6AAFF2D71DA05001E5E6C /* TokenMapper.swift in Sources */,
+				68D6AB002D71DA05001E5E6C /* AvatarProperties.swift in Sources */,
+				68D6AB012D71DA05001E5E6C /* Commit.swift in Sources */,
+				68D6AB022D71DA05001E5E6C /* PullRequest.swift in Sources */,
+				68D6AB032D71DA05001E5E6C /* Repository.swift in Sources */,
+				68D6AB042D71DA05001E5E6C /* User.swift in Sources */,
+				68D6AB052D71DA05001E5E6C /* PreviewModels.swift in Sources */,
+				68D6AB062D71DA05001E5E6C /* LocalizableKeys.swift in Sources */,
+				68D6AB072D71DA05001E5E6C /* String+Ext.swift in Sources */,
+				68D6AB082D71DA05001E5E6C /* User+Ext.swift in Sources */,
+				68D6AB092D71DA05001E5E6C /* AddRepoViewModel.swift in Sources */,
+				68D6AB0A2D71DA05001E5E6C /* AppViewModel.swift in Sources */,
+				68D6AB0B2D71DA05001E5E6C /* AsyncAvatarViewModel.swift in Sources */,
+				68D6AB0C2D71DA05001E5E6C /* AuthenticationViewModel.swift in Sources */,
+				68D6AB0D2D71DA05001E5E6C /* RepoDetailViewModel.swift in Sources */,
+				68D6AB0E2D71DA05001E5E6C /* RepoListViewModel.swift in Sources */,
+				68D6AB0F2D71DA05001E5E6C /* AddRepositoryModal.swift in Sources */,
+				68D6AB102D71DA05001E5E6C /* AuthenticationView.swift in Sources */,
+				68D6AB112D71DA05001E5E6C /* RepoDetailView.swift in Sources */,
+				68D6AB122D71DA05001E5E6C /* RepoListView.swift in Sources */,
+				68D6AB132D71DA05001E5E6C /* Item.swift in Sources */,
+				68D6AB142D71DA05001E5E6C /* OctoTrackApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

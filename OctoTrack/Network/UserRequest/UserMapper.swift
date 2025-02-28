@@ -19,13 +19,9 @@ enum UserMapper {
         }
     }
     
-    enum Error: Swift.Error {
-        case invalidResponse
-    }
-    
     static func map(_ data: Data, and response: HTTPURLResponse) throws -> User {
             guard response.statusCode == 200 else {
-                throw Error.invalidResponse
+                throw Errors.invalidResponse
             }
 
             let userDTO = try JSONDecoder().decode(UserDTO.self, from: data)
