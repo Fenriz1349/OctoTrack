@@ -55,7 +55,6 @@ final class GitHubAuthenticator: NSObject {
                 }
                 
                 if let error = error {
-                    print("❌ Erreur ASWebAuthenticationSession: \(error.localizedDescription)")
                     let nsError = error as NSError
                     if nsError.domain == ASWebAuthenticationSessionErrorDomain,
                        nsError.code == ASWebAuthenticationSessionError.canceledLogin.rawValue {
@@ -67,7 +66,6 @@ final class GitHubAuthenticator: NSObject {
                 }
                 
                 guard let callbackURL = callbackURL else {
-                    print("✅ URL de callback reçue: \(callbackURL)")
                     continuation.resume(throwing: Errors.authenticationFailed)
                     return
                 }
@@ -125,6 +123,7 @@ final class GitHubAuthenticator: NSObject {
             throw error
         }
     }
+    
     @MainActor
     private func requestToken(from request: URLRequest) async throws -> String {
            let (data, response) = try await client.request(from: request)
@@ -133,7 +132,7 @@ final class GitHubAuthenticator: NSObject {
            return token
        }
     
-    private func storeToken(_ token: String) throws {
+    func storeToken(_ token: String) throws {
         guard let data = token.data(using: .utf8) else {
             throw Errors.tokenExchangeFailed
         }

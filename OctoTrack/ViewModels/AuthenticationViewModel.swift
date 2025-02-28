@@ -9,19 +9,18 @@ import Foundation
 
 @Observable final class AuthenticationViewModel {
     
-    private var token: String?
-    var isAuthenticated: Bool = false
     var isAuthenticating: Bool = false
     var authError: Error?
     private let authenticator = GitHubAuthenticator()
     private let keychain = KeychainService()
     let onLoginSucceed: (User) -> Void
+    let onLogoutCompleted: () -> Void
     
     
-    init(_ callback: @escaping (User) -> Void) {
-        self.isAuthenticated = authenticator.isAuthenticated
-        self.onLoginSucceed = callback
-    }
+    init(onLoginSucceed: @escaping (User) -> Void, onLogoutCompleted: @escaping () -> Void) {
+            self.onLoginSucceed = onLoginSucceed
+            self.onLogoutCompleted = onLogoutCompleted
+        }
     
     @MainActor
     func login() async throws {
@@ -32,9 +31,7 @@ import Foundation
         
         Task {
             do {
-                let token = try await authenticator.authenticate()
-                self.token = token
-                self.isAuthenticated = true
+                try await authenticator.authenticate()
                 self.isAuthenticating = false
                 try await onLoginSucceed(getUser())
             } catch {
@@ -45,23 +42,20 @@ import Foundation
     }
     
     func signOut() {
-            do {
-                try authenticator.signOut()
-                token = nil
-                isAuthenticated = false
-            } catch {
-                authError = error
-            }
+        do {
+            try authenticator.signOut()
+            onLogoutCompleted()
+        } catch {
+            authError = error
         }
+    }
     
-    func checkAuthenticationStatus() {
-        isAuthenticated = authenticator.isAuthenticated
-        }
+    func isAuthenticated() -> Bool {
+           return authenticator.isAuthenticated
+       }
     
     func getUser() async throws -> User {
-        guard let token = token else {
-            throw Errors.missingToken
-        }
+        let token = try  await authenticator.authenticate()
         let userRequest: UserLoader = UserLoader()
         let request = UserEndpoint.userInfoRequest(with: token)
         do {

@@ -39,16 +39,13 @@ struct AuthenticationView: View {
                         .padding(.bottom, 20)
                 }
             }
-            .onAppear {
-                viewModel.checkAuthenticationStatus()
-            }
         }
         .padding(.horizontal, 40)
     }
 }
 
 #Preview {
-    AuthenticationView(viewModel: AuthenticationViewModel( { user in
+    AuthenticationView(viewModel: AuthenticationViewModel( onLoginSucceed: { user in
         print("Utilisateur connecté")
-    }))
+    }, onLogoutCompleted: {}))
 }

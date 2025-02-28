@@ -34,12 +34,11 @@ struct OctoTrackApp: App {
                                 Image(systemName: "folder.fill")
                                 Text("Repo List")
                             }
-                        
-//                        AddRepositoryModal(appViewModel: viewModel)
-//                            .tabItem {
-//                                Image(systemName: "plus.app.fill")
-//                                Text("Add Repo")
-//                            }
+                        AccountView(appViewModel: viewModel)
+                            .tabItem {
+                                Image(systemName: "person.circle.fill")
+                                Text("Account")
+                            }
                     }
                     
                 } else {
