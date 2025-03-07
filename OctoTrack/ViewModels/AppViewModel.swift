@@ -12,10 +12,10 @@ import SwiftUI
 
     var userApp: User?
     var isLogged: Bool = false
-    
+
     var authenticationViewModel: AuthenticationViewModel {
-        return AuthenticationViewModel (
-            onLoginSucceed: { [weak self]  user in
+        return AuthenticationViewModel(
+            onLoginSucceed: { [weak self] user in
                 self?.loginUser(user: user)
             },
             onLogoutCompleted: { [weak self] in
@@ -23,7 +23,7 @@ import SwiftUI
             }
         )
     }
-    
+
     init() {
         isLogged = authenticationViewModel.isAuthenticated()
                if isLogged && userApp == nil {
@@ -36,17 +36,17 @@ import SwiftUI
                    }
                }
         }
-    
+
     func loginUser(user: User) {
         self.isLogged = true
         self.userApp = user
     }
-    
+
     func logoutUser() {
             self.isLogged = false
             self.userApp = nil
         }
-    
+
     func addRepoToUser(repo: Repository) {
         guard let user = userApp,
               !user.repoList.contains(where: { $0.id == repo.id }) else {

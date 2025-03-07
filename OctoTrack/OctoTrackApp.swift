@@ -13,7 +13,7 @@ struct OctoTrackApp: App {
     @State var viewModel = AppViewModel()
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Item.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -40,7 +40,7 @@ struct OctoTrackApp: App {
                                 Text("Account")
                             }
                     }
-                    
+
                 } else {
                     AuthenticationView(viewModel: viewModel.authenticationViewModel)
                         .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),

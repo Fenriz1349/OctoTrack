@@ -8,27 +8,26 @@
 import Foundation
 
 @Observable final class AuthenticationViewModel {
-    
+
     var isAuthenticating: Bool = false
     var authError: Error?
     private let authenticator = GitHubAuthenticator()
     private let keychain = KeychainService()
     let onLoginSucceed: (User) -> Void
     let onLogoutCompleted: () -> Void
-    
-    
+
     init(onLoginSucceed: @escaping (User) -> Void, onLogoutCompleted: @escaping () -> Void) {
             self.onLoginSucceed = onLoginSucceed
             self.onLogoutCompleted = onLogoutCompleted
         }
-    
+
     @MainActor
     func login() async throws {
         guard !isAuthenticating else { return }
-        
+
         isAuthenticating = true
         authError = nil
-        
+
         Task {
             do {
                 try await authenticator.authenticate()
@@ -40,7 +39,7 @@ import Foundation
             }
         }
     }
-    
+
     func signOut() {
         do {
             try authenticator.signOut()
@@ -49,11 +48,11 @@ import Foundation
             authError = error
         }
     }
-    
+
     func isAuthenticated() -> Bool {
            return authenticator.isAuthenticated
        }
-    
+
     func getUser() async throws -> User {
         let token = try  await authenticator.authenticate()
         let userRequest: UserLoader = UserLoader()

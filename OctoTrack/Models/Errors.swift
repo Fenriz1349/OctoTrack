@@ -15,7 +15,7 @@ enum Errors: Swift.Error {
     case retrieveFailed
     case deleteFailed
     case invalidUUID
-    
+    case invalidURL
     case authenticationCancelled
     case authenticationFailed
     case missingAuthorizationCode

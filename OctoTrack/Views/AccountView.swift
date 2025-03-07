@@ -9,21 +9,20 @@ import SwiftUI
 
 struct AccountView: View {
     @State private var appViewModel: AppViewModel
-    
+
     init(appViewModel: AppViewModel) {
         self._appViewModel = State(initialValue: appViewModel)
     }
-    
+
     var body: some View {
         VStack(spacing: 24) {
-            // Profile header
             if let user = appViewModel.userApp {
                 UserHeader(user: user)
             } else {
                 Text("User data not available")
                     .foregroundColor(.secondary)
             }
-            
+
             VStack(spacing: 16) {
                 Button {
                     Task {
@@ -40,7 +39,7 @@ struct AccountView: View {
                         color: Color.blue
                     )
                 }
-                
+
                 Button {
                     appViewModel.userApp?.repoList = []
                 } label: {
@@ -50,7 +49,7 @@ struct AccountView: View {
                         color: Color.orange
                     )
                 }
-                
+
                 Button {
                     appViewModel.authenticationViewModel.signOut()
                 } label: {

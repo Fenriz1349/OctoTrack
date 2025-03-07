@@ -15,14 +15,14 @@ struct RepoListView: View {
     var repositories: [Repository]? {
         appViewModel.userApp?.repoList
     }
-    
+
     var body: some View {
         NavigationStack {
             if let user = appViewModel.userApp {
                 UserHeader(user: user)
             }
             NavigationLink(destination: AddRepositoryModal(appViewModel: appViewModel)) {
-                CustomButtonLabel(icon: nil, message: .localized(.repoAdd), color: .black)
+                CustomButtonLabel(icon: nil, message: "repoAdd".localized, color: .black)
                     .padding(.horizontal, 30)
             }
             ScrollView {
@@ -31,8 +31,6 @@ struct RepoListView: View {
                 }
                 .onDelete(perform: deleteItems)
             }
-           
-
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
@@ -45,14 +43,14 @@ struct RepoListView: View {
             }
         }
     }
-    
+
     private func addItem() {
         withAnimation {
             let newItem = Item(timestamp: Date())
             modelContext.insert(newItem)
         }
     }
-    
+
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {

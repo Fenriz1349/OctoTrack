@@ -12,8 +12,8 @@ struct Repository: Identifiable, Codable {
     let name: String
     var description: String?
     let isPrivate: Bool
-    var pullRequests : [PullRequest] = []
-    var commits : [Commit] = []
+    var pullRequests: [PullRequest] = []
+    var commits: [Commit] = []
     let avatar: AvatarProperties
     let createdAt: Date
     var updatedAt: Date?

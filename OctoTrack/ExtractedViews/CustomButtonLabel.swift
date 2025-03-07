@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct CustomButtonLabel: View {
-    let icon : String?
-    let message : String
-    let color : Color
+    let icon: String?
+    let message: String
+    let color: Color
     var body: some View {
         HStack {
             if let icon = icon { Image(systemName: icon) }
@@ -28,5 +28,5 @@ struct CustomButtonLabel: View {
 }
 
 #Preview {
-    CustomButtonLabel(icon: nil, message: .localized(.repoAdd), color: .accentColor)
+    CustomButtonLabel(icon: nil, message: "repoAdd".localized, color: .accentColor)
 }

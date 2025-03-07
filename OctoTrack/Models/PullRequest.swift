@@ -8,7 +8,8 @@
 import Foundation
 
 struct PullRequest: Identifiable, Codable {
-    let id: Int // recup l'iD de github
+
+    let id: Int
     let number: Int
     var state: String
     var title: String
@@ -16,6 +17,6 @@ struct PullRequest: Identifiable, Codable {
     var updateAt: Date?
     var closedAt: Date?
     var mergedAt: Date?
-    var requested_reviewers: [User] = []
+    var requestedReviewers: [User] = []
     var isDraft: Bool = false
 }

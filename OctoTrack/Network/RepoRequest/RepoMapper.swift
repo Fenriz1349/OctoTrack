@@ -8,40 +8,51 @@
 import Foundation
 
 enum RepoMapper {
-    
-    struct RepoDTO: Decodable {
+
+    struct RepoDTO {
         let id: Int
         let name: String
         let isPrivate: Bool
         let owner: OwnerDTO
-        let created_at: Date
+        let createdAt: Date
         let language: String?
-        
-        private enum CodingKeys: String, CodingKey {
-                case id, name, owner, created_at, language
-                case isPrivate = "private"
-            }
-        
+
         func toRepo() -> Repository {
-            let avatar = AvatarProperties(name: owner.login, url: owner.avatar_url)
-            return Repository(id: id, name: name, isPrivate: isPrivate, avatar: avatar, createdAt: created_at, language: language.map { [$0] } ?? [])
+            let avatar = AvatarProperties(name: owner.login, url: owner.avatarUrl)
+            return Repository(id: id, name: name, isPrivate: isPrivate, avatar: avatar,
+                              createdAt: createdAt, language: language.map { [$0] } ?? [])
         }
     }
-    
-    struct OwnerDTO: Decodable {
+
+    struct OwnerDTO {
         let login: String
-        let avatar_url: String
+        let avatarUrl: String
     }
-    
+
     static func map(_ data: Data, and response: HTTPURLResponse) throws -> Repository {
         guard response.statusCode == 200 else {
             throw Errors.invalidResponse
         }
-        
+
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        
+
         let repoDTO = try decoder.decode(RepoDTO.self, from: data)
         return repoDTO.toRepo()
+    }
+}
+
+extension RepoMapper.OwnerDTO: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case login
+        case avatarUrl = "avatar_url"
+    }
+}
+
+extension RepoMapper.RepoDTO: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case id, name, owner, language
+        case createdAt = "created_at"
+        case isPrivate = "private"
     }
 }

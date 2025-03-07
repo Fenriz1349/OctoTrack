@@ -8,7 +8,7 @@
 import Foundation
 
 enum TokenMapper {
-    
+
     static func getTokenString(from key: String) throws -> String {
         let keychain = KeychainService()
         guard !key.isEmpty else {
@@ -21,7 +21,7 @@ enum TokenMapper {
         }
         return tokenString
     }
-    
+
     static func getToken(from key: String) throws -> UUID {
         guard let tokenString = try? getTokenString(from: key),
             let token = UUID(uuidString: tokenString) else {

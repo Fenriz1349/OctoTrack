@@ -9,12 +9,12 @@ import SwiftUI
 
 struct AuthenticationView: View {
     @State var viewModel: AuthenticationViewModel
-    
+
     var body: some View {
         ZStack {
             VStack(spacing: 20) {
                 AsyncAvatarImage(avatar: AvatarProperties(name: "", url: ""), size: 150)
-                Text("welcome on Octotrack")
+                Text("Welcome On Octotrack")
                     .font(.largeTitle)
                     .fontWeight(.semibold)
                 if viewModel.isAuthenticating {
@@ -26,9 +26,11 @@ struct AuthenticationView: View {
                         Task {
                             try await viewModel.login()
                         }
-                    }) {
+                    },
+                    label: {
                         CustomButtonLabel(icon: nil, message: "Sign In to Githhub", color: .black)
-                    }
+                        }
+                    )
                 }
                 if let error = viewModel.authError {
                     Text("Authentication error: \(error.localizedDescription)")
@@ -46,6 +48,6 @@ struct AuthenticationView: View {
 
 #Preview {
     AuthenticationView(viewModel: AuthenticationViewModel( onLoginSucceed: { user in
-        print("Utilisateur connecté")
+        print("\(user.login) connecté")
     }, onLogoutCompleted: {}))
 }

@@ -1,23 +1,29 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ ajouté avec succès!" : {
+
+    },
+    "%lld repositories tracked" : {
+
+    },
+    "Account" : {
+
+    },
     "Add Item" : {
+
+    },
+    "Ajouter un dépôt" : {
 
     },
     "Authentication error: %@" : {
 
     },
-    "chercher les repos de :" : {
-
-    },
-    "Github" : {
+    "Échec : impossible d'ajouter %@" : {
 
     },
     "Key" : {
       "extractionState" : "manual"
-    },
-    "owner" : {
-
     },
     "private" : {
       "extractionState" : "manual"
@@ -31,16 +37,7 @@
     "Public" : {
 
     },
-    "repo" : {
-
-    },
-    "Repo : %lld ajouté" : {
-
-    },
     "Repo List" : {
-
-    },
-    "Repo suivis: %lld" : {
 
     },
     "repoAdd" : {
@@ -60,7 +57,13 @@
         }
       }
     },
-    "welcome on Octotrack" : {
+    "User data not available" : {
+
+    },
+    "View on GitHub" : {
+
+    },
+    "Welcome On Octotrack" : {
 
     }
   },

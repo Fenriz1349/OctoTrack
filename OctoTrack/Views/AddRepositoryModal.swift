@@ -10,30 +10,69 @@ import SwiftUI
 struct AddRepositoryModal: View {
     @State private var viewModel = AddRepoViewModel()
     @State var appViewModel: AppViewModel
+    @Environment(\.dismiss) private var dismiss
 
-    @State var repo: Repository?
     var body: some View {
-        VStack {
-            Text(LK.repoAdd.rawValue)
-            HStack {
-                CustomTextField(color: .gray, placeholder: "owner", text: $viewModel.owner, type: .alphaNumber)
-                CustomTextField(color: .gray,placeholder: "repo", text: $viewModel.repoName, type: .alphaNumber)
-            }
-            Button(action: {
-                Task {
-                    await repo = viewModel.getRepo()
-                    if let repo = repo {
-                        appViewModel.addRepoToUser(repo: repo)
+        VStack(spacing: 20) {
+            Text("Ajouter un dépôt")
+                .font(.headline)
+                .padding(.top)
+
+            CustomTextField(
+                header: "Propriétaire",
+                color: .gray,
+                placeholder: "ex: octocat",
+                text: $viewModel.owner,
+                type: .alphaNumber
+            )
+
+            CustomTextField(
+                header: "Nom du dépôt",
+                color: .gray,
+                placeholder: "ex: Hello-World",
+                text: $viewModel.repoName,
+                type: .alphaNumber
+            )
+
+            if viewModel.isLoading {
+                ProgressView()
+                    .padding()
+            } else {
+                Button(action: {
+                    Task {
+                        let getRepo = await viewModel.getRepo()
+                        switch getRepo {
+                        case .success(let repo):
+                            appViewModel.addRepoToUser(repo: repo)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                viewModel.resetFeedback()
+                                dismiss()
+                            }
+                        case .failure:
+                            break
+                        }
                     }
-                }
-            }) {
-                CustomButtonLabel(icon: nil, message: "ajouter", color: .green)
+                },
+                label: {
+                    CustomButtonLabel(
+                        icon: "plus.circle.fill",
+                        message: "Ajouter le dépôt",
+                        color: .green
+                        )
+                    }
+                )
+                // Permet de désactiver le bouton tant que les 2 champs sont vide
+                .disabled(!viewModel.isFormValid)
+                .opacity(viewModel.isFormValid ? 1 : 0.6)
             }
-//            TextField("chercher les repos de :", text: $viewModel.owner)
-//            if let repo = repo {
-//                Text("Repo : \(repo.id) ajouté")
-//            }
+
+            if viewModel.showFeedback {
+                InfoLabel(message: viewModel.feedbackMessage, isSuccess: viewModel.isSuccess)
+            }
+            Spacer()
         }
+        .padding()
+        .frame(maxWidth: 400)
     }
 }
 

@@ -10,7 +10,7 @@ import SwiftUI
 @MainActor
 @Observable class AsyncAvatarViewModel {
     var downloadedImage: UIImage?
-    
+
     func loadImage(from urlString: String) async {
         guard let url = URL(string: urlString) else {
             return

@@ -8,13 +8,7 @@
 import Foundation
 
 enum RepoEndpoint {
-    static func request(owner: String, repoName: String) throws -> URLRequest {
-        let baseURL = URL(string: "https://api.github.com/repos/\(owner)/\(repoName)")!
-        
-        var request = URLRequest(url: baseURL)
-        request.httpMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        return request
+    static func request(owner: String, repoName: String, token: String? = nil) throws -> URLRequest {
+        return EndpointBuilder.repo(owner: owner, name: repoName, token: token).buildRequest()
     }
 }

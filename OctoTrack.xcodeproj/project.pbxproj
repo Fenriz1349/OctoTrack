@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6856531F2D7AE4400089E3BE /* InfoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6856531E2D7AE4400089E3BE /* InfoLabel.swift */; };
+		685653212D7AEF430089E3BE /* EndpointBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685653202D7AEF430089E3BE /* EndpointBuilder.swift */; };
+		685653232D7B2C910089E3BE /* TextFieldConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685653222D7B2C910089E3BE /* TextFieldConfig.swift */; };
 		68D6ACD62D71EFCC001E5E6C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68D6ACBA2D71EFCC001E5E6C /* Preview Assets.xcassets */; };
 		68D6ACD72D71EFCC001E5E6C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 68D6ACC02D71EFCC001E5E6C /* Localizable.xcstrings */; };
 		68D6ACD82D71EFCC001E5E6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68D6ACD22D71EFCC001E5E6C /* Assets.xcassets */; };
@@ -34,9 +37,7 @@
 		68D6ACEE2D71EFCC001E5E6C /* PreviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6ACBB2D71EFCC001E5E6C /* PreviewModels.swift */; };
 		68D6ACEF2D71EFCC001E5E6C /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6ACBD2D71EFCC001E5E6C /* KeyChainService.swift */; };
 		68D6ACF02D71EFCC001E5E6C /* TokenMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6ACBE2D71EFCC001E5E6C /* TokenMapper.swift */; };
-		68D6ACF12D71EFCC001E5E6C /* LocalizableKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6ACC12D71EFCC001E5E6C /* LocalizableKeys.swift */; };
 		68D6ACF22D71EFCC001E5E6C /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6ACC22D71EFCC001E5E6C /* String+Ext.swift */; };
-		68D6ACF32D71EFCC001E5E6C /* User+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6ACC32D71EFCC001E5E6C /* User+Ext.swift */; };
 		68D6ACF42D71EFCC001E5E6C /* AddRepoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6ACC52D71EFCC001E5E6C /* AddRepoViewModel.swift */; };
 		68D6ACF52D71EFCC001E5E6C /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6ACC62D71EFCC001E5E6C /* AppViewModel.swift */; };
 		68D6ACF62D71EFCC001E5E6C /* AsyncAvatarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6ACC72D71EFCC001E5E6C /* AsyncAvatarViewModel.swift */; };
@@ -73,6 +74,9 @@
 		683612EE2D5D31EC00805615 /* OctoTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OctoTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		683613002D5D31EE00805615 /* OctoTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OctoTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6836130A2D5D31EE00805615 /* OctoTrackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OctoTrackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6856531E2D7AE4400089E3BE /* InfoLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoLabel.swift; sourceTree = "<group>"; };
+		685653202D7AEF430089E3BE /* EndpointBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointBuilder.swift; sourceTree = "<group>"; };
+		685653222D7B2C910089E3BE /* TextFieldConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConfig.swift; sourceTree = "<group>"; };
 		68D6AC9F2D71EFCC001E5E6C /* AsyncAvatarImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAvatarImage.swift; sourceTree = "<group>"; };
 		68D6ACA02D71EFCC001E5E6C /* CustomButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonLabel.swift; sourceTree = "<group>"; };
 		68D6ACA12D71EFCC001E5E6C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -99,9 +103,7 @@
 		68D6ACBD2D71EFCC001E5E6C /* KeyChainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainService.swift; sourceTree = "<group>"; };
 		68D6ACBE2D71EFCC001E5E6C /* TokenMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenMapper.swift; sourceTree = "<group>"; };
 		68D6ACC02D71EFCC001E5E6C /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		68D6ACC12D71EFCC001E5E6C /* LocalizableKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableKeys.swift; sourceTree = "<group>"; };
 		68D6ACC22D71EFCC001E5E6C /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
-		68D6ACC32D71EFCC001E5E6C /* User+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Ext.swift"; sourceTree = "<group>"; };
 		68D6ACC52D71EFCC001E5E6C /* AddRepoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRepoViewModel.swift; sourceTree = "<group>"; };
 		68D6ACC62D71EFCC001E5E6C /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		68D6ACC72D71EFCC001E5E6C /* AsyncAvatarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAvatarViewModel.swift; sourceTree = "<group>"; };
@@ -122,11 +124,6 @@
 		683613032D5D31EE00805615 /* OctoTrackTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = OctoTrackTests;
-			sourceTree = "<group>";
-		};
-		6836130D2D5D31EE00805615 /* OctoTrackUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = OctoTrackUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -161,7 +158,6 @@
 			children = (
 				68D6ACD52D71EFCC001E5E6C /* OctoTrack */,
 				683613032D5D31EE00805615 /* OctoTrackTests */,
-				6836130D2D5D31EE00805615 /* OctoTrackUITests */,
 				683612EF2D5D31EC00805615 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -184,6 +180,7 @@
 				68D6ACA12D71EFCC001E5E6C /* CustomTextField.swift */,
 				68D6ACA22D71EFCC001E5E6C /* RepoRow.swift */,
 				68D6ACA32D71EFCC001E5E6C /* UserHeader.swift */,
+				6856531E2D7AE4400089E3BE /* InfoLabel.swift */,
 			);
 			path = ExtractedViews;
 			sourceTree = "<group>";
@@ -197,6 +194,7 @@
 				68D6ACA82D71EFCC001E5E6C /* PullRequest.swift */,
 				68D6ACA92D71EFCC001E5E6C /* Repository.swift */,
 				68D6ACAA2D71EFCC001E5E6C /* User.swift */,
+				685653222D7B2C910089E3BE /* TextFieldConfig.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -238,6 +236,7 @@
 				68D6ACB32D71EFCC001E5E6C /* RepoRequest */,
 				68D6ACB72D71EFCC001E5E6C /* UserRequest */,
 				68D6ACB82D71EFCC001E5E6C /* URLSessionHTTPClient.swift */,
+				685653202D7AEF430089E3BE /* EndpointBuilder.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -264,9 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				68D6ACC02D71EFCC001E5E6C /* Localizable.xcstrings */,
-				68D6ACC12D71EFCC001E5E6C /* LocalizableKeys.swift */,
 				68D6ACC22D71EFCC001E5E6C /* String+Ext.swift */,
-				68D6ACC32D71EFCC001E5E6C /* User+Ext.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -371,9 +368,6 @@
 			);
 			dependencies = (
 				6836130C2D5D31EE00805615 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				6836130D2D5D31EE00805615 /* OctoTrackUITests */,
 			);
 			name = OctoTrackUITests;
 			packageProductDependencies = (
@@ -481,17 +475,18 @@
 				68D6ACED2D71EFCC001E5E6C /* URLSessionHTTPClient.swift in Sources */,
 				68D6ACEE2D71EFCC001E5E6C /* PreviewModels.swift in Sources */,
 				68D6ACEF2D71EFCC001E5E6C /* KeyChainService.swift in Sources */,
+				6856531F2D7AE4400089E3BE /* InfoLabel.swift in Sources */,
 				68D6ACF02D71EFCC001E5E6C /* TokenMapper.swift in Sources */,
-				68D6ACF12D71EFCC001E5E6C /* LocalizableKeys.swift in Sources */,
 				68D6ACF22D71EFCC001E5E6C /* String+Ext.swift in Sources */,
-				68D6ACF32D71EFCC001E5E6C /* User+Ext.swift in Sources */,
 				68D6ACF42D71EFCC001E5E6C /* AddRepoViewModel.swift in Sources */,
 				68D6ACF52D71EFCC001E5E6C /* AppViewModel.swift in Sources */,
 				68D6ACF62D71EFCC001E5E6C /* AsyncAvatarViewModel.swift in Sources */,
 				68D6ACF72D71EFCC001E5E6C /* AuthenticationViewModel.swift in Sources */,
+				685653212D7AEF430089E3BE /* EndpointBuilder.swift in Sources */,
 				68D6ACF82D71EFCC001E5E6C /* RepoDetailViewModel.swift in Sources */,
 				68D6ACF92D71EFCC001E5E6C /* RepoListViewModel.swift in Sources */,
 				68D6ACFA2D71EFCC001E5E6C /* AccountView.swift in Sources */,
+				685653232D7B2C910089E3BE /* TextFieldConfig.swift in Sources */,
 				68D6ACFB2D71EFCC001E5E6C /* AddRepositoryModal.swift in Sources */,
 				68D6ACFC2D71EFCC001E5E6C /* AuthenticationView.swift in Sources */,
 				68D6ACFD2D71EFCC001E5E6C /* RepoDetailView.swift in Sources */,
