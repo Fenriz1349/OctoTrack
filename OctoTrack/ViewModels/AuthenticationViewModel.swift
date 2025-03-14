@@ -16,6 +16,10 @@ import Foundation
     let onLoginSucceed: (User) -> Void
     let onLogoutCompleted: () -> Void
 
+    var isAuthenticated: Bool {
+           return authenticator.isAuthenticated
+       }
+
     init(onLoginSucceed: @escaping (User) -> Void, onLogoutCompleted: @escaping () -> Void) {
             self.onLoginSucceed = onLoginSucceed
             self.onLogoutCompleted = onLogoutCompleted
@@ -49,14 +53,10 @@ import Foundation
         }
     }
 
-    func isAuthenticated() -> Bool {
-           return authenticator.isAuthenticated
-       }
-
     func getUser() async throws -> User {
         let token = try  await authenticator.authenticate()
         let userRequest: UserLoader = UserLoader()
-        let request = UserEndpoint.userInfoRequest(with: token)
+        let request = try UserEndpoint.userInfoRequest(with: token)
         do {
             return try await userRequest.userLoader(from: request)
         } catch {

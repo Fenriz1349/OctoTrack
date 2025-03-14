@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		683782DA2D82C6B200769754 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683782D72D82C6B200769754 /* SharedTestHelpers.swift */; };
+		683782DC2D82C6D900769754 /* HTTPClientMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683782DB2D82C6D900769754 /* HTTPClientMock.swift */; };
+		683782FC2D82C73100769754 /* EndpointBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683782FB2D82C73100769754 /* EndpointBuilderTest.swift */; };
+		683782FE2D82C76B00769754 /* URLSessionHTTPClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683782FD2D82C76B00769754 /* URLSessionHTTPClientTest.swift */; };
+		683783002D82C84600769754 /* UserLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683782FF2D82C84600769754 /* UserLoaderTests.swift */; };
+		683783022D82C87A00769754 /* UserMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683783012D82C87A00769754 /* UserMapperTests.swift */; };
+		683783042D82C8A600769754 /* UserEndpointTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683783032D82C8A600769754 /* UserEndpointTest.swift */; };
 		6856531F2D7AE4400089E3BE /* InfoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6856531E2D7AE4400089E3BE /* InfoLabel.swift */; };
 		685653212D7AEF430089E3BE /* EndpointBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685653202D7AEF430089E3BE /* EndpointBuilder.swift */; };
 		685653232D7B2C910089E3BE /* TextFieldConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685653222D7B2C910089E3BE /* TextFieldConfig.swift */; };
@@ -61,19 +68,18 @@
 			remoteGlobalIDString = 683612ED2D5D31EC00805615;
 			remoteInfo = OctoTrack;
 		};
-		6836130B2D5D31EE00805615 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 683612E62D5D31EC00805615 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 683612ED2D5D31EC00805615;
-			remoteInfo = OctoTrack;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		683612EE2D5D31EC00805615 /* OctoTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OctoTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		683613002D5D31EE00805615 /* OctoTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OctoTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6836130A2D5D31EE00805615 /* OctoTrackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OctoTrackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		683782D72D82C6B200769754 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
+		683782DB2D82C6D900769754 /* HTTPClientMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientMock.swift; sourceTree = "<group>"; };
+		683782FB2D82C73100769754 /* EndpointBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointBuilderTest.swift; sourceTree = "<group>"; };
+		683782FD2D82C76B00769754 /* URLSessionHTTPClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTest.swift; sourceTree = "<group>"; };
+		683782FF2D82C84600769754 /* UserLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoaderTests.swift; sourceTree = "<group>"; };
+		683783012D82C87A00769754 /* UserMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMapperTests.swift; sourceTree = "<group>"; };
+		683783032D82C8A600769754 /* UserEndpointTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEndpointTest.swift; sourceTree = "<group>"; };
 		6856531E2D7AE4400089E3BE /* InfoLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoLabel.swift; sourceTree = "<group>"; };
 		685653202D7AEF430089E3BE /* EndpointBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointBuilder.swift; sourceTree = "<group>"; };
 		685653222D7B2C910089E3BE /* TextFieldConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConfig.swift; sourceTree = "<group>"; };
@@ -120,14 +126,6 @@
 		68D6ACD42D71EFCC001E5E6C /* OctoTrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctoTrackApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		683613032D5D31EE00805615 /* OctoTrackTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = OctoTrackTests;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
 		683612EB2D5D31EC00805615 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -143,13 +141,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		683613072D5D31EE00805615 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -157,7 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				68D6ACD52D71EFCC001E5E6C /* OctoTrack */,
-				683613032D5D31EE00805615 /* OctoTrackTests */,
+				683782D92D82C6B200769754 /* OctoTrackTests */,
 				683612EF2D5D31EC00805615 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -167,9 +158,38 @@
 			children = (
 				683612EE2D5D31EC00805615 /* OctoTrack.app */,
 				683613002D5D31EE00805615 /* OctoTrackTests.xctest */,
-				6836130A2D5D31EE00805615 /* OctoTrackUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		683782D62D82C6B200769754 /* UserRequest */ = {
+			isa = PBXGroup;
+			children = (
+				683783032D82C8A600769754 /* UserEndpointTest.swift */,
+				683783012D82C87A00769754 /* UserMapperTests.swift */,
+				683782FF2D82C84600769754 /* UserLoaderTests.swift */,
+			);
+			path = UserRequest;
+			sourceTree = "<group>";
+		};
+		683782D82D82C6B200769754 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				683782FB2D82C73100769754 /* EndpointBuilderTest.swift */,
+				683782D62D82C6B200769754 /* UserRequest */,
+				683782FD2D82C76B00769754 /* URLSessionHTTPClientTest.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		683782D92D82C6B200769754 /* OctoTrackTests */ = {
+			isa = PBXGroup;
+			children = (
+				683782D72D82C6B200769754 /* SharedTestHelpers.swift */,
+				683782DB2D82C6D900769754 /* HTTPClientMock.swift */,
+				683782D82D82C6B200769754 /* Network */,
+			);
+			path = OctoTrackTests;
 			sourceTree = "<group>";
 		};
 		68D6ACA42D71EFCC001E5E6C /* ExtractedViews */ = {
@@ -223,8 +243,8 @@
 			isa = PBXGroup;
 			children = (
 				68D6ACB42D71EFCC001E5E6C /* UserEndpoint.swift */,
-				68D6ACB52D71EFCC001E5E6C /* UserLoader.swift */,
 				68D6ACB62D71EFCC001E5E6C /* UserMapper.swift */,
+				68D6ACB52D71EFCC001E5E6C /* UserLoader.swift */,
 			);
 			path = UserRequest;
 			sourceTree = "<group>";
@@ -346,35 +366,12 @@
 			dependencies = (
 				683613022D5D31EE00805615 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				683613032D5D31EE00805615 /* OctoTrackTests */,
-			);
 			name = OctoTrackTests;
 			packageProductDependencies = (
 			);
 			productName = OctoTrackTests;
 			productReference = 683613002D5D31EE00805615 /* OctoTrackTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		683613092D5D31EE00805615 /* OctoTrackUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6836131A2D5D31EE00805615 /* Build configuration list for PBXNativeTarget "OctoTrackUITests" */;
-			buildPhases = (
-				683613062D5D31EE00805615 /* Sources */,
-				683613072D5D31EE00805615 /* Frameworks */,
-				683613082D5D31EE00805615 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6836130C2D5D31EE00805615 /* PBXTargetDependency */,
-			);
-			name = OctoTrackUITests;
-			packageProductDependencies = (
-			);
-			productName = OctoTrackUITests;
-			productReference = 6836130A2D5D31EE00805615 /* OctoTrackUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -391,10 +388,7 @@
 					};
 					683612FF2D5D31EE00805615 = {
 						CreatedOnToolsVersion = 16.1;
-						TestTargetID = 683612ED2D5D31EC00805615;
-					};
-					683613092D5D31EE00805615 = {
-						CreatedOnToolsVersion = 16.1;
+						LastSwiftMigration = 1610;
 						TestTargetID = 683612ED2D5D31EC00805615;
 					};
 				};
@@ -415,7 +409,6 @@
 			targets = (
 				683612ED2D5D31EC00805615 /* OctoTrack */,
 				683612FF2D5D31EE00805615 /* OctoTrackTests */,
-				683613092D5D31EE00805615 /* OctoTrackUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -432,13 +425,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		683612FE2D5D31EE00805615 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		683613082D5D31EE00805615 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -500,13 +486,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		683613062D5D31EE00805615 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				683783042D82C8A600769754 /* UserEndpointTest.swift in Sources */,
+				683782FC2D82C73100769754 /* EndpointBuilderTest.swift in Sources */,
+				683782DC2D82C6D900769754 /* HTTPClientMock.swift in Sources */,
+				683782DA2D82C6B200769754 /* SharedTestHelpers.swift in Sources */,
+				683783022D82C87A00769754 /* UserMapperTests.swift in Sources */,
+				683783002D82C84600769754 /* UserLoaderTests.swift in Sources */,
+				683782FE2D82C76B00769754 /* URLSessionHTTPClientTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,11 +503,6 @@
 			isa = PBXTargetDependency;
 			target = 683612ED2D5D31EC00805615 /* OctoTrack */;
 			targetProxy = 683613012D5D31EE00805615 /* PBXContainerItemProxy */;
-		};
-		6836130C2D5D31EE00805615 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 683612ED2D5D31EC00805615 /* OctoTrack */;
-			targetProxy = 6836130B2D5D31EE00805615 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -705,6 +686,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -713,6 +695,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.juliencotte.OctoTrackTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OctoTrack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OctoTrack";
@@ -723,6 +706,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -734,38 +718,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OctoTrack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OctoTrack";
-			};
-			name = Release;
-		};
-		6836131B2D5D31EE00805615 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.juliencotte.OctoTrackUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = OctoTrack;
-			};
-			name = Debug;
-		};
-		6836131C2D5D31EE00805615 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.juliencotte.OctoTrackUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = OctoTrack;
 			};
 			name = Release;
 		};
@@ -795,15 +747,6 @@
 			buildConfigurations = (
 				683613182D5D31EE00805615 /* Debug */,
 				683613192D5D31EE00805615 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6836131A2D5D31EE00805615 /* Build configuration list for PBXNativeTarget "OctoTrackUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6836131B2D5D31EE00805615 /* Debug */,
-				6836131C2D5D31EE00805615 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

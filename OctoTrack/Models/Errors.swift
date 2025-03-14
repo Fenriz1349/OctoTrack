@@ -16,6 +16,7 @@ enum Errors: Swift.Error {
     case deleteFailed
     case invalidUUID
     case invalidURL
+    case noHTTPURLResponse
     case authenticationCancelled
     case authenticationFailed
     case missingAuthorizationCode

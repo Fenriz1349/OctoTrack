@@ -9,6 +9,6 @@ import Foundation
 
 enum RepoEndpoint {
     static func request(owner: String, repoName: String, token: String? = nil) throws -> URLRequest {
-        return EndpointBuilder.repo(owner: owner, name: repoName, token: token).buildRequest()
+        return try EndpointBuilder.repo(owner: owner, name: repoName, token: token).buildRequest()
     }
 }

@@ -32,7 +32,7 @@ enum GitHubAuthenticationEndpoint {
 
     static func authorizeURL() throws -> URL {
 
-        let request = EndpointBuilder.authorize(
+        let request = try EndpointBuilder.authorize(
             clientID: config.clientID,
             redirectURI: config.redirectURI,
             scopes: config.scopes
@@ -45,8 +45,8 @@ enum GitHubAuthenticationEndpoint {
         return url
     }
 
-    static func tokenExchangeRequest(with code: String) -> URLRequest {
-        return EndpointBuilder.exchangeToken(
+    static func tokenExchangeRequest(with code: String) throws -> URLRequest {
+        return try EndpointBuilder.exchangeToken(
             code: code,
             clientID: config.clientID,
             clientSecret: config.clientSecret,

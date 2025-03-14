@@ -25,7 +25,7 @@ import SwiftUI
     }
 
     init() {
-        isLogged = authenticationViewModel.isAuthenticated()
+        isLogged = authenticationViewModel.isAuthenticated
                if isLogged && userApp == nil {
                    Task {
                        do {

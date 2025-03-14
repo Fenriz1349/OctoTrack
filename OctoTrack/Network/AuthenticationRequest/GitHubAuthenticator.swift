@@ -119,7 +119,7 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
         print("Code d'autorisation obtenu: \(code)")
 
         // Échange code -> token
-        let tokenRequest = GitHubAuthenticationEndpoint.tokenExchangeRequest(with: code)
+        let tokenRequest = try GitHubAuthenticationEndpoint.tokenExchangeRequest(with: code)
         print("Requête de token préparée")
 
         do {

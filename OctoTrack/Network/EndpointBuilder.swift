@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// EndpointBuilder sert à générer uniquement tous les élements qui composeront la requete SQL
+/// Pour chaque cas on peut personalisé l'url, le header et ou le body
 enum EndpointBuilder {
     case user(token: String)
     case repo(owner: String, name: String, token: String?)
@@ -86,16 +88,12 @@ enum EndpointBuilder {
         return customHeaders
     }
 
-    func buildRequest() -> URLRequest {
+    func buildRequest() throws -> URLRequest {
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)
         urlComponents?.path = path
         urlComponents?.queryItems = queryItems
 
-        guard let url = urlComponents?.url else {
-            fatalError("Impossible de construire l'URL avec les composants fournis")
-        }
-
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: urlComponents!.url!)
         request.httpMethod = httpMethod
         request.httpBody = httpBody
 

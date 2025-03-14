@@ -9,7 +9,7 @@ import Foundation
 
 enum UserEndpoint {
 
-    static func userInfoRequest(with token: String) -> URLRequest {
-        return EndpointBuilder.user(token: token).buildRequest()
-       }
+    static func userInfoRequest(with token: String) throws -> URLRequest {
+        return try EndpointBuilder.user(token: token).buildRequest()
+    }
 }
