@@ -36,7 +36,7 @@ struct UserHeader: View {
                     HStack(spacing: 6) {
                         Image(systemName: "link.circle.fill")
                             .foregroundColor(.blue)
-                        Text("View on GitHub")
+                        Text("viewGithub".localized)
                             .fontWeight(.medium)
                             .foregroundColor(.blue)
                     }
@@ -46,7 +46,7 @@ struct UserHeader: View {
                 HStack(spacing: 6) {
                     Image(systemName: "folder.fill")
                         .foregroundColor(.orange)
-                    Text("\(user.repoList.count) repositories tracked")
+                    Text("repositoriesTracked".localized(user.repoList.count))
                         .fontWeight(.medium)
                         .foregroundColor(.secondary)
                 }

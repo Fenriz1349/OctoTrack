@@ -17,8 +17,8 @@ struct InfoLabel: View {
                 .foregroundColor(isSuccess ? .green : .red)
 
             Text(isSuccess
-                 ? "\(message) ajouté avec succès!"
-                 : "Échec : impossible d'ajouter \(message)")
+                 ? "addedWithSuccess".localized(message)
+                 : "failCantAdd".localized(message))
                 .fontWeight(.medium)
         }
         .padding()
@@ -28,5 +28,5 @@ struct InfoLabel: View {
 }
 
 #Preview {
-    InfoLabel(message: "ceci est un test", isSuccess: false)
+    InfoLabel(message: "this is a test", isSuccess: false)
 }

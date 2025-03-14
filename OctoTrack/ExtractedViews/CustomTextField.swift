@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// Permet de gérer l'affichage de tous les Textfields de l'app suivant leur type
+// Manage display of textfields dependding on their type
 struct CustomTextField: View {
     var header: String?
     let color: Color
@@ -35,13 +35,6 @@ struct CustomTextField: View {
             .autocorrectionDisabled(config.disableAutocorrection)
             .textInputAutocapitalization(config.autocapitalization)
         }
-    }
-}
-
-extension View {
-
-    func stylize(color: Color) -> some View {
-        self.modifier(TextFieldStyleModifier(color: color))
     }
 }
 

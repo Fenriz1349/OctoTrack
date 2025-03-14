@@ -60,7 +60,6 @@ import Foundation
         do {
             return try await userRequest.userLoader(from: request)
         } catch {
-            print(error)
             throw error
         }
     }

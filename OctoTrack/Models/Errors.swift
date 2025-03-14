@@ -22,4 +22,6 @@ enum Errors: Swift.Error {
     case missingAuthorizationCode
     case tokenExchangeFailed
     case noStoredToken
+    case networkError(Error)
+    case notFound
 }

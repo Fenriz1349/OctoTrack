@@ -19,7 +19,7 @@ struct AccountView: View {
             if let user = appViewModel.userApp {
                 UserHeader(user: user)
             } else {
-                Text("User data not available")
+                Text("userDataNotAvailable".localized)
                     .foregroundColor(.secondary)
             }
 
@@ -35,7 +35,7 @@ struct AccountView: View {
                 } label: {
                     CustomButtonLabel(
                         icon: "arrow.clockwise",
-                        message: "Refresh User Data",
+                        message: "refreshUserData".localized,
                         color: Color.blue
                     )
                 }
@@ -45,7 +45,7 @@ struct AccountView: View {
                 } label: {
                     CustomButtonLabel(
                         icon: "trash",
-                        message: "Reset Repository List",
+                        message: "resetRepositoryList".localized,
                         color: Color.orange
                     )
                 }
@@ -55,7 +55,7 @@ struct AccountView: View {
                 } label: {
                     CustomButtonLabel(
                         icon: "rectangle.portrait.and.arrow.right",
-                        message: "Sign Out",
+                        message: "signOut".localized,
                         color: Color.red
                     )
                 }
@@ -64,7 +64,7 @@ struct AccountView: View {
             .padding(.bottom, 30)
         }
         .padding()
-        .navigationTitle("Account")
+        .navigationTitle("account".localized)
     }
 }
 

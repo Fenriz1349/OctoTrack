@@ -37,7 +37,7 @@ struct RepoListView: View {
                 }
                 ToolbarItem {
                     Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                        Label("addItem".localized, systemImage: "plus")
                     }
                 }
             }

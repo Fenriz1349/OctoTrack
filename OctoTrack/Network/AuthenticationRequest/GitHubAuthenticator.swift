@@ -47,8 +47,6 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
         try keychainService.delete(key: Constants.tokenKey)
     }
 
-    // MARK: - Private
-
     private func startAuthenticationFlow() async throws -> String {
          return try await withCheckedThrowingContinuation { continuation in
              startWebAuthentication { result in
@@ -99,39 +97,26 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
     }
 
     private func handleCallback(url: URL) async throws -> String {
-        print("Callback URL reçue: \(url)")
 
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-            print("Impossible de créer les composants URL")
             throw Errors.authenticationFailed
         }
-
-        print("Composants URL: \(components)")
-        print("Query items: \(String(describing: components.queryItems))")
 
         guard let queryItems = components.queryItems,
               let codeItem = queryItems.first(where: { $0.name == "code" }),
               let code = codeItem.value else {
-            print("Code d'autorisation manquant")
             throw Errors.missingAuthorizationCode
         }
 
-        print("Code d'autorisation obtenu: \(code)")
-
-        // Échange code -> token
         let tokenRequest = try GitHubAuthenticationEndpoint.tokenExchangeRequest(with: code)
-        print("Requête de token préparée")
 
         do {
             let token = try await requestToken(from: tokenRequest)
-            print("Token obtenu avec succès")
 
             try storeToken(token)
-            print("Token stocké dans le keychain")
 
             return token
         } catch {
-            print("Erreur lors de l'échange du token: \(error)")
             throw error
         }
     }

@@ -20,7 +20,7 @@ struct OctoTrackApp: App {
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            fatalError("couldNotCreateMC".localized(error.localizedDescription))
         }
     }()
 
@@ -32,12 +32,12 @@ struct OctoTrackApp: App {
                         RepoListView(appViewModel: viewModel)
                             .tabItem {
                                 Image(systemName: "folder.fill")
-                                Text("Repo List")
+                                Text("repoList".localized)
                             }
                         AccountView(appViewModel: viewModel)
                             .tabItem {
                                 Image(systemName: "person.circle.fill")
-                                Text("Account")
+                                Text("account".localized)
                             }
                     }
 

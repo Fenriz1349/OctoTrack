@@ -58,6 +58,7 @@
 		68D6ACFE2D71EFCC001E5E6C /* RepoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6ACD02D71EFCC001E5E6C /* RepoListView.swift */; };
 		68D6ACFF2D71EFCC001E5E6C /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6ACD32D71EFCC001E5E6C /* Item.swift */; };
 		68D6AD002D71EFCC001E5E6C /* OctoTrackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D6ACD42D71EFCC001E5E6C /* OctoTrackApp.swift */; };
+		68EBD7ED2D843A32004A2CE2 /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EBD7EC2D843A32004A2CE2 /* View+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,7 @@
 		68D6ACD22D71EFCC001E5E6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68D6ACD32D71EFCC001E5E6C /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		68D6ACD42D71EFCC001E5E6C /* OctoTrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctoTrackApp.swift; sourceTree = "<group>"; };
+		68EBD7EC2D843A32004A2CE2 /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +286,7 @@
 			children = (
 				68D6ACC02D71EFCC001E5E6C /* Localizable.xcstrings */,
 				68D6ACC22D71EFCC001E5E6C /* String+Ext.swift */,
+				68EBD7EC2D843A32004A2CE2 /* View+Ext.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 				68D6ACE42D71EFCC001E5E6C /* GitHubAuthenticationEndpoint.swift in Sources */,
 				68D6ACE52D71EFCC001E5E6C /* GitHubAuthenticationMapper.swift in Sources */,
 				68D6ACE62D71EFCC001E5E6C /* GitHubAuthenticator.swift in Sources */,
+				68EBD7ED2D843A32004A2CE2 /* View+Ext.swift in Sources */,
 				68D6ACE72D71EFCC001E5E6C /* RepoEndpoint.swift in Sources */,
 				68D6ACE82D71EFCC001E5E6C /* RepoGetter.swift in Sources */,
 				68D6ACE92D71EFCC001E5E6C /* RepoMapper.swift in Sources */,

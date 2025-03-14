@@ -14,7 +14,7 @@ struct AuthenticationView: View {
         ZStack {
             VStack(spacing: 20) {
                 AsyncAvatarImage(avatar: AvatarProperties(name: "", url: ""), size: 150)
-                Text("Welcome On Octotrack")
+                Text("welcome".localized)
                     .font(.largeTitle)
                     .fontWeight(.semibold)
                 if viewModel.isAuthenticating {
@@ -28,12 +28,12 @@ struct AuthenticationView: View {
                         }
                     },
                     label: {
-                        CustomButtonLabel(icon: nil, message: "Sign In to Githhub", color: .black)
+                        CustomButtonLabel(icon: nil, message: "signIn".localized, color: .black)
                         }
                     )
                 }
                 if let error = viewModel.authError {
-                    Text("Authentication error: \(error.localizedDescription)")
+                    Text("authenticationError".localized(error.localizedDescription))
                         .font(.caption)
                         .foregroundColor(.red)
                         .multilineTextAlignment(.center)
@@ -48,6 +48,6 @@ struct AuthenticationView: View {
 
 #Preview {
     AuthenticationView(viewModel: AuthenticationViewModel( onLoginSucceed: { user in
-        print("\(user.login) connecté")
+        print("connected".localized(user.login))
     }, onLogoutCompleted: {}))
 }

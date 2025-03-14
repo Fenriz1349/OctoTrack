@@ -14,7 +14,8 @@ struct RepoRow: View {
             HStack {
                 AsyncAvatarImage(avatar: repository.avatar, size: 50)
                 Text(repository.name)
-                Text(repository.isPrivate ? "Privé" : "Public")
+                Text(repository.isPrivate ? "private".localized
+                     : "public".localized)
                 Spacer()
                 Image(systemName: "chevron.forward")
                     .padding(.leading, 5)

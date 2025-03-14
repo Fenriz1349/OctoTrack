@@ -14,22 +14,22 @@ struct AddRepositoryModal: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("Ajouter un dépôt")
+            Text("repoAdd".localized)
                 .font(.headline)
                 .padding(.top)
 
             CustomTextField(
-                header: "Propriétaire",
+                header: "owner".localized,
                 color: .gray,
-                placeholder: "ex: octocat",
+                placeholder: "ownerExemple".localized,
                 text: $viewModel.owner,
                 type: .alphaNumber
             )
 
             CustomTextField(
-                header: "Nom du dépôt",
+                header: "repoName".localized,
                 color: .gray,
-                placeholder: "ex: Hello-World",
+                placeholder: "repoExemple".localized,
                 text: $viewModel.repoName,
                 type: .alphaNumber
             )
@@ -56,7 +56,7 @@ struct AddRepositoryModal: View {
                 label: {
                     CustomButtonLabel(
                         icon: "plus.circle.fill",
-                        message: "Ajouter le dépôt",
+                        message: "repoAdd".localized,
                         color: .green
                         )
                     }

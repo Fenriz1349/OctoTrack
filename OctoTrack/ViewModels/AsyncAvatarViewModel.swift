@@ -9,21 +9,22 @@ import SwiftUI
 
 @MainActor
 @Observable class AsyncAvatarViewModel {
-    var downloadedImage: UIImage?
 
-    func loadImage(from urlString: String) async {
-        guard let url = URL(string: urlString) else {
-            return
+    func loadImage(named name: String, urlString: String?) async -> UIImage {
+        if let localImage = UIImage(named: name) {
+            return localImage
         }
-        Task {
+
+        if let urlString = urlString, let url = URL(string: urlString) {
             do {
                 let (data, _) = try await URLSession.shared.data(from: url)
-                if let image = UIImage(data: data) {
-                    self.downloadedImage = image
+                if let downloadedImage = UIImage(data: data) {
+                    return downloadedImage
                 }
             } catch {
-                print("Erreur de téléchargement: \(error.localizedDescription)")
             }
         }
+
+        return UIImage(named: "defaultAvatar") ?? UIImage()
     }
 }
