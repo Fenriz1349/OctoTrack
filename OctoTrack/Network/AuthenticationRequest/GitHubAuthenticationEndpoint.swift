@@ -31,7 +31,6 @@ enum GitHubAuthenticationEndpoint {
     )
 
     static func authorizeURL() throws -> URL {
-
         let request = try EndpointBuilder.authorize(
             clientID: config.clientID,
             redirectURI: config.redirectURI,

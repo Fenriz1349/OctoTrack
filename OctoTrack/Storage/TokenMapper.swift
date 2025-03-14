@@ -7,26 +7,31 @@
 
 import Foundation
 
+struct TokenData: Codable {
+    let token: String
+    let creationDate: Date
+}
+
 enum TokenMapper {
 
-    static func getTokenString(from key: String) throws -> String {
-        let keychain = KeychainService()
-        guard !key.isEmpty else {
-            throw Errors.emptyKey
-        }
-
-        guard let  data = try? keychain.retrieve(key: key),
-              let tokenString = String(data: data, encoding: .utf8) else {
-            throw Errors.retrieveFailed
-        }
-        return tokenString
+    static func decodeToken(from data: Data) throws -> TokenData {
+        let decoder = JSONDecoder()
+        return try decoder.decode(TokenData.self, from: data)
     }
 
-    static func getToken(from key: String) throws -> UUID {
-        guard let tokenString = try? getTokenString(from: key),
-            let token = UUID(uuidString: tokenString) else {
+    static func encodeToken(_ tokenData: TokenData) throws -> Data {
+        let encoder = JSONEncoder()
+        return try encoder.encode(tokenData)
+    }
+
+    static func getUUID(from tokenString: String) throws -> UUID {
+        guard let uuid = UUID(uuidString: tokenString) else {
             throw Errors.invalidUUID
         }
-        return token
+        return uuid
     }
+
+    static func createTokenData(with token: String) -> TokenData {
+            return TokenData(token: token, creationDate: Date())
+        }
 }

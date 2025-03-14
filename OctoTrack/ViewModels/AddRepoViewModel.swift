@@ -30,7 +30,7 @@ import Foundation
         isLoading = true
 
         do {
-            let token = try await authenticator.authenticate()
+            let token = try await authenticator.retrieveToken()
             let request = try RepoEndpoint.request(owner: owner, repoName: repoName, token: token)
             let repo = try await repoGetter.repoGetter(from: request)
             isSuccess = true

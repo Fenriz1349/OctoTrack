@@ -97,7 +97,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Impossible de charger le ModelContainer: %@"
           }
         }

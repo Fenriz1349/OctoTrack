@@ -8,13 +8,20 @@
 import Foundation
 import AuthenticationServices
 
+enum AuthenticationState {
+    case unauthenticated
+    case authenticated
+    case expired
+}
+
 protocol GitHubAuthenticatorProtocol {
-    var isAuthenticated: Bool { get }
-    func authenticate() async throws -> String
+    var authenticationState: AuthenticationState { get }
+    func authenticate() async throws
+    func retrieveToken() async throws -> String
     func signOut() throws
 }
 
-typealias AuthenticationCompletionHandler = (Result<String, Error>) -> Void
+typealias AuthenticationCompletionHandler = (Result<Void, Error>) -> Void
 
 final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
 
@@ -22,38 +29,37 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
         static let tokenKey = "github.access.token"
     }
     private let client = URLSessionHTTPClient()
-    private let keychainService = KeychainService()
+    private let tokenAuthManager = TokenAuthManager()
     private var webAuthSession: ASWebAuthenticationSession?
     private var completionHandler: AuthenticationCompletionHandler?
 
-    var isAuthenticated: Bool {
-        do {
-             _ = try retrieveToken()
-            return true
-        } catch {
-            return false
+    var authenticationState: AuthenticationState {
+        if tokenAuthManager.isTokenExpired() {
+            return .expired
         }
+        return tokenAuthManager.isAuthenticated ? .authenticated : .unauthenticated
     }
 
-    func authenticate() async throws -> String {
-        if let token = try? retrieveToken() {
-            return token
-        }
-
-        return try await startAuthenticationFlow()
-    }
+    func authenticate() async throws {
+           switch authenticationState {
+           case .authenticated:
+               return
+           case .expired, .unauthenticated:
+               try await startAuthenticationFlow()
+           }
+       }
 
     func signOut() throws {
-        try keychainService.delete(key: Constants.tokenKey)
+        try tokenAuthManager.deleteToken()
     }
 
-    private func startAuthenticationFlow() async throws -> String {
-         return try await withCheckedThrowingContinuation { continuation in
-             startWebAuthentication { result in
-                 continuation.resume(with: result)
-             }
-         }
-     }
+    private func startAuthenticationFlow() async throws {
+            return try await withCheckedThrowingContinuation { continuation in
+                startWebAuthentication { result in
+                    continuation.resume(with: result)
+                }
+            }
+        }
 
     private func startWebAuthentication(completion: @escaping AuthenticationCompletionHandler) {
         self.completionHandler = completion
@@ -80,8 +86,8 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
 
                 Task {
                     do {
-                        let token = try await self.handleCallback(url: callbackURL)
-                        self.completionHandler?(.success(token))
+                        try await self.handleCallback(url: callbackURL)
+                        self.completionHandler?(.success(()))
                     } catch {
                         self.completionHandler?(.failure(error))
                     }
@@ -96,7 +102,7 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
         }
     }
 
-    private func handleCallback(url: URL) async throws -> String {
+    private func handleCallback(url: URL) async throws {
 
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             throw Errors.authenticationFailed
@@ -113,13 +119,25 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
         do {
             let token = try await requestToken(from: tokenRequest)
 
-            try storeToken(token)
+            try tokenAuthManager.storeToken(token)
 
-            return token
         } catch {
             throw error
         }
     }
+
+    func retrieveToken() async throws -> String {
+            switch authenticationState {
+            case .authenticated:
+                return try tokenAuthManager.retrieveToken()
+            case .expired:
+                try await startAuthenticationFlow()
+                return try tokenAuthManager.retrieveToken()
+            case .unauthenticated:
+                try await startAuthenticationFlow()
+                return try tokenAuthManager.retrieveToken()
+            }
+        }
 
     @MainActor
     private func requestToken(from request: URLRequest) async throws -> String {
@@ -128,21 +146,6 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
 
            return token
        }
-
-    func storeToken(_ token: String) throws {
-        guard let data = token.data(using: .utf8) else {
-            throw Errors.tokenExchangeFailed
-        }
-        try keychainService.insert(key: Constants.tokenKey, data: data)
-    }
-
-    private func retrieveToken() throws -> String {
-        let data = try keychainService.retrieve(key: Constants.tokenKey)
-        guard let token = String(data: data, encoding: .utf8) else {
-            throw Errors.noStoredToken
-        }
-        return token
-    }
 }
 
 // MARK: - ASWebAuthenticationPresentationContextProviding

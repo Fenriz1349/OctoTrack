@@ -11,6 +11,7 @@ protocol KeychainServiceProtocol {
     func insert(key: String, data: Data) throws
     func retrieve(key: String)  throws -> Data
     func delete(key: String) throws
+    func existsInKeychain(key: String) -> Bool
 }
 
 final class KeychainService: KeychainServiceProtocol {
@@ -26,10 +27,8 @@ final class KeychainService: KeychainServiceProtocol {
             kSecValueData as String: data
         ]
 
-        // Supprimez d'abord toute valeur existante pour cette clé
         SecItemDelete(query as CFDictionary)
 
-        // Ajoutez la nouvelle valeur
         let status = SecItemAdd(query as CFDictionary, nil)
 
         guard status == errSecSuccess else {
@@ -51,7 +50,6 @@ final class KeychainService: KeychainServiceProtocol {
         guard status == noErr, let data = result as? Data else {
             throw Errors.retrieveFailed
         }
-        print("token storage sucess with key \(key)")
         return data
     }
 

@@ -12,13 +12,12 @@ import Foundation
     var isAuthenticating: Bool = false
     var authError: Error?
     private let authenticator = GitHubAuthenticator()
-    private let keychain = KeychainService()
     let onLoginSucceed: (User) -> Void
     let onLogoutCompleted: () -> Void
 
     var isAuthenticated: Bool {
-           return authenticator.isAuthenticated
-       }
+            authenticator.authenticationState == .authenticated
+        }
 
     init(onLoginSucceed: @escaping (User) -> Void, onLogoutCompleted: @escaping () -> Void) {
             self.onLoginSucceed = onLoginSucceed
@@ -54,7 +53,7 @@ import Foundation
     }
 
     func getUser() async throws -> User {
-        let token = try  await authenticator.authenticate()
+        let token = try  await authenticator.retrieveToken()
         let userRequest: UserLoader = UserLoader()
         let request = try UserEndpoint.userInfoRequest(with: token)
         do {
