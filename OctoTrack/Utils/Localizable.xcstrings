@@ -86,6 +86,23 @@
         }
       }
     },
+    "continue" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer"
+          }
+        }
+      }
+    },
     "couldNotCreateMC" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -116,6 +133,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Echec de l’ajout de %@"
+          }
+        }
+      }
+    },
+    "loading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chargement…"
           }
         }
       }
@@ -286,6 +320,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reset Liste des Repos"
+          }
+        }
+      }
+    },
+    "signAgain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stay connected ?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se reconnecter ?"
           }
         }
       }

@@ -15,8 +15,8 @@ import Foundation
     let onLoginSucceed: (User) -> Void
     let onLogoutCompleted: () -> Void
 
-    var isAuthenticated: Bool {
-            authenticator.authenticationState == .authenticated
+    var authenticationState: AuthenticationState {
+            authenticator.authenticationState
         }
 
     init(onLoginSucceed: @escaping (User) -> Void, onLogoutCompleted: @escaping () -> Void) {
@@ -56,10 +56,6 @@ import Foundation
         let token = try  await authenticator.retrieveToken()
         let userRequest: UserLoader = UserLoader()
         let request = try UserEndpoint.userInfoRequest(with: token)
-        do {
-            return try await userRequest.userLoader(from: request)
-        } catch {
-            throw error
-        }
+        return try await userRequest.userLoader(from: request)
     }
 }

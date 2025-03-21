@@ -34,20 +34,30 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
     private var completionHandler: AuthenticationCompletionHandler?
 
     var authenticationState: AuthenticationState {
-        if tokenAuthManager.isTokenExpired() {
-            return .expired
+        if tokenAuthManager.isAuthenticated {
+            if tokenAuthManager.isTokenExpired() {
+                return .expired
+            }
+            return .authenticated
+        } else {
+            return .unauthenticated
         }
-        return tokenAuthManager.isAuthenticated ? .authenticated : .unauthenticated
     }
 
     func authenticate() async throws {
            switch authenticationState {
            case .authenticated:
                return
-           case .expired, .unauthenticated:
+           case .expired:
+               try refreshToken()
+           case .unauthenticated:
                try await startAuthenticationFlow()
            }
        }
+
+    func refreshToken() throws {
+        try tokenAuthManager.refreshToken()
+    }
 
     func signOut() throws {
         try tokenAuthManager.deleteToken()
@@ -127,17 +137,13 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
     }
 
     func retrieveToken() async throws -> String {
-            switch authenticationState {
-            case .authenticated:
-                return try tokenAuthManager.retrieveToken()
-            case .expired:
-                try await startAuthenticationFlow()
-                return try tokenAuthManager.retrieveToken()
-            case .unauthenticated:
-                try await startAuthenticationFlow()
-                return try tokenAuthManager.retrieveToken()
-            }
+        do {
+            return try tokenAuthManager.getToken()
+        } catch {
+            try await startAuthenticationFlow()
+            return try tokenAuthManager.getToken()
         }
+    }
 
     @MainActor
     private func requestToken(from request: URLRequest) async throws -> String {

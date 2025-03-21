@@ -21,33 +21,48 @@ final class TokenAuthManager {
         try keychain.insert(key: tokenKey, data: data)
     }
 
-    func retrieveToken() throws -> String {
-        let data = try keychain.retrieve(key: tokenKey)
-        let tokenData = try TokenMapper.decodeToken(from: data)
-        return tokenData.token
-    }
+    func getToken() throws -> String {
+        let tokenData = try getTokenDataFromKeychain()
 
-    func retrieveTokenData() throws -> TokenData {
-        let data = try keychain.retrieve(key: tokenKey)
-        return try TokenMapper.decodeToken(from: data)
+        if isTokenExpired() {
+            throw Errors.tokenExpired
+        }
+
+        return tokenData.token
     }
 
     func deleteToken() throws {
         try keychain.delete(key: tokenKey)
     }
 
-    func isTokenExpired(expirationDays: Int = 7) -> Bool {
+    var isAuthenticated: Bool {
+        return keychain.existsInKeychain(key: tokenKey)
+    }
+
+    func isTokenExpired() -> Bool {
         do {
-            let tokenData = try retrieveTokenData()
-            let calendar = Calendar.current
-            let expirationDate = calendar.date(byAdding: .day, value: expirationDays, to: tokenData.creationDate)!
-            return Date() >= expirationDate
+            let tokenData = try getTokenDataFromKeychain()
+            
+            let expirationDate = tokenData.creationDate.addingTimeInterval(7 * 24 * 60 * 60)
+            return Date() > expirationDate
         } catch {
             return true
         }
     }
 
-    var isAuthenticated: Bool {
-        return keychain.existsInKeychain(key: tokenKey) && !isTokenExpired()
+    func refreshToken() throws {
+           let tokenData = try getTokenDataFromKeychain()
+           let refreshedTokenData = TokenMapper.createTokenData(with: tokenData.token)
+           let data = try TokenMapper.encodeToken(refreshedTokenData)
+           try keychain.insert(key: tokenKey, data: data)
+       }
+
+    private func getTokenDataFromKeychain() throws -> TokenData {
+        do {
+            let tokenData = try keychain.retrieve(key: tokenKey)
+            return try TokenMapper.decodeToken(from: tokenData)
+        } catch {
+            throw Errors.invalidToken
+        }
     }
 }

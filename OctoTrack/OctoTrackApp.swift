@@ -11,6 +11,7 @@ import SwiftData
 @main
 struct OctoTrackApp: App {
     @State var viewModel = AppViewModel()
+    @State private var isInitializing: Bool = true
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self
@@ -27,7 +28,15 @@ struct OctoTrackApp: App {
     var body: some Scene {
         WindowGroup {
             Group {
-                if viewModel.isLogged {
+                if viewModel.isInitializing {
+                    VStack {
+                        ProgressView()
+                        Text("loading".localized).padding()
+                    }
+                    .task {
+                        await viewModel.initialize()
+                    }
+                } else if viewModel.isLogged {
                     TabView {
                         RepoListView(appViewModel: viewModel)
                             .tabItem {
@@ -40,7 +49,6 @@ struct OctoTrackApp: App {
                                 Text("account".localized)
                             }
                     }
-
                 } else {
                     AuthenticationView(viewModel: viewModel.authenticationViewModel)
                         .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),

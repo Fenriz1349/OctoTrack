@@ -11,7 +11,6 @@ struct AuthenticationView: View {
     @State var viewModel: AuthenticationViewModel
 
     var body: some View {
-        ZStack {
             VStack(spacing: 20) {
                 AsyncAvatarImage(avatar: AvatarProperties(name: "", url: ""), size: 150)
                 Text("welcome".localized)
@@ -22,16 +21,13 @@ struct AuthenticationView: View {
                         .scaleEffect(1.5)
                         .padding(.bottom, 40)
                 } else {
-                    Button(action: {
-                        Task {
-                            try await viewModel.login()
-                        }
-                    },
-                    label: {
-                        CustomButtonLabel(icon: nil, message: "signIn".localized, color: .black)
-                        }
+                    AuthButtonsStack(
+                        status: viewModel.authenticationState,
+                        onLogin: { Task { try await viewModel.login() } },
+                        onSignOut: { viewModel.signOut() }
                     )
                 }
+
                 if let error = viewModel.authError {
                     Text("authenticationError".localized(error.localizedDescription))
                         .font(.caption)
@@ -41,9 +37,8 @@ struct AuthenticationView: View {
                         .padding(.bottom, 20)
                 }
             }
+            .padding(.horizontal, 40)
         }
-        .padding(.horizontal, 40)
-    }
 }
 
 #Preview {

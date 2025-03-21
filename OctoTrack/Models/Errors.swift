@@ -10,6 +10,8 @@ import Foundation
 enum Errors: Swift.Error {
     case invalidResponse
     case missingToken
+    case invalidToken
+    case tokenExpired
     case emptyKey
     case insertFailed
     case retrieveFailed
@@ -17,11 +19,7 @@ enum Errors: Swift.Error {
     case invalidUUID
     case invalidURL
     case noHTTPURLResponse
-    case authenticationCancelled
     case authenticationFailed
     case missingAuthorizationCode
-    case tokenExchangeFailed
-    case noStoredToken
     case networkError(Error)
-    case notFound
 }
