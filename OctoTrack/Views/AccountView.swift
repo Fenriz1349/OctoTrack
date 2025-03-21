@@ -26,15 +26,11 @@ struct AccountView: View {
             VStack(spacing: 16) {
                 Button {
                     Task {
-                        do {
-                            if let user = try? await appViewModel.authenticationViewModel.getUser() {
-                                appViewModel.loginUser(user: user)
-                            }
-                        }
+                        await appViewModel.initialize()
                     }
                 } label: {
                     CustomButtonLabel(
-                        icon: "arrow.clockwise",
+                        icon: IconsName.refresh.rawValue,
                         message: "refreshUserData".localized,
                         color: Color.blue
                     )
@@ -44,7 +40,7 @@ struct AccountView: View {
                     appViewModel.userApp?.repoList = []
                 } label: {
                     CustomButtonLabel(
-                        icon: "trash",
+                        icon: IconsName.trash.rawValue,
                         message: "resetRepositoryList".localized,
                         color: Color.orange
                     )
@@ -54,7 +50,7 @@ struct AccountView: View {
                     appViewModel.authenticationViewModel.signOut()
                 } label: {
                     CustomButtonLabel(
-                        icon: "rectangle.portrait.and.arrow.right",
+                        icon: IconsName.signOut.rawValue,
                         message: "signOut".localized,
                         color: Color.red
                     )

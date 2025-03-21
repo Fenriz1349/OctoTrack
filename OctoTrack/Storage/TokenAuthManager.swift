@@ -42,7 +42,7 @@ final class TokenAuthManager {
     func isTokenExpired() -> Bool {
         do {
             let tokenData = try getTokenDataFromKeychain()
-            
+
             let expirationDate = tokenData.creationDate.addingTimeInterval(7 * 24 * 60 * 60)
             return Date() > expirationDate
         } catch {

@@ -13,14 +13,20 @@ struct AuthButtonsStack: View {
     let onSignOut: () -> Void
     private var buttonLabel: String {
         switch status {
-           case .expired:
-               return "signAgain".localized
-           case .authenticated:
-               return "continue".localized
-           case .unauthenticated:
-               return "signIn".localized
+           case .expired: "signAgain".localized
+           case .authenticated: "continue".localized
+           case .unauthenticated: "signIn".localized
            }
        }
+
+    private var icon: String {
+        switch status {
+        case .expired: IconsName.refresh.rawValue
+        case .authenticated: IconsName.continu.rawValue
+        case .unauthenticated: IconsName.login.rawValue
+        }
+    }
+
     var body: some View {
         Button(action: {
             Task {
@@ -28,7 +34,7 @@ struct AuthButtonsStack: View {
             }
         },
         label: {
-            CustomButtonLabel(icon: nil, message: buttonLabel, color: .black)
+            CustomButtonLabel(icon: icon, message: buttonLabel, color: .black)
             }
         )
         if status == .expired || status == .authenticated {
@@ -38,7 +44,7 @@ struct AuthButtonsStack: View {
                 }
             },
             label: {
-                CustomButtonLabel(icon: nil, message:"signOut".localized , color: .red)
+                CustomButtonLabel(icon: IconsName.signOut.rawValue, message: "signOut".localized, color: .red)
                 }
             )
         }
@@ -46,7 +52,7 @@ struct AuthButtonsStack: View {
 }
 
 #Preview {
-    AuthButtonsStack(status: .unauthenticated,
+    AuthButtonsStack(status: .authenticated,
                      onLogin: {  },
                      onSignOut: { })
 }
