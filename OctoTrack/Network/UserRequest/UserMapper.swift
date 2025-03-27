@@ -15,7 +15,7 @@ enum UserMapper {
         let avatarUrl: String
 
         func toUser() -> User {
-            return User(id: id, login: login, avatarURL: avatarUrl)
+            return User(id: id, login: login, avatarURL: avatarUrl, repoList: [])
         }
     }
 

@@ -8,23 +8,30 @@
 import Foundation
 
 enum RepoMapper {
-
     struct RepoDTO {
         let id: Int
         let name: String
         let isPrivate: Bool
+        let description: String?
         let owner: OwnerDTO
         let createdAt: Date
+        let updateAt: Date?
         let language: String?
 
         func toRepo() -> Repository {
-            let avatar = AvatarProperties(name: owner.login, url: owner.avatarUrl)
-            return Repository(id: id, name: name, isPrivate: isPrivate, avatar: avatar,
-                              createdAt: createdAt, language: language.map { [$0] } ?? [])
+            let repoOwner = Owner(
+                            id: owner.id,
+                            login: owner.login,
+                            avatarURL: owner.avatarUrl
+                        )
+            return Repository(id: id, name: name,repoDescription: description,
+                              isPrivate: isPrivate, owner: repoOwner,
+                              createdAt: createdAt,updatedAt: updateAt, language: language)
         }
     }
 
     struct OwnerDTO {
+        let id: Int
         let login: String
         let avatarUrl: String
     }
@@ -44,15 +51,16 @@ enum RepoMapper {
 
 extension RepoMapper.OwnerDTO: Decodable {
     enum CodingKeys: String, CodingKey {
-        case login
+        case id, login
         case avatarUrl = "avatar_url"
     }
 }
 
 extension RepoMapper.RepoDTO: Decodable {
     enum CodingKeys: String, CodingKey {
-        case id, name, owner, language
+        case id, name, owner, language, description
         case createdAt = "created_at"
+        case updateAt = "updated_at"
         case isPrivate = "private"
     }
 }

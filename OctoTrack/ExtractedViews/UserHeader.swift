@@ -13,7 +13,7 @@ struct UserHeader: View {
 
     var body: some View {
         HStack(spacing: 24) {
-            AsyncAvatarImage(avatar: user.avatar, size: 100)
+            AsyncAvatarImage(avatarName: user.login, avatarUrl: user.avatarURL, size: 100)
                 .overlay(
                     Circle()
                         .stroke(

@@ -11,7 +11,7 @@ import SwiftData
 struct RepoListView: View {
     @Environment(\.modelContext) private var modelContext
     @State var appViewModel: AppViewModel
-    @Query private var items: [Item]
+    @Query private var reposirories: [Repository]
     var repositories: [Repository]? {
         appViewModel.userApp?.repoList
     }
@@ -35,26 +35,14 @@ struct RepoListView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("addItem".localized, systemImage: "plus")
-                    }
-                }
             }
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
         }
     }
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(items[index])
+                modelContext.delete(reposirories[index])
             }
         }
     }
@@ -62,5 +50,5 @@ struct RepoListView: View {
 
 #Preview {
     RepoListView(appViewModel: AppViewModel())
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: Repository.self, inMemory: true)
 }

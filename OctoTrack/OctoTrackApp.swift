@@ -14,7 +14,10 @@ struct OctoTrackApp: App {
     @State private var isInitializing: Bool = true
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self
+            User.self,
+            Owner.self,
+            Repository.self,
+            PullRequest.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

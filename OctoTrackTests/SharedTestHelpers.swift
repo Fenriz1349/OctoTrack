@@ -38,7 +38,7 @@ func anyHTTPURLResponse(statusCode: Int = 200) -> HTTPURLResponse {
 }
 
 func makeUser() -> (model: User, json: [String: Any]) {
-    let model = User(id: 1, login: "octocat", avatarURL: "https://github.com/images/avatar.jpg")
+    let model = User(id: 1, login: "octocat", avatarURL: "https://github.com/images/avatar.jpg", repoList: [])
 
     let json: [String: Any] = [
         "id": model.id,
@@ -48,7 +48,9 @@ func makeUser() -> (model: User, json: [String: Any]) {
 
     return (model, json)
 }
-
+func makeOwner() -> Owner {
+    return Owner(id: 1, login: "octocat", avatarURL: "https://github.com/images/avatar.jpg")
+}
 func makeUserJSON(_ json: [String: Any]) throws -> Data {
     return try JSONSerialization.data(withJSONObject: json)
 }
@@ -64,9 +66,11 @@ func makeTestRepository() -> Repository {
     Repository(
         id: 12345,
         name: "test-repo",
+        repoDescription: nil,
         isPrivate: false,
-        avatar: AvatarProperties(name: "test-user", url: "https://example.com/avatar.jpg"),
+        owner: makeOwner(),
         createdAt: Date(),
-        language: ["Swift"]
+        updatedAt: nil,
+        language: "Swift"
     )
 }

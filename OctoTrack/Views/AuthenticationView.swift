@@ -12,7 +12,7 @@ struct AuthenticationView: View {
 
     var body: some View {
             VStack(spacing: 20) {
-                AsyncAvatarImage(avatar: AvatarProperties(name: "", url: ""), size: 150)
+                AsyncAvatarImage(avatarName: "", avatarUrl: "", size: 150)
                 Text("welcome".localized)
                     .font(.largeTitle)
                     .fontWeight(.semibold)

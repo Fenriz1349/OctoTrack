@@ -10,7 +10,8 @@ import SwiftUI
 struct AsyncAvatarImage: View {
     @State private var viewModel = AsyncAvatarViewModel()
     @State private var image: UIImage = UIImage()
-    let avatar: AvatarProperties
+    let avatarName: String
+    let avatarUrl: String
     let size: CGFloat
 
     var body: some View {
@@ -20,7 +21,7 @@ struct AsyncAvatarImage: View {
             .frame(width: size, height: size)
             .clipShape(Circle())
             .task {
-                image = await viewModel.loadImage(named: avatar.name, urlString: avatar.url)
+                image = await viewModel.loadImage(named: avatarName, urlString: avatarUrl)
             }
     }
 }

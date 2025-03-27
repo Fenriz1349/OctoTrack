@@ -12,7 +12,8 @@ struct RepoRow: View {
     var body: some View {
         NavigationLink(destination: RepoDetailView(repository: repository) ) {
             HStack {
-                AsyncAvatarImage(avatar: repository.avatar, size: 50)
+                AsyncAvatarImage(avatarName: repository.owner.login,
+                                 avatarUrl: repository.owner.avatarURL, size: 50)
                 Text(repository.name)
                 Text(repository.isPrivate ? "private".localized
                      : "public".localized)

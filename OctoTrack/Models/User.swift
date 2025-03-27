@@ -6,20 +6,23 @@
 //
 
 import SwiftUI
+import SwiftData
 
-@Observable final class User: Identifiable, Codable {
-    let id: Int
-    let login: String
+@Model final class User {
+    @Attribute(.unique) var id: Int
+    @Attribute(.unique) var login: String
     var avatarURL: String
-    var repoList: [Repository]
-    var avatar: AvatarProperties {
-        AvatarProperties(name: login, url: avatarURL)
-    }
 
-    init(id: Int, login: String, avatarURL: String, repoList: [Repository] = []) {
+    @Relationship(deleteRule: .cascade) var repoList: [Repository] = []
+
+    init(id: Int, login: String, avatarURL: String, repoList: [Repository]) {
         self.id = id
         self.login = login
         self.avatarURL = avatarURL
         self.repoList = repoList
+    }
+
+    func toOwner() -> Owner {
+        return Owner(id: id, login: login, avatarURL: avatarURL)
     }
 }
