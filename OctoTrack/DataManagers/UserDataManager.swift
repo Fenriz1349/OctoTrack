@@ -20,13 +20,42 @@ final class UserDataManager {
     var currentUser: User? {
         guard let context = modelContext else { return nil }
            do {
-               let users = try context.fetch(FetchDescriptor<User>())
-               return users.first
+               let predicate = #Predicate<User> { $0.isActiveUser }
+               let descriptor = FetchDescriptor<User>(predicate: predicate)
+               return try context.fetch(descriptor).first
            } catch {
                print("Erreur lors de la récupération de l'utilisateur: \(error)")
                return nil
            }
        }
+
+    var allUsers: [User] {
+        guard let context = modelContext else { return [] }
+        do {
+            return try context.fetch(FetchDescriptor<User>())
+        } catch {
+            return []
+        }
+    }
+
+    /// Deactivate all users except the one in parameter
+    /// - Parameter user: the user to set as currentUser
+    func activateUser(_ user: User) {
+        guard let context = modelContext else { return }
+        deactivateAllUsers()
+        user.isActiveUser = true
+        try? context.save()
+    }
+
+    func deactivateAllUsers() {
+        guard let context = modelContext else { return }
+        allUsers.forEach { $0.isActiveUser = false }
+        do {
+            try context.save()
+        } catch {
+            return
+        }
+    }
 
     /// Create or update the currentUser
     /// - Parameter user: the user create when login
@@ -40,16 +69,17 @@ final class UserDataManager {
         } else {
             context.insert(user)
         }
-        try? context.save()
+        activateUser(user)
     }
 
     /// Use to always clear all users stored when logout so we always have only one user
-    func clearUsers() throws {
+    func clearUser(id: Int) {
         guard let context = modelContext else { return }
-        let users = try context.fetch(FetchDescriptor<User>())
-        for user in users {
+
+            let predicate = #Predicate<User> {$0.id == id}
+        if let user = try? context.fetch(FetchDescriptor<User>(predicate: predicate)).first {
             context.delete(user)
+            try? context.save()
         }
-        try context.save()
     }
 }

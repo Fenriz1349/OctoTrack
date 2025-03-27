@@ -11,6 +11,7 @@ import SwiftData
 @Model final class User {
     @Attribute(.unique) var id: Int
     @Attribute(.unique) var login: String
+    var isActiveUser: Bool = false
     var avatarURL: String
 
     @Relationship(deleteRule: .cascade) var repoList: [Repository] = []

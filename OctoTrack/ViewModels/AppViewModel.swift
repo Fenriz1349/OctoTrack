@@ -62,6 +62,7 @@ import SwiftData
                    }
                }
            case .expired, .unauthenticated:
+               dataManager.deactivateAllUsers()
                isLogged = false
            }
         isInitializing = false
@@ -70,12 +71,13 @@ import SwiftData
     func loginUser(user: User) {
         self.isLogged = true
         self.userApp = user
+        dataManager.saveUser(user)
     }
 
     func logoutUser() {
         self.isLogged = false
         self.userApp = nil
-        try? dataManager.clearUsers()
+        dataManager.deactivateAllUsers()
     }
 
     func addRepoToUser(repo: Repository) {

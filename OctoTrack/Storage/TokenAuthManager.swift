@@ -10,6 +10,7 @@ import Foundation
 final class TokenAuthManager {
     private let keychain: KeychainServiceProtocol
     private let tokenKey = "github.access.token"
+    private let expirationDelay: Double = 7 * 24 * 60 * 60
 
     init(keychain: KeychainServiceProtocol = KeychainService()) {
         self.keychain = keychain
@@ -43,7 +44,7 @@ final class TokenAuthManager {
         do {
             let tokenData = try getTokenDataFromKeychain()
 
-            let expirationDate = tokenData.creationDate.addingTimeInterval(7 * 24 * 60 * 60)
+            let expirationDate = tokenData.creationDate.addingTimeInterval(expirationDelay)
             return Date() > expirationDate
         } catch {
             return true
