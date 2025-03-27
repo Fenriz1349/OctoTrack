@@ -24,9 +24,9 @@ enum RepoMapper {
                             login: owner.login,
                             avatarURL: owner.avatarUrl
                         )
-            return Repository(id: id, name: name,repoDescription: description,
+            return Repository(id: id, name: name, repoDescription: description,
                               isPrivate: isPrivate, owner: repoOwner,
-                              createdAt: createdAt,updatedAt: updateAt, language: language)
+                              createdAt: createdAt, updatedAt: updateAt, language: language)
         }
     }
 

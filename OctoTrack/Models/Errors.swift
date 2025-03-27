@@ -22,4 +22,6 @@ enum Errors: Swift.Error {
     case authenticationFailed
     case missingAuthorizationCode
     case networkError(Error)
+    case insertUserFail
+    case noCurrentUser
 }

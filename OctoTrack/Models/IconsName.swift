@@ -13,4 +13,5 @@ enum IconsName: String {
     case refresh = "arrow.clockwise"
     case trash = "trash"
     case signOut = "rectangle.portrait.and.arrow.right"
+    case plus = "plus.circle.fill"
 }

@@ -55,13 +55,13 @@ struct AddRepositoryModal: View {
                 },
                 label: {
                     CustomButtonLabel(
-                        icon: "plus.circle.fill",
+                        icon: IconsName.plus.rawValue,
                         message: "repoAdd".localized,
                         color: .green
                         )
                     }
                 )
-                // Permet de désactiver le bouton tant que les 2 champs sont vide
+                // Disable button while form is not valid
                 .disabled(!viewModel.isFormValid)
                 .opacity(viewModel.isFormValid ? 1 : 0.6)
             }

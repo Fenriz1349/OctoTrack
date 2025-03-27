@@ -22,7 +22,9 @@ struct RepoListView: View {
                 UserHeader(user: user)
             }
             NavigationLink(destination: AddRepositoryModal(appViewModel: appViewModel)) {
-                CustomButtonLabel(icon: nil, message: "repoAdd".localized, color: .black)
+                CustomButtonLabel(icon: IconsName.plus.rawValue,
+                                  message: "repoAdd".localized,
+                                  color: .black)
                     .padding(.horizontal, 30)
             }
             ScrollView {

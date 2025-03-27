@@ -10,16 +10,17 @@ import SwiftData
 @Model final class Repository {
     @Attribute(.unique) var id: Int
     var name: String
-    var repoDescription: String? = nil
+    var repoDescription: String?
     var isPrivate: Bool
     var createdAt: Date
-    var updatedAt: Date? = nil
-    var language: String? = nil
+    var updatedAt: Date?
+    var language: String?
 
     @Relationship(deleteRule: .cascade) var owner: Owner
     @Relationship(deleteRule: .cascade) var pullRequests: [PullRequest]? = []
 
-    init(id: Int, name: String, repoDescription: String?, isPrivate: Bool, owner: Owner, createdAt: Date, updatedAt: Date?, language: String?) {
+    init(id: Int, name: String, repoDescription: String? = nil, isPrivate: Bool,
+         owner: Owner, createdAt: Date, updatedAt: Date? = nil, language: String? = nil) {
         self.id = id
         self.name = name
         self.repoDescription = repoDescription

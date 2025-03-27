@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6826E8372D9543830048F35A /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826E8362D9543830048F35A /* UserDataManager.swift */; };
+		6826E8392D9580B80048F35A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826E8382D9580B80048F35A /* ContentView.swift */; };
 		684F7C5F2D8DAA1A0044367F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 684F7C412D8DAA1A0044367F /* Preview Assets.xcassets */; };
 		684F7C602D8DAA1A0044367F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 684F7C482D8DAA1A0044367F /* Localizable.xcstrings */; };
 		684F7C612D8DAA1A0044367F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 684F7C592D8DAA1A0044367F /* Assets.xcassets */; };
@@ -81,6 +83,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6826E8362D9543830048F35A /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
+		6826E8382D9580B80048F35A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		683612EE2D5D31EC00805615 /* OctoTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OctoTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		683613002D5D31EE00805615 /* OctoTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OctoTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6836130A2D5D31EE00805615 /* OctoTrackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OctoTrackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +169,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6826E8352D9543650048F35A /* DataManagers */ = {
+			isa = PBXGroup;
+			children = (
+				6826E8362D9543830048F35A /* UserDataManager.swift */,
+			);
+			path = DataManagers;
+			sourceTree = "<group>";
+		};
 		683612E52D5D31EC00805615 = {
 			isa = PBXGroup;
 			children = (
@@ -305,6 +317,7 @@
 				684F7C552D8DAA1A0044367F /* AuthenticationView.swift */,
 				684F7C562D8DAA1A0044367F /* RepoDetailView.swift */,
 				684F7C572D8DAA1A0044367F /* RepoListView.swift */,
+				6826E8382D9580B80048F35A /* ContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -314,6 +327,7 @@
 			children = (
 				684F7C5B2D8DAA1A0044367F /* OctoTrackApp.swift */,
 				684F7C312D8DAA1A0044367F /* Models */,
+				6826E8352D9543650048F35A /* DataManagers */,
 				684F7C402D8DAA1A0044367F /* Network */,
 				684F7C472D8DAA1A0044367F /* Storage */,
 				684F7C4B2D8DAA1A0044367F /* Utils */,
@@ -500,6 +514,7 @@
 				684F7C652D8DAA1A0044367F /* CustomTextField.swift in Sources */,
 				684F7C662D8DAA1A0044367F /* InfoLabel.swift in Sources */,
 				684F7C672D8DAA1A0044367F /* RepoRow.swift in Sources */,
+				6826E8372D9543830048F35A /* UserDataManager.swift in Sources */,
 				684F7C682D8DAA1A0044367F /* UserHeader.swift in Sources */,
 				684F7C6A2D8DAA1A0044367F /* Commit.swift in Sources */,
 				684F7C6B2D8DAA1A0044367F /* Errors.swift in Sources */,
@@ -533,6 +548,7 @@
 				684F7C862D8DAA1A0044367F /* RepoDetailViewModel.swift in Sources */,
 				684F7C872D8DAA1A0044367F /* RepoListViewModel.swift in Sources */,
 				684F7C882D8DAA1A0044367F /* AccountView.swift in Sources */,
+				6826E8392D9580B80048F35A /* ContentView.swift in Sources */,
 				684F7C892D8DAA1A0044367F /* AddRepositoryModal.swift in Sources */,
 				684F7C8A2D8DAA1A0044367F /* AuthenticationView.swift in Sources */,
 				684F7C8B2D8DAA1A0044367F /* RepoDetailView.swift in Sources */,

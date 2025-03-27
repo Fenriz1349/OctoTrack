@@ -6,14 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @MainActor
 @Observable final class AppViewModel {
-    
     var userApp: User?
     var isLogged: Bool = false
     var isInitializing: Bool = true
     var authenticationViewModel: AuthenticationViewModel
+    var dataManager = UserDataManager()
 
     init() {
         self.authenticationViewModel = AuthenticationViewModel(
@@ -37,21 +38,30 @@ import SwiftUI
            self.authenticationViewModel = newViewModel
        }
 
+    /// The main function to initilialize the app
+    /// First check the authentication status
+    /// If authenticate, cherck if there is a stored user, otherwiese get it with the authenticator
+    /// if expired or unauthenticated set isLogged to false to display the AuthenticationView
     @MainActor
     func initialize() async {
         isInitializing = true
         let authState = authenticationViewModel.authenticationState
+
            switch authState {
            case .authenticated:
-               do {
-                   userApp = try await authenticationViewModel.getUser()
+               if let storedUser = dataManager.currentUser {
+                   userApp = storedUser
                    isLogged = true
-               } catch {
-                   isLogged = false
+               } else {
+                   do {
+                       userApp = try await authenticationViewModel.getUser()
+                       dataManager.saveUser(userApp!)
+                       isLogged = true
+                   } catch {
+                       isLogged = false
+                   }
                }
-           case .expired:
-               isLogged = false
-           case .unauthenticated:
+           case .expired, .unauthenticated:
                isLogged = false
            }
         isInitializing = false
@@ -65,6 +75,7 @@ import SwiftUI
     func logoutUser() {
         self.isLogged = false
         self.userApp = nil
+        try? dataManager.clearUsers()
     }
 
     func addRepoToUser(repo: Repository) {
