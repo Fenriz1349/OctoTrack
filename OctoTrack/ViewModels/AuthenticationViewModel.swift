@@ -12,6 +12,7 @@ import Foundation
     var isAuthenticating: Bool = false
     var authError: Error?
     private let authenticator = GitHubAuthenticator()
+    private let tokenValidator = TokenValidator()
     let onLoginSucceed: (User) -> Void
     let onLogoutCompleted: () -> Void
 
@@ -43,9 +44,18 @@ import Foundation
         }
     }
 
+    func isTokenValid() async -> Bool {
+        return await authenticator.isTokenValid()
+    }
+
+    func refreshToken() throws {
+        try authenticator.refreshToken()
+    }
+
     func signOut() {
         do {
             try authenticator.signOut()
+            stopTokenValidation()
             onLogoutCompleted()
         } catch {
             authError = error
@@ -58,4 +68,18 @@ import Foundation
         let request = try UserEndpoint.userInfoRequest(with: token)
         return try await userRequest.userLoader(from: request)
     }
+
+    func startTokenValidation() {
+        tokenValidator.startPeriodicValidation { [weak self] in
+            guard let self = self else { return }
+            if self.authenticator.authenticationState == .expired,
+               await self.isTokenValid() {
+                try? self.refreshToken()
+            }
+        }
+    }
+
+    func stopTokenValidation() {
+            tokenValidator.stopPeriodicValidation()
+        }
 }
