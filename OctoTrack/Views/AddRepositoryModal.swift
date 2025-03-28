@@ -10,6 +10,7 @@ import SwiftUI
 struct AddRepositoryModal: View {
     @State private var viewModel = AddRepoViewModel()
     @State var appViewModel: AppViewModel
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -43,7 +44,7 @@ struct AddRepositoryModal: View {
                         let getRepo = await viewModel.getRepo()
                         switch getRepo {
                         case .success(let repo):
-                            appViewModel.addRepoToUser(repo: repo)
+                            viewModel.addRepoToUser(repo: repo)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                                 viewModel.resetFeedback()
                                 dismiss()
@@ -70,6 +71,10 @@ struct AddRepositoryModal: View {
                 InfoLabel(message: viewModel.feedbackMessage, isSuccess: viewModel.isSuccess)
             }
             Spacer()
+        }
+        .onAppear {
+            viewModel.setModelContext(modelContext)
+            viewModel.setAppViewModel(appViewModel)
         }
         .padding()
         .frame(maxWidth: 400)

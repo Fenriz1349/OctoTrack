@@ -17,7 +17,7 @@ final class UserDataManager {
         self.modelContext = modelContext
     }
 
-    var currentUser: User? {
+    var activeUser: User? {
         guard let context = modelContext else { return nil }
            do {
                let predicate = #Predicate<User> { $0.isActiveUser }
@@ -63,7 +63,7 @@ final class UserDataManager {
     func saveUser(_ user: User) {
         guard let context = modelContext else { return }
         // Update user info if it already exist
-        if let storedUser = currentUser {
+        if let storedUser = activeUser {
             storedUser.login = user.login
             storedUser.avatarURL = user.avatarURL
             storedUser.lastUpdate = Date()
@@ -84,5 +84,11 @@ final class UserDataManager {
             context.delete(user)
             try? context.save()
         }
+    }
+    
+    func storeNewRepo(_ repo: Repository) {
+        guard let currentUser = activeUser else { return }
+        currentUser.repoList.append(repo)
+        saveUser(currentUser)
     }
 }

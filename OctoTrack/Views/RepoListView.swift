@@ -11,9 +11,9 @@ import SwiftData
 struct RepoListView: View {
     @Environment(\.modelContext) private var modelContext
     @State var appViewModel: AppViewModel
-    @Query private var reposirories: [Repository]
-    var repositories: [Repository]? {
-        appViewModel.userApp?.repoList
+
+    var repositories: [Repository] {
+        appViewModel.userApp?.repoList ?? []
     }
 
     var body: some View {
@@ -28,7 +28,7 @@ struct RepoListView: View {
                     .padding(.horizontal, 30)
             }
             ScrollView {
-                ForEach(repositories ?? []) { repository in
+                ForEach(repositories) { repository in
                     RepoRow(repository: repository)
                 }
                 .onDelete(perform: deleteItems)
@@ -44,7 +44,7 @@ struct RepoListView: View {
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(reposirories[index])
+                modelContext.delete(repositories[index])
             }
         }
     }

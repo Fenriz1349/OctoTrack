@@ -80,7 +80,7 @@ import SwiftData
 
     @MainActor
     private func loadUserData() async {
-        if let storedUser = dataManager.currentUser {
+        if let storedUser = dataManager.activeUser {
             userApp = storedUser
             isLogged = true
         } else {
@@ -92,13 +92,5 @@ import SwiftData
                 isLogged = false
             }
         }
-    }
-
-    func addRepoToUser(repo: Repository) {
-        guard let user = userApp,
-              !user.repoList.contains(where: { $0.id == repo.id }) else {
-            return
-        }
-        userApp?.repoList.append(repo)
     }
 }

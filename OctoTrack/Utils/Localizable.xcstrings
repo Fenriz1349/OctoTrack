@@ -52,6 +52,23 @@
         }
       }
     },
+    "AddRepoError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error when try to add Repository"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur pendant l’ajout du Repository"
+          }
+        }
+      }
+    },
     "authenticationError" : {
       "extractionState" : "manual",
       "localizations" : {
