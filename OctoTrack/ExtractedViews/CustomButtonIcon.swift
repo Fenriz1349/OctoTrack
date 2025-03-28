@@ -13,7 +13,7 @@ struct CustomButtonIcon: View {
     var body: some View {
         Image(systemName: icon)
         .fontWeight(.bold)
-        .padding()
+        .padding(7)
         .background(color)
         .foregroundColor(.white)
         .cornerRadius(16)
