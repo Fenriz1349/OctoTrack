@@ -82,5 +82,7 @@ struct AddRepositoryModal: View {
 }
 
 #Preview {
-    AddRepositoryModal(appViewModel: AppViewModel())
+    let viewModel = PreviewContainer.previewAppViewModel
+    return AddRepositoryModal(appViewModel: viewModel)
+        .previewWithContainer()
 }

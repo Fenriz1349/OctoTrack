@@ -25,5 +25,10 @@ struct RepoRow: View {
 }
 
 #Preview {
-    RepoRow(repository: PreviewModels.repositories.first!)
+    if let repository = PreviewContainer.getRepository() {
+        return RepoRow(repository: repository)
+            .previewWithContainer()
+    } else {
+        return Text("Repository not found")
+    }
 }

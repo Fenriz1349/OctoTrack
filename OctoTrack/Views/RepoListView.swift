@@ -52,6 +52,7 @@ struct RepoListView: View {
 }
 
 #Preview {
-    RepoListView(appViewModel: AppViewModel())
-        .modelContainer(for: Repository.self, inMemory: true)
+    let viewModel = PreviewContainer.previewAppViewModel
+    RepoListView(appViewModel: viewModel)
+        .previewWithContainer()
 }

@@ -78,5 +78,10 @@ struct UserHeader: View {
 }
 
 #Preview {
-    UserHeader(user: PreviewModels.previewUser)
+    if let user = PreviewContainer.previewAppViewModel.userApp {
+        return UserHeader(user: user)
+            .previewWithContainer()
+    } else {
+        return Text("Repository not found")
+    }
 }

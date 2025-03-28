@@ -15,5 +15,10 @@ struct RepoDetailView: View {
 }
 
 #Preview {
-    RepoDetailView(repository: PreviewModels.previewRepo)
+    if let repository = PreviewContainer.getRepository() {
+        return RepoRow(repository: repository)
+            .previewWithContainer()
+    } else {
+        return Text("Repository not found")
+    }
 }

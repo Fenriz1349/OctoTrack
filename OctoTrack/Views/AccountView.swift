@@ -67,6 +67,8 @@ struct AccountView: View {
 
 #Preview {
     NavigationView {
-        AccountView(appViewModel: AppViewModel())
+        let viewModel = PreviewContainer.previewAppViewModel
+        return AccountView(appViewModel: viewModel)
+            .previewWithContainer()
     }
 }
