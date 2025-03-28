@@ -22,14 +22,11 @@ final class TokenAuthManager {
         try keychain.insert(key: tokenKey, data: data)
     }
 
-    func getToken() throws -> String {
-        let tokenData = try getTokenDataFromKeychain()
-
-        if isTokenExpired() {
-            throw Errors.tokenExpired
+    var getToken: String {
+        get throws {
+            let tokenData = try getTokenDataFromKeychain()
+            return tokenData.token
         }
-
-        return tokenData.token
     }
 
     func deleteToken() throws {
@@ -56,6 +53,7 @@ final class TokenAuthManager {
            let refreshedTokenData = TokenMapper.createTokenData(with: tokenData.token)
            let data = try TokenMapper.encodeToken(refreshedTokenData)
            try keychain.insert(key: tokenKey, data: data)
+        print("token refresh")
        }
 
     private func getTokenDataFromKeychain() throws -> TokenData {

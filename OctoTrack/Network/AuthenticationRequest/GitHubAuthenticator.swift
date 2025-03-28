@@ -19,6 +19,8 @@ protocol GitHubAuthenticatorProtocol {
     func authenticate() async throws
     func retrieveToken() async throws -> String
     func signOut() throws
+    func isTokenValid() async -> Bool
+    func refreshToken() throws
 }
 
 typealias AuthenticationCompletionHandler = (Result<Void, Error>) -> Void
@@ -45,15 +47,18 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
     }
 
     func authenticate() async throws {
-           switch authenticationState {
-           case .authenticated:
-               return
-           case .expired:
-               try refreshToken()
-           case .unauthenticated:
-               try await startAuthenticationFlow()
-           }
-       }
+        switch authenticationState {
+        case .authenticated:
+            return
+        case .expired:
+            if await isTokenValid() {
+                try refreshToken()
+            }
+            try await startAuthenticationFlow()
+        case .unauthenticated:
+            try await startAuthenticationFlow()
+        }
+    }
 
     func refreshToken() throws {
         try tokenAuthManager.refreshToken()
@@ -117,31 +122,27 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             throw Errors.authenticationFailed
         }
-
         guard let queryItems = components.queryItems,
               let codeItem = queryItems.first(where: { $0.name == "code" }),
               let code = codeItem.value else {
             throw Errors.missingAuthorizationCode
         }
-
         let tokenRequest = try GitHubAuthenticationEndpoint.tokenExchangeRequest(with: code)
 
         do {
             let token = try await requestToken(from: tokenRequest)
-
             try tokenAuthManager.storeToken(token)
-
         } catch {
             throw error
         }
     }
 
     func retrieveToken() async throws -> String {
-        do {
-            return try tokenAuthManager.getToken()
-        } catch {
+        if !tokenAuthManager.isTokenExpired() {
+            return try tokenAuthManager.getToken
+        } else {
             try await startAuthenticationFlow()
-            return try tokenAuthManager.getToken()
+            return try tokenAuthManager.getToken
         }
     }
 
@@ -152,6 +153,17 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
 
            return token
        }
+
+    func isTokenValid() async -> Bool {
+        do {
+            let token = try tokenAuthManager.getToken
+            let request = try EndpointBuilder.user(token: token).buildRequest()
+            let (_, response) = try await client.request(from: request)
+            return response.statusCode == 200
+        } catch {
+            return false
+        }
+    }
 }
 
 // MARK: - ASWebAuthenticationPresentationContextProviding

@@ -47,24 +47,21 @@ import SwiftData
         isInitializing = true
         let authState = authenticationViewModel.authenticationState
 
-           switch authState {
-           case .authenticated:
-               if let storedUser = dataManager.currentUser {
-                   userApp = storedUser
-                   isLogged = true
-               } else {
-                   do {
-                       userApp = try await authenticationViewModel.getUser()
-                       dataManager.saveUser(userApp!)
-                       isLogged = true
-                   } catch {
-                       isLogged = false
-                   }
-               }
-           case .expired, .unauthenticated:
-               dataManager.deactivateAllUsers()
-               isLogged = false
-           }
+        switch authState {
+        case .authenticated:
+            await loadUserData()
+            authenticationViewModel.startTokenValidation()
+        case .expired:
+            if await authenticationViewModel.isTokenValid() {
+                try? authenticationViewModel.refreshToken()
+                await loadUserData()
+                authenticationViewModel.startTokenValidation()
+            } else {
+                logoutUser()
+            }
+        case .unauthenticated:
+            logoutUser()
+        }
         isInitializing = false
     }
 
@@ -75,9 +72,26 @@ import SwiftData
     }
 
     func logoutUser() {
-        self.isLogged = false
-        self.userApp = nil
+        userApp = nil
+        isLogged = false
         dataManager.deactivateAllUsers()
+        authenticationViewModel.stopTokenValidation()
+    }
+
+    @MainActor
+    private func loadUserData() async {
+        if let storedUser = dataManager.currentUser {
+            userApp = storedUser
+            isLogged = true
+        } else {
+            do {
+                userApp = try await authenticationViewModel.getUser()
+                dataManager.saveUser(userApp!)
+                isLogged = true
+            } catch {
+                isLogged = false
+            }
+        }
     }
 
     func addRepoToUser(repo: Repository) {

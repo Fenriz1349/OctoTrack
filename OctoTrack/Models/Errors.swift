@@ -24,4 +24,5 @@ enum Errors: Swift.Error {
     case networkError(Error)
     case insertUserFail
     case noCurrentUser
+    case refreshFailure
 }
