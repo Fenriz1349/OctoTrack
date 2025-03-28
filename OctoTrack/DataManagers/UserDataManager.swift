@@ -44,6 +44,7 @@ final class UserDataManager {
         guard let context = modelContext else { return }
         deactivateAllUsers()
         user.isActiveUser = true
+        user.lastUpdate = Date()
         try? context.save()
     }
 
@@ -65,6 +66,8 @@ final class UserDataManager {
         if let storedUser = currentUser {
             storedUser.login = user.login
             storedUser.avatarURL = user.avatarURL
+            storedUser.lastUpdate = Date()
+            try? context.save()
         // Otherwise create it
         } else {
             context.insert(user)

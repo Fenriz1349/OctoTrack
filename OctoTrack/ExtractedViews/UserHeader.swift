@@ -12,45 +12,58 @@ struct UserHeader: View {
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
-        HStack(spacing: 24) {
-            AsyncAvatarImage(avatarName: user.login, avatarUrl: user.avatarURL, size: 100)
-                .overlay(
-                    Circle()
-                        .stroke(
-                            LinearGradient(
-                                colors: [.blue, .purple],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            ),
-                            lineWidth: 3
-                        )
-                )
-                .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
-
-            VStack(spacing: 8) {
-                Text(user.login)
-                    .font(.title)
-                    .fontWeight(.bold)
-
-                Link(destination: URL(string: "https://github.com/\(user.login)")!) {
-                    HStack(spacing: 6) {
-                        Image(systemName: "link.circle.fill")
-                            .foregroundColor(.blue)
-                        Text("viewGithub".localized)
-                            .fontWeight(.medium)
-                            .foregroundColor(.blue)
+        VStack{
+            HStack(spacing: 24) {
+                AsyncAvatarImage(avatarName: user.login, avatarUrl: user.avatarURL, size: 100)
+                    .overlay(
+                        Circle()
+                            .stroke(
+                                LinearGradient(
+                                    colors: [.blue, .purple],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                ),
+                                lineWidth: 3
+                            )
+                    )
+                    .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
+                
+                VStack(spacing: 8) {
+                    Text(user.login)
+                        .font(.title)
+                        .fontWeight(.bold)
+                    
+                    Link(destination: URL(string: "https://github.com/\(user.login)")!) {
+                        HStack(spacing: 6) {
+                            Image(systemName: "link.circle.fill")
+                                .foregroundColor(.blue)
+                            Text("viewGithub".localized)
+                                .fontWeight(.medium)
+                                .foregroundColor(.blue)
+                        }
+                        .padding(.vertical, 4)
                     }
-                    .padding(.vertical, 4)
+                    
+                    HStack(spacing: 6) {
+                        Image(systemName: "folder.fill")
+                            .foregroundColor(.orange)
+                        Text("repositoriesTracked".localized(user.repoList.count))
+                            .fontWeight(.medium)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.top, 2)
                 }
-
-                HStack(spacing: 6) {
-                    Image(systemName: "folder.fill")
-                        .foregroundColor(.orange)
-                    Text("repositoriesTracked".localized(user.repoList.count))
-                        .fontWeight(.medium)
-                        .foregroundColor(.secondary)
+            }
+            HStack{
+                Text("lastUpdate".localized(user.lastUpdate?.formatted() ?? ""))
+                Button {
+                   
+                } label: {
+                    CustomButtonIcon(
+                        icon: IconsName.refresh.rawValue,
+                        color: Color.blue
+                    )
                 }
-                .padding(.top, 2)
             }
         }
         .padding(20)

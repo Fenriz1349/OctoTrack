@@ -9,8 +9,10 @@ import Foundation
 
 struct PreviewModels {
     static var previewUser: User {
-        User(id: 2, login: "HackerMan",
-             avatarURL: "https://avatars.githubusercontent.com/u/198871564?v=4", repoList: PreviewModels.repositories)
+        User(id: 0, login: "HackerMan",
+             avatarURL: "https://avatars.githubusercontent.com/u/198871564?v=4",
+             repoList: [],
+             lastUpdate: Date())
     }
 
     static let compagny = Owner(

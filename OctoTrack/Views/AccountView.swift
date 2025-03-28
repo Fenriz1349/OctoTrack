@@ -58,6 +58,7 @@ struct AccountView: View {
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 30)
+            Spacer()
         }
         .padding()
         .navigationTitle("account".localized)
