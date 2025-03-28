@@ -25,27 +25,28 @@ struct RepoListView: View {
                 CustomButtonLabel(icon: IconsName.plus.rawValue,
                                   message: "repoAdd".localized,
                                   color: .black)
-                    .padding(.horizontal, 30)
+                .padding(.horizontal, 30)
             }
-            ScrollView {
+            List {
                 ForEach(repositories) { repository in
                     RepoRow(repository: repository)
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+                        .swipeActions(edge: .trailing) {
+                            Button(role: .destructive) {
+                                deleteRepository(repository)
+                            } label: {
+                                CustomButtonIcon(icon: "trash", color: .red)
+                            }
+                        }
                 }
             }
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
+    private func deleteRepository(_ repo: Repository) {
         withAnimation {
-            for index in offsets {
-                modelContext.delete(repositories[index])
-            }
+            appViewModel.userApp?.repoList.removeAll(where: { $0.id == repo.id})
+            modelContext.delete(repo)
+            try? modelContext.save()
         }
     }
 }

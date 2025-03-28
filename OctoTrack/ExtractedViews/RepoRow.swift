@@ -18,8 +18,6 @@ struct RepoRow: View {
                 Text(repository.isPrivate ? "private".localized
                      : "public".localized)
                 Spacer()
-                Image(systemName: "chevron.forward")
-                    .padding(.leading, 5)
             }
             .padding(.horizontal, 20)
         }

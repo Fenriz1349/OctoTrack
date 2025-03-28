@@ -12,7 +12,7 @@ struct UserHeader: View {
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
-        VStack{
+        VStack {
             HStack(spacing: 24) {
                 AsyncAvatarImage(avatarName: user.login, avatarUrl: user.avatarURL, size: 100)
                     .overlay(
@@ -27,12 +27,12 @@ struct UserHeader: View {
                             )
                     )
                     .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
-                
+
                 VStack(spacing: 8) {
                     Text(user.login)
                         .font(.title)
                         .fontWeight(.bold)
-                    
+
                     Link(destination: URL(string: "https://github.com/\(user.login)")!) {
                         HStack(spacing: 6) {
                             Image(systemName: "link.circle.fill")
@@ -43,7 +43,7 @@ struct UserHeader: View {
                         }
                         .padding(.vertical, 4)
                     }
-                    
+
                     HStack(spacing: 6) {
                         Image(systemName: "folder.fill")
                             .foregroundColor(.orange)
@@ -54,10 +54,10 @@ struct UserHeader: View {
                     .padding(.top, 2)
                 }
             }
-            HStack{
+            HStack {
                 Text("lastUpdate".localized(user.lastUpdate?.formatted() ?? ""))
                 Button {
-                   
+
                 } label: {
                     CustomButtonIcon(
                         icon: IconsName.refresh.rawValue,

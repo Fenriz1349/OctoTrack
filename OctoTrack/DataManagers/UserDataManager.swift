@@ -85,7 +85,7 @@ final class UserDataManager {
             try? context.save()
         }
     }
-    
+
     func storeNewRepo(_ repo: Repository) {
         guard let currentUser = activeUser else { return }
         currentUser.repoList.append(repo)

@@ -57,9 +57,8 @@ import SwiftData
         feedbackMessage = ""
         showFeedback = false
     }
-    
+
     func addRepoToUser(repo: Repository) {
-        
         guard let appViewModel = appViewModel else {
             feedbackMessage = "AddRepoError".localized
             isSuccess = false
