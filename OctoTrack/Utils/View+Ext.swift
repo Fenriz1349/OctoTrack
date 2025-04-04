@@ -12,4 +12,12 @@ extension View {
     func stylize(color: Color) -> some View {
         self.modifier(TextFieldStyleModifier(color: color))
     }
+
+    func tabItem(for tab: Tab) -> some View {
+            self
+                .tabItem {
+                    tab.tabItem()
+                }
+                .tag(tab)
+        }
 }

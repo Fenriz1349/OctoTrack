@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @State var viewModel: AppViewModel
     @Environment(\.modelContext) private var modelContext
+    @State private var  tab: Tab = .repoList
+    
     var body: some View {
         Group {
             if viewModel.isInitializing {
@@ -22,17 +24,17 @@ struct ContentView: View {
                     await viewModel.initialize()
                 }
             } else if viewModel.isLogged {
-                TabView {
-                    RepoListView(appViewModel: viewModel)
-                        .tabItem {
-                            Image(systemName: "folder.fill")
-                            Text("repoList".localized)
+                TabView(selection: $tab ){
+                    ForEach(Tab.allCases) { tabItem in
+                        switch tabItem {
+                        case .repoList:
+                            RepoListView(appViewModel: viewModel)
+                                .tabItem(for: tabItem)
+                        case .account:
+                            AccountView(appViewModel: viewModel)
+                                .tabItem(for: tabItem)
                         }
-                    AccountView(appViewModel: viewModel)
-                        .tabItem {
-                            Image(systemName: "person.circle.fill")
-                            Text("account".localized)
-                        }
+                    }
                 }
             } else {
                 AuthenticationView(viewModel: viewModel.authenticationViewModel)
@@ -47,5 +49,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(viewModel: AppViewModel())
+    let viewModel = PreviewContainer.previewAppViewModel
+    ContentView(viewModel: viewModel)
+        .previewWithContainer()
 }

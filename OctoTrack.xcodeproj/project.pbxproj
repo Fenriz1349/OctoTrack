@@ -64,6 +64,7 @@
 		684F7C9E2D8DAA210044367F /* HTTPClientMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C962D8DAA210044367F /* HTTPClientMock.swift */; };
 		684F7C9F2D8DAA210044367F /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C972D8DAA210044367F /* SharedTestHelpers.swift */; };
 		684F7CA12D8DBF8A0044367F /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7CA02D8DBF8A0044367F /* Owner.swift */; };
+		68C02ED52D9FD3CF0065027F /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02ED42D9FD3CF0065027F /* Tab.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +145,7 @@
 		684F7C962D8DAA210044367F /* HTTPClientMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientMock.swift; sourceTree = "<group>"; };
 		684F7C972D8DAA210044367F /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		684F7CA02D8DBF8A0044367F /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
+		68C02ED42D9FD3CF0065027F /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 				684F7C2F2D8DAA1A0044367F /* TextFieldConfig.swift */,
 				684F7C302D8DAA1A0044367F /* User.swift */,
 				684F7CA02D8DBF8A0044367F /* Owner.swift */,
+				68C02ED42D9FD3CF0065027F /* Tab.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				684F7C792D8DAA1A0044367F /* UserMapper.swift in Sources */,
 				6826E96C2D96F0420048F35A /* PreviewContainer.swift in Sources */,
 				684F7C7A2D8DAA1A0044367F /* EndpointBuilder.swift in Sources */,
+				68C02ED52D9FD3CF0065027F /* Tab.swift in Sources */,
 				684F7C7B2D8DAA1A0044367F /* URLSessionHTTPClient.swift in Sources */,
 				684F7C7D2D8DAA1A0044367F /* KeyChainService.swift in Sources */,
 				684F7C7E2D8DAA1A0044367F /* TokenAuthManager.swift in Sources */,
