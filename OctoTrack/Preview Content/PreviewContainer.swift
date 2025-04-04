@@ -16,8 +16,7 @@ struct PreviewContainer {
             let schema = Schema([
                 User.self,
                 Owner.self,
-                Repository.self,
-                PullRequest.self
+                Repository.self
             ])
 
             let configuration = ModelConfiguration(

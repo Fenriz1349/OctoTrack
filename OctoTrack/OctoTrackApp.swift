@@ -17,8 +17,7 @@ struct OctoTrackApp: App {
         let schema = Schema([
             User.self,
             Owner.self,
-            Repository.self,
-            PullRequest.self
+            Repository.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
