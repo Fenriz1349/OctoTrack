@@ -86,6 +86,23 @@
         }
       }
     },
+    "closed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Closed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermé"
+          }
+        }
+      }
+    },
     "connected" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -137,6 +154,23 @@
         }
       }
     },
+    "createdAt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Created At"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créé le"
+          }
+        }
+      }
+    },
     "failCantAdd" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -153,6 +187,9 @@
           }
         }
       }
+    },
+    "Hello, World!" : {
+
     },
     "lastUpdate" : {
       "extractionState" : "manual",
@@ -171,6 +208,23 @@
         }
       }
     },
+    "lastUpdated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "last Updated"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dernière Mise à jour"
+          }
+        }
+      }
+    },
     "loading" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -184,6 +238,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chargement…"
+          }
+        }
+      }
+    },
+    "open" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouverte"
           }
         }
       }
@@ -405,6 +476,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Déconnexion"
+          }
+        }
+      }
+    },
+    "total" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total"
           }
         }
       }

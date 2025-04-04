@@ -18,14 +18,11 @@ struct PreviewContainer {
                 Owner.self,
                 Repository.self
             ])
-
             let configuration = ModelConfiguration(
                 schema: schema,
                 isStoredInMemoryOnly: true // Important pour les previews
             )
-
             let container = try ModelContainer(for: schema, configurations: [configuration])
-
             populateContainer(container)
 
             return container
@@ -65,6 +62,7 @@ struct PreviewContainer {
 
         for repo in repositories {
             context.insert(repo)
+            repo.pullRequests = PreviewPullRequests.getPR(for: repo)
         }
 
         user.repoList = repositories

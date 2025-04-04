@@ -9,14 +9,23 @@ import SwiftUI
 
 struct RepoDetailView: View {
     let repository: Repository
-    var body: some View {
-        Text(repository.name)
+    private var pullRequests : [PullRequest] {
+        if let list = repository.pullRequests {
+            return list
+        }
+        return []
     }
+    var body: some View {
+        RepoHeader(repository: repository)
+        List(pullRequests) { pullRequest in
+                PullRequestRow(pullRequest: pullRequest)
+            }
+        }
 }
 
 #Preview {
     if let repository = PreviewContainer.getRepository() {
-        return RepoRow(repository: repository)
+        return RepoDetailView(repository: repository)
             .previewWithContainer()
     } else {
         return Text("Repository not found")

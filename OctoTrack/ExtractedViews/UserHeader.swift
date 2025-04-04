@@ -35,7 +35,7 @@ struct UserHeader: View {
 
                     Link(destination: URL(string: "https://github.com/\(user.login)")!) {
                         HStack(spacing: 6) {
-                            Image(systemName: "link.circle.fill")
+                            Image(systemName: IconsName.link.rawValue)
                                 .foregroundColor(.blue)
                             Text("viewGithub".localized)
                                 .fontWeight(.medium)
@@ -82,6 +82,6 @@ struct UserHeader: View {
         return UserHeader(user: user)
             .previewWithContainer()
     } else {
-        return Text("Repository not found")
+        return Text("userDataNotAvailable".localized)
     }
 }

@@ -14,4 +14,7 @@ enum IconsName: String {
     case trash = "trash"
     case signOut = "rectangle.portrait.and.arrow.right"
     case plus = "plus.circle.fill"
+    case lockClose = "lock.fill"
+    case lockOpen = "lock.open.fill"
+    case link = "link.circle.fill"
 }

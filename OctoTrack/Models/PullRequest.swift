@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@Observable final class PullRequest {
+@Observable final class PullRequest: Identifiable {
     var id: Int
     var number: Int
     var state: String
