@@ -6,46 +6,40 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    @State var viewModel: AppViewModel
-    @Environment(\.modelContext) private var modelContext
+    @State var appViewModel: AppViewModel
+
     var body: some View {
         Group {
-            if viewModel.isInitializing {
+            if appViewModel.isInitializing {
                 VStack {
                     ProgressView()
                     Text("loading".localized).padding()
                 }
-                .task {
-                    viewModel.dataManager.modelContext = modelContext
-                    await viewModel.initialize()
-                }
-            } else if viewModel.isLogged {
+            } else if appViewModel.isLogged {
                 TabView {
-                    RepoListView(appViewModel: viewModel)
+                    RepoListView(viewModel: RepoListViewModel(dataManager: appViewModel.dataManager))
                         .tabItem {
                             Image(systemName: "folder.fill")
                             Text("repoList".localized)
                         }
-                    AccountView(appViewModel: viewModel)
+                    AccountView(appViewModel: appViewModel)
                         .tabItem {
                             Image(systemName: "person.circle.fill")
                             Text("account".localized)
                         }
                 }
             } else {
-                AuthenticationView(viewModel: viewModel.authenticationViewModel)
+                AuthenticationView(viewModel: appViewModel.authenticationViewModel)
                     .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),
                                             removal: .move(edge: .top).combined(with: .opacity)))
             }
         }
-        .onAppear {
-            viewModel.dataManager.setModelContext(modelContext)
-        }
     }
 }
 
-#Preview {
-    ContentView(viewModel: AppViewModel())
-}
+//#Preview {
+//    ContentView(appViewModel: AppViewModel(dataManager: UserDataManager(modelContext: ModelContext())))
+//}

@@ -16,9 +16,8 @@ import SwiftData
     var updatedAt: Date?
     var language: String?
 
-    @Relationship(deleteRule: .cascade) var owner: Owner
-    // Transcient is use to prevent the saving of this var in SwiftData
-    @Transient var pullRequests: [PullRequest]? = []
+    @Relationship(deleteRule: .nullify) var owner: Owner
+    @Relationship(deleteRule: .cascade) var pullRequests: [PullRequest] = []
 
     init(id: Int, name: String, repoDescription: String? = nil, isPrivate: Bool,
          owner: Owner, createdAt: Date, updatedAt: Date? = nil, language: String? = nil) {

@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import SwiftData
 
-@Observable final class PullRequest: Identifiable {
+@Model final class PullRequest: Identifiable {
     var id: Int
     var number: Int
     var state: String
@@ -17,8 +18,6 @@ import SwiftUI
     var closedAt: Date?
     var mergedAt: Date?
     var isDraft: Bool = false
-
-    var repository: Repository?
 
     init(id: Int, number: Int, state: String, title: String, createdAt: Date,
          updateAt: Date? = nil, closedAt: Date? = nil, mergedAt: Date? = nil, isDraft: Bool) {

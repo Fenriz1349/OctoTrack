@@ -10,14 +10,15 @@ import SwiftData
 
 @main
 struct OctoTrackApp: App {
-    @State private var viewModel = AppViewModel()
-
-    @State private var isInitializing: Bool = true
-    var sharedModelContainer: ModelContainer = {
+    @State private var dataManager: UserDataManager
+    @State private var appViewModel: AppViewModel
+    
+    private let sharedModelContainer: ModelContainer = {
         let schema = Schema([
             User.self,
             Owner.self,
-            Repository.self
+            Repository.self,
+            PullRequest.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -28,10 +29,24 @@ struct OctoTrackApp: App {
         }
     }()
 
+    init() {
+           let dataManager = UserDataManager(modelContext: self.sharedModelContainer.mainContext)
+           
+           let viewModel = AppViewModel(dataManager: dataManager)
+           
+           self._dataManager = State(initialValue: dataManager)
+           self._appViewModel = State(initialValue: viewModel)
+       }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: viewModel)
+            ContentView(appViewModel: appViewModel)
                 .modelContainer(sharedModelContainer)
+                .onAppear {
+                    Task {
+                        await appViewModel.initialize()
+                    }
+                }
         }
     }
 }

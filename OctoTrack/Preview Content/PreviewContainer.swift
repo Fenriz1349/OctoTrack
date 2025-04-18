@@ -33,15 +33,15 @@ struct PreviewContainer {
 
     @MainActor
     static var previewAppViewModel: AppViewModel = {
-        let viewModel = AppViewModel()
-        let user = populateContainer(container).user
+        let dataManager = UserDataManager(modelContext: container.mainContext)
 
-        viewModel.userApp = user
+        let viewModel = AppViewModel(dataManager: dataManager)
+        
         viewModel.isLogged = true
         viewModel.isInitializing = false
-
-        viewModel.dataManager.setModelContext(container.mainContext)
-
+        
+        let user = populateContainer(container).user
+        
         return viewModel
     }()
 
@@ -52,6 +52,7 @@ struct PreviewContainer {
         try? context.delete(model: User.self)
         try? context.delete(model: Repository.self)
         try? context.delete(model: Owner.self)
+        try? context.delete(model: PullRequest.self)
 
         context.insert(companyOwner)
 
@@ -62,10 +63,7 @@ struct PreviewContainer {
 
         for repo in repositories {
             context.insert(repo)
-            repo.pullRequests = PreviewPullRequests.getPR(for: repo)
         }
-
-        user.repoList = repositories
 
         try? context.save()
 
@@ -74,7 +72,8 @@ struct PreviewContainer {
 
     static let user = User(id: 0, login: "HackerMan",
                     avatarURL: "https://avatars.githubusercontent.com/u/198871564?v=4",
-                    repoList: [], lastUpdate: Date())
+                           repoList: [],
+                    lastUpdate: Date())
 
     static let userAsOwner = user.toOwner()
 

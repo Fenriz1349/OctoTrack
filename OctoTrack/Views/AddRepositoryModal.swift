@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct AddRepositoryModal: View {
-    @State private var viewModel = AddRepoViewModel()
-    @State var appViewModel: AppViewModel
-    @Environment(\.modelContext) private var modelContext
+    @State private var viewModel: AddRepoViewModel
     @Environment(\.dismiss) private var dismiss
 
+    init(dataManager: UserDataManager) {
+           self._viewModel = State(initialValue: AddRepoViewModel(dataManager: dataManager))
+       }
+    
     var body: some View {
         VStack(spacing: 20) {
             Text("repoAdd".localized)
@@ -44,7 +46,7 @@ struct AddRepositoryModal: View {
                         let getRepo = await viewModel.getRepo()
                         switch getRepo {
                         case .success(let repo):
-                            viewModel.addRepoToUser(repo: repo)
+                            viewModel.dataManager.storeNewRepo(repo)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                                 viewModel.resetFeedback()
                                 dismiss()
@@ -72,17 +74,12 @@ struct AddRepositoryModal: View {
             }
             Spacer()
         }
-        .onAppear {
-            viewModel.setModelContext(modelContext)
-            viewModel.setAppViewModel(appViewModel)
-        }
         .padding()
         .frame(maxWidth: 400)
     }
 }
 
-#Preview {
-    let viewModel = PreviewContainer.previewAppViewModel
-    return AddRepositoryModal(appViewModel: viewModel)
-        .previewWithContainer()
-}
+//#Preview {
+//    AddRepositoryModal(appViewModel: viewModel)
+//        .previewWithContainer()
+//}

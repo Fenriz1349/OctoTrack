@@ -22,22 +22,16 @@ import SwiftData
     var isFormValid: Bool {
             !owner.isEmpty && !repoName.isEmpty
         }
-    private var modelContext: ModelContext?
-    private var appViewModel: AppViewModel?
+    let dataManager: UserDataManager
     private let repoGetter: RepoGetter = RepoGetter()
     private let authenticator = GitHubAuthenticator()
 
-    func setModelContext(_ modelContext: ModelContext) {
-        self.modelContext = modelContext
-    }
-
-    func setAppViewModel(_ appViewModel: AppViewModel) {
-        self.appViewModel = appViewModel
+    init(dataManager: UserDataManager) {
+        self.dataManager = dataManager
     }
 
     func getRepo() async -> Result<Repository, Error> {
         isLoading = true
-
         do {
             let token = try await authenticator.retrieveToken()
             let request = try RepoEndpoint.request(owner: owner, repoName: repoName, token: token)
@@ -56,25 +50,5 @@ import SwiftData
     func resetFeedback() {
         feedbackMessage = ""
         showFeedback = false
-    }
-
-    func addRepoToUser(repo: Repository) {
-        guard let appViewModel = appViewModel else {
-            feedbackMessage = "AddRepoError".localized
-            isSuccess = false
-            showFeedback = true
-            return
-        }
-        if let user = appViewModel.userApp,
-           !user.repoList.contains(where: {$0.id == repo.id}) {
-            user.repoList.append(repo)
-            appViewModel.dataManager.saveUser(user)
-            feedbackMessage = "addedWithSuccess".localized(repo.name)
-            isSuccess = true
-        } else {
-            feedbackMessage = "failCantAdd".localized
-            isSuccess = false
-        }
-        showFeedback = true
     }
 }

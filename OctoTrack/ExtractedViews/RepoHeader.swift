@@ -12,15 +12,15 @@ struct RepoHeader: View {
     @Environment(\.colorScheme) private var colorScheme
     
     private var openPRCount: Int {
-        repository.pullRequests?.filter { $0.state == "open" }.count ?? 0
+        repository.pullRequests.filter { $0.state == "open" }.count
     }
     
     private var closedPRCount: Int {
-        repository.pullRequests?.filter { $0.state == "closed" }.count ?? 0
+        repository.pullRequests.filter { $0.state == "closed" }.count
     }
     
     private var totalPRCount: Int {
-        repository.pullRequests?.count ?? 0
+        repository.pullRequests.count
     }
     
     var body: some View {

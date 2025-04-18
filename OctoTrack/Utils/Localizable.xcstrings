@@ -188,9 +188,6 @@
         }
       }
     },
-    "Hello, World!" : {
-
-    },
     "lastUpdate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -374,6 +371,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ex: hello.world"
+          }
+        }
+      }
+    },
+    "repoList" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repo list"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste des repos"
           }
         }
       }

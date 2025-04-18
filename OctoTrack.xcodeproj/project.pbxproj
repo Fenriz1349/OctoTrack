@@ -48,8 +48,6 @@
 		684F7C832D8DAA1A0044367F /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C4D2D8DAA1A0044367F /* AppViewModel.swift */; };
 		684F7C842D8DAA1A0044367F /* AsyncAvatarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C4E2D8DAA1A0044367F /* AsyncAvatarViewModel.swift */; };
 		684F7C852D8DAA1A0044367F /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C4F2D8DAA1A0044367F /* AuthenticationViewModel.swift */; };
-		684F7C862D8DAA1A0044367F /* RepoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C502D8DAA1A0044367F /* RepoDetailViewModel.swift */; };
-		684F7C872D8DAA1A0044367F /* RepoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C512D8DAA1A0044367F /* RepoListViewModel.swift */; };
 		684F7C882D8DAA1A0044367F /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C532D8DAA1A0044367F /* AccountView.swift */; };
 		684F7C892D8DAA1A0044367F /* AddRepositoryModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C542D8DAA1A0044367F /* AddRepositoryModal.swift */; };
 		684F7C8A2D8DAA1A0044367F /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C552D8DAA1A0044367F /* AuthenticationView.swift */; };
@@ -64,6 +62,7 @@
 		684F7C9E2D8DAA210044367F /* HTTPClientMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C962D8DAA210044367F /* HTTPClientMock.swift */; };
 		684F7C9F2D8DAA210044367F /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C972D8DAA210044367F /* SharedTestHelpers.swift */; };
 		684F7CA12D8DBF8A0044367F /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7CA02D8DBF8A0044367F /* Owner.swift */; };
+		686BFB8F2DA9378B00C859C3 /* RepoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686BFB8E2DA9378B00C859C3 /* RepoListViewModel.swift */; };
 		68C02EC92D9FB2CD0065027F /* PullRequestEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02EC82D9FB2CD0065027F /* PullRequestEndpoint.swift */; };
 		68C02ECB2D9FB7800065027F /* PullRequestMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02ECA2D9FB7800065027F /* PullRequestMapper.swift */; };
 		68C02ECD2D9FBA360065027F /* PullRequestGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02ECC2D9FBA360065027F /* PullRequestGetter.swift */; };
@@ -81,13 +80,6 @@
 			remoteGlobalIDString = 683612ED2D5D31EC00805615;
 			remoteInfo = OctoTrack;
 		};
-		6836130B2D5D31EE00805615 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 683612E62D5D31EC00805615 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 683612ED2D5D31EC00805615;
-			remoteInfo = OctoTrack;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -98,7 +90,6 @@
 		6826E96B2D96F0420048F35A /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		683612EE2D5D31EC00805615 /* OctoTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OctoTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		683613002D5D31EE00805615 /* OctoTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OctoTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6836130A2D5D31EE00805615 /* OctoTrackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OctoTrackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		684F7C212D8DAA1A0044367F /* AsyncAvatarImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAvatarImage.swift; sourceTree = "<group>"; };
 		684F7C222D8DAA1A0044367F /* AuthButtonsStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButtonsStack.swift; sourceTree = "<group>"; };
 		684F7C232D8DAA1A0044367F /* CustomButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonLabel.swift; sourceTree = "<group>"; };
@@ -134,8 +125,6 @@
 		684F7C4D2D8DAA1A0044367F /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		684F7C4E2D8DAA1A0044367F /* AsyncAvatarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAvatarViewModel.swift; sourceTree = "<group>"; };
 		684F7C4F2D8DAA1A0044367F /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
-		684F7C502D8DAA1A0044367F /* RepoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailViewModel.swift; sourceTree = "<group>"; };
-		684F7C512D8DAA1A0044367F /* RepoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListViewModel.swift; sourceTree = "<group>"; };
 		684F7C532D8DAA1A0044367F /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		684F7C542D8DAA1A0044367F /* AddRepositoryModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRepositoryModal.swift; sourceTree = "<group>"; };
 		684F7C552D8DAA1A0044367F /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
@@ -151,6 +140,8 @@
 		684F7C962D8DAA210044367F /* HTTPClientMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientMock.swift; sourceTree = "<group>"; };
 		684F7C972D8DAA210044367F /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		684F7CA02D8DBF8A0044367F /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
+		686BFB8D2DA909F100C859C3 /* OctoTrack.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = OctoTrack.xctestplan; sourceTree = "<group>"; };
+		686BFB8E2DA9378B00C859C3 /* RepoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListViewModel.swift; sourceTree = "<group>"; };
 		68C02EC82D9FB2CD0065027F /* PullRequestEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestEndpoint.swift; sourceTree = "<group>"; };
 		68C02ECA2D9FB7800065027F /* PullRequestMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestMapper.swift; sourceTree = "<group>"; };
 		68C02ECC2D9FBA360065027F /* PullRequestGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestGetter.swift; sourceTree = "<group>"; };
@@ -175,13 +166,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		683613072D5D31EE00805615 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -196,6 +180,7 @@
 		683612E52D5D31EC00805615 = {
 			isa = PBXGroup;
 			children = (
+				686BFB8D2DA909F100C859C3 /* OctoTrack.xctestplan */,
 				684F7C5C2D8DAA1A0044367F /* OctoTrack */,
 				684F7C982D8DAA210044367F /* OctoTrackTests */,
 				683612EF2D5D31EC00805615 /* Products */,
@@ -207,7 +192,6 @@
 			children = (
 				683612EE2D5D31EC00805615 /* OctoTrack.app */,
 				683613002D5D31EE00805615 /* OctoTrackTests.xctest */,
-				6836130A2D5D31EE00805615 /* OctoTrackUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -324,8 +308,7 @@
 				684F7C4D2D8DAA1A0044367F /* AppViewModel.swift */,
 				684F7C4E2D8DAA1A0044367F /* AsyncAvatarViewModel.swift */,
 				684F7C4F2D8DAA1A0044367F /* AuthenticationViewModel.swift */,
-				684F7C502D8DAA1A0044367F /* RepoDetailViewModel.swift */,
-				684F7C512D8DAA1A0044367F /* RepoListViewModel.swift */,
+				686BFB8E2DA9378B00C859C3 /* RepoListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -444,26 +427,6 @@
 			productReference = 683613002D5D31EE00805615 /* OctoTrackTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		683613092D5D31EE00805615 /* OctoTrackUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6836131A2D5D31EE00805615 /* Build configuration list for PBXNativeTarget "OctoTrackUITests" */;
-			buildPhases = (
-				683613062D5D31EE00805615 /* Sources */,
-				683613072D5D31EE00805615 /* Frameworks */,
-				683613082D5D31EE00805615 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6836130C2D5D31EE00805615 /* PBXTargetDependency */,
-			);
-			name = OctoTrackUITests;
-			packageProductDependencies = (
-			);
-			productName = OctoTrackUITests;
-			productReference = 6836130A2D5D31EE00805615 /* OctoTrackUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -478,10 +441,6 @@
 						CreatedOnToolsVersion = 16.1;
 					};
 					683612FF2D5D31EE00805615 = {
-						CreatedOnToolsVersion = 16.1;
-						TestTargetID = 683612ED2D5D31EC00805615;
-					};
-					683613092D5D31EE00805615 = {
 						CreatedOnToolsVersion = 16.1;
 						TestTargetID = 683612ED2D5D31EC00805615;
 					};
@@ -503,7 +462,6 @@
 			targets = (
 				683612ED2D5D31EC00805615 /* OctoTrack */,
 				683612FF2D5D31EE00805615 /* OctoTrackTests */,
-				683613092D5D31EE00805615 /* OctoTrackUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -520,13 +478,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		683612FE2D5D31EE00805615 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		683613082D5D31EE00805615 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -578,11 +529,10 @@
 				684F7C802D8DAA1A0044367F /* String+Ext.swift in Sources */,
 				684F7C812D8DAA1A0044367F /* View+Ext.swift in Sources */,
 				684F7C822D8DAA1A0044367F /* AddRepoViewModel.swift in Sources */,
+				686BFB8F2DA9378B00C859C3 /* RepoListViewModel.swift in Sources */,
 				684F7C832D8DAA1A0044367F /* AppViewModel.swift in Sources */,
 				684F7C842D8DAA1A0044367F /* AsyncAvatarViewModel.swift in Sources */,
 				684F7C852D8DAA1A0044367F /* AuthenticationViewModel.swift in Sources */,
-				684F7C862D8DAA1A0044367F /* RepoDetailViewModel.swift in Sources */,
-				684F7C872D8DAA1A0044367F /* RepoListViewModel.swift in Sources */,
 				684F7C882D8DAA1A0044367F /* AccountView.swift in Sources */,
 				68C02ED72D9FD9540065027F /* RepoHeader.swift in Sources */,
 				68C02ECD2D9FBA360065027F /* PullRequestGetter.swift in Sources */,
@@ -611,13 +561,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		683613062D5D31EE00805615 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -625,11 +568,6 @@
 			isa = PBXTargetDependency;
 			target = 683612ED2D5D31EC00805615 /* OctoTrack */;
 			targetProxy = 683613012D5D31EE00805615 /* PBXContainerItemProxy */;
-		};
-		6836130C2D5D31EE00805615 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 683612ED2D5D31EC00805615 /* OctoTrack */;
-			targetProxy = 6836130B2D5D31EE00805615 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -845,38 +783,6 @@
 			};
 			name = Release;
 		};
-		6836131B2D5D31EE00805615 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.juliencotte.OctoTrackUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = OctoTrack;
-			};
-			name = Debug;
-		};
-		6836131C2D5D31EE00805615 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.juliencotte.OctoTrackUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = OctoTrack;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -903,15 +809,6 @@
 			buildConfigurations = (
 				683613182D5D31EE00805615 /* Debug */,
 				683613192D5D31EE00805615 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6836131A2D5D31EE00805615 /* Build configuration list for PBXNativeTarget "OctoTrackUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6836131B2D5D31EE00805615 /* Debug */,
-				6836131C2D5D31EE00805615 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
