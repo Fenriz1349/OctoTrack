@@ -19,14 +19,11 @@ struct PreviewContainer {
                 Repository.self,
                 PullRequest.self
             ])
-
             let configuration = ModelConfiguration(
                 schema: schema,
-                isStoredInMemoryOnly: true // Important pour les previews
+                isStoredInMemoryOnly: true // Important for previews
             )
-
             let container = try ModelContainer(for: schema, configurations: [configuration])
-
             populateContainer(container)
 
             return container
@@ -37,15 +34,15 @@ struct PreviewContainer {
 
     @MainActor
     static var previewAppViewModel: AppViewModel = {
-        let viewModel = AppViewModel()
-        let user = populateContainer(container).user
+        let dataManager = UserDataManager(modelContext: container.mainContext)
 
-        viewModel.userApp = user
+        let viewModel = AppViewModel(dataManager: dataManager)
+        
         viewModel.isLogged = true
         viewModel.isInitializing = false
-
-        viewModel.dataManager.setModelContext(container.mainContext)
-
+        
+        let user = populateContainer(container).user
+        
         return viewModel
     }()
 
@@ -56,6 +53,7 @@ struct PreviewContainer {
         try? context.delete(model: User.self)
         try? context.delete(model: Repository.self)
         try? context.delete(model: Owner.self)
+        try? context.delete(model: PullRequest.self)
 
         context.insert(companyOwner)
 
@@ -66,9 +64,12 @@ struct PreviewContainer {
 
         for repo in repositories {
             context.insert(repo)
+            let pullRequests = PreviewPullRequests.getPR(for: repo)
+            for pr in pullRequests {
+                context.insert(pr)
+                repo.pullRequests.append(pr)
+            }
         }
-
-        user.repoList = repositories
 
         try? context.save()
 
@@ -77,7 +78,8 @@ struct PreviewContainer {
 
     static let user = User(id: 0, login: "HackerMan",
                     avatarURL: "https://avatars.githubusercontent.com/u/198871564?v=4",
-                    repoList: [], lastUpdate: Date())
+                           repoList: [],
+                    lastUpdate: Date())
 
     static let userAsOwner = user.toOwner()
 
@@ -91,7 +93,8 @@ struct PreviewContainer {
             isPrivate: true, owner: userAsOwner,
             createdAt: Date().addingTimeInterval(-2592000),
             updatedAt: Date().addingTimeInterval(-43200),
-            language: "Swift"
+            language: "Swift",
+            priority: .high
         ),
         Repository(
             id: 1, name: "iOS-Architecture",
@@ -99,7 +102,8 @@ struct PreviewContainer {
             isPrivate: false, owner: companyOwner,
             createdAt: Date().addingTimeInterval(-5184000),
             updatedAt: Date().addingTimeInterval(-259200),
-            language: "Swift"
+            language: "Swift",
+            priority: .low
         ),
         Repository(
             id: 2, name: "NetworkLayer",
@@ -107,7 +111,8 @@ struct PreviewContainer {
             isPrivate: false, owner: companyOwner,
             createdAt: Date().addingTimeInterval(-10368000),
             updatedAt: Date().addingTimeInterval(-1209600),
-            language: "Swift"
+            language: "Swift",
+            priority: .medium
         ),
         Repository(
             id: 3, name: "SwiftConcurrency",
@@ -115,7 +120,8 @@ struct PreviewContainer {
             isPrivate: true, owner: userAsOwner,
             createdAt: Date().addingTimeInterval(-1296000),
             updatedAt: Date().addingTimeInterval(-86400),
-            language: "Swift"
+            language: "Swift",
+            priority: .low
         )
     ]
 

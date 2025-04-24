@@ -11,7 +11,9 @@ import SwiftData
     @Attribute(.unique) var id: Int
     var login: String
     var avatarURL: String
-
+    
+//    @Relationship(inverse: \Repository.owner) var repositories: [Repository] = []
+    
     init(id: Int, login: String, avatarURL: String) {
         self.id = id
         self.login = login

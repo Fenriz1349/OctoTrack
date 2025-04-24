@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     @State var viewModel: AppViewModel
@@ -14,11 +15,12 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            if viewModel.isInitializing {
+            if appViewModel.isInitializing {
                 VStack {
                     ProgressView()
                     Text("loading".localized).padding()
                 }
+
                 .task {
                     viewModel.dataManager.modelContext = modelContext
                     await viewModel.initialize()
@@ -37,13 +39,10 @@ struct ContentView: View {
                     }
                 }
             } else {
-                AuthenticationView(viewModel: viewModel.authenticationViewModel)
+                AuthenticationView(viewModel: appViewModel.authenticationViewModel)
                     .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),
                                             removal: .move(edge: .top).combined(with: .opacity)))
             }
-        }
-        .onAppear {
-            viewModel.dataManager.setModelContext(modelContext)
         }
     }
 }

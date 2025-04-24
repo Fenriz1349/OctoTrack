@@ -10,13 +10,16 @@ import SwiftData
 
 @MainActor
 @Observable final class AppViewModel {
-    var userApp: User?
     var isLogged: Bool = false
     var isInitializing: Bool = true
     var authenticationViewModel: AuthenticationViewModel
-    var dataManager = UserDataManager()
+    let dataManager: UserDataManager
+    var userApp: User? {
+        dataManager.activeUser
+    }
 
-    init() {
+    init(dataManager: UserDataManager) {
+        self.dataManager = dataManager
         self.authenticationViewModel = AuthenticationViewModel(
             onLoginSucceed: { _ in },
             onLogoutCompleted: { }
@@ -26,17 +29,17 @@ import SwiftData
     }
 
     private func configureCallbacks() {
-           let newViewModel = AuthenticationViewModel(
-               onLoginSucceed: { [weak self] user in
-                   self?.loginUser(user: user)
-               },
-               onLogoutCompleted: { [weak self] in
-                   self?.logoutUser()
-               }
-           )
+        let newViewModel = AuthenticationViewModel(
+            onLoginSucceed: { [weak self] user in
+                self?.loginUser(user: user)
+            },
+            onLogoutCompleted: { [weak self] in
+                self?.logoutUser()
+            }
+        )
 
-           self.authenticationViewModel = newViewModel
-       }
+        self.authenticationViewModel = newViewModel
+    }
 
     /// The main function to initilialize the app
     /// First check the authentication status
@@ -50,7 +53,13 @@ import SwiftData
         switch authState {
         case .authenticated:
             await loadUserData()
-            authenticationViewModel.startTokenValidation()
+            if dataManager.activeUser != nil {
+                isLogged = true
+               
+                authenticationViewModel.startTokenValidation()
+            } else {
+                isLogged = false
+            }
         case .expired:
             if await authenticationViewModel.isTokenValid() {
                 try? authenticationViewModel.refreshToken()
@@ -67,30 +76,28 @@ import SwiftData
 
     func loginUser(user: User) {
         self.isLogged = true
-        self.userApp = user
         dataManager.saveUser(user)
     }
 
     func logoutUser() {
-        userApp = nil
-        isLogged = false
         dataManager.deactivateAllUsers()
+        isLogged = false
         authenticationViewModel.stopTokenValidation()
     }
 
     @MainActor
     private func loadUserData() async {
         if let storedUser = dataManager.activeUser {
-            userApp = storedUser
             isLogged = true
         } else {
             do {
-                userApp = try await authenticationViewModel.getUser()
-                dataManager.saveUser(userApp!)
+                let newUser = try await authenticationViewModel.getUser()
+                dataManager.saveUser(newUser)
                 isLogged = true
             } catch {
                 isLogged = false
             }
         }
+        print("✅ Fin de loadUserData")
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UserHeader: View {
     var user: User
+    var repositories: [Repository]
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
@@ -35,7 +36,7 @@ struct UserHeader: View {
 
                     Link(destination: URL(string: "https://github.com/\(user.login)")!) {
                         HStack(spacing: 6) {
-                            Image(systemName: "link.circle.fill")
+                            Image(systemName: IconsName.link.rawValue)
                                 .foregroundColor(.blue)
                             Text("viewGithub".localized)
                                 .fontWeight(.medium)
@@ -47,7 +48,7 @@ struct UserHeader: View {
                     HStack(spacing: 6) {
                         Image(systemName: "folder.fill")
                             .foregroundColor(.orange)
-                        Text("repositoriesTracked".localized(user.repoList.count))
+                        Text("repositoriesTracked".localized(repositories.count))
                             .fontWeight(.medium)
                             .foregroundColor(.secondary)
                     }
@@ -79,9 +80,9 @@ struct UserHeader: View {
 
 #Preview {
     if let user = PreviewContainer.previewAppViewModel.userApp {
-        return UserHeader(user: user)
+        UserHeader(user: user, repositories: PreviewContainer.repositories)
             .previewWithContainer()
     } else {
-        return Text("Repository not found")
+        Text("userDataNotAvailable".localized)
     }
 }

@@ -17,7 +17,7 @@ struct AccountView: View {
     var body: some View {
         VStack(spacing: 24) {
             if let user = appViewModel.userApp {
-                UserHeader(user: user)
+                UserHeader(user: user, repositories: appViewModel.dataManager.getActiveUserRepositories())
             } else {
                 Text("userDataNotAvailable".localized)
                     .foregroundColor(.secondary)
@@ -37,7 +37,7 @@ struct AccountView: View {
                 }
 
                 Button {
-                    appViewModel.userApp?.repoList = []
+                    
                 } label: {
                     CustomButtonLabel(
                         icon: IconsName.trash.rawValue,

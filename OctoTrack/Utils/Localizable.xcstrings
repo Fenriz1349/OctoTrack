@@ -86,6 +86,23 @@
         }
       }
     },
+    "closed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Closed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermé"
+          }
+        }
+      }
+    },
     "connected" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -137,6 +154,23 @@
         }
       }
     },
+    "createdAt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Created At"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créé le"
+          }
+        }
+      }
+    },
     "failCantAdd" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -150,6 +184,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Echec de l’ajout de %@"
+          }
+        }
+      }
+    },
+    "high" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "high"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "haute"
           }
         }
       }
@@ -171,6 +222,23 @@
         }
       }
     },
+    "lastUpdated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "last Updated"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dernière Mise à jour"
+          }
+        }
+      }
+    },
     "loading" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -184,6 +252,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chargement…"
+          }
+        }
+      }
+    },
+    "low" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "low"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "basse"
+          }
+        }
+      }
+    },
+    "medium" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "medium"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "medium"
+          }
+        }
+      }
+    },
+    "open" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouverte"
           }
         }
       }
@@ -218,6 +337,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ex: octocat"
+          }
+        }
+      }
+    },
+    "priority" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Priority"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Priorité"
           }
         }
       }
@@ -303,6 +439,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ex: hello.world"
+          }
+        }
+      }
+    },
+    "repoList" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repo list"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste des repos"
           }
         }
       }
@@ -405,6 +558,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Déconnexion"
+          }
+        }
+      }
+    },
+    "total" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total"
           }
         }
       }

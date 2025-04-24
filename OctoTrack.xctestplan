@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "88D544D2-7B0F-4FBB-BD17-FFD9B0CB5FD3",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:OctoTrack.xcodeproj",
+      "identifier" : "683612ED2D5D31EC00805615",
+      "name" : "OctoTrack"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:OctoTrack.xcodeproj",
+        "identifier" : "683612FF2D5D31EE00805615",
+        "name" : "OctoTrackTests"
+      }
+    }
+  ],
+  "version" : 1
+}
