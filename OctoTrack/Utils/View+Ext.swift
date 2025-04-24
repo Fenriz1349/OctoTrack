@@ -15,5 +15,12 @@ extension View {
     
     func appButtonStyle(color: Color, isSelected: Bool = true) -> some View {
             self.modifier(AppButtonStyle(color: color, isSelected: isSelected))
+
+    func tabItem(for tab: Tab) -> some View {
+            self
+                .tabItem {
+                    tab.tabItem()
+                }
+                .tag(tab)
         }
 }

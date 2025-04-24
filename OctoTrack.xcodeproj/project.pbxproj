@@ -531,6 +531,7 @@
 				6826E96C2D96F0420048F35A /* PreviewContainer.swift in Sources */,
 				68C02ED12D9FC58C0065027F /* PreviewPullRequests.swift in Sources */,
 				684F7C7A2D8DAA1A0044367F /* EndpointBuilder.swift in Sources */,
+				68C02ED52D9FD3CF0065027F /* Tab.swift in Sources */,
 				684F7C7B2D8DAA1A0044367F /* URLSessionHTTPClient.swift in Sources */,
 				68C02ECF2D9FC3960065027F /* PullRequestRow.swift in Sources */,
 				684F7C7D2D8DAA1A0044367F /* KeyChainService.swift in Sources */,

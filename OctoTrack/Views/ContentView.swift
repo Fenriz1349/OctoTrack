@@ -9,8 +9,10 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @State var appViewModel: AppViewModel
-
+    @State var viewModel: AppViewModel
+    @Environment(\.modelContext) private var modelContext
+    @State private var  tab: Tab = .repoList
+    
     var body: some View {
         Group {
             if appViewModel.isInitializing {
@@ -18,18 +20,23 @@ struct ContentView: View {
                     ProgressView()
                     Text("loading".localized).padding()
                 }
-            } else if appViewModel.isLogged {
-                TabView {
-                    RepoListView(viewModel: RepoListViewModel(dataManager: appViewModel.dataManager))
-                        .tabItem {
-                            Image(systemName: "folder.fill")
-                            Text("repoList".localized)
+
+                .task {
+                    viewModel.dataManager.modelContext = modelContext
+                    await viewModel.initialize()
+                }
+            } else if viewModel.isLogged {
+                TabView(selection: $tab ){
+                    ForEach(Tab.allCases) { tabItem in
+                        switch tabItem {
+                        case .repoList:
+                            RepoListView(appViewModel: viewModel)
+                                .tabItem(for: tabItem)
+                        case .account:
+                            AccountView(appViewModel: viewModel)
+                                .tabItem(for: tabItem)
                         }
-                    AccountView(appViewModel: appViewModel)
-                        .tabItem {
-                            Image(systemName: "person.circle.fill")
-                            Text("account".localized)
-                        }
+                    }
                 }
             } else {
                 AuthenticationView(viewModel: appViewModel.authenticationViewModel)
@@ -40,6 +47,8 @@ struct ContentView: View {
     }
 }
 
-//#Preview {
-//    ContentView(appViewModel: AppViewModel(dataManager: UserDataManager(modelContext: ModelContext())))
-//}
+#Preview {
+    let viewModel = PreviewContainer.previewAppViewModel
+    ContentView(viewModel: viewModel)
+        .previewWithContainer()
+}

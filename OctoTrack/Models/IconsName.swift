@@ -21,4 +21,6 @@ enum IconsName: String {
     case bolt = "bolt.circle.fill"
     case leaf = "leaf.fill"
     case chevron = "chevron.forward"
+    case folder = "folder.fill"
+    case person = "person.circle.fill"
 }
