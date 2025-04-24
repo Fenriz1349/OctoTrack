@@ -12,6 +12,7 @@ import SwiftData
 @Observable final class AddRepoViewModel {
     var owner: String = "Fenriz1349"
     var repoName: String = "DA-iOS_P5"
+    var priority: RepoPriority = .low
 
     // Pour gérer le feedback dans la view
     var showFeedback = false

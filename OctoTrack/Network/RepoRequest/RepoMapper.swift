@@ -26,7 +26,7 @@ enum RepoMapper {
                         )
             return Repository(id: id, name: name, repoDescription: description,
                               isPrivate: isPrivate, owner: repoOwner,
-                              createdAt: createdAt, updatedAt: updateAt, language: language)
+                              createdAt: createdAt, updatedAt: updateAt, language: language, priority: .low)
         }
     }
 

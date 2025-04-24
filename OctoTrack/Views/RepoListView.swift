@@ -22,7 +22,7 @@ struct RepoListView: View {
                                   color: .black)
                 .padding(.horizontal, 30)
             }
-            List {
+            ScrollView {
                 ForEach(viewModel.repositories) { repository in
                     RepoRow(repository: repository)
                         .swipeActions(edge: .trailing) {
@@ -38,8 +38,10 @@ struct RepoListView: View {
     }
 }
 
-//#Preview {
-//    let viewModel = PreviewContainer.previewAppViewModel
-//    RepoListView(appViewModel: viewModel)
-//        .previewWithContainer()
-//}
+#Preview {
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Repository.self, configurations: config)
+    let mockDataManager = UserDataManager(modelContext: ModelContext(container))
+    RepoListView(viewModel: RepoListViewModel(dataManager: mockDataManager))
+        .previewWithContainer()
+}

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// Manage display of textfields dependding on their type
+// Manage display of textfields depending on their type
 struct CustomTextField: View {
     var header: String?
     let color: Color

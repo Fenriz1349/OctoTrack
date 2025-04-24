@@ -17,4 +17,8 @@ enum IconsName: String {
     case lockClose = "lock.fill"
     case lockOpen = "lock.open.fill"
     case link = "link.circle.fill"
+    case flame = "flame.fill"
+    case bolt = "bolt.circle.fill"
+    case leaf = "leaf.fill"
+    case chevron = "chevron.forward"
 }

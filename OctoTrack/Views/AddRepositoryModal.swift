@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct AddRepositoryModal: View {
     @State private var viewModel: AddRepoViewModel
@@ -36,7 +37,7 @@ struct AddRepositoryModal: View {
                 text: $viewModel.repoName,
                 type: .alphaNumber
             )
-
+            PriorityButtonsStack(selectedPriority: $viewModel.priority)
             if viewModel.isLoading {
                 ProgressView()
                     .padding()
@@ -46,6 +47,7 @@ struct AddRepositoryModal: View {
                         let getRepo = await viewModel.getRepo()
                         switch getRepo {
                         case .success(let repo):
+                            repo.priority = viewModel.priority
                             viewModel.dataManager.storeNewRepo(repo)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                                 viewModel.resetFeedback()
@@ -75,11 +77,14 @@ struct AddRepositoryModal: View {
             Spacer()
         }
         .padding()
-        .frame(maxWidth: 400)
     }
 }
 
-//#Preview {
-//    AddRepositoryModal(appViewModel: viewModel)
-//        .previewWithContainer()
-//}
+#Preview {
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Repository.self, configurations: config)
+    let mockDataManager = UserDataManager(modelContext: ModelContext(container))
+    
+    return AddRepositoryModal(dataManager: mockDataManager)
+        .previewWithContainer()
+}

@@ -133,7 +133,8 @@ final class UserDataManager {
                     owner: owner,
                     createdAt: repo.createdAt,
                     updatedAt: repo.updatedAt,
-                    language: repo.language
+                    language: repo.language,
+                    priority: repo.priority
                 )
 
                 modelContext.insert(newRepo)

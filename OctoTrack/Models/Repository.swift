@@ -15,12 +15,14 @@ import SwiftData
     var createdAt: Date
     var updatedAt: Date?
     var language: String?
+    var priority: RepoPriority
 
     @Relationship(deleteRule: .nullify) var owner: Owner
     @Relationship(deleteRule: .cascade) var pullRequests: [PullRequest] = []
 
     init(id: Int, name: String, repoDescription: String? = nil, isPrivate: Bool,
-         owner: Owner, createdAt: Date, updatedAt: Date? = nil, language: String? = nil) {
+         owner: Owner, createdAt: Date, updatedAt: Date? = nil, language: String? = nil,
+         priority: RepoPriority) {
         self.id = id
         self.name = name
         self.repoDescription = repoDescription
@@ -29,5 +31,6 @@ import SwiftData
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.language = language
+        self.priority = priority
     }
 }
