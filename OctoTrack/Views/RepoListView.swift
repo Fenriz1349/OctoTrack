@@ -24,7 +24,10 @@ struct RepoListView: View {
             }
             ScrollView {
                 ForEach(viewModel.repositories) { repository in
+                    NavigationLink(destination: RepoDetailView(repository: repository,
+                                                               dataManager: viewModel.dataManager)) {
                     RepoRow(repository: repository)
+                }
                         .swipeActions(edge: .trailing) {
                             Button(role: .destructive) {
                                 viewModel.deleteRepository(repository)
@@ -39,9 +42,13 @@ struct RepoListView: View {
 }
 
 #Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: Repository.self, configurations: config)
-    let mockDataManager = UserDataManager(modelContext: ModelContext(container))
-    RepoListView(viewModel: RepoListViewModel(dataManager: mockDataManager))
-        .previewWithContainer()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Repository.self, configurations: config)
+        let mockDataManager = UserDataManager(modelContext: ModelContext(container))
+        return RepoListView(viewModel: RepoListViewModel(dataManager: mockDataManager))
+            .previewWithContainer()
+    } catch {
+        return Text("Erreur: \(error.localizedDescription)")
+    }
 }

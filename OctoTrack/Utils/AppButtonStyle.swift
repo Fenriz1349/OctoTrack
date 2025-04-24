@@ -10,7 +10,7 @@ import SwiftUI
 struct AppButtonStyle: ViewModifier {
     var color: Color
     var isSelected: Bool = true
-    
+
     func body(content: Content) -> some View {
         content
             .fontWeight(.bold)

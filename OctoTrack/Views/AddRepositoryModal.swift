@@ -15,7 +15,7 @@ struct AddRepositoryModal: View {
     init(dataManager: UserDataManager) {
            self._viewModel = State(initialValue: AddRepoViewModel(dataManager: dataManager))
        }
-    
+
     var body: some View {
         VStack(spacing: 20) {
             Text("repoAdd".localized)
@@ -81,10 +81,14 @@ struct AddRepositoryModal: View {
 }
 
 #Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: Repository.self, configurations: config)
-    let mockDataManager = UserDataManager(modelContext: ModelContext(container))
-    
-    return AddRepositoryModal(dataManager: mockDataManager)
-        .previewWithContainer()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Repository.self, configurations: config)
+        let mockDataManager = UserDataManager(modelContext: ModelContext(container))
+
+        return AddRepositoryModal(dataManager: mockDataManager)
+            .previewWithContainer()
+    } catch {
+        return Text("Erreur: \(error.localizedDescription)")
+    }
 }

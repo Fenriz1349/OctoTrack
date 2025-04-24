@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PriorityButtonsStack: View {
     @Binding var selectedPriority: RepoPriority
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("priority".localized)
@@ -18,23 +18,23 @@ struct PriorityButtonsStack: View {
             HStack {
                 ForEach(RepoPriority.allCases, id: \.rawValue) { priority in
                     Button(action: {
-                        withAnimation(.easeInOut(duration: 0.2)) {
-                            selectedPriority = priority
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                selectedPriority = priority
+                            }
+                        }, label: {
+                            CustomButtonLabel(
+                                icon: priority.icon,
+                                message: priority.name,
+                                color: priority.color,
+                                isSelected: selectedPriority == priority
+                            )
                         }
-                    }) {
-                        CustomButtonLabel(
-                            icon: priority.icon,
-                            message: priority.name,
-                            color: priority.color,
-                            isSelected: selectedPriority == priority 
-                        )
-                    }
+                    )
                 }
             }
             .background(Color.gray.opacity(0.2))
             .cornerRadius(8)
         }
-        
     }
 }
 

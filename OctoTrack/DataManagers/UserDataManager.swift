@@ -33,7 +33,7 @@ final class UserDataManager {
             return []
         }
     }
-    
+
     /// Deactivate all users except the one in parameter
     /// - Parameter user: the user to set as currentUser
     func activateUser(_ user: User) {
@@ -42,7 +42,7 @@ final class UserDataManager {
         user.lastUpdate = Date()
         try? modelContext.save()
     }
-    
+
     func deactivateAllUsers() {
         allUsers.forEach { $0.isActiveUser = false }
         do {
@@ -51,7 +51,7 @@ final class UserDataManager {
             return
         }
     }
-    
+
     /// Create or update the currentUser
     /// - Parameter user: the user create when login
     func saveUser(_ user: User) {
@@ -67,7 +67,7 @@ final class UserDataManager {
         }
         activateUser(user)
     }
-    
+
     func getActiveUserRepositories() -> [Repository] {
         guard let activeUser = activeUser else { return [] }
         return activeUser.repoList
@@ -75,14 +75,13 @@ final class UserDataManager {
 
     /// Use to always clear all users stored when logout so we always have only one user
     func clearUser(id: Int) {
-        
         let predicate = #Predicate<User> {$0.id == id}
         if let user = try? modelContext.fetch(FetchDescriptor<User>(predicate: predicate)).first {
             modelContext.delete(user)
             try? modelContext.save()
         }
     }
-    
+
     private func findOwner(id: Int) -> Owner? {
         do {
             let predicate = #Predicate<Owner> { owner in owner.id == id }
@@ -92,20 +91,20 @@ final class UserDataManager {
             return nil
         }
     }
-    
+
     private func createOwner(id: Int, login: String, avatarURL: String) -> Owner? {
         guard id != 0 && !login.isEmpty && !avatarURL.isEmpty else {
             return nil
         }
-        
+
         let newOwner = Owner(id: id, login: login, avatarURL: avatarURL)
         modelContext.insert(newOwner)
         return newOwner
     }
-    
+
     func storeNewRepo(_ repo: Repository) {
         guard let currentUser = activeUser else { return }
-    
+
         do {
             let owner: Owner
             if let existingOwner = findOwner(id: repo.owner.id) {
@@ -166,6 +165,34 @@ final class UserDataManager {
             }
         } catch {
             print("❌ Erreur lors de la suppression du repo: \(error)")
+        }
+    }
+
+    func resetAllRepositories() {
+        guard let currentUser = activeUser else { return }
+        do {
+            let reposToDelete = currentUser.repoList
+            currentUser.repoList.removeAll()
+            for repo in reposToDelete {
+                modelContext.delete(repo)
+            }
+            try modelContext.save()
+        } catch {
+            print("erreur lors du reset")
+        }
+    }
+
+    func storePullRequest(_ pullRequests: [PullRequest], repositoryiD: Int) {
+        guard let currentUser = activeUser else { return }
+        do {
+            if let index = currentUser.repoList.firstIndex(where: { $0.id == repositoryiD }) {
+                let repoToUpdate = currentUser.repoList[index]
+                repoToUpdate.pullRequests = pullRequests
+                try modelContext.save()
+                print("liste des PullRequests sauvegardé")
+            }
+        } catch {
+            print("Erreur dans la sauvegarde des PulleEquests")
         }
     }
 }

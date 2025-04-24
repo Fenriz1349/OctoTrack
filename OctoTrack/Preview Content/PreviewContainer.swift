@@ -37,12 +37,12 @@ struct PreviewContainer {
         let dataManager = UserDataManager(modelContext: container.mainContext)
 
         let viewModel = AppViewModel(dataManager: dataManager)
-        
+
         viewModel.isLogged = true
         viewModel.isInitializing = false
-        
+
         let user = populateContainer(container).user
-        
+
         return viewModel
     }()
 
@@ -65,9 +65,9 @@ struct PreviewContainer {
         for repo in repositories {
             context.insert(repo)
             let pullRequests = PreviewPullRequests.getPR(for: repo)
-            for pr in pullRequests {
-                context.insert(pr)
-                repo.pullRequests.append(pr)
+            for pullRequest in pullRequests {
+                context.insert(pullRequest)
+                repo.pullRequests.append(pullRequest)
             }
         }
 

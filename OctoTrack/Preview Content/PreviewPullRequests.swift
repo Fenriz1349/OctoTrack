@@ -77,7 +77,7 @@ enum PreviewPullRequests {
             isDraft: false
         )
     ]
-    
+
     // Pull requests pour iOS-Architecture (id: 1)
     static let architecturePRs: [PullRequest] = [
         PullRequest(
@@ -123,134 +123,12 @@ enum PreviewPullRequests {
             closedAt: Date().addingTimeInterval(-2300000),
             mergedAt: Date().addingTimeInterval(-2300000),
             isDraft: false
-        ),
-        PullRequest(
-            id: 20005,
-            number: 5,
-            state: "open",
-            title: "Ajout d'un exemple avec The Composable Architecture",
-            createdAt: Date().addingTimeInterval(-1000000),
-            updateAt: Date().addingTimeInterval(-500000),
-            closedAt: nil,
-            mergedAt: nil,
-            isDraft: false
-        ),
-        PullRequest(
-            id: 20006,
-            number: 6,
-            state: "open",
-            title: "Patterns de navigation dans SwiftUI",
-            createdAt: Date().addingTimeInterval(-400000),
-            updateAt: nil,
-            closedAt: nil,
-            mergedAt: nil,
-            isDraft: true
-        ),
-        PullRequest(
-            id: 20007,
-            number: 7,
-            state: "open",
-            title: "Mise à jour des exemples pour iOS 17+",
-            createdAt: Date().addingTimeInterval(-200000),
-            updateAt: nil,
-            closedAt: nil,
-            mergedAt: nil,
-            isDraft: true
         )
     ]
-    
+
     // Pull requests pour NetworkLayer (id: 2)
-    static let networkLayerPRs: [PullRequest] = [
-        PullRequest(
-            id: 30001,
-            number: 1,
-            state: "closed",
-            title: "Architecture de base de la couche réseau",
-            createdAt: Date().addingTimeInterval(-10000000),
-            updateAt: Date().addingTimeInterval(-9950000),
-            closedAt: Date().addingTimeInterval(-9900000),
-            mergedAt: Date().addingTimeInterval(-9900000),
-            isDraft: false
-        ),
-        PullRequest(
-            id: 30002,
-            number: 2,
-            state: "closed",
-            title: "Implémentation de la gestion d'erreurs",
-            createdAt: Date().addingTimeInterval(-9500000),
-            updateAt: Date().addingTimeInterval(-9400000),
-            closedAt: Date().addingTimeInterval(-9300000),
-            mergedAt: Date().addingTimeInterval(-9300000),
-            isDraft: false
-        ),
-        PullRequest(
-            id: 30003,
-            number: 3,
-            state: "closed",
-            title: "Intégration du cache et de la persistance",
-            createdAt: Date().addingTimeInterval(-8000000),
-            updateAt: Date().addingTimeInterval(-7900000),
-            closedAt: Date().addingTimeInterval(-7800000),
-            mergedAt: Date().addingTimeInterval(-7800000),
-            isDraft: false
-        ),
-        PullRequest(
-            id: 30004,
-            number: 4,
-            state: "closed",
-            title: "Support des opérations en arrière-plan",
-            createdAt: Date().addingTimeInterval(-7000000),
-            updateAt: Date().addingTimeInterval(-6900000),
-            closedAt: Date().addingTimeInterval(-6800000),
-            mergedAt: Date().addingTimeInterval(-6800000),
-            isDraft: false
-        ),
-        PullRequest(
-            id: 30005,
-            number: 5,
-            state: "closed",
-            title: "Intégration avec Combine",
-            createdAt: Date().addingTimeInterval(-5000000),
-            updateAt: Date().addingTimeInterval(-4900000),
-            closedAt: Date().addingTimeInterval(-4800000),
-            mergedAt: Date().addingTimeInterval(-4800000),
-            isDraft: false
-        ),
-        PullRequest(
-            id: 30006,
-            number: 6,
-            state: "closed",
-            title: "Compatibilité avec Swift Concurrency",
-            createdAt: Date().addingTimeInterval(-3000000),
-            updateAt: Date().addingTimeInterval(-2900000),
-            closedAt: Date().addingTimeInterval(-2800000),
-            mergedAt: Date().addingTimeInterval(-2800000),
-            isDraft: false
-        ),
-        PullRequest(
-            id: 30007,
-            number: 7,
-            state: "open",
-            title: "Optimisation des performances",
-            createdAt: Date().addingTimeInterval(-1500000),
-            updateAt: Date().addingTimeInterval(-1000000),
-            closedAt: nil,
-            mergedAt: nil,
-            isDraft: false
-        ),
-        PullRequest(
-            id: 30008,
-            number: 8,
-            state: "open",
-            title: "Support pour les tests unitaires et d'intégration",
-            createdAt: Date().addingTimeInterval(-800000),
-            updateAt: nil,
-            closedAt: nil,
-            mergedAt: nil,
-            isDraft: true
-        )
-    ]
-    
+    static let networkLayerPRs: [PullRequest] = []
+
     // Pull requests pour SwiftConcurrency (id: 3)
     static let concurrencyPRs: [PullRequest] = [
         PullRequest(
@@ -342,8 +220,8 @@ enum PreviewPullRequests {
             isDraft: true
         )
     ]
-    
-    // Helper pour obtenir les PRs pour un repository spécifique
+
+    // Helper to get pullrequests from a specific repository
     static func getPR(for repository: Repository) -> [PullRequest] {
         switch repository.id {
         case 0:

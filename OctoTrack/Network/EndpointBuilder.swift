@@ -12,7 +12,7 @@ import Foundation
 enum EndpointBuilder {
     case user(token: String)
     case repo(owner: String, repoName: String, token: String?)
-    case allPullRequests(owner: String, repoName: String, token: String?)
+    case allPullRequests(owner: String, repoName: String, token: String?, state: String = "all")
     case pullRequest(owner: String, repoName: String, number: Int, token: String?)
     case authorize(clientID: String, redirectURI: String, scopes: [String])
     case exchangeToken(code: String, clientID: String, clientSecret: String, redirectURI: String)
@@ -30,7 +30,7 @@ enum EndpointBuilder {
         switch self {
         case .user:  "/user"
         case .repo(let owner, let name, _): "/repos/\(owner)/\(name)"
-        case .allPullRequests(let owner, let repo, _): "/repos/\(owner)/\(repo)/pulls"
+        case .allPullRequests(let owner, let repo, _, _): "/repos/\(owner)/\(repo)/pulls"
         case .pullRequest(let owner, let repo, let number, _): "/repos/\(owner)/\(repo)/pulls/\(number)"
         case .authorize:  "/login/oauth/authorize"
         case .exchangeToken:  "/login/oauth/access_token"
@@ -52,7 +52,9 @@ enum EndpointBuilder {
                 URLQueryItem(name: "redirect_uri", value: redirectURI),
                 URLQueryItem(name: "scope", value: scopes.joined(separator: " "))
             ]
-        case .user, .repo, .exchangeToken, .allPullRequests, .pullRequest:
+        case .allPullRequests(_, _, _, let state):
+                    return [URLQueryItem(name: "state", value: state)]
+        case .user, .repo, .exchangeToken, .pullRequest:
             return nil
         }
     }
@@ -78,7 +80,7 @@ enum EndpointBuilder {
         case .user(let token):
             customHeaders["Accept"] = "application/vnd.github.v3+json"
             customHeaders["Authorization"] = "Bearer \(token)"
-        case .repo(_, _, let token), .allPullRequests(_, _, let token), .pullRequest(_, _, _, let token):
+        case .repo(_, _, let token), .allPullRequests(_, _, let token, _), .pullRequest(_, _, _, let token):
             customHeaders["Accept"] = "application/vnd.github.v3+json"
             if let token = token {
                 customHeaders["Authorization"] = "Bearer \(token)"

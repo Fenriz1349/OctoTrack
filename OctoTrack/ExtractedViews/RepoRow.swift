@@ -10,7 +10,6 @@ import SwiftUI
 struct RepoRow: View {
     let repository: Repository
     var body: some View {
-        NavigationLink(destination: RepoDetailView(repository: repository) ) {
             HStack(alignment: .center, spacing: 10) {
                 AsyncAvatarImage(avatarName: repository.owner.login,
                                  avatarUrl: repository.owner.avatarURL, size: 50)
@@ -24,7 +23,6 @@ struct RepoRow: View {
             .padding(.horizontal, 20)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-    }
 }
 
 #Preview {

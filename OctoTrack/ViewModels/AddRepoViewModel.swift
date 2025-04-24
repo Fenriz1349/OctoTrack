@@ -14,7 +14,7 @@ import SwiftData
     var repoName: String = "DA-iOS_P5"
     var priority: RepoPriority = .low
 
-    // Pour gérer le feedback dans la view
+    // To handle feedback on the view
     var showFeedback = false
     var feedbackMessage = ""
     var isSuccess = false

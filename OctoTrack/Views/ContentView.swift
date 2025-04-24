@@ -12,7 +12,7 @@ struct ContentView: View {
     @State var viewModel: AppViewModel
     @Environment(\.modelContext) private var modelContext
     @State private var  tab: Tab = .repoList
-    
+
     var body: some View {
         Group {
             if viewModel.isInitializing {
@@ -20,16 +20,16 @@ struct ContentView: View {
                     ProgressView()
                     Text("loading".localized).padding()
                 }
-                
+
                 .task {
                     viewModel.dataManager.modelContext = modelContext
                     await viewModel.initialize()
                 }
             } else if viewModel.isLogged {
                 TabView(selection: $tab) {
-                    RepoListView(viewModel: RepoListViewModel(dataManager: viewModel.dataManager))                        .tabItem { Tab.repoList.tabItem() }
+                    RepoListView(viewModel: RepoListViewModel(dataManager: viewModel.dataManager))
+                    .tabItem { Tab.repoList.tabItem() }
                         .tag(Tab.repoList)
-                    
                     AccountView(appViewModel: viewModel)
                         .tabItem { Tab.account.tabItem() }
                         .tag(Tab.account)

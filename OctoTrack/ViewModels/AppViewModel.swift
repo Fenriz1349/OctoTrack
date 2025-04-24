@@ -55,7 +55,6 @@ import SwiftData
             await loadUserData()
             if dataManager.activeUser != nil {
                 isLogged = true
-               
                 authenticationViewModel.startTokenValidation()
             } else {
                 isLogged = false
