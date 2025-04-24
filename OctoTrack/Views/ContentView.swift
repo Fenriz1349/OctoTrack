@@ -15,31 +15,27 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            if appViewModel.isInitializing {
+            if viewModel.isInitializing {
                 VStack {
                     ProgressView()
                     Text("loading".localized).padding()
                 }
-
+                
                 .task {
                     viewModel.dataManager.modelContext = modelContext
                     await viewModel.initialize()
                 }
             } else if viewModel.isLogged {
-                TabView(selection: $tab ){
-                    ForEach(Tab.allCases) { tabItem in
-                        switch tabItem {
-                        case .repoList:
-                            RepoListView(appViewModel: viewModel)
-                                .tabItem(for: tabItem)
-                        case .account:
-                            AccountView(appViewModel: viewModel)
-                                .tabItem(for: tabItem)
-                        }
-                    }
+                TabView(selection: $tab) {
+                    RepoListView(viewModel: RepoListViewModel(dataManager: viewModel.dataManager))                        .tabItem { Tab.repoList.tabItem() }
+                        .tag(Tab.repoList)
+                    
+                    AccountView(appViewModel: viewModel)
+                        .tabItem { Tab.account.tabItem() }
+                        .tag(Tab.account)
                 }
             } else {
-                AuthenticationView(viewModel: appViewModel.authenticationViewModel)
+                AuthenticationView(viewModel: viewModel.authenticationViewModel)
                     .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),
                                             removal: .move(edge: .top).combined(with: .opacity)))
             }

@@ -40,7 +40,7 @@ struct OctoTrackApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(appViewModel: appViewModel)
+            ContentView(viewModel: appViewModel)
                 .modelContainer(sharedModelContainer)
                 .onAppear {
                     Task {
