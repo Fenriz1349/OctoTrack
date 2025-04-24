@@ -65,6 +65,7 @@
 		686BFB8F2DA9378B00C859C3 /* RepoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686BFB8E2DA9378B00C859C3 /* RepoListViewModel.swift */; };
 		689B15DF2DBA30310075B3EC /* AppButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689B15DE2DBA30310075B3EC /* AppButtonStyle.swift */; };
 		689B15E12DBA6AEA0075B3EC /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689B15E02DBA6AEA0075B3EC /* Tab.swift */; };
+		689B15E32DBA6FC80075B3EC /* PullRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689B15E22DBA6FC80075B3EC /* PullRequestViewModel.swift */; };
 		68C02EC92D9FB2CD0065027F /* PullRequestEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02EC82D9FB2CD0065027F /* PullRequestEndpoint.swift */; };
 		68C02ECB2D9FB7800065027F /* PullRequestMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02ECA2D9FB7800065027F /* PullRequestMapper.swift */; };
 		68C02ECD2D9FBA360065027F /* PullRequestGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02ECC2D9FBA360065027F /* PullRequestGetter.swift */; };
@@ -148,6 +149,7 @@
 		686BFB8E2DA9378B00C859C3 /* RepoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListViewModel.swift; sourceTree = "<group>"; };
 		689B15DE2DBA30310075B3EC /* AppButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButtonStyle.swift; sourceTree = "<group>"; };
 		689B15E02DBA6AEA0075B3EC /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		689B15E22DBA6FC80075B3EC /* PullRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestViewModel.swift; sourceTree = "<group>"; };
 		68C02EC82D9FB2CD0065027F /* PullRequestEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestEndpoint.swift; sourceTree = "<group>"; };
 		68C02ECA2D9FB7800065027F /* PullRequestMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestMapper.swift; sourceTree = "<group>"; };
 		68C02ECC2D9FBA360065027F /* PullRequestGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestGetter.swift; sourceTree = "<group>"; };
@@ -274,7 +276,7 @@
 				684F7C352D8DAA1A0044367F /* AuthenticationRequest */,
 				684F7C3D2D8DAA1A0044367F /* UserRequest */,
 				684F7C392D8DAA1A0044367F /* RepoRequest */,
-				68C02EC72D9FB29A0065027F /* PRRequest */,
+				68C02EC72D9FB29A0065027F /* PullRequestRequest */,
 				684F7C3E2D8DAA1A0044367F /* EndpointBuilder.swift */,
 				684F7C3F2D8DAA1A0044367F /* URLSessionHTTPClient.swift */,
 			);
@@ -321,6 +323,7 @@
 				684F7C4E2D8DAA1A0044367F /* AsyncAvatarViewModel.swift */,
 				684F7C4F2D8DAA1A0044367F /* AuthenticationViewModel.swift */,
 				686BFB8E2DA9378B00C859C3 /* RepoListViewModel.swift */,
+				689B15E22DBA6FC80075B3EC /* PullRequestViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -387,14 +390,14 @@
 			path = OctoTrackTests;
 			sourceTree = "<group>";
 		};
-		68C02EC72D9FB29A0065027F /* PRRequest */ = {
+		68C02EC72D9FB29A0065027F /* PullRequestRequest */ = {
 			isa = PBXGroup;
 			children = (
 				68C02EC82D9FB2CD0065027F /* PullRequestEndpoint.swift */,
 				68C02ECA2D9FB7800065027F /* PullRequestMapper.swift */,
 				68C02ECC2D9FBA360065027F /* PullRequestGetter.swift */,
 			);
-			path = PRRequest;
+			path = PullRequestRequest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -527,6 +530,7 @@
 				68EDADE52DB28E0600B7995D /* RepoPriority.swift in Sources */,
 				684F7C742D8DAA1A0044367F /* RepoEndpoint.swift in Sources */,
 				684F7C752D8DAA1A0044367F /* RepoGetter.swift in Sources */,
+				689B15E32DBA6FC80075B3EC /* PullRequestViewModel.swift in Sources */,
 				684F7C762D8DAA1A0044367F /* RepoMapper.swift in Sources */,
 				684F7C772D8DAA1A0044367F /* UserEndpoint.swift in Sources */,
 				684F7C782D8DAA1A0044367F /* UserLoader.swift in Sources */,

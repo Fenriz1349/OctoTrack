@@ -10,19 +10,19 @@ import SwiftUI
 struct RepoHeader: View {
     var repository: Repository
     @Environment(\.colorScheme) private var colorScheme
-    
+
     private var openPRCount: Int {
         repository.pullRequests.filter { $0.state == "open" }.count
     }
-    
+
     private var closedPRCount: Int {
         repository.pullRequests.filter { $0.state == "closed" }.count
     }
-    
+
     private var totalPRCount: Int {
         repository.pullRequests.count
     }
-    
+
     var body: some View {
         VStack(spacing: 12) {
             HStack {
@@ -49,26 +49,25 @@ struct RepoHeader: View {
                         )
                 }
             }
-            
+
             HStack(spacing: 12) {
                 AsyncAvatarImage(avatarName: repository.owner.login, avatarUrl: repository.owner.avatarURL, size: 36)
                     .overlay(
                         Circle()
                             .stroke(Color.gray.opacity(0.3), lineWidth: 2)
                     )
-                
+
                 VStack(alignment: .leading, spacing: 2) {
                     Text("owner".localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    
                     Text(repository.owner.login)
                         .font(.subheadline)
                         .fontWeight(.medium)
                 }
-                
+
                 Spacer()
-                
+
                 Link(destination: URL(string: "https://github.com/\(repository.owner.login)/\(repository.name)")!) {
                     HStack(spacing: 4) {
                         Image(systemName: IconsName.link.rawValue)
@@ -81,42 +80,40 @@ struct RepoHeader: View {
                     .padding(.vertical, 4)
                 }
             }
-            
+
             Divider()
-            
+
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("total".localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    
                     Text(totalPRCount.description)
                         .font(.headline)
                         .fontWeight(.bold)
                 }
-                
+
                 Divider()
                     .frame(height: 24)
-                
+
                 VStack(alignment: .leading, spacing: 2) {
                     Text("open".localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    
+
                     Text(openPRCount.description)
                         .font(.headline)
                         .fontWeight(.bold)
                         .foregroundColor(.green)
                 }
-                
+
                 Divider()
                     .frame(height: 24)
-                
+
                 VStack(alignment: .leading, spacing: 2) {
                     Text("closed".localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    
                     Text(closedPRCount.description)
                         .font(.headline)
                         .fontWeight(.bold)
@@ -130,23 +127,22 @@ struct RepoHeader: View {
                         .foregroundColor(.secondary)
                 }
             }
-            
+
             Divider()
-            
+
             HStack(spacing: 16) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("createdAt".localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    
                     Text(repository.createdAt.formatted(date: .abbreviated, time: .omitted))
                         .font(.subheadline)
                 }
-                
+
                 if let updatedAt = repository.updatedAt {
                     Divider()
                         .frame(height: 24)
-                    
+
                     VStack(alignment: .trailing, spacing: 2) {
                         Text("lastUpdated".localized)
                             .font(.caption)
@@ -157,7 +153,6 @@ struct RepoHeader: View {
                     }
                 }
             }
-            
         }
         .padding(20)
         .frame(maxWidth: .infinity)

@@ -25,19 +25,7 @@ struct AccountView: View {
 
             VStack(spacing: 16) {
                 Button {
-                    Task {
-                        await appViewModel.initialize()
-                    }
-                } label: {
-                    CustomButtonLabel(
-                        icon: IconsName.refresh.rawValue,
-                        message: "refreshUserData".localized,
-                        color: Color.blue
-                    )
-                }
-
-                Button {
-                    
+                    appViewModel.dataManager.resetAllRepositories()
                 } label: {
                     CustomButtonLabel(
                         icon: IconsName.trash.rawValue,
