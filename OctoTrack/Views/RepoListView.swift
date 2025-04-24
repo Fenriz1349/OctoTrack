@@ -22,7 +22,7 @@ struct RepoListView: View {
                                   color: .black)
                 .padding(.horizontal, 30)
             }
-            ScrollView {
+            List {
                 ForEach(viewModel.repositories) { repository in
                     NavigationLink(destination: RepoDetailView(repository: repository,
                                                                dataManager: viewModel.dataManager)) {

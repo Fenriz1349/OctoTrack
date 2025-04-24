@@ -17,8 +17,6 @@ struct RepoRow: View {
                 Text(repository.name)
                 Text(repository.isPrivate ? "private".localized
                      : "public".localized)
-                Spacer()
-                Image(systemName: IconsName.chevron.rawValue)
             }
             .padding(.horizontal, 20)
             .frame(maxWidth: .infinity, alignment: .leading)
