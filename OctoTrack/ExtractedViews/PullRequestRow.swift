@@ -13,8 +13,8 @@ struct PullRequestRow: View {
         NavigationLink(destination: PRDetailView(pullRequest: pullRequest) ) {
             HStack {
                 Text(pullRequest.title)
-
                 Spacer()
+                LockLabel(isPrivate: pullRequest.state == "closed", isPrivateLabel: false)
             }
             .padding(.horizontal, 20)
         }

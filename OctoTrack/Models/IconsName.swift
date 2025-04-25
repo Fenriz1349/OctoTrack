@@ -23,4 +23,5 @@ enum IconsName: String {
     case chevron = "chevron.forward"
     case folder = "folder.fill"
     case person = "person.circle.fill"
+    case down = "chevron.down"
 }

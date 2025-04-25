@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AccountView: View {
     @State private var appViewModel: AppViewModel
+    @State private var showingResetAlert = false
 
     init(appViewModel: AppViewModel) {
         self._appViewModel = State(initialValue: appViewModel)
@@ -25,20 +26,27 @@ struct AccountView: View {
 
             VStack(spacing: 16) {
                 Button {
-                    appViewModel.dataManager.resetAllRepositories()
+                    showingResetAlert = true
                 } label: {
                     CustomButtonLabel(
-                        icon: IconsName.trash.rawValue,
+                        iconLeading: IconsName.trash.rawValue,
                         message: "resetRepositoryList".localized,
                         color: Color.orange
                     )
                 }
-
+                .alert("confirmation".localized, isPresented: $showingResetAlert) {
+                    Button("cancel".localized, role: .cancel) { }
+                    Button("reset".localized, role: .destructive) {
+                        appViewModel.dataManager.resetAllRepositories()
+                    }
+                } message: {
+                    Text("resetAlert".localized)
+                }
                 Button {
                     appViewModel.authenticationViewModel.signOut()
                 } label: {
                     CustomButtonLabel(
-                        icon: IconsName.signOut.rawValue,
+                        iconLeading: IconsName.signOut.rawValue,
                         message: "signOut".localized,
                         color: Color.red
                     )

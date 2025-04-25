@@ -60,7 +60,7 @@ struct AddRepositoryModal: View {
                 },
                 label: {
                     CustomButtonLabel(
-                        icon: IconsName.plus.rawValue,
+                        iconLeading: IconsName.plus.rawValue,
                         message: "repoAdd".localized,
                         color: .green
                         )

@@ -19,23 +19,23 @@ struct RepoDetailView: View {
     var body: some View {
         VStack(spacing: 20) {
             RepoHeader(repository: viewModel.repository)
-            Button {
-                Task {
-                    await viewModel.updatePullRequests()
-                }
-            } label: {
-                CustomButtonLabel(icon: IconsName.refresh.rawValue,
-                                  message: "refresh.PR".localized,
-                                  color: .blue)
+            HStack(spacing: 20) {
+                CustomButtonLabel(iconLeading: viewModel.repository.priority.icon,
+                                  iconTrailing: IconsName.down.rawValue,
+                                  message: viewModel.repository.priority.name,
+                                  color: viewModel.repository.priority.color)
             }
+
             if viewModel.repository.pullRequests.isEmpty {
                 Text("noPR".localized)
                 Spacer()
-            } else {
+            }
                 List(viewModel.repository.pullRequests) { pullRequest in
                     PullRequestRow(pullRequest: pullRequest)
                 }
-            }
+                .refreshable {
+                    await viewModel.updatePullRequests()
+                }
         }
         .padding(.horizontal, 20)
     }
