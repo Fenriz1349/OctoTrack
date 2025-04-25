@@ -23,7 +23,7 @@ struct PriorityButtonsStack: View {
                             }
                         }, label: {
                             CustomButtonLabel(
-                                icon: priority.icon,
+                                iconLeading: priority.icon,
                                 message: priority.name,
                                 color: priority.color,
                                 isSelected: selectedPriority == priority

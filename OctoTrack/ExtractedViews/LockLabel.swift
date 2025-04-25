@@ -8,11 +8,30 @@
 import SwiftUI
 
 struct LockLabel: View {
+    let isPrivate: Bool
+    var withText: Bool = true
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack(spacing: 4) {
+            Image(systemName: (isPrivate ?
+                               IconsName.lockClose : IconsName.lockOpen).rawValue)
+            .foregroundColor(.secondary)
+            if withText {
+                Text(isPrivate ?
+                     "private".localized : "public".localized)
+                .font(.caption)
+                .fontWeight(.medium)
+                .foregroundColor(.secondary)
+            }
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(
+            Capsule()
+                .fill(isPrivate ? Color(UIColor.systemGray5) : Color(UIColor.green))
+        )
     }
 }
 
 #Preview {
-    LockLabel()
+    LockLabel(isPrivate: false, withText: false)
 }

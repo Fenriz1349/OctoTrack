@@ -125,6 +125,10 @@ struct PreviewContainer {
         )
     ]
 
+    static var previewRepository :Repository {
+        repositories.first!
+    }
+
     @MainActor static func getRepository(at index: Int = 0) -> Repository? {
         do {
             let repos = try container.mainContext.fetch(FetchDescriptor<Repository>())

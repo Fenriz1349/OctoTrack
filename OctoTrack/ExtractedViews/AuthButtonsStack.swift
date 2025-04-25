@@ -34,7 +34,7 @@ struct AuthButtonsStack: View {
             }
         },
         label: {
-            CustomButtonLabel(icon: icon, message: buttonLabel, color: .blue)
+            CustomButtonLabel(iconLeading: icon, message: buttonLabel, color: .blue)
             }
         )
         if status == .expired || status == .authenticated {
@@ -44,7 +44,7 @@ struct AuthButtonsStack: View {
                 }
             },
             label: {
-                CustomButtonLabel(icon: IconsName.signOut.rawValue, message: "signOut".localized, color: .red)
+                CustomButtonLabel(iconLeading: IconsName.signOut.rawValue, message: "signOut".localized, color: .red)
                 }
             )
         }

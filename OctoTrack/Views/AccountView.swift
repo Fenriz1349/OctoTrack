@@ -28,7 +28,7 @@ struct AccountView: View {
                     appViewModel.dataManager.resetAllRepositories()
                 } label: {
                     CustomButtonLabel(
-                        icon: IconsName.trash.rawValue,
+                        iconLeading: IconsName.trash.rawValue,
                         message: "resetRepositoryList".localized,
                         color: Color.orange
                     )
@@ -38,7 +38,7 @@ struct AccountView: View {
                     appViewModel.authenticationViewModel.signOut()
                 } label: {
                     CustomButtonLabel(
-                        icon: IconsName.signOut.rawValue,
+                        iconLeading: IconsName.signOut.rawValue,
                         message: "signOut".localized,
                         color: Color.red
                     )

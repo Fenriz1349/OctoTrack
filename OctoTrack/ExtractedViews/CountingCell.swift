@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct CountingCell: View {
+    let text: String
+    let count: Int
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading, spacing: 2) {
+            Text(text.localized)
+                .font(.caption)
+                .foregroundColor(.secondary)
+            Text(count.description)
+                .font(.headline)
+                .fontWeight(.bold)
+        }
     }
 }
 
 #Preview {
-    CountingCell()
+    CountingCell(text: "total".localized, count: 5)
 }

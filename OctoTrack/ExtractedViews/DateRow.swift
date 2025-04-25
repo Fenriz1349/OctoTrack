@@ -8,11 +8,35 @@
 import SwiftUI
 
 struct DateRow: View {
+    let creationDate: Date
+    let updateDate: Date?
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack(spacing: 16) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("createdAt".localized)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Text(creationDate.formatted(date: .abbreviated, time: .omitted))
+                    .font(.subheadline)
+            }
+
+            if let updatedAt = updateDate {
+                Divider()
+                    .frame(height: 24)
+
+                VStack(alignment: .trailing, spacing: 2) {
+                    Text("lastUpdated".localized)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+
+                    Text(updatedAt.formatted(date: .abbreviated, time: .omitted))
+                        .font(.subheadline)
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    DateRow()
+    DateRow(creationDate: Date(), updateDate: Date())
 }
