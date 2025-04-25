@@ -18,7 +18,7 @@ struct AccountView: View {
     var body: some View {
         VStack(spacing: 24) {
             if let user = appViewModel.userApp {
-                UserHeader(user: user, repositories: appViewModel.dataManager.getActiveUserRepositories())
+                UserHeader(user: user)
             } else {
                 Text("userDataNotAvailable".localized)
                     .foregroundColor(.secondary)

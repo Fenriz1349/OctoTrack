@@ -25,6 +25,10 @@ import SwiftUI
             self.dataManager = dataManager
         }
 
+    func updateRepositoryPriority(_ priority: RepoPriority) {
+        dataManager.updateRepositoryPriority(repoId: repository.id, priority: priority)
+    }
+
     private func getAllPullRequests(state: String = "all") async -> Result<[PullRequest], Error> {
         isLoading = true
         do {
@@ -46,8 +50,9 @@ import SwiftUI
     func updatePullRequests() async {
         let getPullRequests = await getAllPullRequests()
         switch getPullRequests {
-        case .success(let pullRequests):
-            dataManager.storePullRequest(pullRequests, repositoryiD: repository.id)
+        case .success(var pullRequests):
+            pullRequests.sort { $0.createdAt < $1.createdAt }
+            dataManager.storePullRequests(pullRequests, repositoryiD: repository.id)
         case .failure:
             break
         }

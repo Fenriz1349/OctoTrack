@@ -14,7 +14,7 @@ struct RepoListView: View {
     var body: some View {
         NavigationStack {
             if let user = viewModel.activeUser {
-                UserHeader(user: user, repositories: viewModel.repositories)
+                UserHeader(user: user)
             }
             NavigationLink(destination: AddRepositoryModal(dataManager: viewModel.dataManager)) {
                 CustomButtonLabel(iconLeading: IconsName.plus.rawValue,
@@ -23,7 +23,7 @@ struct RepoListView: View {
                 .padding(.horizontal, 30)
             }
             List {
-                ForEach(viewModel.repositories) { repository in
+                ForEach(viewModel.activeUser?.repoList ?? []) { repository in
                     NavigationLink(destination: RepoDetailView(repository: repository,
                                                                dataManager: viewModel.dataManager)) {
                         RepoRow(repository: repository)
@@ -37,6 +37,9 @@ struct RepoListView: View {
                        }
                    }
                 }
+            }
+            .refreshable {
+                viewModel.orderRepositories()
             }
         }
     }

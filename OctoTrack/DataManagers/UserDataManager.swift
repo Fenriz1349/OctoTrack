@@ -18,15 +18,15 @@ final class UserDataManager {
     // MARK: - User Methods
 
     var activeUser: User? {
-           do {
-               let predicate = #Predicate<User> { $0.isActiveUser }
-               let descriptor = FetchDescriptor<User>(predicate: predicate)
-               return try modelContext.fetch(descriptor).first
-           } catch {
-               print("Erreur lors de la récupération de l'utilisateur: \(error)")
-               return nil
-           }
-       }
+        do {
+            let predicate = #Predicate<User> { $0.isActiveUser }
+            let descriptor = FetchDescriptor<User>(predicate: predicate)
+            return try modelContext.fetch(descriptor).first
+        } catch {
+            print("Erreur lors de la récupération de l'utilisateur: \(error)")
+            return nil
+        }
+    }
 
     var allUsers: [User] {
         do {
@@ -68,11 +68,6 @@ final class UserDataManager {
             modelContext.insert(user)
         }
         activateUser(user)
-    }
-
-    func getActiveUserRepositories() -> [Repository] {
-        guard let activeUser = activeUser else { return [] }
-        return activeUser.repoList
     }
 
     /// Use to always clear all users stored when logout so we always have only one user
@@ -173,6 +168,21 @@ final class UserDataManager {
         }
     }
 
+    func orderRepositories() {
+        guard let currentUser = activeUser else { return }
+        do {
+            currentUser.repoList.sort { repo1, repo2 in
+                let date1 = repo1.updatedAt ?? repo1.createdAt
+                let date2 = repo2.updatedAt ?? repo2.createdAt
+                return date1 < date2
+            }
+            try modelContext.save()
+            print("✅ Repositories triés avec succès")
+        } catch {
+            print("❌ Erreur lors du tri des repositories: \(error)")
+        }
+    }
+
     func resetAllRepositories() {
         guard let currentUser = activeUser else { return }
         do {
@@ -187,9 +197,24 @@ final class UserDataManager {
         }
     }
 
+    func updateRepositoryPriority(repoId: Int, priority: RepoPriority) {
+        guard let currentUser = activeUser else { return }
+        do {
+            if let repoToUpdate = currentUser.repoList.first(where: { $0.id == repoId }) {
+                repoToUpdate.priority = priority
+                try modelContext.save()
+                print("✅ Repo mis à jour avec succès")
+            } else {
+                print("⚠️ Repo non trouvé pour la mise à jour")
+            }
+        } catch {
+            print("❌ Erreur lors de la mise à jour du repo: \(error)")
+        }
+    }
+
     // MARK: - Pull Request Methods
 
-    func storePullRequest(_ pullRequests: [PullRequest], repositoryiD: Int) {
+    func storePullRequests(_ pullRequests: [PullRequest], repositoryiD: Int) {
         guard let currentUser = activeUser else { return }
         do {
             if let index = currentUser.repoList.firstIndex(where: { $0.id == repositoryiD }) {

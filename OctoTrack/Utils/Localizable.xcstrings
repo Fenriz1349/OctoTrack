@@ -205,9 +205,6 @@
         }
       }
     },
-    "Erreur: %@" : {
-
-    },
     "failCantAdd" : {
       "extractionState" : "manual",
       "localizations" : {
