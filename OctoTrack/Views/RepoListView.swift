@@ -9,48 +9,50 @@ import SwiftUI
 import SwiftData
 
 struct RepoListView: View {
-    @Environment(\.modelContext) private var modelContext
-    @State var appViewModel: AppViewModel
-    @Query private var reposirories: [Repository]
-    var repositories: [Repository]? {
-        appViewModel.userApp?.repoList
-    }
+    @State var viewModel: RepoListViewModel
 
     var body: some View {
         NavigationStack {
-            if let user = appViewModel.userApp {
+            if let user = viewModel.activeUser {
                 UserHeader(user: user)
             }
-            NavigationLink(destination: AddRepositoryModal(appViewModel: appViewModel)) {
-                CustomButtonLabel(icon: IconsName.plus.rawValue,
+            NavigationLink(destination: AddRepositoryModal(dataManager: viewModel.dataManager)) {
+                CustomButtonLabel(iconLeading: IconsName.plus.rawValue,
                                   message: "repoAdd".localized,
                                   color: .black)
-                    .padding(.horizontal, 30)
+                .padding(.horizontal, 30)
             }
-            ScrollView {
-                ForEach(repositories ?? []) { repository in
-                    RepoRow(repository: repository)
+            List {
+                ForEach(viewModel.activeUser?.repoList ?? []) { repository in
+                    NavigationLink(destination: RepoDetailView(repository: repository,
+                                                               dataManager: viewModel.dataManager)) {
+                        RepoRow(repository: repository)
+                    }
+                    .listRowInsets(EdgeInsets())
+                    .swipeActions(edge: .trailing) {
+                       Button(role: .destructive) {
+                           viewModel.deleteRepository(repository)
+                       } label: {
+                           CustomButtonIcon(icon: "trash", color: .red)
+                       }
+                   }
                 }
-                .onDelete(perform: deleteItems)
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(reposirories[index])
+            .refreshable {
+                viewModel.orderRepositories()
             }
         }
     }
 }
 
 #Preview {
-    RepoListView(appViewModel: AppViewModel())
-        .modelContainer(for: Repository.self, inMemory: true)
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Repository.self, configurations: config)
+        let mockDataManager = UserDataManager(modelContext: ModelContext(container))
+        return RepoListView(viewModel: RepoListViewModel(dataManager: mockDataManager))
+            .previewWithContainer()
+    } catch {
+        return Text("Erreur: \(error.localizedDescription)")
+    }
 }

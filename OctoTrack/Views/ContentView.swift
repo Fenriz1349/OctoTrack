@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     @State var viewModel: AppViewModel
     @Environment(\.modelContext) private var modelContext
+    @State private var  tab: Tab = .repoList
+
     var body: some View {
         Group {
             if viewModel.isInitializing {
@@ -17,22 +20,19 @@ struct ContentView: View {
                     ProgressView()
                     Text("loading".localized).padding()
                 }
+
                 .task {
                     viewModel.dataManager.modelContext = modelContext
                     await viewModel.initialize()
                 }
             } else if viewModel.isLogged {
-                TabView {
-                    RepoListView(appViewModel: viewModel)
-                        .tabItem {
-                            Image(systemName: "folder.fill")
-                            Text("repoList".localized)
-                        }
+                TabView(selection: $tab) {
+                    RepoListView(viewModel: RepoListViewModel(dataManager: viewModel.dataManager))
+                    .tabItem { Tab.repoList.tabItem() }
+                        .tag(Tab.repoList)
                     AccountView(appViewModel: viewModel)
-                        .tabItem {
-                            Image(systemName: "person.circle.fill")
-                            Text("account".localized)
-                        }
+                        .tabItem { Tab.account.tabItem() }
+                        .tag(Tab.account)
                 }
             } else {
                 AuthenticationView(viewModel: viewModel.authenticationViewModel)
@@ -40,12 +40,11 @@ struct ContentView: View {
                                             removal: .move(edge: .top).combined(with: .opacity)))
             }
         }
-        .onAppear {
-            viewModel.dataManager.setModelContext(modelContext)
-        }
     }
 }
 
 #Preview {
-    ContentView(viewModel: AppViewModel())
+    let viewModel = PreviewContainer.previewAppViewModel
+    ContentView(viewModel: viewModel)
+        .previewWithContainer()
 }

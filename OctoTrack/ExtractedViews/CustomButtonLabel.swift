@@ -8,25 +8,40 @@
 import SwiftUI
 
 struct CustomButtonLabel: View {
-    let icon: String?
+    let iconLeading: String?
+    let iconTrailing: String?
     let message: String
     let color: Color
+    let isSelected: Bool
+
+    init(iconLeading: String? = nil, iconTrailing: String? = nil,
+         message: String, color: Color, isSelected: Bool = true) {
+        self.iconLeading = iconLeading
+        self.iconTrailing  = iconTrailing
+        self.message = message
+        self.color = color
+        self.isSelected = isSelected
+    }
+
     var body: some View {
         HStack {
-            if let icon = icon { Image(systemName: icon) }
+            if iconTrailing != nil {
+                Spacer()
+            }
+            if let iconLeading = iconLeading { Image(systemName: iconLeading) }
             Text(message)
+            if let iconTrailing = iconTrailing {
+                Spacer()
+                Image(systemName: iconTrailing)
+                    .padding(.trailing, 20)
+            }
         }
-        .fontWeight(.bold)
-        .frame(maxWidth: .infinity)
-        .padding()
-        .background(color)
-        .foregroundColor(.white)
-        .cornerRadius(16)
-        .shadow(color: .black.opacity(0.4), radius: 6, x: -4, y: -4)
-        .shadow(color: .black.opacity(0.2), radius: 6, x: 4, y: 4)
+        .appButtonStyle(color: color, isSelected: isSelected)
     }
 }
 
 #Preview {
-    CustomButtonLabel(icon: nil, message: "repoAdd".localized, color: .accentColor)
+    CustomButtonLabel(iconLeading: IconsName.plus.rawValue,
+                      iconTrailing: IconsName.down.rawValue,
+                      message: "repoAdd".localized, color: .accentColor)
 }

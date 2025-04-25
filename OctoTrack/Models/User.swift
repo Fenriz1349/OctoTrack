@@ -13,14 +13,16 @@ import SwiftData
     @Attribute(.unique) var login: String
     var isActiveUser: Bool = false
     var avatarURL: String
+    var lastUpdate: Date?
 
     @Relationship(deleteRule: .cascade) var repoList: [Repository] = []
 
-    init(id: Int, login: String, avatarURL: String, repoList: [Repository]) {
+    init(id: Int, login: String, avatarURL: String, repoList: [Repository], lastUpdate: Date? = nil) {
         self.id = id
         self.login = login
         self.avatarURL = avatarURL
         self.repoList = repoList
+        self.lastUpdate = lastUpdate
     }
 
     func toOwner() -> Owner {

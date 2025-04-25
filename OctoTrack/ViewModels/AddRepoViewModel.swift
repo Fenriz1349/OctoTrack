@@ -6,14 +6,15 @@
 //
 
 import Foundation
+import SwiftData
 
 @MainActor
 @Observable final class AddRepoViewModel {
-
     var owner: String = "Fenriz1349"
     var repoName: String = "DA-iOS_P5"
+    var priority: RepoPriority = .low
 
-    // Pour gérer le feedback dans la view
+    // To handle feedback on the view
     var showFeedback = false
     var feedbackMessage = ""
     var isSuccess = false
@@ -22,20 +23,20 @@ import Foundation
     var isFormValid: Bool {
             !owner.isEmpty && !repoName.isEmpty
         }
-
+    let dataManager: UserDataManager
     private let repoGetter: RepoGetter = RepoGetter()
     private let authenticator = GitHubAuthenticator()
 
+    init(dataManager: UserDataManager) {
+        self.dataManager = dataManager
+    }
+
     func getRepo() async -> Result<Repository, Error> {
         isLoading = true
-
         do {
             let token = try await authenticator.retrieveToken()
             let request = try RepoEndpoint.request(owner: owner, repoName: repoName, token: token)
             let repo = try await repoGetter.repoGetter(from: request)
-            isSuccess = true
-            feedbackMessage = repo.name
-            showFeedback = true
             isLoading = false
             return(.success(repo))
         } catch {
@@ -48,6 +49,7 @@ import Foundation
     }
 
     func resetFeedback() {
+        feedbackMessage = ""
         showFeedback = false
     }
 }

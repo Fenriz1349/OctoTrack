@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct AddRepositoryModal: View {
-    @State private var viewModel = AddRepoViewModel()
-    @State var appViewModel: AppViewModel
+    @State private var viewModel: AddRepoViewModel
     @Environment(\.dismiss) private var dismiss
+
+    init(dataManager: UserDataManager) {
+           self._viewModel = State(initialValue: AddRepoViewModel(dataManager: dataManager))
+       }
 
     var body: some View {
         VStack(spacing: 20) {
@@ -33,7 +37,7 @@ struct AddRepositoryModal: View {
                 text: $viewModel.repoName,
                 type: .alphaNumber
             )
-
+            PriorityButtonsStack(selectedPriority: $viewModel.priority)
             if viewModel.isLoading {
                 ProgressView()
                     .padding()
@@ -43,7 +47,8 @@ struct AddRepositoryModal: View {
                         let getRepo = await viewModel.getRepo()
                         switch getRepo {
                         case .success(let repo):
-                            appViewModel.addRepoToUser(repo: repo)
+                            repo.priority = viewModel.priority
+                            viewModel.dataManager.storeNewRepo(repo)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                                 viewModel.resetFeedback()
                                 dismiss()
@@ -55,7 +60,7 @@ struct AddRepositoryModal: View {
                 },
                 label: {
                     CustomButtonLabel(
-                        icon: IconsName.plus.rawValue,
+                        iconLeading: IconsName.plus.rawValue,
                         message: "repoAdd".localized,
                         color: .green
                         )
@@ -72,10 +77,18 @@ struct AddRepositoryModal: View {
             Spacer()
         }
         .padding()
-        .frame(maxWidth: 400)
     }
 }
 
 #Preview {
-    AddRepositoryModal(appViewModel: AppViewModel())
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Repository.self, configurations: config)
+        let mockDataManager = UserDataManager(modelContext: ModelContext(container))
+
+        return AddRepositoryModal(dataManager: mockDataManager)
+            .previewWithContainer()
+    } catch {
+        return Text("Erreur: \(error.localizedDescription)")
+    }
 }

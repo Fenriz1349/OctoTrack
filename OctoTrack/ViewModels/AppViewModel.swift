@@ -10,13 +10,16 @@ import SwiftData
 
 @MainActor
 @Observable final class AppViewModel {
-    var userApp: User?
     var isLogged: Bool = false
     var isInitializing: Bool = true
     var authenticationViewModel: AuthenticationViewModel
-    var dataManager = UserDataManager()
+    let dataManager: UserDataManager
+    var userApp: User? {
+        dataManager.activeUser
+    }
 
-    init() {
+    init(dataManager: UserDataManager) {
+        self.dataManager = dataManager
         self.authenticationViewModel = AuthenticationViewModel(
             onLoginSucceed: { _ in },
             onLogoutCompleted: { }
@@ -26,17 +29,17 @@ import SwiftData
     }
 
     private func configureCallbacks() {
-           let newViewModel = AuthenticationViewModel(
-               onLoginSucceed: { [weak self] user in
-                   self?.loginUser(user: user)
-               },
-               onLogoutCompleted: { [weak self] in
-                   self?.logoutUser()
-               }
-           )
+        let newViewModel = AuthenticationViewModel(
+            onLoginSucceed: { [weak self] user in
+                self?.loginUser(user: user)
+            },
+            onLogoutCompleted: { [weak self] in
+                self?.logoutUser()
+            }
+        )
 
-           self.authenticationViewModel = newViewModel
-       }
+        self.authenticationViewModel = newViewModel
+    }
 
     /// The main function to initilialize the app
     /// First check the authentication status
@@ -47,44 +50,53 @@ import SwiftData
         isInitializing = true
         let authState = authenticationViewModel.authenticationState
 
-           switch authState {
-           case .authenticated:
-               if let storedUser = dataManager.currentUser {
-                   userApp = storedUser
-                   isLogged = true
-               } else {
-                   do {
-                       userApp = try await authenticationViewModel.getUser()
-                       dataManager.saveUser(userApp!)
-                       isLogged = true
-                   } catch {
-                       isLogged = false
-                   }
-               }
-           case .expired, .unauthenticated:
-               dataManager.deactivateAllUsers()
-               isLogged = false
-           }
+        switch authState {
+        case .authenticated:
+            await loadUserData()
+            if dataManager.activeUser != nil {
+                isLogged = true
+                authenticationViewModel.startTokenValidation()
+            } else {
+                isLogged = false
+            }
+        case .expired:
+            if await authenticationViewModel.isTokenValid() {
+                try? authenticationViewModel.refreshToken()
+                await loadUserData()
+                authenticationViewModel.startTokenValidation()
+            } else {
+                logoutUser()
+            }
+        case .unauthenticated:
+            logoutUser()
+        }
         isInitializing = false
     }
 
     func loginUser(user: User) {
         self.isLogged = true
-        self.userApp = user
         dataManager.saveUser(user)
     }
 
     func logoutUser() {
-        self.isLogged = false
-        self.userApp = nil
         dataManager.deactivateAllUsers()
+        isLogged = false
+        authenticationViewModel.stopTokenValidation()
     }
 
-    func addRepoToUser(repo: Repository) {
-        guard let user = userApp,
-              !user.repoList.contains(where: { $0.id == repo.id }) else {
-            return
+    @MainActor
+    private func loadUserData() async {
+        if let storedUser = dataManager.activeUser {
+            isLogged = true
+        } else {
+            do {
+                let newUser = try await authenticationViewModel.getUser()
+                dataManager.saveUser(newUser)
+                isLogged = true
+            } catch {
+                isLogged = false
+            }
         }
-        userApp?.repoList.append(repo)
+        print("✅ Fin de loadUserData")
     }
 }

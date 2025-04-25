@@ -5,11 +5,11 @@
 //  Created by Julien Cotte on 13/02/2025.
 //
 
-import Foundation
+import SwiftUI
 import SwiftData
 
-@Model final class PullRequest {
-    @Attribute(.unique) var id: Int
+@Model final class PullRequest: Identifiable {
+    var id: Int
     var number: Int
     var state: String
     var title: String
@@ -18,8 +18,6 @@ import SwiftData
     var closedAt: Date?
     var mergedAt: Date?
     var isDraft: Bool = false
-
-    @Relationship var repository: Repository?
 
     init(id: Int, number: Int, state: String, title: String, createdAt: Date,
          updateAt: Date? = nil, closedAt: Date? = nil, mergedAt: Date? = nil, isDraft: Bool) {

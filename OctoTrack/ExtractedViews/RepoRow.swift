@@ -10,22 +10,24 @@ import SwiftUI
 struct RepoRow: View {
     let repository: Repository
     var body: some View {
-        NavigationLink(destination: RepoDetailView(repository: repository) ) {
             HStack {
                 AsyncAvatarImage(avatarName: repository.owner.login,
                                  avatarUrl: repository.owner.avatarURL, size: 50)
                 Text(repository.name)
-                Text(repository.isPrivate ? "private".localized
-                     : "public".localized)
                 Spacer()
-                Image(systemName: "chevron.forward")
-                    .padding(.leading, 5)
+                CustomButtonIcon(icon: repository.priority.icon, color: repository.priority.color)
+                LockLabel(isPrivate: repository.isPrivate, withText: false)
             }
-            .padding(.horizontal, 20)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(5)
         }
-    }
 }
 
 #Preview {
-    RepoRow(repository: PreviewModels.repositories.first!)
+    if let repository = PreviewContainer.getRepository() {
+        return RepoRow(repository: repository)
+            .previewWithContainer()
+    } else {
+        return Text("Repository not found")
+    }
 }
