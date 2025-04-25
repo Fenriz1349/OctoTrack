@@ -9,15 +9,22 @@ import SwiftUI
 
 struct LockLabel: View {
     let isPrivate: Bool
+    var isPrivateLabel: Bool = true
     var withText: Bool = true
+    private var textToDisplay: String {
+        if isPrivateLabel {
+            return isPrivate ? "private".localized : "public".localized
+        } else {
+            return isPrivate ? "closed".localized : "open".localized
+        }
+    }
     var body: some View {
         HStack(spacing: 4) {
             Image(systemName: (isPrivate ?
                                IconsName.lockClose : IconsName.lockOpen).rawValue)
             .foregroundColor(.secondary)
             if withText {
-                Text(isPrivate ?
-                     "private".localized : "public".localized)
+                Text(textToDisplay)
                 .font(.caption)
                 .fontWeight(.medium)
                 .foregroundColor(.secondary)
@@ -33,5 +40,5 @@ struct LockLabel: View {
 }
 
 #Preview {
-    LockLabel(isPrivate: false, withText: false)
+    LockLabel(isPrivate: false, isPrivateLabel: false)
 }
