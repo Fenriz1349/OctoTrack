@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UserHeader: View {
     var user: User
-    var repositories: [Repository]
+
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
@@ -48,7 +48,7 @@ struct UserHeader: View {
                     HStack(spacing: 6) {
                         Image(systemName: "folder.fill")
                             .foregroundColor(.orange)
-                        Text("repositoriesTracked".localized(repositories.count))
+                        Text("repositoriesTracked".localized(user.repoList.count))
                             .fontWeight(.medium)
                             .foregroundColor(.secondary)
                     }
@@ -80,7 +80,7 @@ struct UserHeader: View {
 
 #Preview {
     if let user = PreviewContainer.previewAppViewModel.userApp {
-        UserHeader(user: user, repositories: PreviewContainer.repositories)
+        UserHeader(user: user)
             .previewWithContainer()
     } else {
         Text("userDataNotAvailable".localized)

@@ -15,10 +15,6 @@ import SwiftUI
         dataManager.activeUser
     }
 
-    var repositories: [Repository] {
-        dataManager.getActiveUserRepositories()
-    }
-
     init(dataManager: UserDataManager) {
         self.dataManager = dataManager
     }
@@ -26,6 +22,12 @@ import SwiftUI
     func deleteRepository(_ repo: Repository) {
         withAnimation {
             dataManager.deleteRepo(id: repo.id)
+        }
+    }
+
+    func orderRepositories() {
+        withAnimation {
+            dataManager.orderRepositories()
         }
     }
 }

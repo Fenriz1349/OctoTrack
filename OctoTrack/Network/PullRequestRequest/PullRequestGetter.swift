@@ -21,11 +21,4 @@ final class PullRequestGetter {
 
         return pullRequests
     }
-
-    func pullRequestGetter(from request: URLRequest) async throws -> PullRequest {
-        let (data, response) = try await client.request(from: request)
-        let pullRequest =  try PullRequestMapper.map(data, and: response)
-
-        return pullRequest
-    }
 }

@@ -5,7 +5,7 @@
 //  Created by Julien Cotte on 24/04/2025.
 //
 
-import Foundation
+import SwiftUI
 
 @MainActor
 @Observable final class PullRequestViewModel {
@@ -25,6 +25,10 @@ import Foundation
             self.dataManager = dataManager
         }
 
+    func updateRepositoryPriority(_ priority: RepoPriority) {
+        dataManager.updateRepositoryPriority(repoId: repository.id, priority: priority)
+    }
+
     private func getAllPullRequests(state: String = "all") async -> Result<[PullRequest], Error> {
         isLoading = true
         do {
@@ -43,17 +47,25 @@ import Foundation
         }
     }
 
-    func updatePullRequests()async {
+    func updatePullRequests() async {
         let getPullRequests = await getAllPullRequests()
         switch getPullRequests {
-        case .success(let pullRequests):
-            dataManager.storePullRequest(pullRequests, repositoryiD: repository.id)
+        case .success(var pullRequests):
+            pullRequests.sort { $0.createdAt < $1.createdAt }
+            dataManager.storePullRequests(pullRequests, repositoryiD: repository.id)
         case .failure:
             break
         }
     }
+
     func resetFeedback() {
         feedbackMessage = ""
         showFeedback = false
+    }
+
+    func deletePullRequest(_ pullRequest: PullRequest) {
+        withAnimation {
+            dataManager.deletePullRequest(repoId: repository.id, prId: pullRequest.id)
+        }
     }
 }

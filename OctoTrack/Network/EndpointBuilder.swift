@@ -13,13 +13,12 @@ enum EndpointBuilder {
     case user(token: String)
     case repo(owner: String, repoName: String, token: String?)
     case allPullRequests(owner: String, repoName: String, token: String?, state: String = "all")
-    case pullRequest(owner: String, repoName: String, number: Int, token: String?)
     case authorize(clientID: String, redirectURI: String, scopes: [String])
     case exchangeToken(code: String, clientID: String, clientSecret: String, redirectURI: String)
 
     private var baseURL: URL {
         switch self {
-        case .user, .repo, .allPullRequests, .pullRequest:
+        case .user, .repo, .allPullRequests:
             return URL(string: "https://api.github.com")!
         case .authorize, .exchangeToken:
             return URL(string: "https://github.com")!
@@ -31,7 +30,6 @@ enum EndpointBuilder {
         case .user:  "/user"
         case .repo(let owner, let name, _): "/repos/\(owner)/\(name)"
         case .allPullRequests(let owner, let repo, _, _): "/repos/\(owner)/\(repo)/pulls"
-        case .pullRequest(let owner, let repo, let number, _): "/repos/\(owner)/\(repo)/pulls/\(number)"
         case .authorize:  "/login/oauth/authorize"
         case .exchangeToken:  "/login/oauth/access_token"
         }
@@ -40,7 +38,7 @@ enum EndpointBuilder {
     private var httpMethod: String {
         switch self {
         case .exchangeToken:  "POST"
-        case .user, .repo, .authorize, .allPullRequests, .pullRequest:  "GET"
+        case .user, .repo, .authorize, .allPullRequests:  "GET"
         }
     }
 
@@ -54,14 +52,14 @@ enum EndpointBuilder {
             ]
         case .allPullRequests(_, _, _, let state):
                     return [URLQueryItem(name: "state", value: state)]
-        case .user, .repo, .exchangeToken, .pullRequest:
+        case .user, .repo, .exchangeToken:
             return nil
         }
     }
 
     private var httpBody: Data? {
         switch self {
-        case .user, .repo, .allPullRequests, .pullRequest, .authorize: return nil
+        case .user, .repo, .allPullRequests, .authorize: return nil
         case .exchangeToken(let code, let clientID, let clientSecret, let redirectURI):
             let params = [
                 "client_id": clientID,
@@ -80,7 +78,7 @@ enum EndpointBuilder {
         case .user(let token):
             customHeaders["Accept"] = "application/vnd.github.v3+json"
             customHeaders["Authorization"] = "Bearer \(token)"
-        case .repo(_, _, let token), .allPullRequests(_, _, let token, _), .pullRequest(_, _, _, let token):
+        case .repo(_, _, let token), .allPullRequests(_, _, let token, _):
             customHeaders["Accept"] = "application/vnd.github.v3+json"
             if let token = token {
                 customHeaders["Authorization"] = "Bearer \(token)"

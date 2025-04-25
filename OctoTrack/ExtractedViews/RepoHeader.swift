@@ -31,10 +31,10 @@ struct RepoHeader: View {
                 Spacer()
                 LockLabel(isPrivate: repository.isPrivate)
             }
-            
+
             OwnerLabel(repository: repository)
             Divider()
-            
+
             PRCategoryCounterRow(totalCount: totalPRCount,
                                  openCount: openPRCount,
                                  closedCount: closedPRCount,

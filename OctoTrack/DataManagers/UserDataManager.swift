@@ -15,16 +15,18 @@ final class UserDataManager {
             self.modelContext = modelContext
         }
 
+    // MARK: - User Methods
+
     var activeUser: User? {
-           do {
-               let predicate = #Predicate<User> { $0.isActiveUser }
-               let descriptor = FetchDescriptor<User>(predicate: predicate)
-               return try modelContext.fetch(descriptor).first
-           } catch {
-               print("Erreur lors de la récupération de l'utilisateur: \(error)")
-               return nil
-           }
-       }
+        do {
+            let predicate = #Predicate<User> { $0.isActiveUser }
+            let descriptor = FetchDescriptor<User>(predicate: predicate)
+            return try modelContext.fetch(descriptor).first
+        } catch {
+            print("Erreur lors de la récupération de l'utilisateur: \(error)")
+            return nil
+        }
+    }
 
     var allUsers: [User] {
         do {
@@ -68,11 +70,6 @@ final class UserDataManager {
         activateUser(user)
     }
 
-    func getActiveUserRepositories() -> [Repository] {
-        guard let activeUser = activeUser else { return [] }
-        return activeUser.repoList
-    }
-
     /// Use to always clear all users stored when logout so we always have only one user
     func clearUser(id: Int) {
         let predicate = #Predicate<User> {$0.id == id}
@@ -81,6 +78,8 @@ final class UserDataManager {
             try? modelContext.save()
         }
     }
+
+    // MARK: - Owner Methods
 
     private func findOwner(id: Int) -> Owner? {
         do {
@@ -101,6 +100,8 @@ final class UserDataManager {
         modelContext.insert(newOwner)
         return newOwner
     }
+
+    // MARK: - Repository Methods
 
     func storeNewRepo(_ repo: Repository) {
         guard let currentUser = activeUser else { return }
@@ -154,9 +155,8 @@ final class UserDataManager {
     func deleteRepo(id: Int) {
         guard let currentUser = activeUser else { return }
         do {
-            if let index = currentUser.repoList.firstIndex(where: { $0.id == id }) {
-                let repoToDelete = currentUser.repoList[index]
-                currentUser.repoList.remove(at: index)
+            if let repoToDelete = currentUser.repoList.first(where: { $0.id == id }) {
+                currentUser.repoList.removeAll { $0.id == id }
                 modelContext.delete(repoToDelete)
                 try modelContext.save()
                 print("✅ Repo supprimé avec succès")
@@ -165,6 +165,21 @@ final class UserDataManager {
             }
         } catch {
             print("❌ Erreur lors de la suppression du repo: \(error)")
+        }
+    }
+
+    func orderRepositories() {
+        guard let currentUser = activeUser else { return }
+        do {
+            currentUser.repoList.sort { repo1, repo2 in
+                let date1 = repo1.updatedAt ?? repo1.createdAt
+                let date2 = repo2.updatedAt ?? repo2.createdAt
+                return date1 < date2
+            }
+            try modelContext.save()
+            print("✅ Repositories triés avec succès")
+        } catch {
+            print("❌ Erreur lors du tri des repositories: \(error)")
         }
     }
 
@@ -182,7 +197,24 @@ final class UserDataManager {
         }
     }
 
-    func storePullRequest(_ pullRequests: [PullRequest], repositoryiD: Int) {
+    func updateRepositoryPriority(repoId: Int, priority: RepoPriority) {
+        guard let currentUser = activeUser else { return }
+        do {
+            if let repoToUpdate = currentUser.repoList.first(where: { $0.id == repoId }) {
+                repoToUpdate.priority = priority
+                try modelContext.save()
+                print("✅ Repo mis à jour avec succès")
+            } else {
+                print("⚠️ Repo non trouvé pour la mise à jour")
+            }
+        } catch {
+            print("❌ Erreur lors de la mise à jour du repo: \(error)")
+        }
+    }
+
+    // MARK: - Pull Request Methods
+
+    func storePullRequests(_ pullRequests: [PullRequest], repositoryiD: Int) {
         guard let currentUser = activeUser else { return }
         do {
             if let index = currentUser.repoList.firstIndex(where: { $0.id == repositoryiD }) {
@@ -193,6 +225,24 @@ final class UserDataManager {
             }
         } catch {
             print("Erreur dans la sauvegarde des PulleEquests")
+        }
+    }
+
+    func deletePullRequest(repoId: Int, prId: Int) {
+        guard let currentUser = activeUser else { return }
+        do {
+            if let repo = currentUser.repoList.first(where: { $0.id == repoId }) {
+                if let pullRequest = repo.pullRequests.first(where: { $0.id == prId }) {
+                    repo.pullRequests.removeAll { $0.id == prId }
+                    modelContext.delete(pullRequest)
+                    try modelContext.save()
+                    print("✅ Pull Request supprimé avec succès")
+                }
+            } else {
+                print("⚠️ Pull Request non trouvé pour la suppression")
+            }
+        } catch {
+            print("❌ Erreur lors de la suppression de la pull request: \(error)")
         }
     }
 }
