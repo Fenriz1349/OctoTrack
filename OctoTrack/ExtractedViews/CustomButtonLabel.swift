@@ -14,7 +14,8 @@ struct CustomButtonLabel: View {
     let color: Color
     let isSelected: Bool
 
-    init(iconLeading: String? = nil, iconTrailing: String? = nil, message: String, color: Color, isSelected: Bool = true) {
+    init(iconLeading: String? = nil, iconTrailing: String? = nil,
+         message: String, color: Color, isSelected: Bool = true) {
         self.iconLeading = iconLeading
         self.iconTrailing  = iconTrailing
         self.message = message

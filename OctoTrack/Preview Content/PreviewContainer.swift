@@ -125,7 +125,7 @@ struct PreviewContainer {
         )
     ]
 
-    static var previewRepository :Repository {
+    static var previewRepository: Repository {
         repositories.first!
     }
 

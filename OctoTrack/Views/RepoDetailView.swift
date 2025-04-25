@@ -32,6 +32,13 @@ struct RepoDetailView: View {
             }
                 List(viewModel.repository.pullRequests) { pullRequest in
                     PullRequestRow(pullRequest: pullRequest)
+                        .swipeActions(edge: .trailing) {
+                           Button(role: .destructive) {
+                               viewModel.deletePullRequest(pullRequest)
+                           } label: {
+                               CustomButtonIcon(icon: "trash", color: .red)
+                           }
+                       }
                 }
                 .refreshable {
                     await viewModel.updatePullRequests()

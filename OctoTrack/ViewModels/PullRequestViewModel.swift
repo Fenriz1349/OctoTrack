@@ -5,7 +5,7 @@
 //  Created by Julien Cotte on 24/04/2025.
 //
 
-import Foundation
+import SwiftUI
 
 @MainActor
 @Observable final class PullRequestViewModel {
@@ -43,7 +43,7 @@ import Foundation
         }
     }
 
-    func updatePullRequests()async {
+    func updatePullRequests() async {
         let getPullRequests = await getAllPullRequests()
         switch getPullRequests {
         case .success(let pullRequests):
@@ -52,8 +52,15 @@ import Foundation
             break
         }
     }
+
     func resetFeedback() {
         feedbackMessage = ""
         showFeedback = false
+    }
+
+    func deletePullRequest(_ pullRequest: PullRequest) {
+        withAnimation {
+            dataManager.deletePullRequest(repoId: repository.id, prId: pullRequest.id)
+        }
     }
 }

@@ -15,6 +15,8 @@ final class UserDataManager {
             self.modelContext = modelContext
         }
 
+    // MARK: - User Methods
+
     var activeUser: User? {
            do {
                let predicate = #Predicate<User> { $0.isActiveUser }
@@ -82,6 +84,8 @@ final class UserDataManager {
         }
     }
 
+    // MARK: - Owner Methods
+
     private func findOwner(id: Int) -> Owner? {
         do {
             let predicate = #Predicate<Owner> { owner in owner.id == id }
@@ -101,6 +105,8 @@ final class UserDataManager {
         modelContext.insert(newOwner)
         return newOwner
     }
+
+    // MARK: - Repository Methods
 
     func storeNewRepo(_ repo: Repository) {
         guard let currentUser = activeUser else { return }
@@ -154,9 +160,8 @@ final class UserDataManager {
     func deleteRepo(id: Int) {
         guard let currentUser = activeUser else { return }
         do {
-            if let index = currentUser.repoList.firstIndex(where: { $0.id == id }) {
-                let repoToDelete = currentUser.repoList[index]
-                currentUser.repoList.remove(at: index)
+            if let repoToDelete = currentUser.repoList.first(where: { $0.id == id }) {
+                currentUser.repoList.removeAll { $0.id == id }
                 modelContext.delete(repoToDelete)
                 try modelContext.save()
                 print("✅ Repo supprimé avec succès")
@@ -182,6 +187,8 @@ final class UserDataManager {
         }
     }
 
+    // MARK: - Pull Request Methods
+
     func storePullRequest(_ pullRequests: [PullRequest], repositoryiD: Int) {
         guard let currentUser = activeUser else { return }
         do {
@@ -193,6 +200,24 @@ final class UserDataManager {
             }
         } catch {
             print("Erreur dans la sauvegarde des PulleEquests")
+        }
+    }
+
+    func deletePullRequest(repoId: Int, prId: Int) {
+        guard let currentUser = activeUser else { return }
+        do {
+            if let repo = currentUser.repoList.first(where: { $0.id == repoId }) {
+                if let pullRequest = repo.pullRequests.first(where: { $0.id == prId }) {
+                    repo.pullRequests.removeAll { $0.id == prId }
+                    modelContext.delete(pullRequest)
+                    try modelContext.save()
+                    print("✅ Pull Request supprimé avec succès")
+                }
+            } else {
+                print("⚠️ Pull Request non trouvé pour la suppression")
+            }
+        } catch {
+            print("❌ Erreur lors de la suppression de la pull request: \(error)")
         }
     }
 }
