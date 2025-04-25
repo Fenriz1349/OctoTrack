@@ -87,6 +87,7 @@
       }
     },
     "cancel" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -120,6 +121,7 @@
       }
     },
     "confirmation" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -202,6 +204,9 @@
           }
         }
       }
+    },
+    "Erreur: %@" : {
+
     },
     "failCantAdd" : {
       "extractionState" : "manual",
@@ -561,6 +566,7 @@
       }
     },
     "reset" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -577,6 +583,7 @@
       }
     },
     "resetAlert" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {

@@ -29,14 +29,13 @@ struct RepoDetailView: View {
             if viewModel.repository.pullRequests.isEmpty {
                 Text("noPR".localized)
                 Spacer()
-            } else {
+            }
                 List(viewModel.repository.pullRequests) { pullRequest in
                     PullRequestRow(pullRequest: pullRequest)
                 }
                 .refreshable {
                     await viewModel.updatePullRequests()
                 }
-            }
         }
         .padding(.horizontal, 20)
     }
