@@ -10,14 +10,13 @@ import SwiftUI
 struct PullRequestRow: View {
     let pullRequest: PullRequest
     var body: some View {
-        NavigationLink(destination: PRDetailView(pullRequest: pullRequest) ) {
-            HStack {
-                Text(pullRequest.title)
-                Spacer()
-                LockLabel(isPrivate: pullRequest.state == "closed", isPrivateLabel: false)
-            }
-            .padding(.horizontal, 20)
+        HStack {
+            Text(pullRequest.title)
+                .font(.system(size: 12))
+            Spacer()
+            LockLabel(status: pullRequest.state)
         }
+        .padding(.horizontal, 20)
     }
 }
 

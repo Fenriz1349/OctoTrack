@@ -33,38 +33,19 @@ struct UserHeader: View {
                     Text(user.login)
                         .font(.title)
                         .fontWeight(.bold)
-
-                    Link(destination: URL(string: "https://github.com/\(user.login)")!) {
-                        HStack(spacing: 6) {
-                            Image(systemName: IconsName.link.rawValue)
-                                .foregroundColor(.blue)
-                            Text("viewGithub".localized)
-                                .fontWeight(.medium)
-                                .foregroundColor(.blue)
-                        }
-                        .padding(.vertical, 4)
-                    }
-
+                    GithubLink(link: "https://github.com/\(user.login)")
                     HStack(spacing: 6) {
                         Image(systemName: "folder.fill")
                             .foregroundColor(.orange)
-                        Text("repositoriesTracked".localized(user.repoList.count))
+                        Text("repositoriesTracked \(user.repoList.count)")
                             .fontWeight(.medium)
                             .foregroundColor(.secondary)
                     }
                     .padding(.top, 2)
                 }
             }
-            HStack {
-                Text("lastUpdate".localized(user.lastUpdate?.formatted() ?? ""))
-                Button {
-
-                } label: {
-                    CustomButtonIcon(
-                        icon: IconsName.refresh.rawValue,
-                        color: Color.blue
-                    )
-                }
+            if let lastUpdate = user.lastUpdate {
+                Text("lastUpdate \(lastUpdate.formatted(date: .abbreviated, time: .shortened))")
             }
         }
         .padding(20)
@@ -79,10 +60,6 @@ struct UserHeader: View {
 }
 
 #Preview {
-    if let user = PreviewContainer.previewAppViewModel.userApp {
-        UserHeader(user: user)
+        UserHeader(user: PreviewContainer.user)
             .previewWithContainer()
-    } else {
-        Text("userDataNotAvailable".localized)
-    }
 }

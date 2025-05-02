@@ -13,17 +13,17 @@ struct AuthButtonsStack: View {
     let onSignOut: () -> Void
     private var buttonLabel: String {
         switch status {
-           case .expired: "signAgain".localized
-           case .authenticated: "continue".localized
-           case .unauthenticated: "signIn".localized
+           case .expired: "signAgain"
+           case .authenticated: "continue"
+           case .unauthenticated: "signIn"
            }
        }
 
-    private var icon: String {
+    private var icon: IconsName {
         switch status {
-        case .expired: IconsName.refresh.rawValue
-        case .authenticated: IconsName.continu.rawValue
-        case .unauthenticated: IconsName.login.rawValue
+        case .expired: .refresh
+        case .authenticated: .continu
+        case .unauthenticated: .login
         }
     }
 
@@ -44,7 +44,7 @@ struct AuthButtonsStack: View {
                 }
             },
             label: {
-                CustomButtonLabel(iconLeading: IconsName.signOut.rawValue, message: "signOut".localized, color: .red)
+                CustomButtonLabel(iconLeading: .signOut, message: "signOut", color: .red)
                 }
             )
         }

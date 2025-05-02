@@ -14,9 +14,9 @@ enum RepoPriority: Int, Codable, CaseIterable {
 
     var name: String {
         switch self {
-        case .low: "low".localized
-        case .medium: "medium".localized
-        case .high: "high".localized
+        case .low: "low"
+        case .medium: "medium"
+        case .high: "high"
         }
     }
 
@@ -28,11 +28,11 @@ enum RepoPriority: Int, Codable, CaseIterable {
         }
     }
 
-    var icon: String {
+    var icon: IconsName {
         switch self {
-        case .low: IconsName.leaf.rawValue
-        case .medium: IconsName.bolt.rawValue
-        case .high: IconsName.flame.rawValue
+        case .low: IconsName.leaf
+        case .medium: IconsName.bolt
+        case .high: IconsName.flame
         }
     }
 }

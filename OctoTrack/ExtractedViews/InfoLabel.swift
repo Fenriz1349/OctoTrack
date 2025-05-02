@@ -17,8 +17,8 @@ struct InfoLabel: View {
                 .foregroundColor(isSuccess ? .green : .red)
 
             Text(isSuccess
-                 ? "addedWithSuccess".localized(message)
-                 : "failCantAdd".localized(message))
+                 ? String(format: "addedWithSuccess", message)
+                 : String(format: "failCantAdd", message) )
                 .fontWeight(.medium)
         }
         .padding()
