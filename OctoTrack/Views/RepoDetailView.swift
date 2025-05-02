@@ -26,7 +26,7 @@ struct RepoDetailView: View {
                         viewModel.updateRepositoryPriority(priority)
                     } label: {
                         HStack {
-                            Image(systemName: priority.icon)
+                            Image(systemName: priority.icon.rawValue)
                             Text(priority.name)
                         }
                     }
@@ -34,14 +34,14 @@ struct RepoDetailView: View {
             } label: {
                 CustomButtonLabel(
                     iconLeading: viewModel.repository.priority.icon,
-                    iconTrailing: IconsName.down.rawValue,
+                    iconTrailing: IconsName.down,
                     message: viewModel.repository.priority.name,
                     color: viewModel.repository.priority.color
                 )
             }
 
             if viewModel.repository.pullRequests.isEmpty {
-                Text("noPR".localized)
+                Text("noPR")
                 Spacer()
             }
             List(viewModel.repository.pullRequests) { pullRequest in
@@ -52,7 +52,7 @@ struct RepoDetailView: View {
                             Button(role: .destructive) {
                                 viewModel.deletePullRequest(pullRequest)
                             } label: {
-                                CustomButtonIcon(icon: "trash", color: .red)
+                                CustomButtonIcon(icon: IconsName.trash, color: .red)
                             }
                         }
                 }
@@ -67,14 +67,6 @@ struct RepoDetailView: View {
 }
 
 #Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Repository.self, configurations: config)
-        let mockDataManager = UserDataManager(modelContext: ModelContext(container))
-
-        return RepoDetailView(repository: PreviewContainer.repositories.first!, dataManager: mockDataManager)
-            .previewWithContainer()
-    } catch {
-        return Text("Error: \(error.localizedDescription)".localized)
-    }
+    RepoDetailView(repository: PreviewContainer.repositories.first!, dataManager: PreviewContainer.mockDataManager)
+        .previewWithContainer()
 }

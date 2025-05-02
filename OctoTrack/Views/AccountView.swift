@@ -29,7 +29,7 @@ struct AccountView: View {
                     showingResetAlert = true
                 } label: {
                     CustomButtonLabel(
-                        iconLeading: IconsName.trash.rawValue,
+                        iconLeading: .trash,
                         message: "resetRepositoryList",
                         color: Color.orange
                     )
@@ -46,7 +46,7 @@ struct AccountView: View {
                     appViewModel.authenticationViewModel.signOut()
                 } label: {
                     CustomButtonLabel(
-                        iconLeading: IconsName.signOut.rawValue,
+                        iconLeading: .signOut,
                         message: "signOut",
                         color: Color.red
                     )
@@ -62,9 +62,6 @@ struct AccountView: View {
 }
 
 #Preview {
-    NavigationView {
-        let viewModel = PreviewContainer.previewAppViewModel
-        return AccountView(appViewModel: viewModel)
-            .previewWithContainer()
-    }
+    AccountView(appViewModel: PreviewContainer.previewAppViewModel)
+        .previewWithContainer()
 }

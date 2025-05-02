@@ -10,7 +10,6 @@ import SwiftUI
 struct PullRequestRow: View {
     let pullRequest: PullRequest
     var body: some View {
-        
         HStack {
             Text(pullRequest.title)
                 .font(.system(size: 12))

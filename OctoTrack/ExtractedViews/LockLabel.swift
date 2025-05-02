@@ -10,7 +10,7 @@ import SwiftUI
 struct LockLabel: View {
     let status: Status
     var withText: Bool = true
-    
+
     var body: some View {
         HStack(spacing: 4) {
             Image(systemName: status.icon)

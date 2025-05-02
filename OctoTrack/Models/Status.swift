@@ -18,13 +18,13 @@ enum Status: String, CaseIterable {
 
     var value: String {
         switch self {
-        case .created: "created".localized
-        case .open: "open".localized
-        case .updated: "updated".localized
-        case .closed: "closed".localized
-        case .merged:"merged".localized
-        case .publicRepo: "public".localized
-        case .privateRepo: "private".localized
+        case .created: "created"
+        case .open: "open"
+        case .updated: "updated"
+        case .closed: "closed"
+        case .merged: "merged"
+        case .publicRepo: "public"
+        case .privateRepo: "private"
         }
     }
 
@@ -51,7 +51,7 @@ enum Status: String, CaseIterable {
     static func getRepoStatus(_ repository: Repository) -> Status {
         repository.isPrivate ? .privateRepo : .publicRepo
     }
-    
+
     static func getPullRequestState(_ pullRequest: PullRequest) -> Status {
         pullRequest.mergedAt != nil ? .merged : pullRequest.closedAt != nil ? .closed : .open
     }

@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CustomButtonIcon: View {
-    let icon: String
+    let icon: IconsName
     let color: Color
     var body: some View {
-        Image(systemName: icon)
+        Image(systemName: icon.rawValue)
         .fontWeight(.bold)
         .padding(7)
         .background(color)
@@ -22,5 +22,5 @@ struct CustomButtonIcon: View {
 }
 
 #Preview {
-    CustomButtonIcon(icon: IconsName.refresh.rawValue, color: .accentColor)
+    CustomButtonIcon(icon: IconsName.refresh, color: .accentColor)
 }

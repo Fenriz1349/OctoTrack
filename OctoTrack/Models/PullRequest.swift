@@ -18,7 +18,7 @@ import SwiftData
     var closedAt: Date?
     var mergedAt: Date?
     var isDraft: Bool = false
-    
+
     var state: Status {
         Status.getPullRequestState(self)
     }

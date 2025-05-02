@@ -18,7 +18,7 @@ struct ContentView: View {
             if viewModel.isInitializing {
                 VStack {
                     ProgressView()
-                    Text("loading".localized).padding()
+                    Text("loading").padding()
                 }
 
                 .task {

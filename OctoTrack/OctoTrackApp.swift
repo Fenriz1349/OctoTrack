@@ -25,7 +25,7 @@ struct OctoTrackApp: App {
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
-            fatalError("couldNotCreateMC".localized(error.localizedDescription))
+            fatalError(String(format: "couldNotCreateMC", error.localizedDescription))
         }
     }()
 

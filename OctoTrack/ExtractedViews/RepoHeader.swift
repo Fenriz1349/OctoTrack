@@ -61,10 +61,6 @@ struct RepoHeader: View {
 }
 
 #Preview {
-    if let repository = PreviewContainer.getRepository() {
-        return RepoHeader(repository: repository)
-            .previewWithContainer()
-    } else {
-        return Text("Repository not found")
-    }
+    RepoHeader(repository: PreviewContainer.previewRepository)
+        .previewWithContainer()
 }

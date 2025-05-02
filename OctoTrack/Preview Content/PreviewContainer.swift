@@ -77,9 +77,9 @@ struct PreviewContainer {
     }
 
     static let user = User(id: 0, login: "HackerMan",
-                    avatarURL: "https://avatars.githubusercontent.com/u/198871564?v=4",
+                           avatarURL: "https://avatars.githubusercontent.com/u/198871564?v=4",
                            repoList: [],
-                    lastUpdate: Date())
+                           lastUpdate: Date())
 
     static let userAsOwner = user.toOwner()
 
@@ -129,9 +129,15 @@ struct PreviewContainer {
         repositories.first!
     }
 
-    @MainActor static func getRepository(at index: Int = 0) -> Repository? {
-        let repos = try? container.mainContext.fetch(FetchDescriptor<Repository>())
-        return repos?[index]
+    @MainActor static func getRepository(at index: Int = 0) -> Repository {
+        let repos = try! container.mainContext.fetch(FetchDescriptor<Repository>())
+        return repos[index]
+    }
+
+    static var mockDataManager: UserDataManager {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try! ModelContainer(for: Repository.self, configurations: config)
+        return UserDataManager(modelContext: ModelContext(container))
     }
 }
 

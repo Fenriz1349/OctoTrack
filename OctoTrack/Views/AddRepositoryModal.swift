@@ -18,22 +18,22 @@ struct AddRepositoryModal: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("repoAdd".localized)
+            Text("repoAdd")
                 .font(.headline)
                 .padding(.top)
 
             CustomTextField(
-                header: "owner".localized,
+                header: "owner",
                 color: .gray,
-                placeholder: "ownerExemple".localized,
+                placeholder: "ownerExemple",
                 text: $viewModel.owner,
                 type: .alphaNumber
             )
 
             CustomTextField(
-                header: "repoName".localized,
+                header: "repoName",
                 color: .gray,
-                placeholder: "repoExemple".localized,
+                placeholder: "repoExemple",
                 text: $viewModel.repoName,
                 type: .alphaNumber
             )
@@ -60,8 +60,8 @@ struct AddRepositoryModal: View {
                 },
                 label: {
                     CustomButtonLabel(
-                        iconLeading: IconsName.plus.rawValue,
-                        message: "repoAdd".localized,
+                        iconLeading: .plus,
+                        message: "repoAdd",
                         color: .green
                         )
                     }
@@ -81,14 +81,6 @@ struct AddRepositoryModal: View {
 }
 
 #Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Repository.self, configurations: config)
-        let mockDataManager = UserDataManager(modelContext: ModelContext(container))
-
-        return AddRepositoryModal(dataManager: mockDataManager)
-            .previewWithContainer()
-    } catch {
-        return Text("Erreur: \(error.localizedDescription)")
-    }
+    AddRepositoryModal(dataManager: PreviewContainer.mockDataManager)
+        .previewWithContainer()
 }

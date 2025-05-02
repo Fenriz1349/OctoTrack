@@ -26,4 +26,5 @@ enum IconsName: String {
     case down = "chevron.down"
     case merge = "arrow.triangle.merge"
     case update = "arrow.triangle.2.circlepath"
+    case arrowUp = "arrow.up.right"
 }
