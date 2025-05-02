@@ -11,6 +11,7 @@ struct PRCategoryCounterRow: View {
     let totalCount: Int
     let openCount: Int
     let closedCount: Int
+    let mergedcount: Int
     let language: String?
 
     var body: some View {
@@ -24,6 +25,7 @@ struct PRCategoryCounterRow: View {
             CountingCell(text: "closed".localized, count: closedCount)
             Divider()
                 .frame(height: 24)
+            CountingCell(text: "merged".localized, count: mergedcount)
             if let language = language {
                 Text(language)
                     .font(.subheadline)
@@ -34,5 +36,5 @@ struct PRCategoryCounterRow: View {
 }
 
 #Preview {
-    PRCategoryCounterRow(totalCount: 5, openCount: 4, closedCount: 1, language: "swift")
+    PRCategoryCounterRow(totalCount: 8, openCount: 4, closedCount: 1,mergedcount: 3 , language: "swift")
 }

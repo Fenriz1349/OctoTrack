@@ -16,7 +16,7 @@ struct RepoRow: View {
                 Text(repository.name)
                 Spacer()
                 CustomButtonIcon(icon: repository.priority.icon, color: repository.priority.color)
-                LockLabel(isPrivate: repository.isPrivate, withText: false)
+                LockLabel(status: Status.getRepoStatus(repository), withText: false)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(5)

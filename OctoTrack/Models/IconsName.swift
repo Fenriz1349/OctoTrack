@@ -24,4 +24,6 @@ enum IconsName: String {
     case folder = "folder.fill"
     case person = "person.circle.fill"
     case down = "chevron.down"
+    case merge = "arrow.triangle.merge"
+    case update = "arrow.triangle.2.circlepath"
 }

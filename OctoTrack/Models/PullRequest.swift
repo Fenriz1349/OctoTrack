@@ -11,19 +11,23 @@ import SwiftData
 @Model final class PullRequest: Identifiable {
     var id: Int
     var number: Int
-    var state: String
+    var body: String?
     var title: String
     var createdAt: Date
     var updateAt: Date?
     var closedAt: Date?
     var mergedAt: Date?
     var isDraft: Bool = false
+    
+    var state: Status {
+        Status.getPullRequestState(self)
+    }
 
-    init(id: Int, number: Int, state: String, title: String, createdAt: Date,
+    init(id: Int, number: Int, body: String? = nil, title: String, createdAt: Date,
          updateAt: Date? = nil, closedAt: Date? = nil, mergedAt: Date? = nil, isDraft: Bool) {
         self.id = id
         self.number = number
-        self.state = state
+        self.body = body
         self.title = title
         self.createdAt = createdAt
         self.updateAt = updateAt

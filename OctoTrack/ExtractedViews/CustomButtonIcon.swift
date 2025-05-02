@@ -16,9 +16,8 @@ struct CustomButtonIcon: View {
         .padding(7)
         .background(color)
         .foregroundColor(.white)
-        .cornerRadius(16)
-        .shadow(color: .black.opacity(0.4), radius: 6, x: -4, y: -4)
-        .shadow(color: .black.opacity(0.2), radius: 6, x: 4, y: 4)
+        .cornerRadius(25)
+        .shadow(color: .gray/*.opacity(0.2)*/, radius: 4, x: 2, y: 2)
     }
 }
 

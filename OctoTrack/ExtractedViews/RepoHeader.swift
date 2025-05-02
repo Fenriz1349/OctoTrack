@@ -11,11 +11,15 @@ struct RepoHeader: View {
     var repository: Repository
 
     private var openPRCount: Int {
-        repository.pullRequests.filter { $0.state == "open" }.count
+        repository.pullRequests.filter { $0.state == .open }.count
     }
 
     private var closedPRCount: Int {
-        repository.pullRequests.filter { $0.state == "closed" }.count
+        repository.pullRequests.filter { $0.state == .closed }.count
+    }
+
+    private var mergedPRCount: Int {
+        repository.pullRequests.filter { $0.state == .merged }.count
     }
 
     private var totalPRCount: Int {
@@ -29,7 +33,7 @@ struct RepoHeader: View {
                     .font(.title)
                     .fontWeight(.bold)
                 Spacer()
-                LockLabel(isPrivate: repository.isPrivate)
+                LockLabel(status: Status.getRepoStatus(repository))
             }
 
             OwnerLabel(repository: repository)
@@ -38,9 +42,12 @@ struct RepoHeader: View {
             PRCategoryCounterRow(totalCount: totalPRCount,
                                  openCount: openPRCount,
                                  closedCount: closedPRCount,
+                                 mergedcount: mergedPRCount,
                                  language: repository.language)
             Divider()
-            DateRow(creationDate: repository.createdAt, updateDate: repository.updatedAt)
+            DateRow(creationDate: repository.createdAt,
+                    updateDate: repository.updatedAt,
+                    mergedAt: nil, closedAt: nil)
         }
         .padding(20)
         .frame(maxWidth: .infinity)

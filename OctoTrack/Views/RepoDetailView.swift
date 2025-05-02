@@ -45,14 +45,17 @@ struct RepoDetailView: View {
                 Spacer()
             }
             List(viewModel.repository.pullRequests) { pullRequest in
-                PullRequestRow(pullRequest: pullRequest)
-                    .swipeActions(edge: .trailing) {
-                        Button(role: .destructive) {
-                            viewModel.deletePullRequest(pullRequest)
-                        } label: {
-                            CustomButtonIcon(icon: "trash", color: .red)
+                NavigationLink(destination: PullRequestDetailView(pullRequest: pullRequest,
+                                                         repository: viewModel.repository) ) {
+                    PullRequestRow(pullRequest: pullRequest)
+                        .swipeActions(edge: .trailing) {
+                            Button(role: .destructive) {
+                                viewModel.deletePullRequest(pullRequest)
+                            } label: {
+                                CustomButtonIcon(icon: "trash", color: .red)
+                            }
                         }
-                    }
+                }
             }
             .listStyle(PlainListStyle())
             .refreshable {
@@ -72,6 +75,6 @@ struct RepoDetailView: View {
         return RepoDetailView(repository: PreviewContainer.repositories.first!, dataManager: mockDataManager)
             .previewWithContainer()
     } catch {
-        return Text("Erreur: \(error.localizedDescription)")
+        return Text("Error: \(error.localizedDescription)".localized)
     }
 }

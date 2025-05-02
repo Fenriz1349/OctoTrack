@@ -20,7 +20,7 @@ struct AccountView: View {
             if let user = appViewModel.userApp {
                 UserHeader(user: user)
             } else {
-                Text("userDataNotAvailable".localized)
+                Text("userDataNotAvailable")
                     .foregroundColor(.secondary)
             }
 
@@ -30,24 +30,24 @@ struct AccountView: View {
                 } label: {
                     CustomButtonLabel(
                         iconLeading: IconsName.trash.rawValue,
-                        message: "resetRepositoryList".localized,
+                        message: "resetRepositoryList",
                         color: Color.orange
                     )
                 }
-                .alert("confirmation".localized, isPresented: $showingResetAlert) {
-                    Button("cancel".localized, role: .cancel) { }
-                    Button("reset".localized, role: .destructive) {
+                .alert("confirmation", isPresented: $showingResetAlert) {
+                    Button("cancel", role: .cancel) { }
+                    Button("reset", role: .destructive) {
                         appViewModel.dataManager.resetAllRepositories()
                     }
                 } message: {
-                    Text("resetAlert".localized)
+                    Text("resetAlert")
                 }
                 Button {
                     appViewModel.authenticationViewModel.signOut()
                 } label: {
                     CustomButtonLabel(
                         iconLeading: IconsName.signOut.rawValue,
-                        message: "signOut".localized,
+                        message: "signOut",
                         color: Color.red
                     )
                 }
@@ -57,7 +57,7 @@ struct AccountView: View {
             Spacer()
         }
         .padding()
-        .navigationTitle("account".localized)
+        .navigationTitle("account")
     }
 }
 

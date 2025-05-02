@@ -130,13 +130,8 @@ struct PreviewContainer {
     }
 
     @MainActor static func getRepository(at index: Int = 0) -> Repository? {
-        do {
-            let repos = try container.mainContext.fetch(FetchDescriptor<Repository>())
-            return repos.count > index ? repos[index] : repos.first
-        } catch {
-            print("Erreur lors de la récupération du repository: \(error)")
-            return nil
-        }
+        let repos = try? container.mainContext.fetch(FetchDescriptor<Repository>())
+        return repos?[index]
     }
 }
 

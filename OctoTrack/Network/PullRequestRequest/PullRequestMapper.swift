@@ -11,7 +11,7 @@ enum PullRequestMapper {
     struct PullRequestDTO {
         var id: Int
         var number: Int
-        var state: String
+        var body: String?
         var title: String
         var createdAt: Date
         var updateAt: Date?
@@ -20,8 +20,10 @@ enum PullRequestMapper {
         var isDraft: Bool
 
         func toPullRequest() -> PullRequest {
-            return PullRequest(id: id, number: number, state: state,
-                               title: title, createdAt: createdAt, isDraft: isDraft)
+            return PullRequest(id: id, number: number, body: body,
+                               title: title, createdAt: createdAt,
+                               updateAt: updateAt, closedAt: closedAt, mergedAt: mergedAt,
+                               isDraft: isDraft)
         }
     }
 
@@ -52,7 +54,7 @@ enum PullRequestMapper {
 
 extension PullRequestMapper.PullRequestDTO: Decodable {
     enum CodingKeys: String, CodingKey {
-        case id, number, state, title
+        case id, number, body, title
         case isDraft = "draft"
         case createdAt = "created_at"
         case updateAt = "updated_at"
