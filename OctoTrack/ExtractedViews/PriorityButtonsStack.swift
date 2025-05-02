@@ -12,7 +12,7 @@ struct PriorityButtonsStack: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("priority".localized)
+            Text("priority")
                 .fontWeight(.bold)
                 .padding(.horizontal, 4)
             HStack {

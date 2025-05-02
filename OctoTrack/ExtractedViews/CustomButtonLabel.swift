@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct CustomButtonLabel: View {
-    let iconLeading: String?
-    let iconTrailing: String?
+    let iconLeading: IconsName?
+    let iconTrailing: IconsName?
     let message: String
     let color: Color
     let isSelected: Bool
 
-    init(iconLeading: String? = nil, iconTrailing: String? = nil,
+    init(iconLeading: IconsName? = nil, iconTrailing: IconsName? = nil,
          message: String, color: Color, isSelected: Bool = true) {
         self.iconLeading = iconLeading
         self.iconTrailing  = iconTrailing
@@ -28,11 +28,11 @@ struct CustomButtonLabel: View {
             if iconTrailing != nil {
                 Spacer()
             }
-            if let iconLeading = iconLeading { Image(systemName: iconLeading) }
+            if let iconLeading = iconLeading { Image(systemName: iconLeading.rawValue) }
             Text(message)
             if let iconTrailing = iconTrailing {
                 Spacer()
-                Image(systemName: iconTrailing)
+                Image(systemName: iconTrailing.rawValue)
                     .padding(.trailing, 20)
             }
         }
@@ -41,7 +41,7 @@ struct CustomButtonLabel: View {
 }
 
 #Preview {
-    CustomButtonLabel(iconLeading: IconsName.plus.rawValue,
-                      iconTrailing: IconsName.down.rawValue,
-                      message: "repoAdd".localized, color: .accentColor)
+    CustomButtonLabel(iconLeading: .plus,
+                      iconTrailing: .down,
+                      message: "repoAdd", color: .accentColor)
 }

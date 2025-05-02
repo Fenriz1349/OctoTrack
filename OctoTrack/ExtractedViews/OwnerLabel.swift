@@ -16,29 +16,16 @@ struct OwnerLabel: View {
                     Circle()
                         .stroke(Color.gray.opacity(0.3), lineWidth: 2)
                 )
-
             VStack(alignment: .leading, spacing: 2) {
-                Text("owner".localized)
+                Text("owner")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Text(repository.owner.login)
                     .font(.subheadline)
                     .fontWeight(.medium)
             }
-
             Spacer()
-
-            Link(destination: URL(string: "https://github.com/\(repository.owner.login)/\(repository.name)")!) {
-                HStack(spacing: 4) {
-                    Image(systemName: IconsName.link.rawValue)
-                        .foregroundColor(.blue)
-                    Text("viewGithub".localized)
-                        .font(.footnote)
-                        .fontWeight(.medium)
-                        .foregroundColor(.blue)
-                }
-                .padding(.vertical, 4)
-            }
+            GithubLink(link: "https://github.com/\(repository.owner.login)/\(repository.name)")
         }
     }
 }

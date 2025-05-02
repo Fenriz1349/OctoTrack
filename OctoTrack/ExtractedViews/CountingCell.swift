@@ -12,7 +12,7 @@ struct CountingCell: View {
     let count: Int
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
-            Text(text.localized)
+            Text(text)
                 .font(.caption)
                 .foregroundColor(.secondary)
             Text(count.description)
@@ -23,5 +23,5 @@ struct CountingCell: View {
 }
 
 #Preview {
-    CountingCell(text: "total".localized, count: 5)
+    CountingCell(text: "total", count: 5)
 }

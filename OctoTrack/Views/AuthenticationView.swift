@@ -13,7 +13,7 @@ struct AuthenticationView: View {
     var body: some View {
             VStack(spacing: 20) {
                 AsyncAvatarImage(avatarName: "", avatarUrl: "", size: 150)
-                Text("welcome".localized)
+                Text("welcome")
                     .font(.largeTitle)
                     .fontWeight(.semibold)
                 if viewModel.isAuthenticating {
@@ -29,7 +29,7 @@ struct AuthenticationView: View {
                 }
 
                 if let error = viewModel.authError {
-                    Text("authenticationError".localized(error.localizedDescription))
+                    Text("authenticationError \(error.localizedDescription)")
                         .font(.caption)
                         .foregroundColor(.red)
                         .multilineTextAlignment(.center)
@@ -43,6 +43,6 @@ struct AuthenticationView: View {
 
 #Preview {
     AuthenticationView(viewModel: AuthenticationViewModel( onLoginSucceed: { user in
-        print("connected".localized(user.login))
+        print(String(format: "connected", user.login))
     }, onLogoutCompleted: {}))
 }

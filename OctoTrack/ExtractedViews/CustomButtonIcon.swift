@@ -8,20 +8,19 @@
 import SwiftUI
 
 struct CustomButtonIcon: View {
-    let icon: String
+    let icon: IconsName
     let color: Color
     var body: some View {
-        Image(systemName: icon)
+        Image(systemName: icon.rawValue)
         .fontWeight(.bold)
         .padding(7)
         .background(color)
         .foregroundColor(.white)
-        .cornerRadius(16)
-        .shadow(color: .black.opacity(0.4), radius: 6, x: -4, y: -4)
-        .shadow(color: .black.opacity(0.2), radius: 6, x: 4, y: 4)
+        .cornerRadius(25)
+        .shadow(color: .gray/*.opacity(0.2)*/, radius: 4, x: 2, y: 2)
     }
 }
 
 #Preview {
-    CustomButtonIcon(icon: IconsName.refresh.rawValue, color: .accentColor)
+    CustomButtonIcon(icon: IconsName.refresh, color: .accentColor)
 }

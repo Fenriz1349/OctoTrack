@@ -17,8 +17,8 @@ struct RepoListView: View {
                 UserHeader(user: user)
             }
             NavigationLink(destination: AddRepositoryModal(dataManager: viewModel.dataManager)) {
-                CustomButtonLabel(iconLeading: IconsName.plus.rawValue,
-                                  message: "repoAdd".localized,
+                CustomButtonLabel(iconLeading: .plus,
+                                  message: "repoAdd",
                                   color: .black)
                 .padding(.horizontal, 30)
             }
@@ -33,7 +33,7 @@ struct RepoListView: View {
                        Button(role: .destructive) {
                            viewModel.deleteRepository(repository)
                        } label: {
-                           CustomButtonIcon(icon: "trash", color: .red)
+                           CustomButtonIcon(icon: .trash, color: .red)
                        }
                    }
                 }

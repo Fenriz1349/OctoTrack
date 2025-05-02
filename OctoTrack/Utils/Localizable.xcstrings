@@ -1,6 +1,22 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "#%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%lld"
+          }
+        }
+      }
+    },
     "account" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -69,7 +85,7 @@
         }
       }
     },
-    "authenticationError" : {
+    "authenticationError %@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -205,6 +221,22 @@
         }
       }
     },
+    "draft" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Draft"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Draft"
+          }
+        }
+      }
+    },
     "failCantAdd" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -239,7 +271,7 @@
         }
       }
     },
-    "lastUpdate" : {
+    "lastUpdate %@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -320,6 +352,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Medium"
+          }
+        }
+      }
+    },
+    "merged" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Merged"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mergé"
           }
         }
       }
@@ -443,6 +492,22 @@
         }
       }
     },
+    "Pull Request #%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull Request #%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull Request #%lld"
+          }
+        }
+      }
+    },
     "refresh.PR" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -545,19 +610,19 @@
         }
       }
     },
-    "repositoriesTracked" : {
+    "repositoriesTracked %lld" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Repos tracked %d"
+            "value" : "Repos tracked %lld"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Repos suivies %d"
+            "value" : "Repos suivies %lld"
           }
         }
       }
@@ -664,6 +729,22 @@
         }
       }
     },
+    "timeline" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timeline"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timeline"
+          }
+        }
+      }
+    },
     "total" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -677,6 +758,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Total"
+          }
+        }
+      }
+    },
+    "updated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mis à jour"
           }
         }
       }
@@ -711,6 +809,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voir sur Github"
+          }
+        }
+      }
+    },
+    "welcome" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenu"
           }
         }
       }
