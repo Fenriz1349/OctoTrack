@@ -16,6 +16,8 @@ let clientSecret = "client-secret"
 let redirectURI = "octotrack://callback"
 let scopes = ["repo", "user"]
 let code = "auth-code"
+let testToken = "test-token"
+let testCode = "test-authorization-code"
 
 func anyURL() -> URL {
     URL(string: "https://any-url.com")!
@@ -48,16 +50,18 @@ func makeUser() -> (model: User, json: [String: Any]) {
 
     return (model, json)
 }
+
 func makeOwner() -> Owner {
     return Owner(id: 1, login: "octocat", avatarURL: "https://github.com/images/avatar.jpg")
 }
+
 func makeUserJSON(_ json: [String: Any]) throws -> Data {
     return try JSONSerialization.data(withJSONObject: json)
 }
 
 func makeSUTUSer(result: Result<(Data, HTTPURLResponse),
-                 Error> = .success((Data(), anyHTTPURLResponse()))) -> (UserLoader, HTTPClientMock) {
-    let client = HTTPClientMock(result: result)
+                 Error> = .success((Data(), anyHTTPURLResponse()))) -> (UserLoader, HTTPClientStub) {
+    let client = HTTPClientStub(result: result)
     let sut = UserLoader(client: client)
     return (sut, client)
 }
@@ -71,6 +75,31 @@ func makeTestRepository() -> Repository {
         owner: makeOwner(),
         createdAt: Date(),
         updatedAt: nil,
-        language: "Swift"
+        language: "Swift",
+        priority: .low
     )
+}
+
+// MARK: - Authentication Test Helpers
+
+func makeAccessToken() -> String {
+    return "gho_mockAccessToken12345"
+}
+
+func makeTokenResponse() -> ([String: Any], Data) {
+    let json = ["access_token": makeAccessToken(), "token_type": "bearer", "scope": "repo,user"]
+    let data = try! JSONSerialization.data(withJSONObject: json)
+    return (json, data)
+}
+
+func makeAuthURL() -> URL {
+    return URL(string: "https://github.com/login/oauth/authorize?client_id=\(clientID)&redirect_uri=\(redirectURI)&scope=repo%20user")!
+}
+
+func makeAuthCallbackURL() -> URL {
+    return URL(string: "octotrack://callback?code=\(code)")!
+}
+
+func makeTokenAuthManager() -> TokenAuthManager {
+    return TokenAuthManager(keychain: KeychainServiceSpy())
 }

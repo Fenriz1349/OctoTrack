@@ -11,7 +11,6 @@ import XCTest
 final class UserEndpointTests: XCTestCase {
 
     func test_userInfoRequest_createsRequestWithToken() throws {
-        let token = "test-token"
 
         let request = try UserEndpoint.userInfoRequest(with: token)
 
@@ -19,7 +18,7 @@ final class UserEndpointTests: XCTestCase {
         XCTAssertEqual(request.url?.host, "api.github.com")
         XCTAssertEqual(request.url?.path, "/user")
         XCTAssertEqual(request.httpMethod, "GET")
-        XCTAssertEqual(request.value(forHTTPHeaderField: "Authorization"), "Bearer \(token)")
+        XCTAssertEqual(request.value(forHTTPHeaderField: "Authorization"), "Bearer \(testToken)")
         XCTAssertEqual(request.value(forHTTPHeaderField: "Accept"), "application/vnd.github.v3+json")
     }
 }

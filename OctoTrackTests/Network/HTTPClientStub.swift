@@ -8,7 +8,7 @@
 import XCTest
 @testable import OctoTrack
 
-final class HTTPClientMock: HTTPClient {
+final class HTTPClientStub: HTTPClient {
     private let result: Result<(Data, HTTPURLResponse), Error>
     private(set) var requests: [URLRequest] = []
 

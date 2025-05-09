@@ -30,8 +30,9 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
     private enum Constants {
         static let tokenKey = "github.access.token"
     }
-    private let client = URLSessionHTTPClient()
-    private let tokenAuthManager = TokenAuthManager()
+
+    private let client: HTTPClient
+    private let tokenAuthManager: TokenAuthManager
     private var webAuthSession: ASWebAuthenticationSession?
     private var completionHandler: AuthenticationCompletionHandler?
 
@@ -45,6 +46,12 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
             return .unauthenticated
         }
     }
+
+    init(client: HTTPClient = URLSessionHTTPClient(), tokenAuthManager: TokenAuthManager = TokenAuthManager()) {
+            self.client = client
+            self.tokenAuthManager = tokenAuthManager
+            super.init()
+        }
 
     func authenticate() async throws {
         switch authenticationState {

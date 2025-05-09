@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol KeychainServiceProtocol {
+protocol TokenServiceManager {
     func insert(key: String, data: Data) throws
     func retrieve(key: String)  throws -> Data
     func delete(key: String) throws
     func existsInKeychain(key: String) -> Bool
 }
 
-final class KeychainService: KeychainServiceProtocol {
+final class KeychainService: TokenServiceManager {
 
     func insert(key: String, data: Data) throws {
         guard !key.isEmpty else {

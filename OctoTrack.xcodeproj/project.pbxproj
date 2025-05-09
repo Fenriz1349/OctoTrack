@@ -57,8 +57,7 @@
 		684F7C9A2D8DAA210044367F /* UserLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C902D8DAA210044367F /* UserLoaderTests.swift */; };
 		684F7C9B2D8DAA210044367F /* UserMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C912D8DAA210044367F /* UserMapperTests.swift */; };
 		684F7C9C2D8DAA210044367F /* EndpointBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C932D8DAA210044367F /* EndpointBuilderTest.swift */; };
-		684F7C9D2D8DAA210044367F /* URLSessionHTTPClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C942D8DAA210044367F /* URLSessionHTTPClientTest.swift */; };
-		684F7C9E2D8DAA210044367F /* HTTPClientMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C962D8DAA210044367F /* HTTPClientMock.swift */; };
+		684F7C9E2D8DAA210044367F /* HTTPClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C962D8DAA210044367F /* HTTPClientStub.swift */; };
 		684F7C9F2D8DAA210044367F /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C972D8DAA210044367F /* SharedTestHelpers.swift */; };
 		684F7CA12D8DBF8A0044367F /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7CA02D8DBF8A0044367F /* Owner.swift */; };
 		686BFB8F2DA9378B00C859C3 /* RepoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686BFB8E2DA9378B00C859C3 /* RepoListViewModel.swift */; };
@@ -82,6 +81,12 @@
 		68C02ED12D9FC58C0065027F /* PreviewPullRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02ED02D9FC58C0065027F /* PreviewPullRequests.swift */; };
 		68C02ED32D9FC8200065027F /* PullRequestDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02ED22D9FC8200065027F /* PullRequestDetailView.swift */; };
 		68C02ED72D9FD9540065027F /* RepoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02ED62D9FD9540065027F /* RepoHeader.swift */; };
+		68DB04672DCDE433006A4813 /* KeychainServiceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB04662DCDE433006A4813 /* KeychainServiceSpy.swift */; };
+		68DB04692DCDE486006A4813 /* ASWebAuthenticationSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB04682DCDE486006A4813 /* ASWebAuthenticationSessionMock.swift */; };
+		68DB046B2DCDE70F006A4813 /* GitHubAuthenticationEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB046A2DCDE70F006A4813 /* GitHubAuthenticationEndpointTests.swift */; };
+		68DB046D2DCDE73C006A4813 /* GitHubAuthenticationMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB046C2DCDE73C006A4813 /* GitHubAuthenticationMapperTests.swift */; };
+		68DB046F2DCDE817006A4813 /* GitHubAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB046E2DCDE817006A4813 /* GitHubAuthenticatorTests.swift */; };
+		68DB04712DCDEAA3006A4813 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB04702DCDEAA3006A4813 /* MockURLProtocol.swift */; };
 		68EDADE52DB28E0600B7995D /* RepoPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EDADE42DB28E0600B7995D /* RepoPriority.swift */; };
 		68EDADE72DB2978500B7995D /* PriorityButtonsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EDADE62DB2978500B7995D /* PriorityButtonsStack.swift */; };
 /* End PBXBuildFile section */
@@ -149,8 +154,7 @@
 		684F7C902D8DAA210044367F /* UserLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoaderTests.swift; sourceTree = "<group>"; };
 		684F7C912D8DAA210044367F /* UserMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMapperTests.swift; sourceTree = "<group>"; };
 		684F7C932D8DAA210044367F /* EndpointBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointBuilderTest.swift; sourceTree = "<group>"; };
-		684F7C942D8DAA210044367F /* URLSessionHTTPClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTest.swift; sourceTree = "<group>"; };
-		684F7C962D8DAA210044367F /* HTTPClientMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientMock.swift; sourceTree = "<group>"; };
+		684F7C962D8DAA210044367F /* HTTPClientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientStub.swift; sourceTree = "<group>"; };
 		684F7C972D8DAA210044367F /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		684F7CA02D8DBF8A0044367F /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		686BFB8D2DA909F100C859C3 /* OctoTrack.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = OctoTrack.xctestplan; sourceTree = "<group>"; };
@@ -175,6 +179,12 @@
 		68C02ED02D9FC58C0065027F /* PreviewPullRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPullRequests.swift; sourceTree = "<group>"; };
 		68C02ED22D9FC8200065027F /* PullRequestDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestDetailView.swift; sourceTree = "<group>"; };
 		68C02ED62D9FD9540065027F /* RepoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoHeader.swift; sourceTree = "<group>"; };
+		68DB04662DCDE433006A4813 /* KeychainServiceSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceSpy.swift; sourceTree = "<group>"; };
+		68DB04682DCDE486006A4813 /* ASWebAuthenticationSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASWebAuthenticationSessionMock.swift; sourceTree = "<group>"; };
+		68DB046A2DCDE70F006A4813 /* GitHubAuthenticationEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthenticationEndpointTests.swift; sourceTree = "<group>"; };
+		68DB046C2DCDE73C006A4813 /* GitHubAuthenticationMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthenticationMapperTests.swift; sourceTree = "<group>"; };
+		68DB046E2DCDE817006A4813 /* GitHubAuthenticatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthenticatorTests.swift; sourceTree = "<group>"; };
+		68DB04702DCDEAA3006A4813 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		68EDADE42DB28E0600B7995D /* RepoPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoPriority.swift; sourceTree = "<group>"; };
 		68EDADE62DB2978500B7995D /* PriorityButtonsStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityButtonsStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -391,8 +401,8 @@
 			isa = PBXGroup;
 			children = (
 				684F7C8F2D8DAA210044367F /* UserEndpointTest.swift */,
-				684F7C902D8DAA210044367F /* UserLoaderTests.swift */,
 				684F7C912D8DAA210044367F /* UserMapperTests.swift */,
+				684F7C902D8DAA210044367F /* UserLoaderTests.swift */,
 			);
 			path = UserRequest;
 			sourceTree = "<group>";
@@ -400,9 +410,12 @@
 		684F7C952D8DAA210044367F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				68DB04652DCDE2E5006A4813 /* AuthenticationRequest */,
 				684F7C922D8DAA210044367F /* UserRequest */,
 				684F7C932D8DAA210044367F /* EndpointBuilderTest.swift */,
-				684F7C942D8DAA210044367F /* URLSessionHTTPClientTest.swift */,
+				68DB04702DCDEAA3006A4813 /* MockURLProtocol.swift */,
+				68DB04682DCDE486006A4813 /* ASWebAuthenticationSessionMock.swift */,
+				684F7C962D8DAA210044367F /* HTTPClientStub.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -411,8 +424,8 @@
 			isa = PBXGroup;
 			children = (
 				684F7C952D8DAA210044367F /* Network */,
-				684F7C962D8DAA210044367F /* HTTPClientMock.swift */,
 				684F7C972D8DAA210044367F /* SharedTestHelpers.swift */,
+				68DB04662DCDE433006A4813 /* KeychainServiceSpy.swift */,
 			);
 			path = OctoTrackTests;
 			sourceTree = "<group>";
@@ -425,6 +438,16 @@
 				68C02ECC2D9FBA360065027F /* PullRequestGetter.swift */,
 			);
 			path = PullRequestRequest;
+			sourceTree = "<group>";
+		};
+		68DB04652DCDE2E5006A4813 /* AuthenticationRequest */ = {
+			isa = PBXGroup;
+			children = (
+				68DB046A2DCDE70F006A4813 /* GitHubAuthenticationEndpointTests.swift */,
+				68DB046C2DCDE73C006A4813 /* GitHubAuthenticationMapperTests.swift */,
+				68DB046E2DCDE817006A4813 /* GitHubAuthenticatorTests.swift */,
+			);
+			path = AuthenticationRequest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -607,13 +630,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68DB04692DCDE486006A4813 /* ASWebAuthenticationSessionMock.swift in Sources */,
 				684F7C992D8DAA210044367F /* UserEndpointTest.swift in Sources */,
+				68DB046F2DCDE817006A4813 /* GitHubAuthenticatorTests.swift in Sources */,
 				684F7C9A2D8DAA210044367F /* UserLoaderTests.swift in Sources */,
+				68DB046B2DCDE70F006A4813 /* GitHubAuthenticationEndpointTests.swift in Sources */,
 				684F7C9B2D8DAA210044367F /* UserMapperTests.swift in Sources */,
+				68DB04672DCDE433006A4813 /* KeychainServiceSpy.swift in Sources */,
+				68DB04712DCDEAA3006A4813 /* MockURLProtocol.swift in Sources */,
 				684F7C9C2D8DAA210044367F /* EndpointBuilderTest.swift in Sources */,
-				684F7C9D2D8DAA210044367F /* URLSessionHTTPClientTest.swift in Sources */,
-				684F7C9E2D8DAA210044367F /* HTTPClientMock.swift in Sources */,
+				684F7C9E2D8DAA210044367F /* HTTPClientStub.swift in Sources */,
 				684F7C9F2D8DAA210044367F /* SharedTestHelpers.swift in Sources */,
+				68DB046D2DCDE73C006A4813 /* GitHubAuthenticationMapperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

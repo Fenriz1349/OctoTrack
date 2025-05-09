@@ -14,6 +14,7 @@ struct PullRequestDetailView: View {
     private var link: String {
         "https://github.com/\(repository.owner.login)/\(repository.name)/pull/\(pullRequest.number)"
     }
+
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
