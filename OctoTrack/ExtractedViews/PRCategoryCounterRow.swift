@@ -27,6 +27,8 @@ struct PRCategoryCounterRow: View {
                 .frame(height: 24)
             CountingCell(text: "merged", count: mergedcount)
             if let language = language {
+                Divider()
+                    .frame(height: 24)
                 Text(language)
                     .font(.subheadline)
                     .foregroundColor(.secondary)

@@ -97,6 +97,5 @@ import SwiftData
                 isLogged = false
             }
         }
-        print("✅ Fin de loadUserData")
     }
 }

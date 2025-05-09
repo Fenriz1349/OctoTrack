@@ -23,7 +23,6 @@ final class UserDataManager {
             let descriptor = FetchDescriptor<User>(predicate: predicate)
             return try modelContext.fetch(descriptor).first
         } catch {
-            print("Erreur lors de la récupération de l'utilisateur: \(error)")
             return nil
         }
     }
@@ -142,11 +141,7 @@ final class UserDataManager {
                 currentUser.lastUpdate = Date()
 
                 try modelContext.save()
-                print("✅ Repo ajouté et sauvegardé: \(newRepo.name)")
-            } else {
-                print("⚠️ Ce repo est déjà associé à cet utilisateur")
             }
-            print("📊 Nombre de repos associés à l'utilisateur: \(currentUser.repoList.count)")
         } catch {
             print("❌ Erreur: \(error)")
         }
@@ -159,9 +154,6 @@ final class UserDataManager {
                 currentUser.repoList.removeAll { $0.id == id }
                 modelContext.delete(repoToDelete)
                 try modelContext.save()
-                print("✅ Repo supprimé avec succès")
-            } else {
-                print("⚠️ Repo non trouvé pour la suppression")
             }
         } catch {
             print("❌ Erreur lors de la suppression du repo: \(error)")
@@ -177,7 +169,6 @@ final class UserDataManager {
                 return date1 < date2
             }
             try modelContext.save()
-            print("✅ Repositories triés avec succès")
         } catch {
             print("❌ Erreur lors du tri des repositories: \(error)")
         }
@@ -203,9 +194,6 @@ final class UserDataManager {
             if let repoToUpdate = currentUser.repoList.first(where: { $0.id == repoId }) {
                 repoToUpdate.priority = priority
                 try modelContext.save()
-                print("✅ Repo mis à jour avec succès")
-            } else {
-                print("⚠️ Repo non trouvé pour la mise à jour")
             }
         } catch {
             print("❌ Erreur lors de la mise à jour du repo: \(error)")
@@ -221,7 +209,6 @@ final class UserDataManager {
                 let repoToUpdate = currentUser.repoList[index]
                 repoToUpdate.pullRequests = pullRequests
                 try modelContext.save()
-                print("liste des PullRequests sauvegardé")
             }
         } catch {
             print("Erreur dans la sauvegarde des PulleEquests")
@@ -231,15 +218,11 @@ final class UserDataManager {
     func deletePullRequest(repoId: Int, prId: Int) {
         guard let currentUser = activeUser else { return }
         do {
-            if let repo = currentUser.repoList.first(where: { $0.id == repoId }) {
-                if let pullRequest = repo.pullRequests.first(where: { $0.id == prId }) {
-                    repo.pullRequests.removeAll { $0.id == prId }
-                    modelContext.delete(pullRequest)
-                    try modelContext.save()
-                    print("✅ Pull Request supprimé avec succès")
-                }
-            } else {
-                print("⚠️ Pull Request non trouvé pour la suppression")
+            if let repo = currentUser.repoList.first(where: { $0.id == repoId }),
+               let pullRequest = repo.pullRequests.first(where: { $0.id == prId }) {
+                repo.pullRequests.removeAll { $0.id == prId }
+                modelContext.delete(pullRequest)
+                try modelContext.save()
             }
         } catch {
             print("❌ Erreur lors de la suppression de la pull request: \(error)")

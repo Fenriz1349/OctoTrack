@@ -18,7 +18,7 @@ struct PullRequestDetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                CompactRepoHeader(repository: repository)
+                RepoHeader(repository: repository, isCompact: true)
 
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {

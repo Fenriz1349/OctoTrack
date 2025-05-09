@@ -53,7 +53,6 @@ final class TokenAuthManager {
            let refreshedTokenData = TokenMapper.createTokenData(with: tokenData.token)
            let data = try TokenMapper.encodeToken(refreshedTokenData)
            try keychain.insert(key: tokenKey, data: data)
-        print("token refresh")
        }
 
     private func getTokenDataFromKeychain() throws -> TokenData {

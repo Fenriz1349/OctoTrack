@@ -11,18 +11,25 @@ struct InfoLabel: View {
     let message: String
     let isSuccess: Bool
 
+    private var color: Color {
+        isSuccess ? .green : .red
+    }
+
+    private var iconName: String {
+        isSuccess ? IconsName.checkMark.rawValue : IconsName.xMark.rawValue
+    }
+    
     var body: some View {
         HStack {
-            Image(systemName: isSuccess ? "checkmark.circle.fill" : "xmark.circle.fill")
-                .foregroundColor(isSuccess ? .green : .red)
-
+            Image(systemName: iconName)
+                .foregroundColor(color)
             Text(isSuccess
-                 ? String(format: "addedWithSuccess", message)
-                 : String(format: "failCantAdd", message) )
-                .fontWeight(.medium)
+                 ? "addedWithSuccess \(message)"
+                 : "failCantAdd \(message)")
+            .fontWeight(.medium)
         }
         .padding()
-        .background(isSuccess ? Color.green.opacity(0.1) : Color.red.opacity(0.1))
+        .background(color.opacity(0.1))
         .cornerRadius(8)
     }
 }
