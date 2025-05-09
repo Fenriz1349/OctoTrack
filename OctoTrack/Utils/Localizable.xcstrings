@@ -34,7 +34,7 @@
         }
       }
     },
-    "addedWithSuccess" : {
+    "addedWithSuccess %@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -237,7 +237,7 @@
         }
       }
     },
-    "failCantAdd" : {
+    "failCantAdd %@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

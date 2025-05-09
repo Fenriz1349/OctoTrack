@@ -15,15 +15,12 @@ import SwiftUI
             return localImage
         }
 
-        if let urlString = urlString, let url = URL(string: urlString) {
-            do {
-                let (data, _) = try await URLSession.shared.data(from: url)
-                if let downloadedImage = UIImage(data: data) {
-                    return downloadedImage
-                }
-            } catch {
-            }
-        }
+        if let urlString = urlString,
+              let url = URL(string: urlString),
+              let (data, _) = try? await URLSession.shared.data(from: url),
+              let downloadedImage = UIImage(data: data) {
+               return downloadedImage
+           }
 
         return UIImage(named: "defaultAvatar") ?? UIImage()
     }

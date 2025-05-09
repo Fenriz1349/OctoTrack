@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct RepoHeader: View {
-    var repository: Repository
+    let repository: Repository
+    var isCompact: Bool = false
 
     private var openPRCount: Int {
         repository.pullRequests.filter { $0.state == .open }.count
@@ -37,17 +38,18 @@ struct RepoHeader: View {
             }
 
             OwnerLabel(repository: repository)
-            Divider()
-
-            PRCategoryCounterRow(totalCount: totalPRCount,
-                                 openCount: openPRCount,
-                                 closedCount: closedPRCount,
-                                 mergedcount: mergedPRCount,
-                                 language: repository.language)
-            Divider()
-            DateRow(creationDate: repository.createdAt,
-                    updateDate: repository.updatedAt,
-                    mergedAt: nil, closedAt: nil)
+            if !isCompact {
+                Divider()
+                PRCategoryCounterRow(totalCount: totalPRCount,
+                                     openCount: openPRCount,
+                                     closedCount: closedPRCount,
+                                     mergedcount: mergedPRCount,
+                                     language: repository.language)
+                Divider()
+                DateRow(creationDate: repository.createdAt,
+                        updateDate: repository.updatedAt,
+                        mergedAt: nil, closedAt: nil)
+            }
         }
         .padding(20)
         .frame(maxWidth: .infinity)
