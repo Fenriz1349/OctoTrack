@@ -1,5 +1,5 @@
 //
-//  InfoLabel.swift
+//  FeedbackLabel.swift
 //  OctoTrack
 //
 //  Created by Julien Cotte on 07/03/2025.
@@ -7,17 +7,16 @@
 
 import SwiftUI
 
-struct InfoLabel: View {
-    let message: String
+struct FeedbackLabel: View {
+    let feedback: FeedbackHandler
     var showIcon: Bool = true
-    var isSuccess: Bool = false
 
     private var color: Color {
-        isSuccess ? .green : .red
+        feedback.isError ? .red : .green
     }
 
     private var iconName: String {
-        isSuccess ? IconsName.checkMark.rawValue : IconsName.xMark.rawValue
+        feedback.isError ? IconsName.xMark.rawValue : IconsName.checkMark.rawValue
     }
 
     var body: some View {
@@ -26,8 +25,8 @@ struct InfoLabel: View {
                 Image(systemName: iconName)
                     .foregroundColor(color)
             }
-            Text(message)
-            .fontWeight(.medium)
+            Text(LocalizedStringKey(feedback.message ?? ""))
+                .fontWeight(.medium)
         }
         .padding()
         .background(color.opacity(0.1))
@@ -36,5 +35,5 @@ struct InfoLabel: View {
 }
 
 #Preview {
-    InfoLabel(message: "this is a test", isSuccess: false)
+    FeedbackLabel(feedback: PreviewContainer.previewFeedbackSuceess)
 }

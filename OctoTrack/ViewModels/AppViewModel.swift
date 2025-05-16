@@ -14,9 +14,6 @@ import SwiftData
     var isInitializing: Bool = true
     var authenticationViewModel: AuthenticationViewModel
     let dataManager: UserDataManager
-    var userApp: User? {
-        dataManager.activeUser
-    }
 
     init(dataManager: UserDataManager) {
         self.dataManager = dataManager
@@ -53,7 +50,7 @@ import SwiftData
         switch authState {
         case .authenticated:
             await loadUserData()
-            if dataManager.activeUser != nil {
+            if dataManager.safeActiveUser() != nil {
                 isLogged = true
                 authenticationViewModel.startTokenValidation()
             } else {
@@ -86,7 +83,7 @@ import SwiftData
 
     @MainActor
     private func loadUserData() async {
-        if let storedUser = dataManager.safeActiveUser() {
+        if dataManager.safeActiveUser() != nil {
             isLogged = true
         } else {
             do {

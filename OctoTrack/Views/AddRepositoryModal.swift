@@ -60,8 +60,8 @@ struct AddRepositoryModal: View {
                 .opacity(viewModel.isFormValid ? 1 : 0.6)
             }
 
-            if let message = viewModel.feedback.message {
-                InfoLabel(message: message, isSuccess: viewModel.feedback.isError)
+            if viewModel.feedback.message != nil {
+                FeedbackLabel(feedback: viewModel.feedback)
             }
             Spacer()
         }

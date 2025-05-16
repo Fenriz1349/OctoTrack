@@ -155,7 +155,7 @@ import SwiftData
         }
     }
 
-    func deleteRepository(_ repository: Repository)  throws {
+    func deleteRepository(_ repository: Repository) throws {
         if let repoToDelete = activeUser.repoList.first(where: { $0.id == repository.id }) {
             activeUser.repoList.removeAll { $0.id == repository.id }
             modelContext.delete(repoToDelete)

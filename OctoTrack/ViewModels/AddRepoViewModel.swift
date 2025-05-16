@@ -35,10 +35,6 @@ import SwiftData
                 return true
             }
         }
-
-        mutating func reset() {
-            self = .none
-        }
     }
 
     var owner: String

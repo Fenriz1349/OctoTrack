@@ -40,8 +40,8 @@ struct RepoDetailView: View {
                 )
             }
 
-            if let message = viewModel.feedbackMessage {
-                InfoLabel(message: message, showIcon: false)
+            if viewModel.feedback.message != nil {
+                FeedbackLabel(feedback: viewModel.feedback, showIcon: false)
             }
 
             List(viewModel.repository.pullRequests) { pullRequest in
@@ -59,7 +59,7 @@ struct RepoDetailView: View {
             }
             .listStyle(PlainListStyle())
             .refreshable {
-                await viewModel.updatePullRequests()
+                await viewModel.getAllPullRequests()
             }
         }
         .padding(.horizontal, 20)

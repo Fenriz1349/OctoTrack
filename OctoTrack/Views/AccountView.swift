@@ -17,13 +17,7 @@ struct AccountView: View {
 
     var body: some View {
         VStack(spacing: 24) {
-            if let user = appViewModel.userApp {
-                UserHeader(user: user)
-            } else {
-                Text("userDataNotAvailable")
-                    .foregroundColor(.secondary)
-            }
-
+            UserHeader(user: appViewModel.dataManager.activeUser)
             VStack(spacing: 16) {
                 Button {
                     showingResetAlert = true

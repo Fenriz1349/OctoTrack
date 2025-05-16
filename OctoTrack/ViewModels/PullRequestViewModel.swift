@@ -9,9 +9,27 @@ import SwiftUI
 
 @MainActor
 @Observable final class PullRequestViewModel {
+
+    enum Feedback: FeedbackHandler, Equatable {
+        case none
+        case noPR
+        case updateFailed
+
+        var message: String? {
+            switch self {
+            case .none:  nil
+            case .noPR: "noPR"
+            case .updateFailed: "updateFailed"
+            }
+        }
+
+        var isError: Bool {
+            true
+        }
+    }
+
     let repository: Repository
-    // To handle feedback on the view
-    var feedbackMessage: String?
+    var feedback: Feedback = .none
     var isLoading = false
     let dataManager: UserDataManager
     private let pullRequestGetter = PullRequestGetter()
@@ -26,31 +44,20 @@ import SwiftUI
         dataManager.updateRepositoryPriority(repoId: repository.id, priority: priority)
     }
 
-    private func getAllPullRequests(state: String = "all") async -> Result<[PullRequest], Error> {
+    func getAllPullRequests(state: String = "all") async {
         isLoading = true
         do {
             let token = try await authenticator.retrieveToken()
             let request = try PullRequestEndpoint
                 .request(owner: repository.owner.login, repoName: repository.name, token: token, state: state)
-            let pullRequests = try await pullRequestGetter.allPullRequestsGetter(from: request)
-            isLoading = false
-            checkIfEmptyPullRequest()
-            return(.success(pullRequests))
-        } catch {
-            feedbackMessage = "\(repository.owner.login)/\(repository.name)"
-            isLoading = false
-            return .failure(error)
-        }
-    }
-
-    func updatePullRequests() async {
-        let getPullRequests = await getAllPullRequests()
-        switch getPullRequests {
-        case .success(var pullRequests):
+            var pullRequests = try await pullRequestGetter.allPullRequestsGetter(from: request)
+            feedback = pullRequests.isEmpty ? .noPR : .none
             pullRequests.sort { $0.createdAt < $1.createdAt }
             dataManager.storePullRequests(pullRequests, repositoryiD: repository.id)
-        case .failure:
-            feedbackMessage = "updateFailed"
+            isLoading = false
+        } catch {
+            feedback = .updateFailed
+            isLoading = false
         }
     }
 
@@ -58,9 +65,5 @@ import SwiftUI
         withAnimation {
             dataManager.deletePullRequest(repoId: repository.id, prId: pullRequest.id)
         }
-    }
-
-    private func checkIfEmptyPullRequest() {
-        feedbackMessage = dataManager.allUsers.isEmpty ? "noPR" : nil
     }
 }
