@@ -60,7 +60,6 @@
 		684F7C9E2D8DAA210044367F /* HTTPClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C962D8DAA210044367F /* HTTPClientStub.swift */; };
 		684F7C9F2D8DAA210044367F /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C972D8DAA210044367F /* SharedTestHelpers.swift */; };
 		684F7CA12D8DBF8A0044367F /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7CA02D8DBF8A0044367F /* Owner.swift */; };
-		686BFB8F2DA9378B00C859C3 /* RepoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686BFB8E2DA9378B00C859C3 /* RepoListViewModel.swift */; };
 		688F20422DC4A95D00AA7194 /* TImelineEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688F20412DC4A95D00AA7194 /* TImelineEvent.swift */; };
 		688F20442DC4AA5200AA7194 /* PullRequestTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688F20432DC4AA5200AA7194 /* PullRequestTimeline.swift */; };
 		688F20482DC4E06300AA7194 /* GithubLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688F20472DC4E06300AA7194 /* GithubLink.swift */; };
@@ -86,6 +85,7 @@
 		68DB046D2DCDE73C006A4813 /* GitHubAuthenticationMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB046C2DCDE73C006A4813 /* GitHubAuthenticationMapperTests.swift */; };
 		68DB046F2DCDE817006A4813 /* GitHubAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB046E2DCDE817006A4813 /* GitHubAuthenticatorTests.swift */; };
 		68DB04712DCDEAA3006A4813 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB04702DCDEAA3006A4813 /* MockURLProtocol.swift */; };
+		68E682FD2DD7318400B6C922 /* FeedbackHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E682FC2DD7318400B6C922 /* FeedbackHandler.swift */; };
 		68EDADE52DB28E0600B7995D /* RepoPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EDADE42DB28E0600B7995D /* RepoPriority.swift */; };
 		68EDADE72DB2978500B7995D /* PriorityButtonsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EDADE62DB2978500B7995D /* PriorityButtonsStack.swift */; };
 /* End PBXBuildFile section */
@@ -157,7 +157,6 @@
 		684F7C972D8DAA210044367F /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		684F7CA02D8DBF8A0044367F /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		686BFB8D2DA909F100C859C3 /* OctoTrack.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = OctoTrack.xctestplan; sourceTree = "<group>"; };
-		686BFB8E2DA9378B00C859C3 /* RepoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListViewModel.swift; sourceTree = "<group>"; };
 		688F20412DC4A95D00AA7194 /* TImelineEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TImelineEvent.swift; sourceTree = "<group>"; };
 		688F20432DC4AA5200AA7194 /* PullRequestTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestTimeline.swift; sourceTree = "<group>"; };
 		688F20472DC4E06300AA7194 /* GithubLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLink.swift; sourceTree = "<group>"; };
@@ -183,6 +182,7 @@
 		68DB046C2DCDE73C006A4813 /* GitHubAuthenticationMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthenticationMapperTests.swift; sourceTree = "<group>"; };
 		68DB046E2DCDE817006A4813 /* GitHubAuthenticatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthenticatorTests.swift; sourceTree = "<group>"; };
 		68DB04702DCDEAA3006A4813 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		68E682FC2DD7318400B6C922 /* FeedbackHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackHandler.swift; sourceTree = "<group>"; };
 		68EDADE42DB28E0600B7995D /* RepoPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoPriority.swift; sourceTree = "<group>"; };
 		68EDADE62DB2978500B7995D /* PriorityButtonsStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityButtonsStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -271,6 +271,7 @@
 				68EDADE42DB28E0600B7995D /* RepoPriority.swift */,
 				689B15E02DBA6AEA0075B3EC /* Tab.swift */,
 				689B15EE2DBBCC480075B3EC /* Status.swift */,
+				68E682FC2DD7318400B6C922 /* FeedbackHandler.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -356,7 +357,6 @@
 				684F7C4D2D8DAA1A0044367F /* AppViewModel.swift */,
 				684F7C4E2D8DAA1A0044367F /* AsyncAvatarViewModel.swift */,
 				684F7C4F2D8DAA1A0044367F /* AuthenticationViewModel.swift */,
-				686BFB8E2DA9378B00C859C3 /* RepoListViewModel.swift */,
 				689B15E22DBA6FC80075B3EC /* PullRequestViewModel.swift */,
 			);
 			path = ViewModels;
@@ -570,6 +570,7 @@
 				684F7C6F2D8DAA1A0044367F /* TextFieldConfig.swift in Sources */,
 				68C02ECB2D9FB7800065027F /* PullRequestMapper.swift in Sources */,
 				684F7C702D8DAA1A0044367F /* User.swift in Sources */,
+				68E682FD2DD7318400B6C922 /* FeedbackHandler.swift in Sources */,
 				688F20442DC4AA5200AA7194 /* PullRequestTimeline.swift in Sources */,
 				684F7C712D8DAA1A0044367F /* GitHubAuthenticationEndpoint.swift in Sources */,
 				684F7C722D8DAA1A0044367F /* GitHubAuthenticationMapper.swift in Sources */,
@@ -599,7 +600,6 @@
 				689B15DF2DBA30310075B3EC /* AppButtonStyle.swift in Sources */,
 				684F7C822D8DAA1A0044367F /* AddRepoViewModel.swift in Sources */,
 				689B15ED2DBB85690075B3EC /* CountingCell.swift in Sources */,
-				686BFB8F2DA9378B00C859C3 /* RepoListViewModel.swift in Sources */,
 				688F20482DC4E06300AA7194 /* GithubLink.swift in Sources */,
 				689B15EB2DBB84E70075B3EC /* PRCategoryCounterRow.swift in Sources */,
 				684F7C832D8DAA1A0044367F /* AppViewModel.swift in Sources */,

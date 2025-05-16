@@ -9,7 +9,8 @@ import SwiftUI
 
 struct InfoLabel: View {
     let message: String
-    let isSuccess: Bool
+    var showIcon: Bool = true
+    var isSuccess: Bool = false
 
     private var color: Color {
         isSuccess ? .green : .red
@@ -21,11 +22,11 @@ struct InfoLabel: View {
     
     var body: some View {
         HStack {
-            Image(systemName: iconName)
-                .foregroundColor(color)
-            Text(isSuccess
-                 ? "addedWithSuccess \(message)"
-                 : "failCantAdd \(message)")
+            if showIcon {
+                Image(systemName: iconName)
+                    .foregroundColor(color)
+            }
+            Text(message)
             .fontWeight(.medium)
         }
         .padding()

@@ -21,7 +21,4 @@ enum Errors: Swift.Error {
     case noHTTPURLResponse
     case authenticationFailed
     case missingAuthorizationCode
-    case insertUserFail
-    case noCurrentUser
-    case refreshFailure
 }

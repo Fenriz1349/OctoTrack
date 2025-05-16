@@ -40,10 +40,10 @@ struct RepoDetailView: View {
                 )
             }
 
-            if viewModel.repository.pullRequests.isEmpty {
-                Text("noPR")
-                Spacer()
+            if let message = viewModel.feedbackMessage  {
+                InfoLabel(message: message, showIcon: false)
             }
+
             List(viewModel.repository.pullRequests) { pullRequest in
                 NavigationLink(destination: PullRequestDetailView(pullRequest: pullRequest,
                                                          repository: viewModel.repository) ) {

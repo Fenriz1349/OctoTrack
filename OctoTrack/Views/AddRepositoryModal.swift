@@ -44,18 +44,7 @@ struct AddRepositoryModal: View {
             } else {
                 Button(action: {
                     Task {
-                        let getRepo = await viewModel.getRepo()
-                        switch getRepo {
-                        case .success(let repo):
-                            repo.priority = viewModel.priority
-                            viewModel.dataManager.storeNewRepo(repo)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                viewModel.resetFeedback()
-                                dismiss()
-                            }
-                        case .failure:
-                            break
-                        }
+                         await viewModel.getRepo()
                     }
                 },
                 label: {
@@ -71,10 +60,18 @@ struct AddRepositoryModal: View {
                 .opacity(viewModel.isFormValid ? 1 : 0.6)
             }
 
-            if viewModel.showFeedback {
-                InfoLabel(message: viewModel.feedbackMessage, isSuccess: viewModel.isSuccess)
+            if let message = viewModel.feedback.message {
+                InfoLabel(message: message, isSuccess: viewModel.feedback.isError)
             }
             Spacer()
+        }
+        .onChange(of: viewModel.feedback) {
+            if case .addSuccess = viewModel.feedback {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    viewModel.feedback = .none
+                    dismiss()
+                }
+            }
         }
         .padding()
     }

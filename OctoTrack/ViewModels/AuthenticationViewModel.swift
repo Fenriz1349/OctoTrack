@@ -80,6 +80,6 @@ import Foundation
     }
 
     func stopTokenValidation() {
-            tokenValidator.stopPeriodicValidation()
-        }
+        tokenValidator.stopPeriodicValidation()
+    }
 }

@@ -86,7 +86,7 @@ import SwiftData
 
     @MainActor
     private func loadUserData() async {
-        if let storedUser = dataManager.activeUser {
+        if let storedUser = dataManager.safeActiveUser() {
             isLogged = true
         } else {
             do {

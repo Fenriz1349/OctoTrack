@@ -237,6 +237,9 @@
         }
       }
     },
+    "Erreur: %@" : {
+
+    },
     "failCantAdd %@" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -369,6 +372,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mergé"
+          }
+        }
+      }
+    },
+    "noActiveUser" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No active user found"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun utilisateur actif trouvé"
           }
         }
       }
@@ -678,6 +698,17 @@
         }
       }
     },
+    "resetSuccess" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset all Repo with sucess !"
+          }
+        }
+      }
+    },
     "signAgain" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -775,6 +806,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mis à jour"
+          }
+        }
+      }
+    },
+    "updateFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error during update, please try again"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur pendant la mise à jour, veuillez réssayer"
           }
         }
       }

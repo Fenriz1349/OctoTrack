@@ -49,18 +49,14 @@ final class TokenAuthManager {
     }
 
     func refreshToken() throws {
-           let tokenData = try getTokenDataFromKeychain()
-           let refreshedTokenData = TokenMapper.createTokenData(with: tokenData.token)
-           let data = try TokenMapper.encodeToken(refreshedTokenData)
-           try keychain.insert(key: tokenKey, data: data)
-       }
+        let tokenData = try getTokenDataFromKeychain()
+        let refreshedTokenData = TokenMapper.createTokenData(with: tokenData.token)
+        let data = try TokenMapper.encodeToken(refreshedTokenData)
+        try keychain.insert(key: tokenKey, data: data)
+    }
 
     private func getTokenDataFromKeychain() throws -> TokenData {
-        do {
-            let tokenData = try keychain.retrieve(key: tokenKey)
-            return try TokenMapper.decodeToken(from: tokenData)
-        } catch {
-            throw Errors.invalidToken
-        }
+        let tokenData = try keychain.retrieve(key: tokenKey)
+        return try TokenMapper.decodeToken(from: tokenData)
     }
 }
