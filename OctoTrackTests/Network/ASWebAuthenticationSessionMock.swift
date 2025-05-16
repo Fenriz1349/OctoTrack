@@ -35,7 +35,8 @@ class ASWebAuthenticationSessionMock: ASWebAuthenticationSession {
     }
 }
 
-func makeSUTAuthenticator() -> (sut: GitHubAuthenticator, client: HTTPClientStub, tokenManager: TokenAuthManager, keychain: KeychainServiceSpy) {
+func makeSUTAuthenticator() -> (sut: GitHubAuthenticator, client: HTTPClientStub,
+                                tokenManager: TokenAuthManager, keychain: KeychainServiceSpy) {
     let keychainMock = KeychainServiceSpy()
     let tokenManager = TokenAuthManager(keychain: keychainMock)
     let client = HTTPClientStub(result: .success((Data(), anyHTTPURLResponse())))

@@ -19,7 +19,7 @@ struct InfoLabel: View {
     private var iconName: String {
         isSuccess ? IconsName.checkMark.rawValue : IconsName.xMark.rawValue
     }
-    
+
     var body: some View {
         HStack {
             if showIcon {

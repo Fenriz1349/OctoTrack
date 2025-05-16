@@ -10,37 +10,37 @@ import SwiftData
 
 @MainActor
 @Observable final class AddRepoViewModel {
-    
+
     enum Feedback: FeedbackHandler, Equatable {
-          case none
-          case addSuccess(owner: String, repoName: String)
+        case none
+        case addSuccess(owner: String, repoName: String)
         case addFailed(owner: String, repoName: String, error: String)
-          
-          var message: String? {
-              switch self {
-              case .none:
-                  return nil
-              case .addSuccess(let owner, let repoName):
-                  return "Successfully added \(owner)/\(repoName)"
-              case .addFailed(let owner, let repoName, let error):
-                  return "Failed to add \(owner)/\(repoName): \(error)"
-              }
-          }
-          
-          var isError: Bool {
-              switch self {
-              case .none, .addSuccess:
-                  return false
-              case .addFailed:
-                  return true
-              }
-          }
-          
-          mutating func reset() {
-              self = .none
-          }
-      }
-    
+
+        var message: String? {
+            switch self {
+            case .none:
+                return nil
+            case .addSuccess(let owner, let repoName):
+                return "Successfully added \(owner)/\(repoName)"
+            case .addFailed(let owner, let repoName, let error):
+                return "Failed to add \(owner)/\(repoName): \(error)"
+            }
+        }
+
+        var isError: Bool {
+            switch self {
+            case .none, .addSuccess:
+                return false
+            case .addFailed:
+                return true
+            }
+        }
+
+        mutating func reset() {
+            self = .none
+        }
+    }
+
     var owner: String
 #warning("supprimer la valeur par defaut dans la version finale")
     var repoName: String = "DA-iOS_P5"
@@ -48,8 +48,7 @@ import SwiftData
     let dataManager: UserDataManager
     private let repoGetter: RepoGetter = RepoGetter()
     private let authenticator = GitHubAuthenticator()
-    
-    // To handle feedback on the view
+
     var feedback: Feedback = .none
     var isLoading = false
 
@@ -68,7 +67,7 @@ import SwiftData
             let token = try await authenticator.retrieveToken()
             let request = try RepoEndpoint.request(owner: owner, repoName: repoName, token: token)
             let repo = try await repoGetter.repoGetter(from: request)
-            
+
             repo.priority = priority
             dataManager.storeNewRepo(repo)
             feedback = .addSuccess(owner: owner, repoName: repoName)

@@ -40,7 +40,7 @@ struct RepoDetailView: View {
                 )
             }
 
-            if let message = viewModel.feedbackMessage  {
+            if let message = viewModel.feedbackMessage {
                 InfoLabel(message: message, showIcon: false)
             }
 

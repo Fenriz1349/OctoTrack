@@ -48,7 +48,7 @@ import SwiftData
         user.lastUpdate = Date()
         try? modelContext.save()
     }
-    
+
     /// Used when we log, and we are not sure there is an activeUser
     /// - Returns: The activeUser, or nil if noone is active
     func safeActiveUser() -> User? {
@@ -143,11 +143,11 @@ import SwiftData
                     language: repo.language,
                     priority: repo.priority
                 )
-                
+
                 modelContext.insert(newRepo)
                 activeUser.repoList.append(newRepo)
                 activeUser.lastUpdate = Date()
-                
+
                 try modelContext.save()
             }
         } catch {

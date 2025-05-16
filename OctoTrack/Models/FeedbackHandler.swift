@@ -8,6 +8,6 @@
 import Foundation
 
 protocol FeedbackHandler {
-    var message: String? { get  }
-    var isError: Bool { get  }
+    var message: String? { get }
+    var isError: Bool { get }
 }
