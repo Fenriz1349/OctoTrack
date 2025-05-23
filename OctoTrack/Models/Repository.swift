@@ -20,6 +20,9 @@ import SwiftData
     @Relationship(deleteRule: .nullify) var owner: Owner
     @Relationship(deleteRule: .cascade) var pullRequests: [PullRequest] = []
 
+    @Relationship(deleteRule: .nullify, inverse: \User.repoList)
+    var user: User?
+
     init(id: Int, name: String, repoDescription: String? = nil, isPrivate: Bool,
          owner: Owner, createdAt: Date, updatedAt: Date? = nil, language: String? = nil,
          priority: RepoPriority) {

@@ -11,14 +11,17 @@ import SwiftUI
 @Observable final class RepoDetailsViewModel {
 
     enum Feedback: FeedbackHandler, Equatable {
-        case none, noPR, updateFailed, deleteFailed
+        case none,
+             noPR,
+             updateFailed(error: String),
+             deleteFailed(error: String)
 
         var message: String? {
             switch self {
             case .none:  nil
-            case .noPR: "noPR"
-            case .updateFailed: "updateFailed"
-            case .deleteFailed: "deleteFailed"
+            case .noPR: String(localized: "noPR")
+            case .updateFailed(let error): String(localized: "updateFailed \(error)")
+            case .deleteFailed(let error): String(localized:  "deleteFailed \(error)")
             }
         }
 
@@ -41,7 +44,7 @@ import SwiftUI
         do {
             try dataManager.updateRepositoryPriority(repoId: repository.id, priority: priority)
         } catch {
-            feedback = .updateFailed
+            feedback = .updateFailed(error: error.localizedDescription)
         }
     }
 
@@ -57,7 +60,7 @@ import SwiftUI
             try dataManager.storePullRequests(pullRequests, repositoryiD: repository.id)
             isLoading = false
         } catch {
-            feedback = .updateFailed
+            feedback = .updateFailed(error: error.localizedDescription)
             isLoading = false
         }
     }
@@ -67,7 +70,7 @@ import SwiftUI
             do {
                 try dataManager.deletePullRequest(repoId: repository.id, prId: pullRequest.id)
             } catch {
-                feedback = .deleteFailed
+                feedback = .deleteFailed(error: error.localizedDescription)
             }
         }
     }

@@ -16,7 +16,7 @@ enum GitHubAuthenticationMapper {
     static func map(_ data: Data, and response: HTTPURLResponse) throws -> String {
 
         guard response.statusCode == 200 else {
-            throw Errors.invalidResponse
+            throw URLError(.badServerResponse)
         }
 
         if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
@@ -34,6 +34,6 @@ enum GitHubAuthenticationMapper {
             }
         }
 
-        throw Errors.missingToken
+        throw URLError(.userAuthenticationRequired)
     }
 }

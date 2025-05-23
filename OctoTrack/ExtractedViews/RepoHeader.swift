@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RepoHeader: View {
-    let repository: Repository
+    @Bindable var repository: Repository
     var isCompact: Bool = false
 
     private var openPRCount: Int {

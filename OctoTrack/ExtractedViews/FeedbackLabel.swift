@@ -25,7 +25,6 @@ struct FeedbackLabel: View {
                 Image(systemName: iconName)
                     .foregroundColor(color)
             }
-#warning("vérifier que tous les messages soient localisés et non en majuscule")
             Text(feedback.message ?? "")
                 .fontWeight(.medium)
         }

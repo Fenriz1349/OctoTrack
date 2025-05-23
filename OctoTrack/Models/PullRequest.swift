@@ -23,6 +23,9 @@ import SwiftData
         Status.getPullRequestState(self)
     }
 
+    @Relationship(deleteRule: .cascade, inverse: \Repository.pullRequests)
+    var repository: Repository?
+
     init(id: Int, number: Int, body: String? = nil, title: String, createdAt: Date,
          updateAt: Date? = nil, closedAt: Date? = nil, mergedAt: Date? = nil, isDraft: Bool) {
         self.id = id

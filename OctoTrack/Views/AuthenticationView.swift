@@ -42,6 +42,6 @@ struct AuthenticationView: View {
 
 #Preview {
     AuthenticationView(viewModel: AuthenticationViewModel( onLoginSucceed: { user in
-        print(String(format: "connected", user.login))
+        print("connected\(user.login)")
     }, onLogoutCompleted: {}))
 }

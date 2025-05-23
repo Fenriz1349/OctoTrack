@@ -238,6 +238,22 @@
         }
       }
     },
+    "deleteFailed %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Failed %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Echec de la suppression %@"
+          }
+        }
+      }
+    },
     "draft" : {
       "localizations" : {
         "en" : {
@@ -898,6 +914,22 @@
         }
       }
     },
+    "updateFailed %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update Failed %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Echec de la mise à jour %@"
+          }
+        }
+      }
+    },
     "userDataNotAvailable" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -911,17 +943,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Données de l’utilisateur non disponible"
-          }
-        }
-      }
-    },
-    "userError" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erreur lors de la récupération de l'utilisateur:"
           }
         }
       }

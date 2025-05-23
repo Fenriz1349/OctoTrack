@@ -18,7 +18,7 @@ import Foundation
         var message: String? {
             switch self {
             case .none: return nil
-            case .addSuccess(let owner, let repoName):
+            case .addSuccess(let owner, let repoName): 
                 return String(localized: "addSuccess \(owner)/\(repoName)")
             case .addFailed(let owner, let repoName, let error):
                 return String(localized: "addFail \(owner)/\(repoName): \(error)")

@@ -16,7 +16,7 @@ import Foundation
         var message: String? {
             switch self {
             case .none: return nil
-            case .authFailed(let error): return String(localized: "authFail\(error)")
+            case .authFailed(let error): return String(localized: "authFail \(error)")
             }
         }
 

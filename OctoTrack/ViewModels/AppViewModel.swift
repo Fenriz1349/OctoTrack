@@ -19,8 +19,8 @@ import Foundation
         var message: String? {
             switch self {
             case .none: return nil
-            case .emptyRepo: return "emptyRepo"
-            case .resetSucessed: return "resetSuccess"
+            case .emptyRepo: return String(localized: "emptyRepo")
+            case .resetSucessed: return String(localized: "resetSuccess")
             case .resetFailed(let error): return String(localized: "resetFailed \(error)")
             }
         }
