@@ -38,7 +38,7 @@ enum RepoMapper {
 
     static func map(_ data: Data, and response: HTTPURLResponse) throws -> Repository {
         guard response.statusCode == 200 else {
-            throw Errors.invalidResponse
+            throw URLError(.badServerResponse)
         }
 
         let decoder = JSONDecoder()

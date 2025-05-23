@@ -62,7 +62,7 @@ struct PullRequestDetailView: View {
                 .padding(.horizontal)
             }
         }
-        .navigationTitle("Pull Request #\(pullRequest.number)")
+        .navigationTitle("PR#\(pullRequest.number)")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

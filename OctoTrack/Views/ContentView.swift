@@ -21,14 +21,13 @@ struct ContentView: View {
                     Text("loading")
                         .padding()
                 }
-
                 .task {
                     viewModel.dataManager.modelContext = modelContext
                     await viewModel.initialize()
                 }
             } else if viewModel.isLogged {
                 TabView(selection: $tab) {
-                    RepoListView(viewModel: RepoListViewModel(dataManager: viewModel.dataManager))
+                    RepoListView(dataManager: viewModel.dataManager)
                     .tabItem { Tab.repoList.tabItem() }
                         .tag(Tab.repoList)
                     AccountView(appViewModel: viewModel)

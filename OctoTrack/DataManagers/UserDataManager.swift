@@ -8,8 +8,9 @@
 import SwiftUI
 import SwiftData
 
-final class UserDataManager {
+@Observable final class UserDataManager {
     var modelContext: ModelContext
+    var isSucess: Bool = false
 
     init(modelContext: ModelContext) {
             self.modelContext = modelContext
@@ -46,21 +47,17 @@ final class UserDataManager {
 
     func deactivateAllUsers() {
         allUsers.forEach { $0.isActiveUser = false }
-        do {
-            try modelContext.save()
-        } catch {
-            return
-        }
+        try? modelContext.save()
     }
 
     /// Create or update the currentUser
     /// - Parameter user: the user create when login
     func saveUser(_ user: User) {
         // Update user info if it already exist
-        if let storedUser = activeUser {
-            storedUser.login = user.login
-            storedUser.avatarURL = user.avatarURL
-            storedUser.lastUpdate = Date()
+        if let currentUser = activeUser, user.id == currentUser.id {
+            currentUser.login = user.login
+            currentUser.avatarURL = user.avatarURL
+            currentUser.lastUpdate = Date()
             try? modelContext.save()
             // Otherwise create it
         } else {
@@ -69,25 +66,12 @@ final class UserDataManager {
         activateUser(user)
     }
 
-    /// Use to always clear all users stored when logout so we always have only one user
-    func clearUser(id: Int) {
-        let predicate = #Predicate<User> {$0.id == id}
-        if let user = try? modelContext.fetch(FetchDescriptor<User>(predicate: predicate)).first {
-            modelContext.delete(user)
-            try? modelContext.save()
-        }
-    }
-
     // MARK: - Owner Methods
 
     private func findOwner(id: Int) -> Owner? {
-        do {
-            let predicate = #Predicate<Owner> { owner in owner.id == id }
-            let descriptor = FetchDescriptor<Owner>(predicate: predicate)
-            return try modelContext.fetch(descriptor).first
-        } catch {
-            return nil
-        }
+        try? modelContext.fetch(
+            FetchDescriptor<Owner>(predicate: #Predicate { $0.id == id })
+        ).first
     }
 
     private func createOwner(id: Int, login: String, avatarURL: String) -> Owner? {
@@ -102,130 +86,108 @@ final class UserDataManager {
 
     // MARK: - Repository Methods
 
-    func storeNewRepo(_ repo: Repository) {
+    func storeNewRepo(_ repo: Repository) throws {
         guard let currentUser = activeUser else { return }
+        let owner: Owner
 
-        do {
-            let owner: Owner
-            if let existingOwner = findOwner(id: repo.owner.id) {
-                owner = existingOwner
-            } else {
-                guard let newOwner = createOwner(
-                    id: repo.owner.id,
-                    login: repo.owner.login,
-                    avatarURL: repo.owner.avatarURL
-                ) else {
-                    return
-                }
-                owner = newOwner
-                try modelContext.save()
+        if let existingOwner = findOwner(id: repo.owner.id) {
+            owner = existingOwner
+        } else {
+            guard let newOwner = createOwner(
+                id: repo.owner.id,
+                login: repo.owner.login,
+                avatarURL: repo.owner.avatarURL
+            ) else {
+                return
             }
+            owner = newOwner
+            try modelContext.save()
+        }
 
-            let existingRepo = currentUser.repoList.first { $0.id == repo.id }
+        let existingRepo = currentUser.repoList.first { $0.id == repo.id }
 
-            if existingRepo == nil {
-                let newRepo = Repository(
-                    id: repo.id,
-                    name: repo.name,
-                    repoDescription: repo.repoDescription,
-                    isPrivate: repo.isPrivate,
-                    owner: owner,
-                    createdAt: repo.createdAt,
-                    updatedAt: repo.updatedAt,
-                    language: repo.language,
-                    priority: repo.priority
-                )
+        if existingRepo == nil {
+            let newRepo = Repository(
+                id: repo.id,
+                name: repo.name,
+                repoDescription: repo.repoDescription,
+                isPrivate: repo.isPrivate,
+                owner: owner,
+                createdAt: repo.createdAt,
+                updatedAt: repo.updatedAt,
+                language: repo.language,
+                priority: repo.priority
+            )
 
-                modelContext.insert(newRepo)
-                currentUser.repoList.append(newRepo)
-                currentUser.lastUpdate = Date()
+            modelContext.insert(newRepo)
+            currentUser.repoList.append(newRepo)
+            currentUser.lastUpdate = Date()
 
-                try modelContext.save()
-            }
-        } catch {
-            print("❌ Erreur: \(error)")
+            try modelContext.save()
         }
     }
 
-    func deleteRepo(id: Int) {
+    func deleteRepository(_ repository: Repository) throws {
         guard let currentUser = activeUser else { return }
-        do {
-            if let repoToDelete = currentUser.repoList.first(where: { $0.id == id }) {
-                currentUser.repoList.removeAll { $0.id == id }
-                modelContext.delete(repoToDelete)
-                try modelContext.save()
-            }
-        } catch {
-            print("❌ Erreur lors de la suppression du repo: \(error)")
+
+        if let repoToDelete = currentUser.repoList.first(where: { $0.id == repository.id }) {
+            currentUser.repoList.removeAll { $0.id == repository.id }
+            modelContext.delete(repoToDelete)
+            try modelContext.save()
         }
     }
 
     func orderRepositories() {
         guard let currentUser = activeUser else { return }
-        do {
-            currentUser.repoList.sort { repo1, repo2 in
-                let date1 = repo1.updatedAt ?? repo1.createdAt
-                let date2 = repo2.updatedAt ?? repo2.createdAt
-                return date1 < date2
-            }
-            try modelContext.save()
-        } catch {
-            print("❌ Erreur lors du tri des repositories: \(error)")
+
+        currentUser.repoList.sort { repo1, repo2 in
+            let date1 = repo1.updatedAt ?? repo1.createdAt
+            let date2 = repo2.updatedAt ?? repo2.createdAt
+            return date1 > date2
         }
+        try? modelContext.save()
     }
 
-    func resetAllRepositories() {
+    func resetAllRepositories() throws {
         guard let currentUser = activeUser else { return }
-        do {
-            let reposToDelete = currentUser.repoList
-            currentUser.repoList.removeAll()
-            for repo in reposToDelete {
-                modelContext.delete(repo)
-            }
-            try modelContext.save()
-        } catch {
-            print("erreur lors du reset")
+
+        let reposToDelete = currentUser.repoList
+        currentUser.repoList.removeAll()
+        for repo in reposToDelete {
+            modelContext.delete(repo)
         }
+        try modelContext.save()
     }
 
-    func updateRepositoryPriority(repoId: Int, priority: RepoPriority) {
+    func updateRepositoryPriority(repoId: Int, priority: RepoPriority) throws {
         guard let currentUser = activeUser else { return }
-        do {
-            if let repoToUpdate = currentUser.repoList.first(where: { $0.id == repoId }) {
-                repoToUpdate.priority = priority
-                try modelContext.save()
-            }
-        } catch {
-            print("❌ Erreur lors de la mise à jour du repo: \(error)")
+
+        if let repoToUpdate = currentUser.repoList.first(where: { $0.id == repoId }) {
+            repoToUpdate.priority = priority
+            try modelContext.save()
         }
     }
 
     // MARK: - Pull Request Methods
 
-    func storePullRequests(_ pullRequests: [PullRequest], repositoryiD: Int) {
+    func storePullRequests(_ pullRequests: [PullRequest], repositoryiD: Int) throws {
         guard let currentUser = activeUser else { return }
-        do {
-            if let index = currentUser.repoList.firstIndex(where: { $0.id == repositoryiD }) {
-                let repoToUpdate = currentUser.repoList[index]
-                repoToUpdate.pullRequests = pullRequests
-                try modelContext.save()
-            }
-        } catch {
-            print("Erreur dans la sauvegarde des PulleEquests")
+
+        if let index = currentUser.repoList.firstIndex(where: { $0.id == repositoryiD }) {
+            let repoToUpdate = currentUser.repoList[index]
+            repoToUpdate.pullRequests = pullRequests
+            try modelContext.save()
         }
     }
 
-    func deletePullRequest(repoId: Int, prId: Int) {
+    func deletePullRequest(repoId: Int, prId: Int) throws {
         guard let currentUser = activeUser else { return }
-        do {
-            if let repo = currentUser.repoList.first(where: { $0.id == repoId }),
-               let pullRequest = repo.pullRequests.first(where: { $0.id == prId }) {
-                repo.pullRequests.removeAll { $0.id == prId }
-                modelContext.delete(pullRequest)
-                try modelContext.save()
-            }
-        } catch {
-            print("❌ Erreur lors de la suppression de la pull request: \(error)")
+
+        if let repo = currentUser.repoList.first(where: { $0.id == repoId }),
+           let pullRequest = repo.pullRequests.first(where: { $0.id == prId }) {
+            repo.pullRequests.removeAll { $0.id == prId }
+            modelContext.delete(pullRequest)
+            try modelContext.save()
         }
     }
 }

@@ -6,32 +6,32 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct RepoListView: View {
-    @State var viewModel: RepoListViewModel
-
+    @State var dataManager: UserDataManager
+    #warning("ajouter un picker pour les priorités")
+    #warning("ajouter un tri par date ou par priorité")
     var body: some View {
         NavigationStack {
-            if let user = viewModel.activeUser {
+            if let user = dataManager.activeUser {
                 UserHeader(user: user)
             }
-            NavigationLink(destination: AddRepositoryModal(dataManager: viewModel.dataManager)) {
+            NavigationLink(destination: AddRepositoryModal(dataManager: dataManager)) {
                 CustomButtonLabel(iconLeading: .plus,
                                   message: "repoAdd",
                                   color: .black)
                 .padding(.horizontal, 30)
             }
             List {
-                ForEach(viewModel.activeUser?.repoList ?? []) { repository in
+                ForEach(dataManager.activeUser?.repoList ?? []) { repository in
                     NavigationLink(destination: RepoDetailView(repository: repository,
-                                                               dataManager: viewModel.dataManager)) {
+                                                               dataManager: dataManager)) {
                         RepoRow(repository: repository)
                     }
                     .listRowInsets(EdgeInsets())
                     .swipeActions(edge: .trailing) {
                        Button(role: .destructive) {
-                           viewModel.deleteRepository(repository)
+                           try? dataManager.deleteRepository(repository)
                        } label: {
                            CustomButtonIcon(icon: .trash, color: .red)
                        }
@@ -39,20 +39,15 @@ struct RepoListView: View {
                 }
             }
             .refreshable {
-                viewModel.orderRepositories()
+                withAnimation {
+                    dataManager.orderRepositories()
+                }
             }
         }
     }
 }
 
 #Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Repository.self, configurations: config)
-        let mockDataManager = UserDataManager(modelContext: ModelContext(container))
-        return RepoListView(viewModel: RepoListViewModel(dataManager: mockDataManager))
-            .previewWithContainer()
-    } catch {
-        return Text("Erreur: \(error.localizedDescription)")
-    }
+    RepoListView(dataManager: UserDataManager.preview)
+        .previewWithContainer()
 }

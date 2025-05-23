@@ -6,14 +6,13 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct RepoDetailView: View {
-    @State private var viewModel: PullRequestViewModel
+    @State private var viewModel: RepoDetailsViewModel
     @State private var showPriorityPicker = false
 
     init(repository: Repository, dataManager: UserDataManager) {
-            self._viewModel = State(initialValue: PullRequestViewModel(repository: repository,
+            self._viewModel = State(initialValue: RepoDetailsViewModel(repository: repository,
                                                                        dataManager: dataManager))
         }
 
@@ -40,10 +39,10 @@ struct RepoDetailView: View {
                 )
             }
 
-            if viewModel.repository.pullRequests.isEmpty {
-                Text("noPR")
-                Spacer()
+            if viewModel.feedback.message != nil {
+                FeedbackLabel(feedback: viewModel.feedback, showIcon: false)
             }
+
             List(viewModel.repository.pullRequests) { pullRequest in
                 NavigationLink(destination: PullRequestDetailView(pullRequest: pullRequest,
                                                          repository: viewModel.repository) ) {
@@ -59,7 +58,7 @@ struct RepoDetailView: View {
             }
             .listStyle(PlainListStyle())
             .refreshable {
-                await viewModel.updatePullRequests()
+                await viewModel.getAllPullRequests()
             }
         }
         .padding(.horizontal, 20)

@@ -5,11 +5,10 @@
 //  Created by Julien Cotte on 28/03/2025.
 //
 
+import Foundation
 import SwiftData
-import SwiftUI
 
 struct PreviewContainer {
-
     @MainActor
     static var container: ModelContainer = {
         do {
@@ -139,10 +138,25 @@ struct PreviewContainer {
         let container = try! ModelContainer(for: Repository.self, configurations: config)
         return UserDataManager(modelContext: ModelContext(container))
     }
+
+    static let previewFeedbackError = PreviewFeedback(message: "test", isError: true)
+    static let previewFeedbackSuceess = PreviewFeedback(message: "test", isError: false)
 }
 
-extension View {
-    func previewWithContainer() -> some View {
-        self.modelContainer(PreviewContainer.container)
+struct PreviewFeedback: FeedbackHandler {
+    var message: String?
+    var isError: Bool
+
+    init(message: String? = nil, isError: Bool = false) {
+        self.message = message
+        self.isError = isError
+    }
+}
+
+extension UserDataManager {
+    static var preview: UserDataManager {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try! ModelContainer(for: Repository.self, configurations: config)
+        return UserDataManager(modelContext: ModelContext(container))
     }
 }

@@ -29,7 +29,7 @@ enum PullRequestMapper {
 
     static func map(_ data: Data, and response: HTTPURLResponse) throws -> PullRequest {
         guard response.statusCode == 200 else {
-            throw Errors.invalidResponse
+            throw URLError(.badServerResponse)
         }
 
         let decoder = JSONDecoder()
@@ -41,7 +41,7 @@ enum PullRequestMapper {
 
     static func mapList(_ data: Data, and response: HTTPURLResponse) throws -> [PullRequest] {
         guard response.statusCode == 200 else {
-            throw Errors.invalidResponse
+            throw URLError(.badServerResponse)
         }
 
         let decoder = JSONDecoder()

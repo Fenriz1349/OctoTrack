@@ -55,8 +55,7 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
 
     func authenticate() async throws {
         switch authenticationState {
-        case .authenticated:
-            return
+        case .authenticated: return
         case .expired:
             if await isTokenValid() {
                 try refreshToken()
@@ -102,7 +101,7 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
                 }
 
                 guard let callbackURL = callbackURL else {
-                    self.completionHandler?(.failure(Errors.authenticationFailed))
+                    self.completionHandler?(.failure(URLError(.userAuthenticationRequired)))
                     return
                 }
 
@@ -125,23 +124,17 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
     }
 
     private func handleCallback(url: URL) async throws {
-
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-            throw Errors.authenticationFailed
+            throw URLError(.badURL)
         }
         guard let queryItems = components.queryItems,
               let codeItem = queryItems.first(where: { $0.name == "code" }),
               let code = codeItem.value else {
-            throw Errors.missingAuthorizationCode
+            throw URLError(.userAuthenticationRequired)
         }
         let tokenRequest = try GitHubAuthenticationEndpoint.tokenExchangeRequest(with: code)
-
-        do {
-            let token = try await requestToken(from: tokenRequest)
-            try tokenAuthManager.storeToken(token)
-        } catch {
-            throw error
-        }
+        let token = try await requestToken(from: tokenRequest)
+        try tokenAuthManager.storeToken(token)
     }
 
     func retrieveToken() async throws -> String {
@@ -162,14 +155,10 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
        }
 
     func isTokenValid() async -> Bool {
-        do {
-            let token = try tokenAuthManager.getToken
-            let request = try EndpointBuilder.user(token: token).buildRequest()
-            let (_, response) = try await client.request(from: request)
-            return response.statusCode == 200
-        } catch {
-            return false
-        }
+        guard let token = try? tokenAuthManager.getToken,
+              let request = try? EndpointBuilder.user(token: token).buildRequest(),
+              let (_, response) = try? await client.request(from: request) else { return false }
+        return response.statusCode == 200
     }
 }
 

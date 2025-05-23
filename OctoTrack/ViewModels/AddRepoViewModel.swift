@@ -6,50 +6,68 @@
 //
 
 import Foundation
-import SwiftData
 
 @MainActor
 @Observable final class AddRepoViewModel {
-    var owner: String = "Fenriz1349"
+
+    enum Feedback: FeedbackHandler, Equatable {
+        case none
+        case addSuccess(owner: String, repoName: String)
+        case addFailed(owner: String, repoName: String, error: String)
+
+        var message: String? {
+            switch self {
+            case .none: return nil
+            case .addSuccess(let owner, let repoName): 
+                return String(localized: "addSuccess \(owner)/\(repoName)")
+            case .addFailed(let owner, let repoName, let error):
+                return String(localized: "addFail \(owner)/\(repoName): \(error)")
+            }
+        }
+
+        var isError: Bool {
+            switch self {
+            case .none, .addSuccess: return false
+            case .addFailed: return true
+            }
+        }
+    }
+
+    var owner: String
+#warning("supprimer la valeur par defaut dans la version finale")
     var repoName: String = "DA-iOS_P5"
     var priority: RepoPriority = .low
-
-    // To handle feedback on the view
-    var showFeedback = false
-    var feedbackMessage = ""
-    var isSuccess = false
-    var isLoading = false
-
-    var isFormValid: Bool {
-            !owner.isEmpty && !repoName.isEmpty
-        }
     let dataManager: UserDataManager
     private let repoGetter: RepoGetter = RepoGetter()
     private let authenticator = GitHubAuthenticator()
 
-    init(dataManager: UserDataManager) {
-        self.dataManager = dataManager
+    var feedback: Feedback = .none
+    var isLoading = false
+
+    var isFormValid: Bool {
+        !owner.isEmpty && !repoName.isEmpty
     }
 
-    func getRepo() async -> Result<Repository, Error> {
+    init(dataManager: UserDataManager) {
+        self.dataManager = dataManager
+        self.owner = dataManager.activeUser?.login ?? ""
+    }
+    #warning("ajouter un cas lorsque le repo est deja dans le user")
+    #warning("ajouter un cas lorsque le repo existe deja et le recuperer")
+    func getRepo() async {
         isLoading = true
         do {
             let token = try await authenticator.retrieveToken()
             let request = try RepoEndpoint.request(owner: owner, repoName: repoName, token: token)
             let repo = try await repoGetter.repoGetter(from: request)
-            isLoading = false
-            return(.success(repo))
-        } catch {
-            isSuccess = false
-            feedbackMessage = "\(owner)/\(repoName)"
-            showFeedback = true
-            isLoading = false
-            return .failure(error)
-        }
-    }
 
-    func resetFeedback() {
-        feedbackMessage = ""
-        showFeedback = false
+            repo.priority = priority
+            try dataManager.storeNewRepo(repo)
+            feedback = .addSuccess(owner: owner, repoName: repoName)
+            isLoading = false
+        } catch {
+            feedback = .addFailed(owner: owner, repoName: repoName, error: error.localizedDescription)
+            isLoading = false
+        }
     }
 }

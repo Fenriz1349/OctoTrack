@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct AddRepositoryModal: View {
     @State private var viewModel: AddRepoViewModel
@@ -44,18 +43,7 @@ struct AddRepositoryModal: View {
             } else {
                 Button(action: {
                     Task {
-                        let getRepo = await viewModel.getRepo()
-                        switch getRepo {
-                        case .success(let repo):
-                            repo.priority = viewModel.priority
-                            viewModel.dataManager.storeNewRepo(repo)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                viewModel.resetFeedback()
-                                dismiss()
-                            }
-                        case .failure:
-                            break
-                        }
+                         await viewModel.getRepo()
                     }
                 },
                 label: {
@@ -71,10 +59,18 @@ struct AddRepositoryModal: View {
                 .opacity(viewModel.isFormValid ? 1 : 0.6)
             }
 
-            if viewModel.showFeedback {
-                InfoLabel(message: viewModel.feedbackMessage, isSuccess: viewModel.isSuccess)
+            if viewModel.feedback != .none {
+                FeedbackLabel(feedback: viewModel.feedback)
             }
             Spacer()
+        }
+        .onChange(of: viewModel.feedback) {
+            if !viewModel.feedback.isError {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    viewModel.feedback = .none
+                    dismiss()
+                }
+            }
         }
         .padding()
     }

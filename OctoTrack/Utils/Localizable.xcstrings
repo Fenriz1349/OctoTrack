@@ -34,19 +34,19 @@
         }
       }
     },
-    "addedWithSuccess %@" : {
+    "addFail %@/%@: %@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Added with success %@"
+            "value" : "Failed to add %@/%@: %@"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajouté avec succès %@"
+            "value" : "Echec de l’ajout %@/%@: %@"
           }
         }
       }
@@ -85,19 +85,36 @@
         }
       }
     },
-    "authenticationError %@" : {
+    "addSuccess %@/%@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Authentication Error: %@"
+            "value" : "Added with success %@/%@"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erreur d’authentification: %@"
+            "value" : "Ajouté avec succès %@/%@"
+          }
+        }
+      }
+    },
+    "authFail %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to authenticate: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Echec de l’authentification: %@"
           }
         }
       }
@@ -187,7 +204,7 @@
         }
       }
     },
-    "couldNotCreateMC" : {
+    "couldNotCreateMC %@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -221,6 +238,22 @@
         }
       }
     },
+    "deleteFailed %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Failed %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Echec de la suppression %@"
+          }
+        }
+      }
+    },
     "draft" : {
       "localizations" : {
         "en" : {
@@ -233,6 +266,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Draft"
+          }
+        }
+      }
+    },
+    "emptyRepo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You don’t have Repos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous n’avez aucun repos"
           }
         }
       }
@@ -373,6 +423,23 @@
         }
       }
     },
+    "noActiveUser" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No active user found"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun utilisateur actif trouvé"
+          }
+        }
+      }
+    },
     "noPR" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -441,6 +508,22 @@
         }
       }
     },
+    "PR#%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull Request #%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull Request #%lld"
+          }
+        }
+      }
+    },
     "priority" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -488,22 +571,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Public"
-          }
-        }
-      }
-    },
-    "Pull Request #%lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pull Request #%lld"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pull Request #%lld"
           }
         }
       }
@@ -661,6 +728,23 @@
         }
       }
     },
+    "resetFailed %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur %@"
+          }
+        }
+      }
+    },
     "resetRepositoryList" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -674,6 +758,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reset Liste des Repos"
+          }
+        }
+      }
+    },
+    "resetSuccess" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset all Repo with sucess !"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retrait des repos avec succès !"
           }
         }
       }
@@ -729,6 +830,23 @@
         }
       }
     },
+    "test" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is a test"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ceci est un test"
+          }
+        }
+      }
+    },
     "timeline" : {
       "localizations" : {
         "en" : {
@@ -775,6 +893,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mis à jour"
+          }
+        }
+      }
+    },
+    "updateFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error during update, please try again"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur pendant la mise à jour, veuillez réssayer"
+          }
+        }
+      }
+    },
+    "updateFailed %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update Failed %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Echec de la mise à jour %@"
           }
         }
       }

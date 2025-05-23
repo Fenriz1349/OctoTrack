@@ -5,7 +5,7 @@
 //  Created by Julien Cotte on 12/02/2025.
 //
 
-import SwiftUI
+import Foundation
 import SwiftData
 
 @Model final class User {

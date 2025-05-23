@@ -38,7 +38,7 @@ enum GitHubAuthenticationEndpoint {
         ).buildRequest()
 
         guard let url = request.url else {
-            throw Errors.invalidURL
+            throw URLError(.badURL)
         }
 
         return url

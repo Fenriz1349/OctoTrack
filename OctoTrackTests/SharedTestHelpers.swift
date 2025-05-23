@@ -93,7 +93,8 @@ func makeTokenResponse() -> ([String: Any], Data) {
 }
 
 func makeAuthURL() -> URL {
-    return URL(string: "https://github.com/login/oauth/authorize?client_id=\(clientID)&redirect_uri=\(redirectURI)&scope=repo%20user")!
+    return URL(string:
+                "https://github.com/login/oauth/authorize?client_id=\(clientID)&redirect_uri=\(redirectURI)&scope=repo%20user")!
 }
 
 func makeAuthCallbackURL() -> URL {

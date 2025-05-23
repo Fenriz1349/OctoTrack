@@ -38,29 +38,20 @@ final class TokenAuthManager {
     }
 
     func isTokenExpired() -> Bool {
-        do {
-            let tokenData = try getTokenDataFromKeychain()
-
-            let expirationDate = tokenData.creationDate.addingTimeInterval(expirationDelay)
-            return Date() > expirationDate
-        } catch {
-            return true
-        }
+        guard let tokenData = try? getTokenDataFromKeychain() else {return true }
+        let expirationDate = tokenData.creationDate.addingTimeInterval(expirationDelay)
+        return Date() > expirationDate
     }
 
     func refreshToken() throws {
-           let tokenData = try getTokenDataFromKeychain()
-           let refreshedTokenData = TokenMapper.createTokenData(with: tokenData.token)
-           let data = try TokenMapper.encodeToken(refreshedTokenData)
-           try keychain.insert(key: tokenKey, data: data)
-       }
+        let tokenData = try getTokenDataFromKeychain()
+        let refreshedTokenData = TokenMapper.createTokenData(with: tokenData.token)
+        let data = try TokenMapper.encodeToken(refreshedTokenData)
+        try keychain.insert(key: tokenKey, data: data)
+    }
 
     private func getTokenDataFromKeychain() throws -> TokenData {
-        do {
-            let tokenData = try keychain.retrieve(key: tokenKey)
-            return try TokenMapper.decodeToken(from: tokenData)
-        } catch {
-            throw Errors.invalidToken
-        }
+        let tokenData = try keychain.retrieve(key: tokenKey)
+        return try TokenMapper.decodeToken(from: tokenData)
     }
 }

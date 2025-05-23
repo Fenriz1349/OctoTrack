@@ -18,7 +18,7 @@ final class KeychainService: TokenServiceManager {
 
     func insert(key: String, data: Data) throws {
         guard !key.isEmpty else {
-            throw Errors.emptyKey
+            throw URLError(.dataNotAllowed)
         }
 
         let query: [String: Any] = [
@@ -32,7 +32,7 @@ final class KeychainService: TokenServiceManager {
         let status = SecItemAdd(query as CFDictionary, nil)
 
         guard status == errSecSuccess else {
-            throw Errors.insertFailed
+            throw URLError(.cannotCreateFile)
         }
     }
 
@@ -48,7 +48,7 @@ final class KeychainService: TokenServiceManager {
         let status = SecItemCopyMatching(query, &result)
 
         guard status == noErr, let data = result as? Data else {
-            throw Errors.retrieveFailed
+            throw URLError(.fileDoesNotExist)
         }
         return data
     }
@@ -61,7 +61,7 @@ final class KeychainService: TokenServiceManager {
             ] as CFDictionary
 
             guard SecItemDelete(query) == noErr else {
-                throw Errors.deleteFailed
+                throw URLError(.cannotRemoveFile)
             }
         }
     }

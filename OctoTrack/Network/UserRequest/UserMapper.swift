@@ -21,7 +21,7 @@ enum UserMapper {
 
     static func map(_ data: Data, and response: HTTPURLResponse) throws -> User {
         guard response.statusCode == 200 else {
-            throw Errors.invalidResponse
+            throw URLError(.badServerResponse)
         }
 
         let userDTO = try JSONDecoder().decode(UserDTO.self, from: data)
