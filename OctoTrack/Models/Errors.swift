@@ -8,6 +8,7 @@
 import Foundation
 
 enum Errors: Swift.Error {
+    #warning("retirer toutes ces erreurs, et throw directement l'erreur native de Swift")
     case invalidResponse
     case missingToken
     case invalidToken

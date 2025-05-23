@@ -21,7 +21,6 @@ struct ContentView: View {
                     Text("loading")
                         .padding()
                 }
-
                 .task {
                     viewModel.dataManager.modelContext = modelContext
                     await viewModel.initialize()

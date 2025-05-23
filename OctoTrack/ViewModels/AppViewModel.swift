@@ -5,11 +5,36 @@
 //  Created by Julien Cotte on 13/02/2025.
 //
 
-import SwiftUI
-import SwiftData
+import Foundation
 
 @MainActor
 @Observable final class AppViewModel {
+#warning("ajouter branding")
+    #warning("varifier tous les imports")
+    enum Feedback: FeedbackHandler, Equatable {
+        case none
+        case emptyRepo
+        case resetSucessed
+        case resetFailed(error: String)
+
+        var message: String? {
+            switch self {
+            case .none: return nil
+            case .emptyRepo: return "emptyRepo"
+            case .resetSucessed: return "resetSuccess"
+            case .resetFailed(let error): return "resetFailed \(error)"
+            }
+        }
+
+        var isError: Bool {
+            switch self {
+            case .resetSucessed: return false
+            default: return true
+            }
+        }
+    }
+
+    var feedback: Feedback = .none
     var isLogged: Bool = false
     var isInitializing: Bool = true
     var authenticationViewModel: AuthenticationViewModel
@@ -34,7 +59,6 @@ import SwiftData
                 self?.logoutUser()
             }
         )
-
         self.authenticationViewModel = newViewModel
     }
 
@@ -50,7 +74,7 @@ import SwiftData
         switch authState {
         case .authenticated:
             await loadUserData()
-            if dataManager.safeActiveUser() != nil {
+            if dataManager.activeUser != nil {
                 isLogged = true
                 authenticationViewModel.startTokenValidation()
             } else {
@@ -76,14 +100,14 @@ import SwiftData
     }
 
     func logoutUser() {
-        dataManager.deactivateAllUsers()
         isLogged = false
         authenticationViewModel.stopTokenValidation()
+        dataManager.deactivateAllUsers()
     }
 
     @MainActor
     private func loadUserData() async {
-        if dataManager.safeActiveUser() != nil {
+        if dataManager.activeUser != nil {
             isLogged = true
         } else {
             do {
@@ -94,5 +118,22 @@ import SwiftData
                 isLogged = false
             }
         }
+    }
+
+    func resetUserRepository() {
+        do {
+            try dataManager.resetAllRepositories()
+            feedback = .resetSucessed
+        } catch {
+            feedback = .resetFailed(error: error.localizedDescription)
+        }
+    }
+    
+    func checkIfEmptyRepoList() -> Bool {
+        if let currentUser = dataManager.activeUser, currentUser.repoList.isEmpty {
+            feedback = .emptyRepo
+            return false
+        }
+        return  true
     }
 }

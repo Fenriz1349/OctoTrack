@@ -8,18 +8,17 @@
 import SwiftUI
 
 @MainActor
-@Observable final class PullRequestViewModel {
+@Observable final class RepoDetailsViewModel {
 
     enum Feedback: FeedbackHandler, Equatable {
-        case none
-        case noPR
-        case updateFailed
+        case none, noPR, updateFailed, deleteFailed
 
         var message: String? {
             switch self {
             case .none:  nil
             case .noPR: "noPR"
             case .updateFailed: "updateFailed"
+            case .deleteFailed: "deleteFailed"
             }
         }
 
@@ -41,7 +40,11 @@ import SwiftUI
     }
 
     func updateRepositoryPriority(_ priority: RepoPriority) {
-        dataManager.updateRepositoryPriority(repoId: repository.id, priority: priority)
+        do {
+            try dataManager.updateRepositoryPriority(repoId: repository.id, priority: priority)
+        } catch {
+            feedback = .updateFailed
+        }
     }
 
     func getAllPullRequests(state: String = "all") async {
@@ -53,7 +56,7 @@ import SwiftUI
             var pullRequests = try await pullRequestGetter.allPullRequestsGetter(from: request)
             feedback = pullRequests.isEmpty ? .noPR : .none
             pullRequests.sort { $0.createdAt < $1.createdAt }
-            dataManager.storePullRequests(pullRequests, repositoryiD: repository.id)
+            try dataManager.storePullRequests(pullRequests, repositoryiD: repository.id)
             isLoading = false
         } catch {
             feedback = .updateFailed
@@ -63,7 +66,11 @@ import SwiftUI
 
     func deletePullRequest(_ pullRequest: PullRequest) {
         withAnimation {
-            dataManager.deletePullRequest(repoId: repository.id, prId: pullRequest.id)
+            do {
+                try dataManager.deletePullRequest(repoId: repository.id, prId: pullRequest.id)
+            } catch {
+                feedback = .deleteFailed
+            }
         }
     }
 }

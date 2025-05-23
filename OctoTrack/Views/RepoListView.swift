@@ -10,10 +10,13 @@ import SwiftData
 
 struct RepoListView: View {
     @State var dataManager: UserDataManager
-
+    #warning("ajouter un picker pour les priorités")
+    #warning("ajouter un tri par date ou par priorité")
     var body: some View {
         NavigationStack {
-            UserHeader(user: dataManager.activeUser)
+            if let user = dataManager.activeUser {
+                UserHeader(user: user)
+            }
             NavigationLink(destination: AddRepositoryModal(dataManager: dataManager)) {
                 CustomButtonLabel(iconLeading: .plus,
                                   message: "repoAdd",
@@ -21,7 +24,7 @@ struct RepoListView: View {
                 .padding(.horizontal, 30)
             }
             List {
-                ForEach(dataManager.activeUser.repoList) { repository in
+                ForEach(dataManager.activeUser?.repoList ?? []) { repository in
                     NavigationLink(destination: RepoDetailView(repository: repository,
                                                                dataManager: dataManager)) {
                         RepoRow(repository: repository)

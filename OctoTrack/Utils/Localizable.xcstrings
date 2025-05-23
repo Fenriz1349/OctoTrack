@@ -187,7 +187,7 @@
         }
       }
     },
-    "couldNotCreateMC" : {
+    "couldNotCreateMC %@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -233,6 +233,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Draft"
+          }
+        }
+      }
+    },
+    "emptyRepo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You don’t have Repos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous n’avez aucun repos"
           }
         }
       }
@@ -678,6 +695,23 @@
         }
       }
     },
+    "resetFailed %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur %@"
+          }
+        }
+      }
+    },
     "resetRepositoryList" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -702,6 +736,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reset all Repo with sucess !"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retrait des repos avec succès !"
           }
         }
       }
@@ -753,6 +793,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Déconnexion"
+          }
+        }
+      }
+    },
+    "test" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is a test"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ceci est un test"
           }
         }
       }
@@ -837,6 +894,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Données de l’utilisateur non disponible"
+          }
+        }
+      }
+    },
+    "userError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur lors de la récupération de l'utilisateur:"
           }
         }
       }

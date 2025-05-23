@@ -138,15 +138,15 @@ struct PreviewContainer {
         let container = try! ModelContainer(for: Repository.self, configurations: config)
         return UserDataManager(modelContext: ModelContext(container))
     }
-    
-    static let previewFeedbackError = PreviewFeedback(message: "This is a test", isError: true)
-    static let previewFeedbackSuceess = PreviewFeedback(message: "This is a test", isError: false)
+
+    static let previewFeedbackError = PreviewFeedback(message: "test", isError: true)
+    static let previewFeedbackSuceess = PreviewFeedback(message: "test", isError: false)
 }
 
 struct PreviewFeedback: FeedbackHandler {
     var message: String?
     var isError: Bool
-    
+
     init(message: String? = nil, isError: Bool = false) {
         self.message = message
         self.isError = isError

@@ -60,13 +60,13 @@ struct AddRepositoryModal: View {
                 .opacity(viewModel.isFormValid ? 1 : 0.6)
             }
 
-            if viewModel.feedback.message != nil {
+            if viewModel.feedback != .none {
                 FeedbackLabel(feedback: viewModel.feedback)
             }
             Spacer()
         }
         .onChange(of: viewModel.feedback) {
-            if case .addSuccess = viewModel.feedback {
+            if !viewModel.feedback.isError {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     viewModel.feedback = .none
                     dismiss()

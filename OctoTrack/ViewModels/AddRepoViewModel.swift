@@ -54,9 +54,10 @@ import SwiftData
 
     init(dataManager: UserDataManager) {
         self.dataManager = dataManager
-        self.owner = dataManager.activeUser.login
+        self.owner = dataManager.activeUser?.login ?? ""
     }
-
+    #warning("ajouter un cas lorsque le repo est deja dans le user")
+    #warning("ajouter un cas lorsque le repo existe deja et le recuperer")
     func getRepo() async {
         isLoading = true
         do {
@@ -65,7 +66,7 @@ import SwiftData
             let repo = try await repoGetter.repoGetter(from: request)
 
             repo.priority = priority
-            dataManager.storeNewRepo(repo)
+            try dataManager.storeNewRepo(repo)
             feedback = .addSuccess(owner: owner, repoName: repoName)
             isLoading = false
         } catch {

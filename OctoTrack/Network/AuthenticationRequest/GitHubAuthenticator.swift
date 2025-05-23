@@ -55,8 +55,7 @@ final class GitHubAuthenticator: NSObject, GitHubAuthenticatorProtocol {
 
     func authenticate() async throws {
         switch authenticationState {
-        case .authenticated:
-            return
+        case .authenticated: return
         case .expired:
             if await isTokenValid() {
                 try refreshToken()

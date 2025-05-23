@@ -9,11 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct RepoDetailView: View {
-    @State private var viewModel: PullRequestViewModel
+    @State private var viewModel: RepoDetailsViewModel
     @State private var showPriorityPicker = false
 
     init(repository: Repository, dataManager: UserDataManager) {
-            self._viewModel = State(initialValue: PullRequestViewModel(repository: repository,
+            self._viewModel = State(initialValue: RepoDetailsViewModel(repository: repository,
                                                                        dataManager: dataManager))
         }
 

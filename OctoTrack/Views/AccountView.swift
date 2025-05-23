@@ -17,10 +17,13 @@ struct AccountView: View {
 
     var body: some View {
         VStack(spacing: 24) {
-            UserHeader(user: appViewModel.dataManager.activeUser)
+            if let user = appViewModel.dataManager.activeUser {
+                UserHeader(user: user)
+            }
+
             VStack(spacing: 16) {
                 Button {
-                    showingResetAlert = true
+                    showingResetAlert = appViewModel.checkIfEmptyRepoList()
                 } label: {
                     CustomButtonLabel(
                         iconLeading: .trash,
@@ -31,7 +34,7 @@ struct AccountView: View {
                 .alert("confirmation", isPresented: $showingResetAlert) {
                     Button("cancel", role: .cancel) { }
                     Button("reset", role: .destructive) {
-                        appViewModel.dataManager.resetAllRepositories()
+                        appViewModel.resetUserRepository()
                     }
                 } message: {
                     Text("resetAlert")
@@ -44,6 +47,14 @@ struct AccountView: View {
                         message: "signOut",
                         color: Color.red
                     )
+                }
+                if appViewModel.feedback != .none {
+                    FeedbackLabel(feedback: appViewModel.feedback)
+                }
+            }
+            .onChange(of: appViewModel.feedback) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    appViewModel.feedback = .none
                 }
             }
             .padding(.horizontal, 20)
