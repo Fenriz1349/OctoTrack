@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftData
 
 @MainActor
 @Observable final class AddRepoViewModel {

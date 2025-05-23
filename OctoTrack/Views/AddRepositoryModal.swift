@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct AddRepositoryModal: View {
     @State private var viewModel: AddRepoViewModel

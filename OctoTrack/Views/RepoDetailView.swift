@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct RepoDetailView: View {
     @State private var viewModel: RepoDetailsViewModel

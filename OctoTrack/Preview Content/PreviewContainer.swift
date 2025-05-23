@@ -5,8 +5,8 @@
 //  Created by Julien Cotte on 28/03/2025.
 //
 
+import Foundation
 import SwiftData
-import SwiftUI
 
 struct PreviewContainer {
     @MainActor
@@ -150,11 +150,5 @@ struct PreviewFeedback: FeedbackHandler {
     init(message: String? = nil, isError: Bool = false) {
         self.message = message
         self.isError = isError
-    }
-}
-
-extension View {
-    func previewWithContainer() -> some View {
-        self.modelContainer(PreviewContainer.container)
     }
 }

@@ -191,3 +191,11 @@ import SwiftData
         }
     }
 }
+
+extension UserDataManager {
+    static var preview: UserDataManager {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try! ModelContainer(for: Repository.self, configurations: config)
+        return UserDataManager(modelContext: ModelContext(container))
+    }
+}

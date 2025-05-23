@@ -5,7 +5,7 @@
 //  Created by Julien Cotte on 13/02/2025.
 //
 
-import SwiftUI
+import Foundation
 import SwiftData
 
 @Model final class PullRequest: Identifiable {

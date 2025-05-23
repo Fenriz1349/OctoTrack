@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct RepoListView: View {
     @State var dataManager: UserDataManager
@@ -49,13 +48,6 @@ struct RepoListView: View {
 }
 
 #Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Repository.self, configurations: config)
-        let mockDataManager = UserDataManager(modelContext: ModelContext(container))
-        return RepoListView(dataManager: mockDataManager)
-            .previewWithContainer()
-    } catch {
-        return Text("Erreur: \(error.localizedDescription)")
-    }
+    RepoListView(dataManager: UserDataManager.preview)
+        .previewWithContainer()
 }

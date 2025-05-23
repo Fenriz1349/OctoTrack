@@ -17,10 +17,14 @@ extension View {
     }
 
     func tabItem(for tab: Tab) -> some View {
-            self
-                .tabItem {
-                    tab.tabItem()
-                }
-                .tag(tab)
-        }
+        self
+            .tabItem {
+                tab.tabItem()
+            }
+            .tag(tab)
+    }
+
+    func previewWithContainer() -> some View {
+        self.modelContainer(PreviewContainer.container)
+    }
 }
