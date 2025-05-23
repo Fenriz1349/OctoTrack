@@ -13,6 +13,7 @@ struct CustomButtonLabel: View {
     let message: String
     let color: Color
     var isSelected: Bool = true
+    var fontSize: CGFloat = 16
 
     var body: some View {
         HStack {
@@ -28,6 +29,7 @@ struct CustomButtonLabel: View {
                     .padding(.trailing, 20)
             }
         }
+        .font(.system(size: fontSize))
         .appButtonStyle(color: color, isSelected: isSelected)
     }
 }

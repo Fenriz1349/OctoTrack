@@ -9,14 +9,14 @@ import SwiftUI
 
 struct PriorityButtonsStack: View {
     @Binding var selectedPriority: RepoPriority
+    var showAll: Bool = false
+    var priorities: [RepoPriority] {
+        showAll ? RepoPriority.allCases : RepoPriority.allCases.filter{ $0.rawValue != 0 }
+    }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("priority")
-                .fontWeight(.bold)
-                .padding(.horizontal, 4)
             HStack {
-                ForEach(RepoPriority.allCases, id: \.rawValue) { priority in
+                ForEach(priorities, id: \.rawValue) { priority in
                     Button(action: {
                             withAnimation(.easeInOut(duration: 0.2)) {
                                 selectedPriority = priority
@@ -26,7 +26,8 @@ struct PriorityButtonsStack: View {
                                 iconLeading: priority.icon,
                                 message: priority.name,
                                 color: priority.color,
-                                isSelected: selectedPriority == priority
+                                isSelected: selectedPriority == priority,
+                                fontSize: 12
                             )
                         }
                     )
@@ -34,7 +35,6 @@ struct PriorityButtonsStack: View {
             }
             .background(Color.gray.opacity(0.2))
             .cornerRadius(8)
-        }
     }
 }
 

@@ -36,7 +36,14 @@ struct AddRepositoryModal: View {
                 text: $viewModel.repoName,
                 type: .alphaNumber
             )
-            PriorityButtonsStack(selectedPriority: $viewModel.priority)
+
+            VStack(alignment: .leading, spacing: 10) {
+                Text("priority")
+                    .fontWeight(.bold)
+                    .padding(.horizontal, 4)
+                PriorityButtonsStack(selectedPriority: $viewModel.priority)
+            }
+
             if viewModel.isLoading {
                 ProgressView()
                     .padding()

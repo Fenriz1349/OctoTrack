@@ -8,12 +8,14 @@
 import SwiftUI
 
 enum RepoPriority: Int, Codable, CaseIterable {
-    case low = 0
-    case medium = 1
-    case high = 2
+    case all = 0
+    case low = 1
+    case medium = 2
+    case high = 3
 
     var name: String {
         switch self {
+        case.all: "all"
         case .low: "low"
         case .medium: "medium"
         case .high: "high"
@@ -22,6 +24,7 @@ enum RepoPriority: Int, Codable, CaseIterable {
 
     var color: Color {
         switch self {
+        case.all: .gray
         case .low: .green
         case .medium: .yellow
         case .high: .red
@@ -30,6 +33,7 @@ enum RepoPriority: Int, Codable, CaseIterable {
 
     var icon: IconsName {
         switch self {
+        case .all: IconsName.folder
         case .low: IconsName.leaf
         case .medium: IconsName.bolt
         case .high: IconsName.flame
