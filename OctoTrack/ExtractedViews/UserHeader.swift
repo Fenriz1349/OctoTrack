@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UserHeader: View {
     var user: User
+    var isCompact: Bool = false
 
     @Environment(\.colorScheme) private var colorScheme
 
@@ -33,7 +34,7 @@ struct UserHeader: View {
                     Text(user.login)
                         .font(.title)
                         .fontWeight(.bold)
-                    GithubLink(link: "https://github.com/\(user.login)")
+                    if !isCompact { GithubLink(link: "https://github.com/\(user.login)") }
                     HStack(spacing: 6) {
                         Image(systemName: "folder.fill")
                             .foregroundColor(.orange)
@@ -44,7 +45,7 @@ struct UserHeader: View {
                     .padding(.top, 2)
                 }
             }
-            if let lastUpdate = user.lastUpdate {
+            if let lastUpdate = user.lastUpdate, !isCompact {
                 Text("lastUpdate \(lastUpdate.formatted(date: .abbreviated, time: .shortened))")
             }
         }
@@ -60,6 +61,6 @@ struct UserHeader: View {
 }
 
 #Preview {
-        UserHeader(user: PreviewContainer.user)
+        UserHeader(user: PreviewContainer.user, isCompact: true)
             .previewWithContainer()
 }

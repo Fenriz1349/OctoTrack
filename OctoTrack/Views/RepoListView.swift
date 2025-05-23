@@ -19,7 +19,7 @@ struct RepoListView: View {
     var body: some View {
         NavigationStack {
             if let user = dataManager.activeUser {
-                UserHeader(user: user)
+                UserHeader(user: user, isCompact: true)
             }
             NavigationLink(destination: AddRepositoryModal(dataManager: dataManager)) {
                 CustomButtonLabel(iconLeading: .plus,
