@@ -22,9 +22,7 @@ import SwiftUI
             }
         }
 
-        var isError: Bool {
-            true
-        }
+        var isError: Bool { true }
     }
 
     let repository: Repository

@@ -34,19 +34,19 @@
         }
       }
     },
-    "addedWithSuccess %@" : {
+    "addFail %@/%@: %@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Added with success %@"
+            "value" : "Failed to add %@/%@: %@"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajouté avec succès %@"
+            "value" : "Echec de l’ajout %@/%@: %@"
           }
         }
       }
@@ -85,19 +85,36 @@
         }
       }
     },
-    "authenticationError %@" : {
+    "addSuccess %@/%@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Authentication Error: %@"
+            "value" : "Added with success %@/%@"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erreur d’authentification: %@"
+            "value" : "Ajouté avec succès %@/%@"
+          }
+        }
+      }
+    },
+    "authFail %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to authenticate: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Echec de l’authentification: %@"
           }
         }
       }
@@ -475,6 +492,22 @@
         }
       }
     },
+    "PR#%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull Request #%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull Request #%lld"
+          }
+        }
+      }
+    },
     "priority" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -522,22 +555,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Public"
-          }
-        }
-      }
-    },
-    "Pull Request #%lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pull Request #%lld"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pull Request #%lld"
           }
         }
       }

@@ -10,7 +10,6 @@ import Foundation
 @MainActor
 @Observable final class AppViewModel {
 #warning("ajouter branding")
-    #warning("varifier tous les imports")
     enum Feedback: FeedbackHandler, Equatable {
         case none
         case emptyRepo
@@ -22,7 +21,7 @@ import Foundation
             case .none: return nil
             case .emptyRepo: return "emptyRepo"
             case .resetSucessed: return "resetSuccess"
-            case .resetFailed(let error): return "resetFailed \(error)"
+            case .resetFailed(let error): return String(localized: "resetFailed \(error)")
             }
         }
 
@@ -128,7 +127,7 @@ import Foundation
             feedback = .resetFailed(error: error.localizedDescription)
         }
     }
-    
+
     func checkIfEmptyRepoList() -> Bool {
         if let currentUser = dataManager.activeUser, currentUser.repoList.isEmpty {
             feedback = .emptyRepo

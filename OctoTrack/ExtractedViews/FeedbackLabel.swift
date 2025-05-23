@@ -26,7 +26,7 @@ struct FeedbackLabel: View {
                     .foregroundColor(color)
             }
 #warning("vérifier que tous les messages soient localisés et non en majuscule")
-            Text(LocalizedStringKey(feedback.message ?? ""))
+            Text(feedback.message ?? "")
                 .fontWeight(.medium)
         }
         .padding()

@@ -17,21 +17,18 @@ import Foundation
 
         var message: String? {
             switch self {
-            case .none:
-                return nil
+            case .none: return nil
             case .addSuccess(let owner, let repoName):
-                return "Successfully added \(owner)/\(repoName)"
+                return String(localized: "addSuccess \(owner)/\(repoName)")
             case .addFailed(let owner, let repoName, let error):
-                return "Failed to add \(owner)/\(repoName): \(error)"
+                return String(localized: "addFail \(owner)/\(repoName): \(error)")
             }
         }
 
         var isError: Bool {
             switch self {
-            case .none, .addSuccess:
-                return false
-            case .addFailed:
-                return true
+            case .none, .addSuccess: return false
+            case .addFailed: return true
             }
         }
     }

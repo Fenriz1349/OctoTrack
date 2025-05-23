@@ -27,14 +27,13 @@ struct AuthenticationView: View {
                         onSignOut: { viewModel.signOut() }
                     )
                 }
-
-                if let error = viewModel.authError {
-                    Text("authenticationError \(error.localizedDescription)")
-                        .font(.caption)
-                        .foregroundColor(.red)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 32)
-                        .padding(.bottom, 20)
+                if viewModel.feedback != .none {
+                    FeedbackLabel(feedback: viewModel.feedback)
+                }
+            }
+            .onChange(of: viewModel.feedback) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    viewModel.feedback = .none
                 }
             }
             .padding(.horizontal, 40)
