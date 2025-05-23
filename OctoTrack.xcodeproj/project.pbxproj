@@ -12,6 +12,8 @@
 		6826E9682D9692710048F35A /* CustomButtonIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826E9672D9692710048F35A /* CustomButtonIcon.swift */; };
 		6826E96A2D96A8FF0048F35A /* TokenValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826E9692D96A8FF0048F35A /* TokenValidator.swift */; };
 		6826E96C2D96F0420048F35A /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826E96B2D96F0420048F35A /* PreviewContainer.swift */; };
+		68422C722DE0BDF200F60F71 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68422C712DE0BDF200F60F71 /* CustomTabBar.swift */; };
+		68422C742DE0BE5400F60F71 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68422C732DE0BE5400F60F71 /* TabBarButton.swift */; };
 		684F7C5F2D8DAA1A0044367F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 684F7C412D8DAA1A0044367F /* Preview Assets.xcassets */; };
 		684F7C602D8DAA1A0044367F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 684F7C482D8DAA1A0044367F /* Localizable.xcstrings */; };
 		684F7C612D8DAA1A0044367F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 684F7C592D8DAA1A0044367F /* Assets.xcassets */; };
@@ -107,6 +109,8 @@
 		6826E96B2D96F0420048F35A /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		683612EE2D5D31EC00805615 /* OctoTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OctoTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		683613002D5D31EE00805615 /* OctoTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OctoTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		68422C712DE0BDF200F60F71 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		68422C732DE0BE5400F60F71 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
 		684F7C212D8DAA1A0044367F /* AsyncAvatarImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAvatarImage.swift; sourceTree = "<group>"; };
 		684F7C222D8DAA1A0044367F /* AuthButtonsStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButtonsStack.swift; sourceTree = "<group>"; };
 		684F7C232D8DAA1A0044367F /* CustomButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonLabel.swift; sourceTree = "<group>"; };
@@ -252,6 +256,8 @@
 				688F20412DC4A95D00AA7194 /* TImelineEvent.swift */,
 				688F20432DC4AA5200AA7194 /* PullRequestTimeline.swift */,
 				688F20472DC4E06300AA7194 /* GithubLink.swift */,
+				68422C712DE0BDF200F60F71 /* CustomTabBar.swift */,
+				68422C732DE0BE5400F60F71 /* TabBarButton.swift */,
 			);
 			path = ExtractedViews;
 			sourceTree = "<group>";
@@ -564,6 +570,7 @@
 				684F7C6E2D8DAA1A0044367F /* Repository.swift in Sources */,
 				684F7CA12D8DBF8A0044367F /* Owner.swift in Sources */,
 				684F7C6F2D8DAA1A0044367F /* TextFieldConfig.swift in Sources */,
+				68422C742DE0BE5400F60F71 /* TabBarButton.swift in Sources */,
 				68C02ECB2D9FB7800065027F /* PullRequestMapper.swift in Sources */,
 				684F7C702D8DAA1A0044367F /* User.swift in Sources */,
 				68E682FD2DD7318400B6C922 /* FeedbackHandler.swift in Sources */,
@@ -608,6 +615,7 @@
 				68C02ECD2D9FBA360065027F /* PullRequestGetter.swift in Sources */,
 				6826E8392D9580B80048F35A /* ContentView.swift in Sources */,
 				684F7C892D8DAA1A0044367F /* AddRepositoryModal.swift in Sources */,
+				68422C722DE0BDF200F60F71 /* CustomTabBar.swift in Sources */,
 				684F7C8A2D8DAA1A0044367F /* AuthenticationView.swift in Sources */,
 				684F7C8B2D8DAA1A0044367F /* RepoDetailView.swift in Sources */,
 				684F7C8C2D8DAA1A0044367F /* RepoListView.swift in Sources */,
