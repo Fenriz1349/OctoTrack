@@ -1,0 +1,67 @@
+//
+//  CustomTabBar.swift
+//  OctoTrack
+//
+//  Created by Julien Cotte on 23/05/2025.
+//
+
+import SwiftUI
+
+struct CustomTabBar: View {
+    @Binding var selectedTab: Tab
+       @State private var showAddModal = false
+       let viewModel: AppViewModel
+       
+       var body: some View {
+           ZStack(alignment: .bottom) {
+               Group {
+                   switch selectedTab {
+                   case .repoList:
+                       RepoListView(dataManager: viewModel.dataManager)
+                   case .account:
+                       AccountView(appViewModel: viewModel)
+                   case .addRepo:
+                       EmptyView()
+                   }
+               }
+               
+               HStack{
+                   TabBarButton( tab: .repoList,
+                                 isSelected: selectedTab == .repoList,
+                                 action: { selectedTab = .repoList }
+                   )
+                   
+                   ZStack {
+                       RoundedRectangle(cornerRadius: 50)
+                           .fill(Color.black)
+                           .frame(width: 110, height: 56)
+                           .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
+                       
+                       TabBarButton(tab: .addRepo,
+                                    isSelected: false,
+                                    action: {showAddModal = true },
+                                    color: .white
+                       )
+                   }
+
+                   TabBarButton(tab: .account,
+                                isSelected: selectedTab == .account,
+                                action: { selectedTab = .account }
+                   )
+               }
+               .padding(.horizontal, 24)
+               .padding(.vertical, 12)
+               .background(
+                   Color(.systemBackground)
+                       .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: -2)
+               )
+           }
+           .sheet(isPresented: $showAddModal) {
+               AddRepositoryModal(dataManager: viewModel.dataManager)
+           }
+       }
+   }
+
+#Preview {
+    CustomTabBar(selectedTab: .constant(.account), viewModel: PreviewContainer.previewAppViewModel)
+}

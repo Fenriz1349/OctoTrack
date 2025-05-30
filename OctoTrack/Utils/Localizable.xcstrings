@@ -153,6 +153,16 @@
         }
       }
     },
+    "close" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        }
+      }
+    },
     "closed" : {
       "extractionState" : "manual",
       "localizations" : {

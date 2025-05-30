@@ -21,12 +21,6 @@ struct RepoListView: View {
             if let user = dataManager.activeUser {
                 UserHeader(user: user, isCompact: true)
             }
-            NavigationLink(destination: AddRepositoryModal(dataManager: dataManager)) {
-                CustomButtonLabel(iconLeading: .plus,
-                                  message: "repoAdd",
-                                  color: .black)
-                .padding(.horizontal, 30)
-            }
             PriorityButtonsStack(selectedPriority: $selectedPriority, showAll: true)
             List {
                 ForEach(repositoryList) { repository in

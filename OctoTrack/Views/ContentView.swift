@@ -26,14 +26,7 @@ struct ContentView: View {
                     await viewModel.initialize()
                 }
             } else if viewModel.isLogged {
-                TabView(selection: $tab) {
-                    RepoListView(dataManager: viewModel.dataManager)
-                    .tabItem { Tab.repoList.tabItem() }
-                        .tag(Tab.repoList)
-                    AccountView(appViewModel: viewModel)
-                        .tabItem { Tab.account.tabItem() }
-                        .tag(Tab.account)
-                }
+                CustomTabBar(selectedTab: $tab, viewModel: viewModel)
             } else {
                 AuthenticationView(viewModel: viewModel.authenticationViewModel)
                     .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),

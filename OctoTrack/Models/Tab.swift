@@ -9,20 +9,23 @@ import SwiftUI
 
 enum Tab: CaseIterable, Identifiable {
     case repoList
+    case addRepo
     case account
     var id: Self { self }
 
-    private var tabIcon: IconsName {
+    var tabIcon: IconsName {
         switch self {
         case .account: .person
+        case .addRepo: .plus
         case .repoList: .folder
         }
     }
 
-    private var tabLabel: String {
+    var tabLabel: String {
         switch self {
-        case .account: "account"
-        case .repoList: "repoList"
+        case .account: String(localized: "account")
+        case .addRepo: String(localized: "repoAdd")
+        case .repoList: String(localized: "repoList")
         }
     }
 
