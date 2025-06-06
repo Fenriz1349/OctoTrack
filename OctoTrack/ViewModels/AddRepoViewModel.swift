@@ -13,13 +13,16 @@ import Foundation
     enum Feedback: FeedbackHandler, Equatable {
         case none
         case addSuccess(owner: String, repoName: String)
+        case alreadyTracked(owner: String, repoName: String)
         case addFailed(owner: String, repoName: String, error: String)
 
         var message: String? {
             switch self {
             case .none: return nil
-            case .addSuccess(let owner, let repoName): 
+            case .addSuccess(let owner, let repoName):
                 return String(localized: "addSuccess \(owner)/\(repoName)")
+            case .alreadyTracked(let owner, let repoName):
+                           return String(localized: "\(owner)/\(repoName) alreadyTracked ")
             case .addFailed(let owner, let repoName, let error):
                 return String(localized: "addFail \(owner)/\(repoName): \(error)")
             }
@@ -27,7 +30,7 @@ import Foundation
 
         var isError: Bool {
             switch self {
-            case .none, .addSuccess: return false
+            case .none, .alreadyTracked, .addSuccess: return false
             case .addFailed: return true
             }
         }
@@ -52,10 +55,17 @@ import Foundation
         self.dataManager = dataManager
         self.owner = dataManager.activeUser?.login ?? ""
     }
-    #warning("ajouter un cas lorsque le repo est deja dans le user")
-    #warning("ajouter un cas lorsque le repo existe deja et le recuperer")
+
     func getRepo() async {
         isLoading = true
+
+        if let currentUser = dataManager.activeUser,
+           currentUser.repoList.contains(where: { $0.name == repoName && $0.owner.login == owner }) {
+            feedback = .alreadyTracked(owner: owner, repoName: repoName)
+            isLoading = false
+            return
+        }
+
         do {
             let token = try await authenticator.retrieveToken()
             let request = try RepoEndpoint.request(owner: owner, repoName: repoName, token: token)

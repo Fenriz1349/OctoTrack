@@ -11,9 +11,9 @@ struct CustomTabBar: View {
     @Binding var selectedTab: Tab
        @State private var showAddModal = false
        let viewModel: AppViewModel
-       
+
        var body: some View {
-           ZStack(alignment: .bottom) {
+           VStack {
                Group {
                    switch selectedTab {
                    case .repoList:
@@ -24,8 +24,8 @@ struct CustomTabBar: View {
                        EmptyView()
                    }
                }
-               
-               HStack{
+
+               HStack {
                    TabBarButton( tab: .repoList,
                                  isSelected: selectedTab == .repoList,
                                  action: { selectedTab = .repoList }
@@ -33,10 +33,9 @@ struct CustomTabBar: View {
                    
                    ZStack {
                        RoundedRectangle(cornerRadius: 50)
-                           .fill(Color.black)
+                           .fill(Color.blue.opacity(0.8))
                            .frame(width: 110, height: 56)
-                           .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
-                       
+                           .shadow(color: .blue.opacity(0.3), radius: 8, x: 0, y: 4)
                        TabBarButton(tab: .addRepo,
                                     isSelected: false,
                                     action: {showAddModal = true },
@@ -51,9 +50,14 @@ struct CustomTabBar: View {
                }
                .padding(.horizontal, 24)
                .padding(.vertical, 12)
+               .padding(.bottom, -30)
                .background(
-                   Color(.systemBackground)
-                       .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: -2)
+                Color(.systemBackground)
+                    .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: -4)
+                    .mask(
+                        Rectangle()
+                            .padding(.top, -20)
+                    )
                )
            }
            .sheet(isPresented: $showAddModal) {

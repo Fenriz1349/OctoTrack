@@ -10,39 +10,37 @@ import SwiftUI
 struct AddRepositoryModal: View {
     @State private var viewModel: AddRepoViewModel
     @Environment(\.dismiss) private var dismiss
-    
+
     init(dataManager: UserDataManager) {
         self._viewModel = State(initialValue: AddRepoViewModel(dataManager: dataManager))
     }
-    
+
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
                 Text("repoAdd")
                     .font(.headline)
                     .padding(.top)
-                
+
                 CustomTextField(header: String(localized: "owner"),
                                 color: .gray,
-                                placeholder: "ownerExemple",
+                                placeholder: String(localized: "ownerExemple"),
                                 text: $viewModel.owner,
-                                type: .alphaNumber
-                )
-                
+                                type: .alphaNumber)
+
                 CustomTextField(header: String(localized: "repoName"),
                                 color: .gray,
-                                placeholder: "repoExemple",
+                                placeholder: String(localized: "repoExemple"),
                                 text: $viewModel.repoName,
-                                type: .alphaNumber
-                )
-                
+                                type: .alphaNumber)
+
                 VStack(alignment: .leading, spacing: 10) {
                     Text("priority")
                         .fontWeight(.bold)
                         .padding(.horizontal, 4)
                     PriorityButtonsStack(selectedPriority: $viewModel.priority)
                 }
-                
+
                 if viewModel.isLoading {
                     ProgressView()
                         .padding()
@@ -55,7 +53,7 @@ struct AddRepositoryModal: View {
                            label: {
                         CustomButtonLabel(iconLeading: .plus,
                                           message: "repoAdd",
-                                          color: .green
+                                          color: .blue
                         )
                     }
                     )
@@ -63,7 +61,7 @@ struct AddRepositoryModal: View {
                     .disabled(!viewModel.isFormValid)
                     .opacity(viewModel.isFormValid ? 1 : 0.6)
                 }
-                
+
                 if viewModel.feedback != .none {
                     FeedbackLabel(feedback: viewModel.feedback)
                 }
@@ -78,10 +76,15 @@ struct AddRepositoryModal: View {
                     }
             }
             .onChange(of: viewModel.feedback) {
-                if !viewModel.feedback.isError {
+                switch viewModel.feedback {
+                case .addSuccess:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                         viewModel.feedback = .none
                         dismiss()
+                    }
+                default:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                        viewModel.feedback = .none
                     }
                 }
             }

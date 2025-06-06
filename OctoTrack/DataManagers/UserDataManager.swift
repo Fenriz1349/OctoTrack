@@ -28,6 +28,13 @@ import SwiftData
         }
     }
 
+    func getRepositoryList(with priority: RepoPriority) -> [Repository] {
+        guard let activeUser = activeUser else { return [] }
+        return priority == .all
+        ? activeUser.repoList
+        : activeUser.repoList.filter { $0.priority == priority}
+    }
+
     var allUsers: [User] {
         do {
             return try modelContext.fetch(FetchDescriptor<User>())
@@ -88,8 +95,28 @@ import SwiftData
 
     func storeNewRepo(_ repo: Repository) throws {
         guard let currentUser = activeUser else { return }
-        let owner: Owner
 
+        if try !addExistingRepoToUser(repoId: repo.id, user: currentUser) {
+            try createNewRepo(repo, for: currentUser)
+        }
+    }
+
+    private func addExistingRepoToUser(repoId: Int, user: User) throws -> Bool {
+        guard let existingRepo = try modelContext
+            .fetch( FetchDescriptor<Repository>(predicate: #Predicate { $0.id == repoId })).first
+        else { return false }
+
+        guard !user.repoList.contains(where: { $0.id == repoId }) else { return true }
+
+        user.repoList.append(existingRepo)
+        user.lastUpdate = Date()
+        try modelContext.save()
+
+        return true
+    }
+
+    private func createNewRepo(_ repo: Repository, for user: User) throws {
+        let owner: Owner
         if let existingOwner = findOwner(id: repo.owner.id) {
             owner = existingOwner
         } else {
@@ -97,34 +124,25 @@ import SwiftData
                 id: repo.owner.id,
                 login: repo.owner.login,
                 avatarURL: repo.owner.avatarURL
-            ) else {
-                return
-            }
+            ) else { throw URLError(.badURL) }
             owner = newOwner
-            try modelContext.save()
         }
 
-        let existingRepo = currentUser.repoList.first { $0.id == repo.id }
+        let newRepo = Repository(
+            id: repo.id,
+            name: repo.name,
+            repoDescription: repo.repoDescription,
+            isPrivate: repo.isPrivate,
+            owner: owner,
+            createdAt: repo.createdAt,
+            updatedAt: repo.updatedAt,
+            language: repo.language,
+            priority: repo.priority)
 
-        if existingRepo == nil {
-            let newRepo = Repository(
-                id: repo.id,
-                name: repo.name,
-                repoDescription: repo.repoDescription,
-                isPrivate: repo.isPrivate,
-                owner: owner,
-                createdAt: repo.createdAt,
-                updatedAt: repo.updatedAt,
-                language: repo.language,
-                priority: repo.priority
-            )
-
-            modelContext.insert(newRepo)
-            currentUser.repoList.append(newRepo)
-            currentUser.lastUpdate = Date()
-
-            try modelContext.save()
-        }
+        modelContext.insert(newRepo)
+        user.repoList.append(newRepo)
+        user.lastUpdate = Date()
+        try modelContext.save()
     }
 
     func deleteRepository(_ repository: Repository) throws {
@@ -165,6 +183,24 @@ import SwiftData
         if let repoToUpdate = currentUser.repoList.first(where: { $0.id == repoId }) {
             repoToUpdate.priority = priority
             try modelContext.save()
+        }
+    }
+
+    func fetchExistingRepository(withId id: Int) throws -> Repository? {
+        return try? modelContext.fetch(
+            FetchDescriptor<Repository>(predicate: #Predicate { $0.id == id })
+        ).first
+    }
+
+    func updateIfAlreayExist(_ repository: Repository) throws {
+        guard let currentUser = activeUser else { return }
+
+        if let existingRepo = try fetchExistingRepository(withId: repository.id) {
+            if !currentUser.repoList.contains(where: { $0.id == repository.id }) {
+                currentUser.repoList.append(existingRepo)
+                currentUser.lastUpdate = Date()
+                try modelContext.save()
+            }
         }
     }
 

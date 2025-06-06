@@ -8,18 +8,12 @@
 import SwiftUI
 
 struct AccountView: View {
-    @State private var appViewModel: AppViewModel
+    @State var appViewModel: AppViewModel
     @State private var showingResetAlert = false
-
-    init(appViewModel: AppViewModel) {
-        self._appViewModel = State(initialValue: appViewModel)
-    }
 
     var body: some View {
         VStack(spacing: 24) {
-            if let user = appViewModel.dataManager.activeUser {
-                UserHeader(user: user)
-            }
+            UserHeader()
 
             VStack(spacing: 16) {
                 Button {

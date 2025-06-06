@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RepoHeader: View {
     @Bindable var repository: Repository
+    var viewModel: RepoDetailsViewModel?
     var isCompact: Bool = false
 
     private var openPRCount: Int {
@@ -48,7 +49,8 @@ struct RepoHeader: View {
                 Divider()
                 DateRow(creationDate: repository.createdAt,
                         updateDate: repository.updatedAt,
-                        mergedAt: nil, closedAt: nil)
+                        mergedAt: nil, closedAt: nil,
+                        viewModel: viewModel)
             }
         }
         .padding(20)
@@ -58,11 +60,10 @@ struct RepoHeader: View {
                 .fill(Color.white)
                 .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
         )
-        .padding(.horizontal)
     }
 }
 
 #Preview {
-    RepoHeader(repository: PreviewContainer.previewRepository)
+    RepoHeader(repository: PreviewContainer.previewRepository, isCompact: false)
         .previewWithContainer()
 }

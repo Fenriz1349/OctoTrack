@@ -12,6 +12,7 @@
 		6826E9682D9692710048F35A /* CustomButtonIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826E9672D9692710048F35A /* CustomButtonIcon.swift */; };
 		6826E96A2D96A8FF0048F35A /* TokenValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826E9692D96A8FF0048F35A /* TokenValidator.swift */; };
 		6826E96C2D96F0420048F35A /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826E96B2D96F0420048F35A /* PreviewContainer.swift */; };
+		682B68832DE9CCAC00B1C389 /* CompactPriorityMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682B68822DE9CCAC00B1C389 /* CompactPriorityMenu.swift */; };
 		68422C722DE0BDF200F60F71 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68422C712DE0BDF200F60F71 /* CustomTabBar.swift */; };
 		68422C742DE0BE5400F60F71 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68422C732DE0BE5400F60F71 /* TabBarButton.swift */; };
 		684F7C5F2D8DAA1A0044367F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 684F7C412D8DAA1A0044367F /* Preview Assets.xcassets */; };
@@ -80,6 +81,7 @@
 		68C02ED12D9FC58C0065027F /* PreviewPullRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02ED02D9FC58C0065027F /* PreviewPullRequests.swift */; };
 		68C02ED32D9FC8200065027F /* PullRequestDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02ED22D9FC8200065027F /* PullRequestDetailView.swift */; };
 		68C02ED72D9FD9540065027F /* RepoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02ED62D9FD9540065027F /* RepoHeader.swift */; };
+		68CCBC3C2DF2CA7800B4DB5A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CCBC3B2DF2CA7800B4DB5A /* LoadingView.swift */; };
 		68DB04672DCDE433006A4813 /* KeychainServiceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB04662DCDE433006A4813 /* KeychainServiceSpy.swift */; };
 		68DB04692DCDE486006A4813 /* ASWebAuthenticationSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB04682DCDE486006A4813 /* ASWebAuthenticationSessionMock.swift */; };
 		68DB046B2DCDE70F006A4813 /* GitHubAuthenticationEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB046A2DCDE70F006A4813 /* GitHubAuthenticationEndpointTests.swift */; };
@@ -107,6 +109,7 @@
 		6826E9672D9692710048F35A /* CustomButtonIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonIcon.swift; sourceTree = "<group>"; };
 		6826E9692D96A8FF0048F35A /* TokenValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenValidator.swift; sourceTree = "<group>"; };
 		6826E96B2D96F0420048F35A /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
+		682B68822DE9CCAC00B1C389 /* CompactPriorityMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactPriorityMenu.swift; sourceTree = "<group>"; };
 		683612EE2D5D31EC00805615 /* OctoTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OctoTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		683613002D5D31EE00805615 /* OctoTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OctoTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		68422C712DE0BDF200F60F71 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
@@ -178,6 +181,7 @@
 		68C02ED02D9FC58C0065027F /* PreviewPullRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPullRequests.swift; sourceTree = "<group>"; };
 		68C02ED22D9FC8200065027F /* PullRequestDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestDetailView.swift; sourceTree = "<group>"; };
 		68C02ED62D9FD9540065027F /* RepoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoHeader.swift; sourceTree = "<group>"; };
+		68CCBC3B2DF2CA7800B4DB5A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		68DB04662DCDE433006A4813 /* KeychainServiceSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceSpy.swift; sourceTree = "<group>"; };
 		68DB04682DCDE486006A4813 /* ASWebAuthenticationSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASWebAuthenticationSessionMock.swift; sourceTree = "<group>"; };
 		68DB046A2DCDE70F006A4813 /* GitHubAuthenticationEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthenticationEndpointTests.swift; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 				688F20472DC4E06300AA7194 /* GithubLink.swift */,
 				68422C712DE0BDF200F60F71 /* CustomTabBar.swift */,
 				68422C732DE0BE5400F60F71 /* TabBarButton.swift */,
+				682B68822DE9CCAC00B1C389 /* CompactPriorityMenu.swift */,
 			);
 			path = ExtractedViews;
 			sourceTree = "<group>";
@@ -375,6 +380,7 @@
 				684F7C572D8DAA1A0044367F /* RepoListView.swift */,
 				6826E8382D9580B80048F35A /* ContentView.swift */,
 				68C02ED22D9FC8200065027F /* PullRequestDetailView.swift */,
+				68CCBC3B2DF2CA7800B4DB5A /* LoadingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -594,6 +600,7 @@
 				684F7C7A2D8DAA1A0044367F /* EndpointBuilder.swift in Sources */,
 				689B15E72DBB82710075B3EC /* OwnerLabel.swift in Sources */,
 				684F7C7B2D8DAA1A0044367F /* URLSessionHTTPClient.swift in Sources */,
+				682B68832DE9CCAC00B1C389 /* CompactPriorityMenu.swift in Sources */,
 				68C02ECF2D9FC3960065027F /* PullRequestRow.swift in Sources */,
 				684F7C7D2D8DAA1A0044367F /* TokenServiceManager.swift in Sources */,
 				688F20422DC4A95D00AA7194 /* TImelineEvent.swift in Sources */,
@@ -623,6 +630,7 @@
 				684F7C8E2D8DAA1A0044367F /* OctoTrackApp.swift in Sources */,
 				68C02EC92D9FB2CD0065027F /* PullRequestEndpoint.swift in Sources */,
 				6826E9682D9692710048F35A /* CustomButtonIcon.swift in Sources */,
+				68CCBC3C2DF2CA7800B4DB5A /* LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

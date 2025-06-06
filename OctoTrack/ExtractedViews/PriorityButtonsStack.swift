@@ -11,7 +11,7 @@ struct PriorityButtonsStack: View {
     @Binding var selectedPriority: RepoPriority
     var showAll: Bool = false
     var priorities: [RepoPriority] {
-        showAll ? RepoPriority.allCases : RepoPriority.allCases.filter{ $0.rawValue != 0 }
+        showAll ? RepoPriority.allCases: RepoPriority.allCases.filter { $0.rawValue != 0 }
     }
 
     var body: some View {

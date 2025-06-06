@@ -17,6 +17,39 @@
         }
       }
     },
+    "%@/%@ alreadyTracked " : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@/%@ is already being tracked"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@/%@ est déjà suivi"
+          }
+        }
+      }
+    },
+    "%lld reposTracked" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Repos tracked"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Repos suivies"
+          }
+        }
+      }
+    },
     "account" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -160,6 +193,12 @@
             "state" : "translated",
             "value" : "Close"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermer"
+          }
         }
       }
     },
@@ -244,6 +283,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de charger le ModelContainer: %@"
+          }
+        }
+      }
+    },
+    "created" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Created"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crée"
           }
         }
       }
@@ -484,6 +539,56 @@
         }
       }
     },
+    "noTrackedRepos" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No tracked Repo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun repo suivie"
+          }
+        }
+      }
+    },
+    "octotrack" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OctoTrack"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Octotrack"
+          }
+        }
+      }
+    },
+    "oneTrackedRepo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One tracked Repo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un repo suivi"
+          }
+        }
+      }
+    },
     "open" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -700,23 +805,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nom du Repo"
-          }
-        }
-      }
-    },
-    "repositoriesTracked %lld" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Repos tracked %lld"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Repos suivies %lld"
           }
         }
       }
@@ -974,19 +1062,18 @@
         }
       }
     },
-    "viewGithub" : {
-      "extractionState" : "manual",
+    "viewOnGithub" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "View on GitHub"
+            "value" : "View on github"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voir sur Github"
+            "value" : "Voir sur github"
           }
         }
       }

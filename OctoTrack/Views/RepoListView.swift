@@ -6,24 +6,22 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct RepoListView: View {
     @State var dataManager: UserDataManager
     @State var selectedPriority: RepoPriority = .all
-    var repositoryList: [Repository] {
-        return selectedPriority == .all
-        ? dataManager.activeUser?.repoList ?? []
-        : dataManager.activeUser?.repoList.filter{ $0.priority == selectedPriority} ?? []
+
+    @Query private var allRepositories: [Repository]
+    var selectedRepositories: [Repository] {
+        selectedPriority == .all ? allRepositories : allRepositories.filter{$0.priority == selectedPriority}
     }
-    #warning("ajouter un tri par date ou par priorité")
     var body: some View {
         NavigationStack {
-            if let user = dataManager.activeUser {
-                UserHeader(user: user, isCompact: true)
-            }
+            UserHeader(isCompact: true)
             PriorityButtonsStack(selectedPriority: $selectedPriority, showAll: true)
             List {
-                ForEach(repositoryList) { repository in
+                ForEach(selectedRepositories) { repository in
                     NavigationLink(destination: RepoDetailView(repository: repository,
                                                                dataManager: dataManager)) {
                         RepoRow(repository: repository)
@@ -38,6 +36,7 @@ struct RepoListView: View {
                    }
                 }
             }
+            .listStyle(.plain)
             .refreshable {
                 withAnimation {
                     dataManager.orderRepositories()
@@ -49,6 +48,6 @@ struct RepoListView: View {
 }
 
 #Preview {
-    RepoListView(dataManager: UserDataManager.preview)
+    RepoListView(dataManager: PreviewContainer.previewAppViewModel.dataManager)
         .previewWithContainer()
 }

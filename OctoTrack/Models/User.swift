@@ -15,7 +15,7 @@ import SwiftData
     var avatarURL: String
     var lastUpdate: Date?
 
-    @Relationship(deleteRule: .cascade) var repoList: [Repository] = []
+    @Relationship(deleteRule: .nullify) var repoList: [Repository] = []
 
     init(id: Int, login: String, avatarURL: String, repoList: [Repository], lastUpdate: Date? = nil) {
         self.id = id
@@ -27,5 +27,15 @@ import SwiftData
 
     func toOwner() -> Owner {
         return Owner(id: id, login: login, avatarURL: avatarURL)
+    }
+}
+
+extension User {
+    var trackedReposText: String {
+        switch repoList.count {
+        case 0: return String(localized: "noTrackedRepos")
+        case 1: return String(localized: "oneTrackedRepo")
+        default: return String(localized: "\(repoList.count) reposTracked")
+        }
     }
 }

@@ -13,9 +13,9 @@ struct GithubLink: View {
         Link(destination: URL(string: link)!) {
             HStack {
                 Image(systemName: IconsName.link.rawValue)
-                Text("viewGithub")
+                Text("viewOnGithub")
+                    .font(.system(size: 14))
             }
-            .padding()
             .foregroundColor(.blue)
             .cornerRadius(8)
         }
