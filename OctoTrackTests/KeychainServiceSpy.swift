@@ -24,7 +24,7 @@ class KeychainServiceSpy: TokenServiceManager {
         if let data = self.data[key] {
             return data
         }
-        throw Errors.retrieveFailed
+        throw URLError(.fileDoesNotExist)
     }
 
     func delete(key: String) throws {
@@ -32,7 +32,7 @@ class KeychainServiceSpy: TokenServiceManager {
         if existsInKeychain(key: key) {
             self.data.removeValue(forKey: key)
         } else {
-            throw Errors.deleteFailed
+            throw URLError(.fileDoesNotExist)
         }
     }
 

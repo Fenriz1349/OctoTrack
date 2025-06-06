@@ -54,7 +54,7 @@ import SwiftUI
             let token = try await authenticator.retrieveToken()
             let request = try PullRequestEndpoint
                 .request(owner: repository.owner.login, repoName: repository.name, token: token, state: state)
-            var pullRequests = try await pullRequestGetter.allPullRequestsGetter(from: request)
+            let pullRequests = try await pullRequestGetter.allPullRequestsGetter(from: request)
             feedback = pullRequests.isEmpty ? .noPR : .none
 //            pullRequests.sort { $0.createdAt < $1.createdAt }
             try dataManager.storePullRequests(pullRequests, repositoryiD: repository.id)
