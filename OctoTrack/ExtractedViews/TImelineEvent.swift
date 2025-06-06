@@ -38,7 +38,7 @@ struct TimelineEvent: View {
             .frame(width: 20)
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(status.value)
+                Text(status.text)
                     .font(.subheadline)
                     .fontWeight(.medium)
 

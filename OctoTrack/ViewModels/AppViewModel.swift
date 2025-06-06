@@ -5,11 +5,11 @@
 //  Created by Julien Cotte on 13/02/2025.
 //
 
-import Foundation
+import SwiftUI
 
 @MainActor
 @Observable final class AppViewModel {
-#warning("ajouter branding")
+
     enum Feedback: FeedbackHandler, Equatable {
         case none
         case emptyRepo

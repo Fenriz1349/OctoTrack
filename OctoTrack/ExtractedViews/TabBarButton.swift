@@ -12,19 +12,19 @@ struct TabBarButton: View {
     let isSelected: Bool
     let action: () -> Void
     var color: Color?
-    
+
     var displayedColor: Color {
         if let color = color { return color }
         return isSelected ? .blue : .gray
     }
-    
+
     var body: some View {
         Button(action: action) {
             VStack(spacing: 4) {
                 Image(systemName: tab.tabIcon.rawValue)
                     .font(.title3)
                     .foregroundColor(displayedColor)
-                
+
                 Text(tab.tabLabel)
                     .font(.caption2)
                     .foregroundColor(displayedColor)

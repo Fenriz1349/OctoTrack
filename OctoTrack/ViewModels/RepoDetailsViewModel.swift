@@ -21,7 +21,7 @@ import SwiftUI
             case .none:  nil
             case .noPR: String(localized: "noPR")
             case .updateFailed(let error): String(localized: "updateFailed \(error)")
-            case .deleteFailed(let error): String(localized:  "deleteFailed \(error)")
+            case .deleteFailed(let error): String(localized: "deleteFailed \(error)")
             }
         }
 
@@ -56,7 +56,7 @@ import SwiftUI
                 .request(owner: repository.owner.login, repoName: repository.name, token: token, state: state)
             var pullRequests = try await pullRequestGetter.allPullRequestsGetter(from: request)
             feedback = pullRequests.isEmpty ? .noPR : .none
-            pullRequests.sort { $0.createdAt < $1.createdAt }
+//            pullRequests.sort { $0.createdAt < $1.createdAt }
             try dataManager.storePullRequests(pullRequests, repositoryiD: repository.id)
             isLoading = false
         } catch {

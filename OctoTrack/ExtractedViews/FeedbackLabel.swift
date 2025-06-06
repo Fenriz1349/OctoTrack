@@ -28,6 +28,7 @@ struct FeedbackLabel: View {
             Text(feedback.message ?? "")
                 .fontWeight(.medium)
         }
+        .frame(maxWidth: .infinity)
         .padding()
         .background(color.opacity(0.1))
         .cornerRadius(8)

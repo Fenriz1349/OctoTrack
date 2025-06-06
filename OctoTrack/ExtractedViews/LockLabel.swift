@@ -16,7 +16,7 @@ struct LockLabel: View {
             Image(systemName: status.icon)
             .foregroundColor(.secondary)
             if withText {
-                Text(status.value)
+                Text(status.text)
                 .font(.caption)
                 .fontWeight(.medium)
                 .foregroundColor(.secondary)

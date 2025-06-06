@@ -18,26 +18,7 @@ struct RepoDetailView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            RepoHeader(repository: viewModel.repository)
-            Menu {
-                ForEach(RepoPriority.allCases, id: \.self) { priority in
-                    Button {
-                        viewModel.updateRepositoryPriority(priority)
-                    } label: {
-                        HStack {
-                            Image(systemName: priority.icon.rawValue)
-                            Text(priority.name)
-                        }
-                    }
-                }
-            } label: {
-                CustomButtonLabel(
-                    iconLeading: viewModel.repository.priority.icon,
-                    iconTrailing: IconsName.down,
-                    message: viewModel.repository.priority.name,
-                    color: viewModel.repository.priority.color
-                )
-            }
+            RepoHeader(repository: viewModel.repository, viewModel: viewModel)
 
             if viewModel.feedback.message != nil {
                 FeedbackLabel(feedback: viewModel.feedback, showIcon: false)
@@ -61,7 +42,7 @@ struct RepoDetailView: View {
                 await viewModel.getAllPullRequests()
             }
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 10)
     }
 }
 

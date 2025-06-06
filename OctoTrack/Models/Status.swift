@@ -16,15 +16,15 @@ enum Status: String, CaseIterable {
     case publicRepo
     case privateRepo
 
-    var value: String {
+    var text: String {
         switch self {
-        case .created: "created"
-        case .open: "open"
-        case .updated: "updated"
-        case .closed: "closed"
-        case .merged: "merged"
-        case .publicRepo: "public"
-        case .privateRepo: "private"
+        case .created: String(localized: "created")
+        case .open: String(localized: "open")
+        case .updated: String(localized: "updated")
+        case .closed: String(localized: "closed")
+        case .merged: String(localized: "merged")
+        case .publicRepo: String(localized: "public")
+        case .privateRepo: String(localized: "private")
         }
     }
 

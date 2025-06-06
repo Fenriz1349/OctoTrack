@@ -16,11 +16,7 @@ struct ContentView: View {
     var body: some View {
         Group {
             if viewModel.isInitializing {
-                VStack {
-                    ProgressView()
-                    Text("loading")
-                        .padding()
-                }
+                LoadingView()
                 .task {
                     viewModel.dataManager.modelContext = modelContext
                     await viewModel.initialize()

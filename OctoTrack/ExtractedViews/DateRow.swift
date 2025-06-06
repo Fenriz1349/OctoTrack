@@ -12,10 +12,11 @@ struct DateRow: View {
     let updateDate: Date?
     let mergedAt: Date?
     let closedAt: Date?
+    var viewModel: RepoDetailsViewModel?
 
     var body: some View {
-        HStack(spacing: 16) {
-            VStack(alignment: .leading, spacing: 2) {
+        HStack (alignment: .center, spacing: 8) {
+            VStack(alignment: .center, spacing: 2) {
                 Text("createdAt")
                     .font(.caption)
                     .foregroundColor(.secondary)
@@ -26,7 +27,7 @@ struct DateRow: View {
             if let updatedAt = updateDate {
                 Divider()
                     .frame(height: 24)
-                VStack(alignment: .trailing, spacing: 2) {
+                VStack(alignment: .center, spacing: 2) {
                     Text("updated")
                         .font(.caption)
                         .foregroundColor(.secondary)
@@ -38,7 +39,7 @@ struct DateRow: View {
             if let mergedAt = mergedAt {
                 Divider()
                     .frame(height: 24)
-                VStack(alignment: .trailing, spacing: 2) {
+                VStack(alignment: .center, spacing: 2) {
                     Text("merged")
                         .font(.caption)
                         .foregroundColor(.secondary)
@@ -48,7 +49,7 @@ struct DateRow: View {
             } else if let closedAt = closedAt {
                 Divider()
                     .frame(height: 24)
-                VStack(alignment: .trailing, spacing: 2) {
+                VStack(alignment: .center, spacing: 2) {
                     Text("closed")
                         .font(.caption)
                         .foregroundColor(.secondary)
@@ -57,10 +58,15 @@ struct DateRow: View {
                         .font(.subheadline)
                 }
             }
+            if let viewModel = viewModel {
+                Divider()
+                    .frame(height: 24)
+                CompactPriorityMenu(viewModel: viewModel)
+            }
         }
     }
 }
 
 #Preview {
-    DateRow(creationDate: Date(), updateDate: Date(), mergedAt: Date(), closedAt: Date())
+    DateRow(creationDate: Date(), updateDate: Date(), mergedAt: nil, closedAt: nil)
 }
