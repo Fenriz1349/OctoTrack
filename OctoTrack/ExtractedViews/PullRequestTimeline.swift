@@ -16,31 +16,30 @@ struct PullRequestTimeline: View {
                 .font(.headline)
                 .padding(.bottom, 8)
 
-            TimelineEvent(
-                date: pullRequest.createdAt,
-                status: .created,
-                isLast: pullRequest.closedAt == nil && pullRequest.mergedAt == nil
-            )
-            if let updateDate = pullRequest.updateAt {
-                TimelineEvent(
-                    date: updateDate,
-                    status: .updated,
-                    isLast: pullRequest.closedAt == nil && pullRequest.mergedAt == nil
-                )
-            }
             if let mergedDate = pullRequest.mergedAt {
                 TimelineEvent(
                     date: mergedDate,
-                    status: .merged,
-                    isLast: true
+                    status: .merged
                 )
             } else if let closedDate = pullRequest.closedAt {
                 TimelineEvent(
                     date: closedDate,
-                    status: .closed,
-                    isLast: true
+                    status: .closed
                 )
             }
+
+            if let updateDate = pullRequest.updatedAt,
+               updateDate != pullRequest.createdAt {
+                TimelineEvent(
+                    date: updateDate,
+                    status: .updated
+                )
+            }
+            TimelineEvent(
+                date: pullRequest.createdAt,
+                status: .created,
+                notSolo: pullRequest.mergedAt == nil && pullRequest.closedAt == nil
+            )
         }
     }
 }

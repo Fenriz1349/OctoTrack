@@ -18,10 +18,7 @@ import SwiftData
     var priority: RepoPriority
 
     @Relationship(deleteRule: .nullify) var owner: Owner
-    @Relationship(deleteRule: .cascade) var pullRequests: [PullRequest] = []
-
-    @Relationship(deleteRule: .nullify, inverse: \User.repoList)
-    var user: User?
+    @Relationship var pullRequests: [PullRequest] = []
 
     init(id: Int, name: String, repoDescription: String? = nil, isPrivate: Bool,
          owner: Owner, createdAt: Date, updatedAt: Date? = nil, language: String? = nil,
@@ -35,5 +32,11 @@ import SwiftData
         self.updatedAt = updatedAt
         self.language = language
         self.priority = priority
+    }
+}
+
+extension Repository {
+    var mostRecentUpdate: Date {
+        return updatedAt ?? createdAt
     }
 }

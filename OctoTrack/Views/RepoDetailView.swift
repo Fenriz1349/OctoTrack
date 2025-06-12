@@ -11,6 +11,10 @@ struct RepoDetailView: View {
     @State private var viewModel: RepoDetailsViewModel
     @State private var showPriorityPicker = false
 
+    var sortedPullRequests: [PullRequest] {
+        viewModel.repository.pullRequests.sorted { $0.createdAt > $1.createdAt }
+    }
+
     init(repository: Repository, dataManager: UserDataManager) {
             self._viewModel = State(initialValue: RepoDetailsViewModel(repository: repository,
                                                                        dataManager: dataManager))
@@ -24,7 +28,7 @@ struct RepoDetailView: View {
                 FeedbackLabel(feedback: viewModel.feedback, showIcon: false)
             }
 
-            List(viewModel.repository.pullRequests) { pullRequest in
+            List(sortedPullRequests) { pullRequest in
                 NavigationLink(destination: PullRequestDetailView(pullRequest: pullRequest,
                                                          repository: viewModel.repository) ) {
                     PullRequestRow(pullRequest: pullRequest)

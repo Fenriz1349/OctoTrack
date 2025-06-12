@@ -60,13 +60,11 @@ import SwiftData
     /// Create or update the currentUser
     /// - Parameter user: the user create when login
     func saveUser(_ user: User) {
-        // Update user info if it already exist
         if let currentUser = activeUser, user.id == currentUser.id {
             currentUser.login = user.login
             currentUser.avatarURL = user.avatarURL
             currentUser.lastUpdate = Date()
             try? modelContext.save()
-            // Otherwise create it
         } else {
             modelContext.insert(user)
         }
@@ -82,9 +80,7 @@ import SwiftData
     }
 
     private func createOwner(id: Int, login: String, avatarURL: String) -> Owner? {
-        guard id != 0 && !login.isEmpty && !avatarURL.isEmpty else {
-            return nil
-        }
+        guard !login.isEmpty, !avatarURL.isEmpty else { return nil }
 
         let newOwner = Owner(id: id, login: login, avatarURL: avatarURL)
         modelContext.insert(newOwner)
@@ -146,24 +142,8 @@ import SwiftData
     }
 
     func deleteRepository(_ repository: Repository) throws {
-        guard let currentUser = activeUser else { return }
-
-        if let repoToDelete = currentUser.repoList.first(where: { $0.id == repository.id }) {
-            currentUser.repoList.removeAll { $0.id == repository.id }
-            modelContext.delete(repoToDelete)
-            try modelContext.save()
-        }
-    }
-
-    func orderRepositories() {
-        guard let currentUser = activeUser else { return }
-
-        currentUser.repoList.sort { repo1, repo2 in
-            let date1 = repo1.updatedAt ?? repo1.createdAt
-            let date2 = repo2.updatedAt ?? repo2.createdAt
-            return date1 > date2
-        }
-        try? modelContext.save()
+        modelContext.delete(repository)
+        try modelContext.save()
     }
 
     func resetAllRepositories() throws {

@@ -14,7 +14,9 @@ struct RepoListView: View {
 
     @Query private var allRepositories: [Repository]
     var selectedRepositories: [Repository] {
-        selectedPriority == .all ? allRepositories : allRepositories.filter{$0.priority == selectedPriority}
+        let orderedRepositories = allRepositories.sorted { $0.mostRecentUpdate > $1.mostRecentUpdate }
+        return selectedPriority == .all ? orderedRepositories
+        : orderedRepositories.filter{$0.priority == selectedPriority}
     }
     var body: some View {
         NavigationStack {
@@ -37,11 +39,6 @@ struct RepoListView: View {
                 }
             }
             .listStyle(.plain)
-            .refreshable {
-                withAnimation {
-                    dataManager.orderRepositories()
-                }
-            }
         }
         .padding(.horizontal, 10)
     }
