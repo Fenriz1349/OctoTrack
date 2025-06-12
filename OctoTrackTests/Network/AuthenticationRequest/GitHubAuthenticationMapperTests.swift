@@ -17,7 +17,7 @@ final class GitHubAuthenticationMapperTests: XCTestCase {
 
         // When/Then
         XCTAssertThrowsError(try GitHubAuthenticationMapper.map(data, and: response)) { error in
-            XCTAssertEqual(error as? Errors, Errors.invalidResponse)
+            XCTAssertEqual(error as? URLError, URLError(.badServerResponse))
         }
     }
 
@@ -56,7 +56,7 @@ final class GitHubAuthenticationMapperTests: XCTestCase {
 
         // When/Then
         XCTAssertThrowsError(try GitHubAuthenticationMapper.map(data, and: response)) { error in
-            XCTAssertEqual(error as? Errors, Errors.missingToken)
+            XCTAssertEqual(error as? URLError, URLError(.userAuthenticationRequired))
         }
     }
 
@@ -67,7 +67,35 @@ final class GitHubAuthenticationMapperTests: XCTestCase {
 
         // When/Then
         XCTAssertThrowsError(try GitHubAuthenticationMapper.map(invalidData, and: response)) { error in
-            XCTAssertEqual(error as? Errors, Errors.missingToken)
+            XCTAssertEqual(error as? URLError, URLError(.userAuthenticationRequired))
         }
+    }
+    
+    func test_authenticate_returnsImmediatelyWhenAlreadyAuthenticated() async throws {
+        // Given
+        let (sut, client, tokenManager, _) = makeSUTAuthenticator()
+        try tokenManager.storeToken(makeAccessToken())
+        
+        // When
+        try await sut.authenticate()
+        
+        // Then
+        XCTAssertEqual(client.requests.count, 0)
+        XCTAssertEqual(sut.authenticationState, .authenticated)
+    }
+
+    func test_refreshToken_updatesTokenCreationDate() throws {
+        // Given
+        let (sut, _, _, keychain) = makeSUTAuthenticator()
+        let expiredTokenData = try makeExpiredTokenData()
+        try keychain.insert(key: "github.access.token", data: expiredTokenData)
+        
+        // When
+        try sut.refreshToken()
+        
+        // Then
+        let retrievedData = try keychain.retrieve(key: "github.access.token")
+        let decodedToken = try TokenMapper.decodeToken(from: retrievedData)
+        XCTAssertGreaterThan(decodedToken.creationDate, Date().addingTimeInterval(-60))
     }
 }

@@ -9,6 +9,7 @@ import XCTest
 import AuthenticationServices
 @testable import OctoTrack
 
+/// We only test application logic, so we avoid testing ASWebAuthentication
 final class GitHubAuthenticatorTests: XCTestCase {
 
     // MARK: - AuthenticationState Tests
@@ -61,6 +62,19 @@ final class GitHubAuthenticatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(state, .expired)
+    }
+
+    func test_authenticate_returnsImmediatelyWhenAlreadyAuthenticated() async throws {
+        // Given
+        let (sut, client, tokenManager, _) = makeSUTAuthenticator()
+        try tokenManager.storeToken(makeAccessToken())
+        
+        // When
+        try await sut.authenticate()
+        
+        // Then
+        XCTAssertEqual(client.requests.count, 0) // Pas de requête
+        XCTAssertEqual(sut.authenticationState, .authenticated)
     }
 
     // MARK: - Sign Out Tests
@@ -180,6 +194,19 @@ final class GitHubAuthenticatorTests: XCTestCase {
     }
 
     // MARK: - Retrieve Token Tests
+
+    func test_retrieveToken_returnsTokenWhenNotExpired() async throws {
+        // Given
+        let expectedToken = makeAccessToken()
+        let (sut, _, tokenManager, _) = makeSUTAuthenticator()
+        try tokenManager.storeToken(expectedToken) // Token récent, pas expiré
+        
+        // When
+        let token = try await sut.retrieveToken()
+        
+        // Then
+        XCTAssertEqual(token, expectedToken)
+    }
 
     func test_retrieveToken_returnsTokenWhenAuthenticated() async throws {
         // Given

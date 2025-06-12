@@ -8,7 +8,7 @@
 import Foundation
 @testable import OctoTrack
 
-class MockURLProtocol: URLProtocol {
+class URLProtocolStub: URLProtocol {
 
     enum ResponseType {
         case success(HTTPURLResponse, Data)
@@ -40,14 +40,14 @@ class MockURLProtocol: URLProtocol {
     }
 
     override func startLoading() {
-        MockURLProtocol.requestCount += 1
-        MockURLProtocol.requestHistory.append(request)
+        URLProtocolStub.requestCount += 1
+        URLProtocolStub.requestHistory.append(request)
 
         let responseType: ResponseType
 
-        if let url = request.url, let mappedResponse = MockURLProtocol.responseMap[url] {
+        if let url = request.url, let mappedResponse = URLProtocolStub.responseMap[url] {
             responseType = mappedResponse
-        } else if let handler = MockURLProtocol.requestHandler {
+        } else if let handler = URLProtocolStub.requestHandler {
             responseType = handler(request)
         } else {
             let error = NSError(
@@ -79,7 +79,7 @@ class MockURLProtocol: URLProtocol {
 extension URLSession {
     static var mockSession: URLSession {
         let configuration = URLSessionConfiguration.ephemeral
-        configuration.protocolClasses = [MockURLProtocol.self]
+        configuration.protocolClasses = [URLProtocolStub.self]
         return URLSession(configuration: configuration)
     }
 }

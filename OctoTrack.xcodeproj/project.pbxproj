@@ -82,12 +82,15 @@
 		68C02ED32D9FC8200065027F /* PullRequestDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02ED22D9FC8200065027F /* PullRequestDetailView.swift */; };
 		68C02ED72D9FD9540065027F /* RepoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C02ED62D9FD9540065027F /* RepoHeader.swift */; };
 		68CCBC3C2DF2CA7800B4DB5A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CCBC3B2DF2CA7800B4DB5A /* LoadingView.swift */; };
+		68CCBC3F2DF2D3B200B4DB5A /* RepoEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CCBC3E2DF2D3B200B4DB5A /* RepoEndpointTests.swift */; };
+		68CCBC412DF2D3D400B4DB5A /* RepoGetterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CCBC402DF2D3D400B4DB5A /* RepoGetterTests.swift */; };
+		68CCBC432DF2D41800B4DB5A /* RepoMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CCBC422DF2D41800B4DB5A /* RepoMapperTests.swift */; };
 		68DB04672DCDE433006A4813 /* KeychainServiceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB04662DCDE433006A4813 /* KeychainServiceSpy.swift */; };
 		68DB04692DCDE486006A4813 /* ASWebAuthenticationSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB04682DCDE486006A4813 /* ASWebAuthenticationSessionMock.swift */; };
 		68DB046B2DCDE70F006A4813 /* GitHubAuthenticationEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB046A2DCDE70F006A4813 /* GitHubAuthenticationEndpointTests.swift */; };
 		68DB046D2DCDE73C006A4813 /* GitHubAuthenticationMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB046C2DCDE73C006A4813 /* GitHubAuthenticationMapperTests.swift */; };
 		68DB046F2DCDE817006A4813 /* GitHubAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB046E2DCDE817006A4813 /* GitHubAuthenticatorTests.swift */; };
-		68DB04712DCDEAA3006A4813 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB04702DCDEAA3006A4813 /* MockURLProtocol.swift */; };
+		68DB04712DCDEAA3006A4813 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DB04702DCDEAA3006A4813 /* URLProtocolStub.swift */; };
 		68E682FD2DD7318400B6C922 /* FeedbackHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E682FC2DD7318400B6C922 /* FeedbackHandler.swift */; };
 		68EDADE52DB28E0600B7995D /* RepoPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EDADE42DB28E0600B7995D /* RepoPriority.swift */; };
 		68EDADE72DB2978500B7995D /* PriorityButtonsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EDADE62DB2978500B7995D /* PriorityButtonsStack.swift */; };
@@ -182,12 +185,15 @@
 		68C02ED22D9FC8200065027F /* PullRequestDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestDetailView.swift; sourceTree = "<group>"; };
 		68C02ED62D9FD9540065027F /* RepoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoHeader.swift; sourceTree = "<group>"; };
 		68CCBC3B2DF2CA7800B4DB5A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		68CCBC3E2DF2D3B200B4DB5A /* RepoEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoEndpointTests.swift; sourceTree = "<group>"; };
+		68CCBC402DF2D3D400B4DB5A /* RepoGetterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoGetterTests.swift; sourceTree = "<group>"; };
+		68CCBC422DF2D41800B4DB5A /* RepoMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoMapperTests.swift; sourceTree = "<group>"; };
 		68DB04662DCDE433006A4813 /* KeychainServiceSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceSpy.swift; sourceTree = "<group>"; };
 		68DB04682DCDE486006A4813 /* ASWebAuthenticationSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASWebAuthenticationSessionMock.swift; sourceTree = "<group>"; };
 		68DB046A2DCDE70F006A4813 /* GitHubAuthenticationEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthenticationEndpointTests.swift; sourceTree = "<group>"; };
 		68DB046C2DCDE73C006A4813 /* GitHubAuthenticationMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthenticationMapperTests.swift; sourceTree = "<group>"; };
 		68DB046E2DCDE817006A4813 /* GitHubAuthenticatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAuthenticatorTests.swift; sourceTree = "<group>"; };
-		68DB04702DCDEAA3006A4813 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		68DB04702DCDEAA3006A4813 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 		68E682FC2DD7318400B6C922 /* FeedbackHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackHandler.swift; sourceTree = "<group>"; };
 		68EDADE42DB28E0600B7995D /* RepoPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoPriority.swift; sourceTree = "<group>"; };
 		68EDADE62DB2978500B7995D /* PriorityButtonsStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityButtonsStack.swift; sourceTree = "<group>"; };
@@ -418,8 +424,9 @@
 			children = (
 				68DB04652DCDE2E5006A4813 /* AuthenticationRequest */,
 				684F7C922D8DAA210044367F /* UserRequest */,
+				68CCBC3D2DF2D38100B4DB5A /* RepoRequest */,
 				684F7C932D8DAA210044367F /* EndpointBuilderTest.swift */,
-				68DB04702DCDEAA3006A4813 /* MockURLProtocol.swift */,
+				68DB04702DCDEAA3006A4813 /* URLProtocolStub.swift */,
 				68DB04682DCDE486006A4813 /* ASWebAuthenticationSessionMock.swift */,
 				684F7C962D8DAA210044367F /* HTTPClientStub.swift */,
 			);
@@ -444,6 +451,16 @@
 				68C02ECC2D9FBA360065027F /* PullRequestGetter.swift */,
 			);
 			path = PullRequestRequest;
+			sourceTree = "<group>";
+		};
+		68CCBC3D2DF2D38100B4DB5A /* RepoRequest */ = {
+			isa = PBXGroup;
+			children = (
+				68CCBC3E2DF2D3B200B4DB5A /* RepoEndpointTests.swift */,
+				68CCBC402DF2D3D400B4DB5A /* RepoGetterTests.swift */,
+				68CCBC422DF2D41800B4DB5A /* RepoMapperTests.swift */,
+			);
+			path = RepoRequest;
 			sourceTree = "<group>";
 		};
 		68DB04652DCDE2E5006A4813 /* AuthenticationRequest */ = {
@@ -638,18 +655,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68CCBC412DF2D3D400B4DB5A /* RepoGetterTests.swift in Sources */,
 				68DB04692DCDE486006A4813 /* ASWebAuthenticationSessionMock.swift in Sources */,
 				684F7C992D8DAA210044367F /* UserEndpointTest.swift in Sources */,
+				68CCBC432DF2D41800B4DB5A /* RepoMapperTests.swift in Sources */,
 				68DB046F2DCDE817006A4813 /* GitHubAuthenticatorTests.swift in Sources */,
 				684F7C9A2D8DAA210044367F /* UserLoaderTests.swift in Sources */,
 				68DB046B2DCDE70F006A4813 /* GitHubAuthenticationEndpointTests.swift in Sources */,
 				684F7C9B2D8DAA210044367F /* UserMapperTests.swift in Sources */,
 				68DB04672DCDE433006A4813 /* KeychainServiceSpy.swift in Sources */,
-				68DB04712DCDEAA3006A4813 /* MockURLProtocol.swift in Sources */,
+				68DB04712DCDEAA3006A4813 /* URLProtocolStub.swift in Sources */,
 				684F7C9C2D8DAA210044367F /* EndpointBuilderTest.swift in Sources */,
 				684F7C9E2D8DAA210044367F /* HTTPClientStub.swift in Sources */,
 				684F7C9F2D8DAA210044367F /* SharedTestHelpers.swift in Sources */,
 				68DB046D2DCDE73C006A4813 /* GitHubAuthenticationMapperTests.swift in Sources */,
+				68CCBC3F2DF2D3B200B4DB5A /* RepoEndpointTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
