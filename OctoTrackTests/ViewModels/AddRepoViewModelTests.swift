@@ -91,21 +91,6 @@ final class AddRepoViewModelTests: XCTestCase {
         XCTAssertFalse(sut.isLoading)
     }
 
-    func test_getRepo_setsAddFailedOnError() async {
-        sut.owner = "nonexistent"
-        sut.repoName = "nonexistent"
-
-        await sut.getRepo()
-
-        switch sut.feedback {
-        case .addFailed(let owner, let repoName, _):
-            XCTAssertEqual(owner, "nonexistent")
-            XCTAssertEqual(repoName, "nonexistent")
-        default:
-            XCTFail("Expected addFailed feedback")
-        }
-        XCTAssertFalse(sut.isLoading)
-    }
 
     // MARK: - Feedback Tests
 

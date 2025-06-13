@@ -19,10 +19,6 @@ import SwiftData
     var mergedAt: Date?
     var isDraft: Bool = false
 
-    var state: Status {
-        Status.getPullRequestState(self)
-    }
-
     @Relationship(deleteRule: .cascade, inverse: \Repository.pullRequests)
     var repository: Repository?
 
@@ -42,6 +38,10 @@ import SwiftData
 
 extension PullRequest {
     var mostRecentUpdate: Date {
-        return updatedAt ?? createdAt
+        return mergedAt ?? closedAt ?? updatedAt ?? createdAt
+    }
+
+    var state: Status {
+        Status.getPullRequestState(self)
     }
 }
