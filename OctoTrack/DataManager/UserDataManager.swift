@@ -68,13 +68,13 @@ import SwiftData
     // For now, we create a new repo and a new owner everytime to avoid conflicts
     func storeNewRepo(_ repo: Repository) throws {
         guard let currentUser = activeUser else { return }
-        
+
         let newRepoId = "\(currentUser.id)_\(repo.id)".hashValue
-           
-       if currentUser.repoList.contains(where: { $0.id == newRepoId }) {
-           return
-       }
-    
+
+        if currentUser.repoList.contains(where: { $0.id == newRepoId }) {
+            return
+        }
+
         let newOwner = Owner(
             id: "\(currentUser.id)_\(repo.owner.id)".hashValue,
             login: repo.owner.login,
