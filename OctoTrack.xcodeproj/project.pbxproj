@@ -67,6 +67,8 @@
 		685A32FF2DFC07D5007E89AE /* PullRequestMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685A32FE2DFC07D5007E89AE /* PullRequestMapperTests.swift */; };
 		685A33022DFC2615007E89AE /* TokenMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685A33012DFC2615007E89AE /* TokenMapperTests.swift */; };
 		685A33042DFC2647007E89AE /* TokenAuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685A33032DFC2647007E89AE /* TokenAuthManagerTests.swift */; };
+		685A33092DFC2A26007E89AE /* UserDataManagerTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685A33082DFC2A26007E89AE /* UserDataManagerTestHelpers.swift */; };
+		685A330B2DFC2A93007E89AE /* UserDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685A330A2DFC2A93007E89AE /* UserDataManagerTests.swift */; };
 		688F20422DC4A95D00AA7194 /* TImelineEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688F20412DC4A95D00AA7194 /* TImelineEvent.swift */; };
 		688F20442DC4AA5200AA7194 /* PullRequestTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688F20432DC4AA5200AA7194 /* PullRequestTimeline.swift */; };
 		688F20482DC4E06300AA7194 /* GithubLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688F20472DC4E06300AA7194 /* GithubLink.swift */; };
@@ -174,6 +176,8 @@
 		685A32FE2DFC07D5007E89AE /* PullRequestMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestMapperTests.swift; sourceTree = "<group>"; };
 		685A33012DFC2615007E89AE /* TokenMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenMapperTests.swift; sourceTree = "<group>"; };
 		685A33032DFC2647007E89AE /* TokenAuthManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAuthManagerTests.swift; sourceTree = "<group>"; };
+		685A33082DFC2A26007E89AE /* UserDataManagerTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManagerTestHelpers.swift; sourceTree = "<group>"; };
+		685A330A2DFC2A93007E89AE /* UserDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManagerTests.swift; sourceTree = "<group>"; };
 		686BFB8D2DA909F100C859C3 /* OctoTrack.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = OctoTrack.xctestplan; sourceTree = "<group>"; };
 		688F20412DC4A95D00AA7194 /* TImelineEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TImelineEvent.swift; sourceTree = "<group>"; };
 		688F20432DC4AA5200AA7194 /* PullRequestTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestTimeline.swift; sourceTree = "<group>"; };
@@ -227,12 +231,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6826E8352D9543650048F35A /* DataManagers */ = {
+		6826E8352D9543650048F35A /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
 				6826E8362D9543830048F35A /* UserDataManager.swift */,
 			);
-			path = DataManagers;
+			path = DataManager;
 			sourceTree = "<group>";
 		};
 		683612E52D5D31EC00805615 = {
@@ -406,7 +410,7 @@
 			children = (
 				684F7C5B2D8DAA1A0044367F /* OctoTrackApp.swift */,
 				684F7C312D8DAA1A0044367F /* Models */,
-				6826E8352D9543650048F35A /* DataManagers */,
+				6826E8352D9543650048F35A /* DataManager */,
 				684F7C402D8DAA1A0044367F /* Network */,
 				684F7C472D8DAA1A0044367F /* Storage */,
 				684F7C4B2D8DAA1A0044367F /* Utils */,
@@ -449,6 +453,7 @@
 			children = (
 				684F7C952D8DAA210044367F /* Network */,
 				685A33002DFC25B4007E89AE /* Storage */,
+				685A33072DFC2A04007E89AE /* DataManager */,
 				684F7C972D8DAA210044367F /* SharedTestHelpers.swift */,
 			);
 			path = OctoTrackTests;
@@ -472,6 +477,15 @@
 				685A33032DFC2647007E89AE /* TokenAuthManagerTests.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		685A33072DFC2A04007E89AE /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				685A33082DFC2A26007E89AE /* UserDataManagerTestHelpers.swift */,
+				685A330A2DFC2A93007E89AE /* UserDataManagerTests.swift */,
+			);
+			path = DataManager;
 			sourceTree = "<group>";
 		};
 		68C02EC72D9FB29A0065027F /* PullRequests */ = {
@@ -691,6 +705,7 @@
 				684F7C992D8DAA210044367F /* UserEndpointTest.swift in Sources */,
 				685A32FB2DFC0778007E89AE /* PullRequestEndpointTests.swift in Sources */,
 				68CCBC432DF2D41800B4DB5A /* RepoMapperTests.swift in Sources */,
+				685A33092DFC2A26007E89AE /* UserDataManagerTestHelpers.swift in Sources */,
 				68DB046F2DCDE817006A4813 /* GitHubAuthenticatorTests.swift in Sources */,
 				684F7C9A2D8DAA210044367F /* UserLoaderTests.swift in Sources */,
 				68DB046B2DCDE70F006A4813 /* GitHubAuthenticationEndpointTests.swift in Sources */,
@@ -703,6 +718,7 @@
 				68DB04712DCDEAA3006A4813 /* URLProtocolStub.swift in Sources */,
 				684F7C9C2D8DAA210044367F /* EndpointBuilderTest.swift in Sources */,
 				684F7C9E2D8DAA210044367F /* HTTPClientStub.swift in Sources */,
+				685A330B2DFC2A93007E89AE /* UserDataManagerTests.swift in Sources */,
 				684F7C9F2D8DAA210044367F /* SharedTestHelpers.swift in Sources */,
 				68DB046D2DCDE73C006A4813 /* GitHubAuthenticationMapperTests.swift in Sources */,
 				68CCBC3F2DF2D3B200B4DB5A /* RepoEndpointTests.swift in Sources */,

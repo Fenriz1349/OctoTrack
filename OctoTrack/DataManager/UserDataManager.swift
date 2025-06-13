@@ -12,21 +12,19 @@ import SwiftData
     var modelContext: ModelContext
     var isSucess: Bool = false
 
+    var activeUser: User? {
+        try? modelContext.fetch(FetchDescriptor<User>(predicate: #Predicate { $0.isActiveUser })).first
+    }
+
+    var allUsers: [User] {
+        (try? modelContext.fetch(FetchDescriptor<User>())) ?? []
+    }
+
     init(modelContext: ModelContext) {
             self.modelContext = modelContext
         }
 
     // MARK: - User Methods
-
-    var activeUser: User? {
-        do {
-            let predicate = #Predicate<User> { $0.isActiveUser }
-            let descriptor = FetchDescriptor<User>(predicate: predicate)
-            return try modelContext.fetch(descriptor).first
-        } catch {
-            return nil
-        }
-    }
 
     func getRepositoryList(with priority: RepoPriority) -> [Repository] {
         guard let activeUser = activeUser else { return [] }
@@ -35,13 +33,6 @@ import SwiftData
         : activeUser.repoList.filter { $0.priority == priority}
     }
 
-    var allUsers: [User] {
-        do {
-            return try modelContext.fetch(FetchDescriptor<User>())
-        } catch {
-            return []
-        }
-    }
 
     /// Deactivate all users except the one in parameter
     /// - Parameter user: the user to set as currentUser
@@ -67,25 +58,10 @@ import SwiftData
             try? modelContext.save()
         } else {
             modelContext.insert(user)
+            activateUser(user)
         }
-        activateUser(user)
     }
 
-    // MARK: - Owner Methods
-
-    private func findOwner(id: Int) -> Owner? {
-        try? modelContext.fetch(
-            FetchDescriptor<Owner>(predicate: #Predicate { $0.id == id })
-        ).first
-    }
-
-    private func createOwner(id: Int, login: String, avatarURL: String) -> Owner? {
-        guard !login.isEmpty, !avatarURL.isEmpty else { return nil }
-
-        let newOwner = Owner(id: id, login: login, avatarURL: avatarURL)
-        modelContext.insert(newOwner)
-        return newOwner
-    }
 
     // MARK: - Repository Methods
 
@@ -125,20 +101,6 @@ import SwiftData
         try modelContext.save()
     }
 
-    private func addExistingRepoToUser(repoId: Int, user: User) throws -> Bool {
-        guard let existingRepo = try modelContext
-            .fetch( FetchDescriptor<Repository>(predicate: #Predicate { $0.id == repoId })).first
-        else { return false }
-
-        guard !user.repoList.contains(where: { $0.id == repoId }) else { return true }
-
-        user.repoList.append(existingRepo)
-        user.lastUpdate = Date()
-        try modelContext.save()
-
-        return true
-    }
-
     func deleteRepository(_ repository: Repository) throws {
         modelContext.delete(repository)
         try modelContext.save()
@@ -161,24 +123,6 @@ import SwiftData
         if let repoToUpdate = currentUser.repoList.first(where: { $0.id == repoId }) {
             repoToUpdate.priority = priority
             try modelContext.save()
-        }
-    }
-
-    func fetchExistingRepository(withId id: Int) throws -> Repository? {
-        return try? modelContext.fetch(
-            FetchDescriptor<Repository>(predicate: #Predicate { $0.id == id })
-        ).first
-    }
-
-    func updateIfAlreayExist(_ repository: Repository) throws {
-        guard let currentUser = activeUser else { return }
-
-        if let existingRepo = try fetchExistingRepository(withId: repository.id) {
-            if !currentUser.repoList.contains(where: { $0.id == repository.id }) {
-                currentUser.repoList.append(existingRepo)
-                currentUser.lastUpdate = Date()
-                try modelContext.save()
-            }
         }
     }
 
