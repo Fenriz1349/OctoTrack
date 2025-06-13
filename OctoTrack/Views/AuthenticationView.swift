@@ -12,6 +12,9 @@ struct AuthenticationView: View {
 
     var body: some View {
             VStack(spacing: 20) {
+                Text("octotrack")
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
                 AsyncAvatarImage(avatarName: "", avatarUrl: "", size: 150)
                 Text("welcome")
                     .font(.largeTitle)

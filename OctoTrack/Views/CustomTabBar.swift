@@ -13,7 +13,7 @@ struct CustomTabBar: View {
        let viewModel: AppViewModel
 
        var body: some View {
-           VStack {
+           NavigationStack {
                Group {
                    switch selectedTab {
                    case .repoList:

@@ -157,3 +157,46 @@ func makeValidTokenData() throws -> Data {
 func makeInvalidCallbackURL() -> URL {
     return URL(string: "octotrack://callback?error=access_denied")!
 }
+
+// MARK: - PullRequest Test Data
+
+let testPRId = 67890
+let testPRNumber = 42
+let testPRTitle = "Fix issue with authentication"
+let testPRBody = "This PR fixes the authentication bug"
+
+let testPRJSON: [String: Any] = [
+    "id": testPRId,
+    "number": testPRNumber,
+    "title": testPRTitle,
+    "body": testPRBody,
+    "draft": false,
+    "created_at": "2024-06-06T09:00:00Z",
+    "updated_at": "2024-06-06T10:00:00Z",
+    "closed_at": NSNull(),
+    "merged_at": NSNull()
+]
+
+func makePullRequestResponse() -> (model: PullRequest, json: Data) {
+    let model = PullRequest(
+        id: testPRId,
+        number: testPRNumber,
+        body: testPRBody,
+        title: testPRTitle,
+        createdAt: Date(),
+        updateAt: Date(),
+        closedAt: nil,
+        mergedAt: nil,
+        isDraft: false
+    )
+
+    return (model, try! JSONSerialization.data(withJSONObject: testPRJSON))
+}
+
+func makePullRequestListResponse() -> (model: [PullRequest], json: Data) {
+    let (singlePR, _) = makePullRequestResponse()
+    let models = [singlePR]
+    let jsonArray = [testPRJSON]
+
+    return (models, try! JSONSerialization.data(withJSONObject: jsonArray))
+}

@@ -22,6 +22,6 @@ import SwiftUI
                return downloadedImage
            }
 
-        return UIImage(named: "defaultAvatar") ?? UIImage()
+        return UIImage(named: "AppLogo") ?? UIImage()
     }
 }

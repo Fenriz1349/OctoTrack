@@ -89,12 +89,40 @@ import SwiftData
 
     // MARK: - Repository Methods
 
+    // For now, we create a new repo and a new owner everytime to avoid conflicts
     func storeNewRepo(_ repo: Repository) throws {
         guard let currentUser = activeUser else { return }
+        
+        let newRepoId = "\(currentUser.id)_\(repo.id)".hashValue
+           
+       if currentUser.repoList.contains(where: { $0.id == newRepoId }) {
+           return
+       }
+    
+        let newOwner = Owner(
+            id: "\(currentUser.id)_\(repo.owner.id)".hashValue,
+            login: repo.owner.login,
+            avatarURL: repo.owner.avatarURL
+        )
 
-        if try !addExistingRepoToUser(repoId: repo.id, user: currentUser) {
-            try createNewRepo(repo, for: currentUser)
-        }
+        let newRepo = Repository(
+            id: newRepoId,
+            name: repo.name,
+            repoDescription: repo.repoDescription,
+            isPrivate: repo.isPrivate,
+            owner: newOwner,
+            createdAt: repo.createdAt,
+            updatedAt: repo.updatedAt,
+            language: repo.language,
+            priority: repo.priority
+        )
+        newRepo.user = currentUser
+        modelContext.insert(newOwner)
+        modelContext.insert(newRepo)
+        currentUser.repoList.append(newRepo)
+        currentUser.lastUpdate = Date()
+        
+        try modelContext.save()
     }
 
     private func addExistingRepoToUser(repoId: Int, user: User) throws -> Bool {
@@ -109,36 +137,6 @@ import SwiftData
         try modelContext.save()
 
         return true
-    }
-
-    private func createNewRepo(_ repo: Repository, for user: User) throws {
-        let owner: Owner
-        if let existingOwner = findOwner(id: repo.owner.id) {
-            owner = existingOwner
-        } else {
-            guard let newOwner = createOwner(
-                id: repo.owner.id,
-                login: repo.owner.login,
-                avatarURL: repo.owner.avatarURL
-            ) else { throw URLError(.badURL) }
-            owner = newOwner
-        }
-
-        let newRepo = Repository(
-            id: repo.id,
-            name: repo.name,
-            repoDescription: repo.repoDescription,
-            isPrivate: repo.isPrivate,
-            owner: owner,
-            createdAt: repo.createdAt,
-            updatedAt: repo.updatedAt,
-            language: repo.language,
-            priority: repo.priority)
-
-        modelContext.insert(newRepo)
-        user.repoList.append(newRepo)
-        user.lastUpdate = Date()
-        try modelContext.save()
     }
 
     func deleteRepository(_ repository: Repository) throws {
