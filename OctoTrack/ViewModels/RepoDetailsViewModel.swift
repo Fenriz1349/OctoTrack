@@ -38,6 +38,9 @@ import SwiftUI
     init(repository: Repository, dataManager: UserDataManager) {
         self.repository = repository
         self.dataManager = dataManager
+        Task {
+            await getAllPullRequests()
+        }
     }
 
     func updateRepositoryPriority(_ priority: RepoPriority) {
@@ -56,7 +59,6 @@ import SwiftUI
                 .request(owner: repository.owner.login, repoName: repository.name, token: token, state: state)
             let pullRequests = try await pullRequestGetter.allPullRequestsGetter(from: request)
             feedback = pullRequests.isEmpty ? .noPR : .none
-//            pullRequests.sort { $0.createdAt < $1.createdAt }
             try dataManager.storePullRequests(pullRequests, repositoryiD: repository.id)
             isLoading = false
         } catch {

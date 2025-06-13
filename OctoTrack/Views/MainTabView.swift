@@ -1,5 +1,5 @@
 //
-//  CustomTabBar.swift
+//  MainTabView.swift
 //  OctoTrack
 //
 //  Created by Julien Cotte on 23/05/2025.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct CustomTabBar: View {
+struct MainTabView: View {
     @Binding var selectedTab: Tab
        @State private var showAddModal = false
        let viewModel: AppViewModel
 
        var body: some View {
-           VStack {
+           NavigationStack {
                Group {
                    switch selectedTab {
                    case .repoList:
@@ -67,5 +67,5 @@ struct CustomTabBar: View {
    }
 
 #Preview {
-    CustomTabBar(selectedTab: .constant(.account), viewModel: PreviewContainer.previewAppViewModel)
+    MainTabView(selectedTab: .constant(.account), viewModel: PreviewContainer.previewAppViewModel)
 }

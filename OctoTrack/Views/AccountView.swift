@@ -56,7 +56,6 @@ struct AccountView: View {
             Spacer()
         }
         .padding()
-        .navigationTitle("account")
     }
 }
 

@@ -10,28 +10,28 @@ import SwiftUI
 struct TimelineEvent: View {
     let date: Date
     let status: Status
-    let isLast: Bool
+    var notSolo: Bool = true
 
     var body: some View {
         HStack(alignment: .top) {
             ZStack(alignment: .top) {
-                if status != .created {
+                if !notSolo {
                     Rectangle()
                         .fill(status.color)
                         .frame(width: 2)
-                        .frame(height: 24)
-                        .offset(y: -24)
+                        .frame(height: 20)
+                        .offset(y: -18)
                 }
 
                 Image(systemName: status.icon)
                     .foregroundColor(status.color)
                     .background(Circle().fill(Color.white).frame(width: 18, height: 18))
 
-                if !isLast {
+                if status != .created {
                     Rectangle()
                         .fill(status.color)
                         .frame(width: 2)
-                        .frame(height: 40)
+                        .frame(height: 24)
                         .offset(y: 18)
                 }
             }
@@ -47,11 +47,11 @@ struct TimelineEvent: View {
                     .foregroundColor(.secondary)
             }
             .padding(.leading, 8)
-            .padding(.bottom, isLast ? 0 : 20)
+            .padding(.bottom, status != .created ? 0 : 20)
         }
     }
 }
 
 #Preview {
-    TimelineEvent(date: Date(), status: .created, isLast: true)
+    TimelineEvent(date: Date(), status: .updated)
 }

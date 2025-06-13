@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
+struct AppCoordinator: View {
     @State var viewModel: AppViewModel
     @Environment(\.modelContext) private var modelContext
     @State private var  tab: Tab = .repoList
@@ -22,7 +22,7 @@ struct ContentView: View {
                     await viewModel.initialize()
                 }
             } else if viewModel.isLogged {
-                CustomTabBar(selectedTab: $tab, viewModel: viewModel)
+                MainTabView(selectedTab: $tab, viewModel: viewModel)
             } else {
                 AuthenticationView(viewModel: viewModel.authenticationViewModel)
                     .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),
@@ -34,6 +34,6 @@ struct ContentView: View {
 
 #Preview {
     let viewModel = PreviewContainer.previewAppViewModel
-    ContentView(viewModel: viewModel)
+    AppCoordinator(viewModel: viewModel)
         .previewWithContainer()
 }

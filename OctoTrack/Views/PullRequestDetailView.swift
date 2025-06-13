@@ -41,11 +41,10 @@ struct PullRequestDetailView: View {
                     }
 
                     Text(pullRequest.title)
-                        .font(.title)
-                        .fontWeight(.semibold)
+                        .fontWeight(.bold)
 
                     Divider()
-                    DateRow(creationDate: pullRequest.createdAt, updateDate: pullRequest.updateAt,
+                    DateRow(creationDate: pullRequest.createdAt, updateDate: pullRequest.updatedAt,
                             mergedAt: pullRequest.mergedAt, closedAt: pullRequest.closedAt)
 
                     Divider()

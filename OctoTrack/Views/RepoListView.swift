@@ -13,11 +13,19 @@ struct RepoListView: View {
     @State var selectedPriority: RepoPriority = .all
 
     @Query private var allRepositories: [Repository]
-    var selectedRepositories: [Repository] {
-        selectedPriority == .all ? allRepositories : allRepositories.filter{$0.priority == selectedPriority}
-    }
+      
+      var selectedRepositories: [Repository] {
+          let userRepositories = allRepositories.filter { repo in
+              dataManager.activeUser?.repoList.contains(where: { $0.id == repo.id }) ?? false
+          }
+          let sortedRepos = userRepositories.sorted { $0.mostRecentUpdate > $1.mostRecentUpdate }
+          
+          return selectedPriority == .all ? sortedRepos
+              : sortedRepos.filter { $0.priority == selectedPriority }
+      }
+
     var body: some View {
-        NavigationStack {
+        VStack {
             UserHeader(isCompact: true)
             PriorityButtonsStack(selectedPriority: $selectedPriority, showAll: true)
             List {
@@ -37,11 +45,6 @@ struct RepoListView: View {
                 }
             }
             .listStyle(.plain)
-            .refreshable {
-                withAnimation {
-                    dataManager.orderRepositories()
-                }
-            }
         }
         .padding(.horizontal, 10)
     }

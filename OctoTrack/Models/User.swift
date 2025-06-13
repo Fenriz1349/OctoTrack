@@ -24,10 +24,6 @@ import SwiftData
         self.repoList = repoList
         self.lastUpdate = lastUpdate
     }
-
-    func toOwner() -> Owner {
-        return Owner(id: id, login: login, avatarURL: avatarURL)
-    }
 }
 
 extension User {
@@ -37,5 +33,9 @@ extension User {
         case 1: return String(localized: "oneTrackedRepo")
         default: return String(localized: "\(repoList.count) reposTracked")
         }
+    }
+
+    func toOwner() -> Owner {
+        return Owner(id: id, login: login, avatarURL: avatarURL)
     }
 }
