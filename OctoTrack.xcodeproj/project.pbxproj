@@ -47,7 +47,6 @@
 		684F7C812D8DAA1A0044367F /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C4A2D8DAA1A0044367F /* View+Ext.swift */; };
 		684F7C822D8DAA1A0044367F /* AddRepoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C4C2D8DAA1A0044367F /* AddRepoViewModel.swift */; };
 		684F7C832D8DAA1A0044367F /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C4D2D8DAA1A0044367F /* AppViewModel.swift */; };
-		684F7C842D8DAA1A0044367F /* AsyncAvatarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C4E2D8DAA1A0044367F /* AsyncAvatarViewModel.swift */; };
 		684F7C852D8DAA1A0044367F /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C4F2D8DAA1A0044367F /* AuthenticationViewModel.swift */; };
 		684F7C882D8DAA1A0044367F /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C532D8DAA1A0044367F /* AccountView.swift */; };
 		684F7C892D8DAA1A0044367F /* AddRepositoryModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684F7C542D8DAA1A0044367F /* AddRepositoryModal.swift */; };
@@ -155,7 +154,6 @@
 		684F7C4A2D8DAA1A0044367F /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		684F7C4C2D8DAA1A0044367F /* AddRepoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRepoViewModel.swift; sourceTree = "<group>"; };
 		684F7C4D2D8DAA1A0044367F /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
-		684F7C4E2D8DAA1A0044367F /* AsyncAvatarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAvatarViewModel.swift; sourceTree = "<group>"; };
 		684F7C4F2D8DAA1A0044367F /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		684F7C532D8DAA1A0044367F /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		684F7C542D8DAA1A0044367F /* AddRepositoryModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRepositoryModal.swift; sourceTree = "<group>"; };
@@ -382,7 +380,6 @@
 			children = (
 				684F7C4C2D8DAA1A0044367F /* AddRepoViewModel.swift */,
 				684F7C4D2D8DAA1A0044367F /* AppViewModel.swift */,
-				684F7C4E2D8DAA1A0044367F /* AsyncAvatarViewModel.swift */,
 				684F7C4F2D8DAA1A0044367F /* AuthenticationViewModel.swift */,
 				689B15E22DBA6FC80075B3EC /* RepoDetailsViewModel.swift */,
 			);
@@ -454,6 +451,7 @@
 				684F7C952D8DAA210044367F /* Network */,
 				685A33002DFC25B4007E89AE /* Storage */,
 				685A33072DFC2A04007E89AE /* DataManager */,
+				685A330C2DFC40C4007E89AE /* ViewModels */,
 				684F7C972D8DAA210044367F /* SharedTestHelpers.swift */,
 			);
 			path = OctoTrackTests;
@@ -486,6 +484,13 @@
 				685A330A2DFC2A93007E89AE /* UserDataManagerTests.swift */,
 			);
 			path = DataManager;
+			sourceTree = "<group>";
+		};
+		685A330C2DFC40C4007E89AE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		68C02EC72D9FB29A0065027F /* PullRequests */ = {
@@ -675,7 +680,6 @@
 				688F20482DC4E06300AA7194 /* GithubLink.swift in Sources */,
 				689B15EB2DBB84E70075B3EC /* PRCategoryCounterRow.swift in Sources */,
 				684F7C832D8DAA1A0044367F /* AppViewModel.swift in Sources */,
-				684F7C842D8DAA1A0044367F /* AsyncAvatarViewModel.swift in Sources */,
 				68EDADE72DB2978500B7995D /* PriorityButtonsStack.swift in Sources */,
 				689B15E92DBB84040075B3EC /* DateRow.swift in Sources */,
 				684F7C852D8DAA1A0044367F /* AuthenticationViewModel.swift in Sources */,
