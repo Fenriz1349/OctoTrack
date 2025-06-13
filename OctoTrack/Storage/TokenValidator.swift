@@ -15,7 +15,6 @@ class TokenValidator {
         stopPeriodicValidation()
 
         timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) {_ in
-            print("debut timer")
             Task {
                 await onValidation()
             }

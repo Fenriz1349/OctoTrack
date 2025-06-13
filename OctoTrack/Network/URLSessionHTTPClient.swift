@@ -21,7 +21,7 @@ final class URLSessionHTTPClient: HTTPClient {
     func request(from request: URLRequest) async throws -> (Data, HTTPURLResponse) {
         let (data, response) = try await session.data(for: request)
         guard let httpURLResponse = response as? HTTPURLResponse else {
-            throw Errors.noHTTPURLResponse
+            throw URLError(.badServerResponse)
         }
 
         return (data, httpURLResponse)

@@ -5,7 +5,7 @@
 //  Created by Julien Cotte on 13/02/2025.
 //
 
-import SwiftUI
+import Foundation
 import SwiftData
 
 @Model final class PullRequest: Identifiable {
@@ -14,14 +14,13 @@ import SwiftData
     var body: String?
     var title: String
     var createdAt: Date
-    var updateAt: Date?
+    var updatedAt: Date?
     var closedAt: Date?
     var mergedAt: Date?
     var isDraft: Bool = false
 
-    var state: Status {
-        Status.getPullRequestState(self)
-    }
+    @Relationship(deleteRule: .cascade, inverse: \Repository.pullRequests)
+    var repository: Repository?
 
     init(id: Int, number: Int, body: String? = nil, title: String, createdAt: Date,
          updateAt: Date? = nil, closedAt: Date? = nil, mergedAt: Date? = nil, isDraft: Bool) {
@@ -30,9 +29,19 @@ import SwiftData
         self.body = body
         self.title = title
         self.createdAt = createdAt
-        self.updateAt = updateAt
+        self.updatedAt = updateAt
         self.closedAt = closedAt
         self.mergedAt = mergedAt
         self.isDraft = isDraft
+    }
+}
+
+extension PullRequest {
+    var mostRecentUpdate: Date {
+        return mergedAt ?? closedAt ?? updatedAt ?? createdAt
+    }
+
+    var state: Status {
+        Status.getPullRequestState(self)
     }
 }

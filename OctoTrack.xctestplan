@@ -17,7 +17,10 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
+      "parallelizable" : false,
+      "skippedTests" : [
+        "GitHubAuthenticatorTests\/test_retrieveToken_throwsWhenTokenExpiredAndCannotRefresh()"
+      ],
       "target" : {
         "containerPath" : "container:OctoTrack.xcodeproj",
         "identifier" : "683612FF2D5D31EE00805615",

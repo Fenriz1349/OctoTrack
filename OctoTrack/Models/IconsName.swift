@@ -5,8 +5,6 @@
 //  Created by Julien Cotte on 21/03/2025.
 //
 
-import Foundation
-
 enum IconsName: String {
     case login = "paperplane"
     case continu = "arrow.forward"
@@ -27,4 +25,6 @@ enum IconsName: String {
     case merge = "arrow.triangle.merge"
     case update = "arrow.triangle.2.circlepath"
     case arrowUp = "arrow.up.right"
+    case checkMark = "checkmark.circle.fill"
+    case xMark = "xmark.circle.fill"
 }

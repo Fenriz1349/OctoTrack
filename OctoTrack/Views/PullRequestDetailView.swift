@@ -14,10 +14,11 @@ struct PullRequestDetailView: View {
     private var link: String {
         "https://github.com/\(repository.owner.login)/\(repository.name)/pull/\(pullRequest.number)"
     }
+
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                CompactRepoHeader(repository: repository)
+                RepoHeader(repository: repository, isCompact: true)
 
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
@@ -40,11 +41,10 @@ struct PullRequestDetailView: View {
                     }
 
                     Text(pullRequest.title)
-                        .font(.title)
-                        .fontWeight(.semibold)
+                        .fontWeight(.bold)
 
                     Divider()
-                    DateRow(creationDate: pullRequest.createdAt, updateDate: pullRequest.updateAt,
+                    DateRow(creationDate: pullRequest.createdAt, updateDate: pullRequest.updatedAt,
                             mergedAt: pullRequest.mergedAt, closedAt: pullRequest.closedAt)
 
                     Divider()
@@ -61,7 +61,7 @@ struct PullRequestDetailView: View {
                 .padding(.horizontal)
             }
         }
-        .navigationTitle("Pull Request #\(pullRequest.number)")
+        .navigationTitle("PR#\(pullRequest.number)")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

@@ -12,6 +12,9 @@ struct AuthenticationView: View {
 
     var body: some View {
             VStack(spacing: 20) {
+                Text("octotrack")
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
                 AsyncAvatarImage(avatarName: "", avatarUrl: "", size: 150)
                 Text("welcome")
                     .font(.largeTitle)
@@ -27,14 +30,13 @@ struct AuthenticationView: View {
                         onSignOut: { viewModel.signOut() }
                     )
                 }
-
-                if let error = viewModel.authError {
-                    Text("authenticationError \(error.localizedDescription)")
-                        .font(.caption)
-                        .foregroundColor(.red)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 32)
-                        .padding(.bottom, 20)
+                if viewModel.feedback != .none {
+                    FeedbackLabel(feedback: viewModel.feedback)
+                }
+            }
+            .onChange(of: viewModel.feedback) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    viewModel.feedback = .none
                 }
             }
             .padding(.horizontal, 40)
@@ -43,6 +45,6 @@ struct AuthenticationView: View {
 
 #Preview {
     AuthenticationView(viewModel: AuthenticationViewModel( onLoginSucceed: { user in
-        print(String(format: "connected", user.login))
+        print("connected\(user.login)")
     }, onLogoutCompleted: {}))
 }

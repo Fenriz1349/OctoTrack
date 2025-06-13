@@ -17,6 +17,39 @@
         }
       }
     },
+    "%@/%@ alreadyTracked " : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@/%@ is already being tracked"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@/%@ est déjà suivi"
+          }
+        }
+      }
+    },
+    "%lld reposTracked" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Repos tracked"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Repos suivies"
+          }
+        }
+      }
+    },
     "account" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -34,19 +67,19 @@
         }
       }
     },
-    "addedWithSuccess" : {
+    "addFail %@/%@: %@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Added with success %@"
+            "value" : "Failed to add %@/%@: %@"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajouté avec succès %@"
+            "value" : "Echec de l’ajout %@/%@: %@"
           }
         }
       }
@@ -85,19 +118,53 @@
         }
       }
     },
-    "authenticationError %@" : {
+    "addSuccess %@/%@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Authentication Error: %@"
+            "value" : "Added with success %@/%@"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erreur d’authentification: %@"
+            "value" : "Ajouté avec succès %@/%@"
+          }
+        }
+      }
+    },
+    "all" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout"
+          }
+        }
+      }
+    },
+    "authFail %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to authenticate: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Echec de l’authentification: %@"
           }
         }
       }
@@ -115,6 +182,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuler"
+          }
+        }
+      }
+    },
+    "close" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermer"
           }
         }
       }
@@ -187,7 +270,7 @@
         }
       }
     },
-    "couldNotCreateMC" : {
+    "couldNotCreateMC %@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -200,6 +283,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de charger le ModelContainer: %@"
+          }
+        }
+      }
+    },
+    "created" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Created"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crée"
           }
         }
       }
@@ -221,6 +320,22 @@
         }
       }
     },
+    "deleteFailed %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Failed %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Echec de la suppression %@"
+          }
+        }
+      }
+    },
     "draft" : {
       "localizations" : {
         "en" : {
@@ -237,7 +352,24 @@
         }
       }
     },
-    "failCantAdd" : {
+    "emptyRepo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You don’t have Repos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous n’avez aucun repos"
+          }
+        }
+      }
+    },
+    "failCantAdd %@" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -373,6 +505,23 @@
         }
       }
     },
+    "noActiveUser" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No active user found"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun utilisateur actif trouvé"
+          }
+        }
+      }
+    },
     "noPR" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -386,6 +535,56 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucune pull request trouvée"
+          }
+        }
+      }
+    },
+    "noTrackedRepos" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No tracked Repo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun repo suivie"
+          }
+        }
+      }
+    },
+    "octotrack" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Octo Track"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Octo Track"
+          }
+        }
+      }
+    },
+    "oneTrackedRepo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One tracked Repo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un repo suivi"
           }
         }
       }
@@ -441,6 +640,22 @@
         }
       }
     },
+    "PR#%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull Request #%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull Request #%lld"
+          }
+        }
+      }
+    },
     "priority" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -488,22 +703,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Public"
-          }
-        }
-      }
-    },
-    "Pull Request #%lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pull Request #%lld"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pull Request #%lld"
           }
         }
       }
@@ -610,23 +809,6 @@
         }
       }
     },
-    "repositoriesTracked %lld" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Repos tracked %lld"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Repos suivies %lld"
-          }
-        }
-      }
-    },
     "reset" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -661,6 +843,23 @@
         }
       }
     },
+    "resetFailed %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur %@"
+          }
+        }
+      }
+    },
     "resetRepositoryList" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -674,6 +873,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reset Liste des Repos"
+          }
+        }
+      }
+    },
+    "resetSuccess" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset all Repo with sucess !"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retrait des repos avec succès !"
           }
         }
       }
@@ -729,6 +945,23 @@
         }
       }
     },
+    "test" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is a test"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ceci est un test"
+          }
+        }
+      }
+    },
     "timeline" : {
       "localizations" : {
         "en" : {
@@ -779,6 +1012,39 @@
         }
       }
     },
+    "updateFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error during update, please try again"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur pendant la mise à jour, veuillez réssayer"
+          }
+        }
+      }
+    },
+    "updateFailed %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update Failed %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Echec de la mise à jour %@"
+          }
+        }
+      }
+    },
     "userDataNotAvailable" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -796,19 +1062,18 @@
         }
       }
     },
-    "viewGithub" : {
-      "extractionState" : "manual",
+    "viewOnGithub" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "View on GitHub"
+            "value" : "View on github"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voir sur Github"
+            "value" : "Voir sur github"
           }
         }
       }
@@ -818,13 +1083,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Welcome"
+            "value" : "Let's track !"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bienvenu"
+            "value" : "Let's track !"
           }
         }
       }

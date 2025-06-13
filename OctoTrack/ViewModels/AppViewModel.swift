@@ -6,17 +6,38 @@
 //
 
 import SwiftUI
-import SwiftData
 
 @MainActor
 @Observable final class AppViewModel {
+
+    enum Feedback: FeedbackHandler, Equatable {
+        case none
+        case emptyRepo
+        case resetSucessed
+        case resetFailed(error: String)
+
+        var message: String? {
+            switch self {
+            case .none: return nil
+            case .emptyRepo: return String(localized: "emptyRepo")
+            case .resetSucessed: return String(localized: "resetSuccess")
+            case .resetFailed(let error): return String(localized: "resetFailed \(error)")
+            }
+        }
+
+        var isError: Bool {
+            switch self {
+            case .resetSucessed: return false
+            default: return true
+            }
+        }
+    }
+
+    var feedback: Feedback = .none
     var isLogged: Bool = false
     var isInitializing: Bool = true
     var authenticationViewModel: AuthenticationViewModel
     let dataManager: UserDataManager
-    var userApp: User? {
-        dataManager.activeUser
-    }
 
     init(dataManager: UserDataManager) {
         self.dataManager = dataManager
@@ -37,7 +58,6 @@ import SwiftData
                 self?.logoutUser()
             }
         )
-
         self.authenticationViewModel = newViewModel
     }
 
@@ -79,14 +99,14 @@ import SwiftData
     }
 
     func logoutUser() {
-        dataManager.deactivateAllUsers()
         isLogged = false
         authenticationViewModel.stopTokenValidation()
+        dataManager.deactivateAllUsers()
     }
 
     @MainActor
     private func loadUserData() async {
-        if let storedUser = dataManager.activeUser {
+        if dataManager.activeUser != nil {
             isLogged = true
         } else {
             do {
@@ -97,6 +117,22 @@ import SwiftData
                 isLogged = false
             }
         }
-        print("✅ Fin de loadUserData")
+    }
+
+    func resetUserRepository() {
+        do {
+            try dataManager.resetAllRepositories()
+            feedback = .resetSucessed
+        } catch {
+            feedback = .resetFailed(error: error.localizedDescription)
+        }
+    }
+
+    func checkIfEmptyRepoList() -> Bool {
+        if let currentUser = dataManager.activeUser, currentUser.repoList.isEmpty {
+            feedback = .emptyRepo
+            return false
+        }
+        return  true
     }
 }

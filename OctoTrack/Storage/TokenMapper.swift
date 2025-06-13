@@ -26,7 +26,7 @@ enum TokenMapper {
 
     static func getUUID(from tokenString: String) throws -> UUID {
         guard let uuid = UUID(uuidString: tokenString) else {
-            throw Errors.invalidUUID
+            throw URLError(.cannotDecodeRawData)
         }
         return uuid
     }

@@ -8,25 +8,16 @@
 import SwiftUI
 
 struct AccountView: View {
-    @State private var appViewModel: AppViewModel
+    @State var appViewModel: AppViewModel
     @State private var showingResetAlert = false
-
-    init(appViewModel: AppViewModel) {
-        self._appViewModel = State(initialValue: appViewModel)
-    }
 
     var body: some View {
         VStack(spacing: 24) {
-            if let user = appViewModel.userApp {
-                UserHeader(user: user)
-            } else {
-                Text("userDataNotAvailable")
-                    .foregroundColor(.secondary)
-            }
+            UserHeader()
 
             VStack(spacing: 16) {
                 Button {
-                    showingResetAlert = true
+                    showingResetAlert = appViewModel.checkIfEmptyRepoList()
                 } label: {
                     CustomButtonLabel(
                         iconLeading: .trash,
@@ -37,7 +28,7 @@ struct AccountView: View {
                 .alert("confirmation", isPresented: $showingResetAlert) {
                     Button("cancel", role: .cancel) { }
                     Button("reset", role: .destructive) {
-                        appViewModel.dataManager.resetAllRepositories()
+                        appViewModel.resetUserRepository()
                     }
                 } message: {
                     Text("resetAlert")
@@ -51,13 +42,20 @@ struct AccountView: View {
                         color: Color.red
                     )
                 }
+                if appViewModel.feedback != .none {
+                    FeedbackLabel(feedback: appViewModel.feedback)
+                }
+            }
+            .onChange(of: appViewModel.feedback) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    appViewModel.feedback = .none
+                }
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 30)
             Spacer()
         }
         .padding()
-        .navigationTitle("account")
     }
 }
 

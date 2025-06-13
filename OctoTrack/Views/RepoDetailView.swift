@@ -6,45 +6,29 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct RepoDetailView: View {
-    @State private var viewModel: PullRequestViewModel
+    @State private var viewModel: RepoDetailsViewModel
     @State private var showPriorityPicker = false
 
+    var sortedPullRequests: [PullRequest] {
+        viewModel.repository.pullRequests.sorted { $0.createdAt > $1.createdAt }
+    }
+
     init(repository: Repository, dataManager: UserDataManager) {
-            self._viewModel = State(initialValue: PullRequestViewModel(repository: repository,
+            self._viewModel = State(initialValue: RepoDetailsViewModel(repository: repository,
                                                                        dataManager: dataManager))
         }
 
     var body: some View {
         VStack(spacing: 20) {
-            RepoHeader(repository: viewModel.repository)
-            Menu {
-                ForEach(RepoPriority.allCases, id: \.self) { priority in
-                    Button {
-                        viewModel.updateRepositoryPriority(priority)
-                    } label: {
-                        HStack {
-                            Image(systemName: priority.icon.rawValue)
-                            Text(priority.name)
-                        }
-                    }
-                }
-            } label: {
-                CustomButtonLabel(
-                    iconLeading: viewModel.repository.priority.icon,
-                    iconTrailing: IconsName.down,
-                    message: viewModel.repository.priority.name,
-                    color: viewModel.repository.priority.color
-                )
+            RepoHeader(repository: viewModel.repository, viewModel: viewModel)
+
+            if viewModel.feedback.message != nil {
+                FeedbackLabel(feedback: viewModel.feedback, showIcon: false)
             }
 
-            if viewModel.repository.pullRequests.isEmpty {
-                Text("noPR")
-                Spacer()
-            }
-            List(viewModel.repository.pullRequests) { pullRequest in
+            List(sortedPullRequests) { pullRequest in
                 NavigationLink(destination: PullRequestDetailView(pullRequest: pullRequest,
                                                          repository: viewModel.repository) ) {
                     PullRequestRow(pullRequest: pullRequest)
@@ -59,10 +43,10 @@ struct RepoDetailView: View {
             }
             .listStyle(PlainListStyle())
             .refreshable {
-                await viewModel.updatePullRequests()
+                await viewModel.getAllPullRequests()
             }
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 10)
     }
 }
 
