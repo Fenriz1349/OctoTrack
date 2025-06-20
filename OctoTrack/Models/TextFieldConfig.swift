@@ -31,7 +31,7 @@ enum TextFieldType {
             )
         case .password:
             return TextFieldConfig(
-                keyboardType: .default,
+                keyboardType: .asciiCapable,
                 isSecure: true,
                 disableAutocorrection: true,
                 autocapitalization: .never
@@ -45,7 +45,7 @@ enum TextFieldType {
             )
         case .alphaNumber:
             return TextFieldConfig(
-                keyboardType: .namePhonePad,
+                keyboardType: .asciiCapable,
                 isSecure: false,
                 disableAutocorrection: true,
                 autocapitalization: .words
