@@ -57,6 +57,18 @@ struct AddRepositoryModal: View {
                         )
                     }
                     )
+                    Button(action: {
+                        Task {
+                            await viewModel.importAllUserRepos()
+                        }
+                    },
+                           label: {
+                        CustomButtonLabel(iconLeading: .plus,
+                                          message: "importAll",
+                                          color: .blue
+                        )
+                    }
+                    )
                     // Disable button while form is not valid
                     .disabled(!viewModel.isFormValid)
                     .opacity(viewModel.isFormValid ? 1 : 0.6)

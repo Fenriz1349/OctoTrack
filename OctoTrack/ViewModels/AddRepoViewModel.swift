@@ -12,6 +12,7 @@ import Foundation
 
     enum Feedback: FeedbackHandler, Equatable {
         case none
+        case importSuccess(count: Int)
         case addSuccess(owner: String, repoName: String)
         case alreadyTracked(owner: String, repoName: String)
         case addFailed(owner: String, repoName: String, error: String)
@@ -19,6 +20,7 @@ import Foundation
         var message: String? {
             switch self {
             case .none: return nil
+            case .importSuccess(let count) : return String(localized: "importSucess \(count)")
             case .addSuccess(let owner, let repoName):
                 return String(localized: "addSuccess \(owner)/\(repoName)")
             case .alreadyTracked(let owner, let repoName):
@@ -30,7 +32,7 @@ import Foundation
 
         var isError: Bool {
             switch self {
-            case .none, .alreadyTracked, .addSuccess: return false
+            case .none,.importSuccess, .alreadyTracked, .addSuccess: return false
             case .addFailed: return true
             }
         }
@@ -73,10 +75,30 @@ import Foundation
 
             repo.priority = priority
             try dataManager.storeNewRepo(repo)
+            try dataManager.modelContext.save()
             feedback = .addSuccess(owner: owner, repoName: repoName)
             isLoading = false
         } catch {
             feedback = .addFailed(owner: owner, repoName: repoName, error: error.localizedDescription)
+            isLoading = false
+        }
+    }
+    
+    func importAllUserRepos() async {
+        isLoading = true
+        
+        do {
+            let token = try await authenticator.retrieveToken()
+            let request = try RepoEndpoint.allUserReposRequest(token: token)
+            let repos = try await repoGetter.getAllUserRepos(from: request)
+            
+            for repo in repos {
+                try dataManager.storeNewRepo(repo)
+            }
+            feedback = .importSuccess(count: repos.count)
+            isLoading = false
+        } catch {
+            feedback = .addFailed(owner: "", repoName: "import", error: error.localizedDescription)
             isLoading = false
         }
     }

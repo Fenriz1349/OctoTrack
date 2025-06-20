@@ -403,6 +403,39 @@
         }
       }
     },
+    "importAll" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import All Your Repos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importer tous vos repos"
+          }
+        }
+      }
+    },
+    "importSucess %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import with success  %lld repos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld repos importer avec succès "
+          }
+        }
+      }
+    },
     "lastUpdate %@" : {
       "extractionState" : "manual",
       "localizations" : {
