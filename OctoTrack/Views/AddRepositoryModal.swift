@@ -23,13 +23,11 @@ struct AddRepositoryModal: View {
                     .padding(.top)
 
                 CustomTextField(header: String(localized: "owner"),
-                                color: .customGray,
                                 placeholder: String(localized: "ownerExemple"),
                                 text: $viewModel.owner,
                                 type: .alphaNumber)
 
                 CustomTextField(header: String(localized: "repoName"),
-                                color: .customGray,
                                 placeholder: String(localized: "repoExemple"),
                                 text: $viewModel.repoName,
                                 type: .alphaNumber)
