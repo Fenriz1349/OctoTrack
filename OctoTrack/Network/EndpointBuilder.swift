@@ -11,6 +11,7 @@ import Foundation
 /// Pour chaque cas on peut personalisé l'url, le header et ou le body
 enum EndpointBuilder {
     case user(token: String)
+    case allUserRepos(token: String)
     case repo(owner: String, repoName: String, token: String?)
     case allPullRequests(owner: String, repoName: String, token: String?, state: String = "all")
     case authorize(clientID: String, redirectURI: String, scopes: [String])
@@ -18,7 +19,7 @@ enum EndpointBuilder {
 
     private var baseURL: URL {
         switch self {
-        case .user, .repo, .allPullRequests:
+        case .user,.allUserRepos, .repo, .allPullRequests:
             return URL(string: "https://api.github.com")!
         case .authorize, .exchangeToken:
             return URL(string: "https://github.com")!
@@ -28,6 +29,7 @@ enum EndpointBuilder {
     private var path: String {
         switch self {
         case .user:  "/user"
+        case .allUserRepos: "/user/repos"
         case .repo(let owner, let name, _): "/repos/\(owner)/\(name)"
         case .allPullRequests(let owner, let repo, _, _): "/repos/\(owner)/\(repo)/pulls"
         case .authorize:  "/login/oauth/authorize"
@@ -38,7 +40,7 @@ enum EndpointBuilder {
     private var httpMethod: String {
         switch self {
         case .exchangeToken:  "POST"
-        case .user, .repo, .authorize, .allPullRequests:  "GET"
+        case .user,.allUserRepos, .repo, .authorize, .allPullRequests:  "GET"
         }
     }
 
@@ -50,8 +52,14 @@ enum EndpointBuilder {
                 URLQueryItem(name: "redirect_uri", value: redirectURI),
                 URLQueryItem(name: "scope", value: scopes.joined(separator: " "))
             ]
+        case .allUserRepos:
+            return [
+                URLQueryItem(name: "per_page", value: "100"),
+                URLQueryItem(name: "sort", value: "updated"),
+                URLQueryItem(name: "type", value: "all")
+            ]
         case .allPullRequests(_, _, _, let state):
-                    return [URLQueryItem(name: "state", value: state)]
+            return [URLQueryItem(name: "state", value: state)]
         case .user, .repo, .exchangeToken:
             return nil
         }
@@ -59,7 +67,7 @@ enum EndpointBuilder {
 
     private var httpBody: Data? {
         switch self {
-        case .user, .repo, .allPullRequests, .authorize: return nil
+        case .user, .allUserRepos, .repo, .allPullRequests, .authorize: return nil
         case .exchangeToken(let code, let clientID, let clientSecret, let redirectURI):
             let params = [
                 "client_id": clientID,
@@ -75,7 +83,7 @@ enum EndpointBuilder {
     private var headers: [String: String]? {
         var customHeaders: [String: String] = [:]
         switch self {
-        case .user(let token):
+        case .user(let token),.allUserRepos(let token):
             customHeaders["Accept"] = "application/vnd.github.v3+json"
             customHeaders["Authorization"] = "Bearer \(token)"
         case .repo(_, _, let token), .allPullRequests(_, _, let token, _):

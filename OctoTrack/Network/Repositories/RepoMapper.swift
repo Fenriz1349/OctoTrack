@@ -47,6 +47,18 @@ enum RepoMapper {
         let repoDTO = try decoder.decode(RepoDTO.self, from: data)
         return repoDTO.toRepo()
     }
+
+    static func mapList(_ data: Data, and response: HTTPURLResponse) throws -> [Repository] {
+        guard response.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+
+        let repoDTOs = try decoder.decode([RepoDTO].self, from: data)
+        return repoDTOs.map { $0.toRepo() }
+    }
 }
 
 extension RepoMapper.OwnerDTO: Decodable {

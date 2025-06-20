@@ -12,17 +12,15 @@ struct RepoListView: View {
     @State var dataManager: UserDataManager
     @State var selectedPriority: RepoPriority = .all
 
-    @Query private var allRepositories: [Repository]
+//    @Query private var allRepositories: [Repository]
       
-      var selectedRepositories: [Repository] {
-          let userRepositories = allRepositories.filter { repo in
-              dataManager.activeUser?.repoList.contains(where: { $0.id == repo.id }) ?? false
-          }
-          let sortedRepos = userRepositories.sorted { $0.mostRecentUpdate > $1.mostRecentUpdate }
-          
-          return selectedPriority == .all ? sortedRepos
-              : sortedRepos.filter { $0.priority == selectedPriority }
-      }
+    var selectedRepositories: [Repository] {
+            // ✅ Directement via dataManager
+            guard let activeUser = dataManager.activeUser else { return [] }
+            let userRepositories = activeUser.repoList.sorted { $0.mostRecentUpdate > $1.mostRecentUpdate }
+            return selectedPriority == .all ? userRepositories
+                : userRepositories.filter { $0.priority == selectedPriority }
+        }
 
     var body: some View {
         VStack {

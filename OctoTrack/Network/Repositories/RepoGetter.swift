@@ -21,4 +21,10 @@ final class RepoGetter {
 
         return repo
     }
+
+    func getAllUserRepos(from request: URLRequest) async throws -> [Repository] {
+        let (data, response) = try await client.request(from: request)
+        let repos = try RepoMapper.mapList(data, and: response)
+        return repos
+    }
 }
