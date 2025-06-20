@@ -36,7 +36,7 @@ struct RepoDetailView: View {
                             Button(role: .destructive) {
                                 viewModel.deletePullRequest(pullRequest)
                             } label: {
-                                CustomButtonIcon(icon: IconsName.trash, color: .red)
+                                CustomButtonIcon(icon: IconsName.trash, color: .customRed)
                             }
                         }
                 }

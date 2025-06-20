@@ -30,11 +30,11 @@ enum Status: String, CaseIterable {
 
     var color: Color {
         switch self {
-        case .created: .blue
-        case .updated: .orange
-        case .open, .publicRepo: .green
-        case .closed, .privateRepo: Color(.systemGray5)
-        case .merged: .purple
+        case .created: .accentColor
+        case .updated: .customOrange
+        case .open, .publicRepo: .customGreen
+        case .closed, .privateRepo: .customGray
+        case .merged: .customPurple
         }
     }
 

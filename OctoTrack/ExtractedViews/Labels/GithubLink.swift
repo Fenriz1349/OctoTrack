@@ -16,7 +16,7 @@ struct GithubLink: View {
                 Text("viewOnGithub")
                     .font(.system(size: 14))
             }
-            .foregroundColor(.blue)
+            .foregroundColor(.accentColor)
             .cornerRadius(8)
         }
     }
