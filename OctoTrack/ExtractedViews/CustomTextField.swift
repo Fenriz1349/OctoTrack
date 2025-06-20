@@ -46,6 +46,6 @@ struct TextFieldStyleModifier: ViewModifier {
             .padding()
             .background(color)
             .cornerRadius(8)
-            .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
+            .shadow(color: .primary.opacity(0.2), radius: 4, x: 0, y: 2)
     }
 }

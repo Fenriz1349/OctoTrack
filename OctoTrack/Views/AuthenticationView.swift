@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AuthenticationView: View {
     @State var viewModel: AuthenticationViewModel
+    @State private var isAnimating = false
+    @State private var opacity: Double = 0
 
     var body: some View {
             VStack(spacing: 20) {
@@ -16,6 +18,8 @@ struct AuthenticationView: View {
                     .font(.largeTitle)
                     .fontWeight(.semibold)
                 AsyncAvatarImage(avatarName: "", avatarUrl: "", size: 150)
+                    .scaleEffect(isAnimating ? 1.1 : 1.0)
+                    .opacity(opacity)
                 Text("welcome")
                     .font(.largeTitle)
                     .fontWeight(.semibold)
@@ -32,6 +36,15 @@ struct AuthenticationView: View {
                 }
                 if viewModel.feedback != .none {
                     FeedbackLabel(feedback: viewModel.feedback)
+                }
+            }
+            .onAppear {
+                withAnimation(.easeInOut(duration: 0.6)) {
+                    opacity = 1.0
+                }
+                
+                withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
+                    isAnimating = true
                 }
             }
             .onChange(of: viewModel.feedback) {

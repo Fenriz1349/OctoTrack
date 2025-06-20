@@ -23,13 +23,13 @@ struct AddRepositoryModal: View {
                     .padding(.top)
 
                 CustomTextField(header: String(localized: "owner"),
-                                color: .gray,
+                                color: .customGray,
                                 placeholder: String(localized: "ownerExemple"),
                                 text: $viewModel.owner,
                                 type: .alphaNumber)
 
                 CustomTextField(header: String(localized: "repoName"),
-                                color: .gray,
+                                color: .customGray,
                                 placeholder: String(localized: "repoExemple"),
                                 text: $viewModel.repoName,
                                 type: .alphaNumber)
@@ -52,8 +52,7 @@ struct AddRepositoryModal: View {
                     },
                            label: {
                         CustomButtonLabel(iconLeading: .plus,
-                                          message: "repoAdd",
-                                          color: .blue
+                                          message: "repoAdd"
                         )
                     }
                     )

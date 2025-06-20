@@ -29,14 +29,14 @@ struct UserHeader: View {
                             Circle()
                                 .stroke(
                                     LinearGradient(
-                                        colors: [.blue, .purple],
+                                        colors: [.accentColor, .purple],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
                                     ),
                                     lineWidth: 3
                                 )
                         )
-                        .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
+                        .shadow(color: .primary.opacity(0.2), radius: 10, x: 0, y: 5)
                     Spacer()
                     VStack(alignment: .leading, spacing: 8) {
                         Text(user.login)
@@ -55,14 +55,15 @@ struct UserHeader: View {
                 .frame(height: size, alignment: .top)
                 if let lastUpdate = user.lastUpdate, !isCompact {
                     Text("lastUpdate \(lastUpdate.formatted(date: .abbreviated, time: .shortened))")
+                        .foregroundColor(.secondary)
                 }
             }
             .padding(20)
             .frame(maxWidth: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.white)
-                    .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+                    .fill(Color(.systemBackground))
+                    .shadow(color: .primary.opacity(0.1), radius: 8, x: 0, y: 4)
             )
         }
     }
