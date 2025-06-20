@@ -33,13 +33,13 @@ struct MainTabView: View {
                    
                    ZStack {
                        RoundedRectangle(cornerRadius: 50)
-                           .fill(Color.blue.opacity(0.8))
+                           .fill(Color.accentColor.opacity(0.8))
                            .frame(width: 110, height: 56)
-                           .shadow(color: .blue.opacity(0.3), radius: 8, x: 0, y: 4)
+                           .shadow(color: .accentColor.opacity(0.3), radius: 8, x: 0, y: 4)
                        TabBarButton(tab: .addRepo,
                                     isSelected: false,
                                     action: {showAddModal = true },
-                                    color: .white
+                                    color: .buttonWhite
                        )
                    }
 
@@ -53,7 +53,7 @@ struct MainTabView: View {
                .padding(.bottom, -30)
                .background(
                 Color(.systemBackground)
-                    .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: -4)
+                    .shadow(color: .primary.opacity(0.2), radius: 8, x: 0, y: -4)
                     .mask(
                         Rectangle()
                             .padding(.top, -20)

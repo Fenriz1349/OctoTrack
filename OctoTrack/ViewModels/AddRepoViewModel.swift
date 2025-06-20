@@ -37,8 +37,7 @@ import Foundation
     }
 
     var owner: String
-#warning("supprimer la valeur par defaut dans la version finale")
-    var repoName: String = "DA-iOS_P5"
+    var repoName: String = ""
     var priority: RepoPriority = .low
     let dataManager: UserDataManager
     private let repoGetter: RepoGetter = RepoGetter()

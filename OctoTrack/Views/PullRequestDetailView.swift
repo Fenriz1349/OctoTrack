@@ -32,9 +32,9 @@ struct PullRequestDetailView: View {
                                 .padding(.vertical, 4)
                                 .background(
                                     Capsule()
-                                        .fill(Color.gray.opacity(0.2))
+                                        .fill(Color.customGray.opacity(0.2))
                                 )
-                                .foregroundColor(.gray)
+                                .foregroundColor(.customGray)
                         }
                         Spacer()
                         LockLabel(status: pullRequest.state, withText: true)
@@ -44,19 +44,21 @@ struct PullRequestDetailView: View {
                         .fontWeight(.bold)
 
                     Divider()
+                        .background(Color("DividerColor"))
+
                     DateRow(creationDate: pullRequest.createdAt, updateDate: pullRequest.updatedAt,
                             mergedAt: pullRequest.mergedAt, closedAt: pullRequest.closedAt)
 
                     Divider()
-
+                        .background(Color("DividerColor"))
                     PullRequestTimeline(pullRequest: pullRequest)
                     GithubLink(link: link)
                 }
                 .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.white)
-                        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+                        .fill(Color(.systemBackground))
+                        .shadow(color: .primary.opacity(0.1), radius: 8, x: 0, y: 4)
                 )
                 .padding(.horizontal)
             }

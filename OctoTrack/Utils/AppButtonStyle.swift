@@ -16,15 +16,15 @@ struct AppButtonStyle: ViewModifier {
             .fontWeight(.bold)
             .padding(.vertical)
             .frame(maxWidth: .infinity)
-            .background(color.opacity(isSelected ? 1.0 : 0.8))
-            .foregroundColor(isSelected ? .white : .gray)
+            .background(isSelected ? color : Color.clear)
+            .foregroundColor(isSelected ? .buttonWhite : color)
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.black.opacity(0.2), lineWidth: 1)
+                    .stroke(color, lineWidth: isSelected ? 0 : 2)
             )
             .shadow(
-                color: isSelected ? .black.opacity(0.3) : .clear,
+                color: isSelected ? .primary.opacity(0.3) : .clear,
                 radius: 4,
                 x: 0,
                 y: isSelected ? 0 : 2

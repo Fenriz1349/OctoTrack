@@ -22,7 +22,7 @@ struct AccountView: View {
                     CustomButtonLabel(
                         iconLeading: .trash,
                         message: "resetRepositoryList",
-                        color: Color.orange
+                        color: .customOrange
                     )
                 }
                 .alert("confirmation", isPresented: $showingResetAlert) {
@@ -39,7 +39,7 @@ struct AccountView: View {
                     CustomButtonLabel(
                         iconLeading: .signOut,
                         message: "signOut",
-                        color: Color.red
+                        color: .customRed
                     )
                 }
                 if appViewModel.feedback != .none {
