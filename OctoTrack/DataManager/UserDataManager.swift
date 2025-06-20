@@ -69,20 +69,21 @@ import SwiftData
     func storeNewRepo(_ repo: Repository) throws {
         guard let currentUser = activeUser else { return }
 
-        let newRepoId = "\(currentUser.id)_\(repo.id)".hashValue
+        let uniqueRepoId = UUID().hashValue
+        let uniqueOwnerId = UUID().hashValue
 
-        if currentUser.repoList.contains(where: { $0.id == newRepoId }) {
-            return
-        }
+        if currentUser.repoList.contains(where: { $0.name == repo.name && $0.owner.login == repo.owner.login }) {
+               return
+           }
 
         let newOwner = Owner(
-            id: "\(currentUser.id)_\(repo.owner.id)".hashValue,
+            id: uniqueOwnerId,
             login: repo.owner.login,
             avatarURL: repo.owner.avatarURL
         )
 
         let newRepo = Repository(
-            id: newRepoId,
+            id: uniqueRepoId,
             name: repo.name,
             repoDescription: repo.repoDescription,
             isPrivate: repo.isPrivate,

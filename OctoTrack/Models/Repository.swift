@@ -17,7 +17,7 @@ import SwiftData
     var language: String?
     var priority: RepoPriority
 
-    @Relationship(deleteRule: .nullify) var owner: Owner
+    @Relationship var owner: Owner
     @Relationship var pullRequests: [PullRequest] = []
 
     @Relationship(deleteRule: .nullify, inverse: \User.repoList) var user: User?
