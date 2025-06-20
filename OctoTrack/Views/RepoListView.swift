@@ -39,7 +39,7 @@ struct RepoListView: View {
                        Button(role: .destructive) {
                            try? dataManager.deleteRepository(repository)
                        } label: {
-                           CustomButtonIcon(icon: .trash, color: .red)
+                           CustomButtonIcon(icon: .trash, color: .customRed)
                        }
                    }
                 }

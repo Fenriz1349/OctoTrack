@@ -41,12 +41,14 @@ struct RepoHeader: View {
             OwnerLabel(repository: repository)
             if !isCompact {
                 Divider()
+                    .background(Color("DividerColor"))
                 PRCategoryCounterRow(totalCount: totalPRCount,
                                      openCount: openPRCount,
                                      closedCount: closedPRCount,
                                      mergedcount: mergedPRCount,
                                      language: repository.language)
                 Divider()
+                    .background(Color("DividerColor"))
                 DateRow(creationDate: repository.createdAt,
                         updateDate: repository.updatedAt,
                         mergedAt: nil, closedAt: nil,
@@ -57,8 +59,8 @@ struct RepoHeader: View {
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color.white)
-                .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+                .fill(Color(.systemBackground))
+                .shadow(color: .primary.opacity(0.1), radius: 8, x: 0, y: 4)
         )
     }
 }

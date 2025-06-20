@@ -14,7 +14,7 @@ struct OwnerLabel: View {
             AsyncAvatarImage(avatarName: repository.owner.login, avatarUrl: repository.owner.avatarURL, size: 36)
                 .overlay(
                     Circle()
-                        .stroke(Color.gray.opacity(0.3), lineWidth: 2)
+                        .stroke(Color.customGray.opacity(0.3), lineWidth: 2)
                 )
             VStack(alignment: .leading, spacing: 2) {
                 Text("owner")

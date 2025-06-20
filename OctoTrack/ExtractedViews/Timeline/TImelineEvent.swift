@@ -25,7 +25,7 @@ struct TimelineEvent: View {
 
                 Image(systemName: status.icon)
                     .foregroundColor(status.color)
-                    .background(Circle().fill(Color.white).frame(width: 18, height: 18))
+                    .background(Circle().fill(Color(.systemBackground)).frame(width: 18, height: 18))
 
                 if status != .created {
                     Rectangle()

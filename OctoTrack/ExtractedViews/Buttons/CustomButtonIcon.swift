@@ -15,9 +15,9 @@ struct CustomButtonIcon: View {
         .fontWeight(.bold)
         .padding(7)
         .background(color)
-        .foregroundColor(.white)
+        .foregroundColor(.buttonWhite)
         .cornerRadius(25)
-        .shadow(color: .gray, radius: 4, x: 2, y: 2)
+        .shadow(color: .customGray, radius: 4, x: 2, y: 2)
     }
 }
 

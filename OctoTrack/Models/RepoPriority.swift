@@ -24,10 +24,10 @@ enum RepoPriority: Int, Codable, CaseIterable {
 
     var color: Color {
         switch self {
-        case.all: .gray
-        case .low: .green
-        case .medium: .yellow
-        case .high: .red
+        case.all: .customGray
+        case .low: .customGreen
+        case .medium: .customYellow
+        case .high: .customRed
         }
     }
 

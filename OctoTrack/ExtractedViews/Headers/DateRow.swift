@@ -26,6 +26,7 @@ struct DateRow: View {
 
             if let updatedAt = updateDate {
                 Divider()
+                    .background(Color("DividerColor"))
                     .frame(height: 24)
                 VStack(alignment: .center, spacing: 2) {
                     Text("updated")
@@ -38,6 +39,7 @@ struct DateRow: View {
 
             if let mergedAt = mergedAt {
                 Divider()
+                    .background(Color("DividerColor"))
                     .frame(height: 24)
                 VStack(alignment: .center, spacing: 2) {
                     Text("merged")
@@ -48,6 +50,7 @@ struct DateRow: View {
                 }
             } else if let closedAt = closedAt {
                 Divider()
+                    .background(Color("DividerColor"))
                     .frame(height: 24)
                 VStack(alignment: .center, spacing: 2) {
                     Text("closed")
@@ -60,6 +63,7 @@ struct DateRow: View {
             }
             if let viewModel = viewModel {
                 Divider()
+                    .background(Color("DividerColor"))
                     .frame(height: 24)
                 CompactPriorityMenu(viewModel: viewModel)
             }

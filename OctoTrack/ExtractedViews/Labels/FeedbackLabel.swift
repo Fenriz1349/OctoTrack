@@ -12,7 +12,7 @@ struct FeedbackLabel: View {
     var showIcon: Bool = true
 
     private var color: Color {
-        feedback.isError ? .red : .green
+        feedback.isError ? .customRed : .customGreen
     }
 
     private var iconName: String {

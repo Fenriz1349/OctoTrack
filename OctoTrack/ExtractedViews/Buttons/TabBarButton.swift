@@ -15,7 +15,7 @@ struct TabBarButton: View {
 
     var displayedColor: Color {
         if let color = color { return color }
-        return isSelected ? .blue : .gray
+        return isSelected ? .accentColor : .customGray
     }
 
     var body: some View {

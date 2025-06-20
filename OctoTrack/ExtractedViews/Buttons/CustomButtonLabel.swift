@@ -11,7 +11,7 @@ struct CustomButtonLabel: View {
     var iconLeading: IconsName?
     var iconTrailing: IconsName?
     let message: String
-    let color: Color
+    var color: Color = .accentColor
     var isSelected: Bool = true
     var fontSize: CGFloat = 16
 
@@ -37,5 +37,5 @@ struct CustomButtonLabel: View {
 #Preview {
     CustomButtonLabel(iconLeading: .plus,
                       iconTrailing: .down,
-                      message: "repoAdd", color: .accentColor)
+                      message: "repoAdd")
 }

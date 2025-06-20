@@ -33,7 +33,7 @@ struct PriorityButtonsStack: View {
                     )
                 }
             }
-            .background(Color.gray.opacity(0.2))
+            .background(Color.secondary.opacity(0.2))
             .cornerRadius(8)
     }
 }
