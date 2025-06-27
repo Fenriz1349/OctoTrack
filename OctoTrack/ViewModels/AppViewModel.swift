@@ -8,35 +8,11 @@
 import SwiftUI
 
 @MainActor
-@Observable final class AppViewModel {
+final class AppViewModel: ObservableObject {
 
-    enum Feedback: FeedbackHandler, Equatable {
-        case none
-        case emptyRepo
-        case resetSucessed
-        case resetFailed(error: String)
-
-        var message: String? {
-            switch self {
-            case .none: return nil
-            case .emptyRepo: return String(localized: "emptyRepo")
-            case .resetSucessed: return String(localized: "resetSuccess")
-            case .resetFailed(let error): return String(localized: "resetFailed \(error)")
-            }
-        }
-
-        var isError: Bool {
-            switch self {
-            case .resetSucessed: return false
-            default: return true
-            }
-        }
-    }
-
-    var feedback: Feedback = .none
-    var isLogged: Bool = false
-    var isInitializing: Bool = true
-    var authenticationViewModel: AuthenticationViewModel
+    @Published var isLogged: Bool = false
+    @Published var isInitializing: Bool = true
+    @Published var authenticationViewModel: AuthenticationViewModel
     let dataManager: UserDataManager
 
     init(dataManager: UserDataManager) {
@@ -67,31 +43,37 @@ import SwiftUI
     /// if expired or unauthenticated set isLogged to false to display the AuthenticationView
     @MainActor
     func initialize() async {
-        isInitializing = true
-        let authState = authenticationViewModel.authenticationState
+            isInitializing = true
 
-        switch authState {
-        case .authenticated:
-            await loadUserData()
-            if dataManager.activeUser != nil {
-                isLogged = true
-                authenticationViewModel.startTokenValidation()
-            } else {
-                isLogged = false
-            }
-        case .expired:
-            if await authenticationViewModel.isTokenValid() {
-                try? authenticationViewModel.refreshToken()
-                await loadUserData()
-                authenticationViewModel.startTokenValidation()
-            } else {
+            do {
+                let authState = authenticationViewModel.authenticationState
+
+                switch authState {
+                case .authenticated:
+                    await loadUserData()
+                    if dataManager.activeUser != nil {
+                        isLogged = true
+                            authenticationViewModel.startTokenValidation()
+                    } else {
+                        isLogged = false
+                    }
+                case .expired:
+                    if await authenticationViewModel.isTokenValid() {
+                        try authenticationViewModel.refreshToken()
+                        await loadUserData()
+                            authenticationViewModel.startTokenValidation()
+                    } else {
+                        logoutUser()
+                    }
+
+                case .unauthenticated:
+                    logoutUser()
+                }
+            } catch {
                 logoutUser()
             }
-        case .unauthenticated:
-            logoutUser()
-        }
         isInitializing = false
-    }
+        }
 
     func loginUser(user: User) {
         self.isLogged = true
@@ -117,22 +99,5 @@ import SwiftUI
                 isLogged = false
             }
         }
-    }
-
-    func resetUserRepository() {
-        do {
-            try dataManager.resetAllRepositories()
-            feedback = .resetSucessed
-        } catch {
-            feedback = .resetFailed(error: error.localizedDescription)
-        }
-    }
-
-    func checkIfEmptyRepoList() -> Bool {
-        if let currentUser = dataManager.activeUser, currentUser.repoList.isEmpty {
-            feedback = .emptyRepo
-            return false
-        }
-        return  true
     }
 }

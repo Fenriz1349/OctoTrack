@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CompactPriorityMenu: View {
-    @Bindable var viewModel: RepoDetailsViewModel
+    @ObservedObject var viewModel: RepoDetailsViewModel
 
     var body: some View {
         Menu {

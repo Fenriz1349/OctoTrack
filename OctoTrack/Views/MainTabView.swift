@@ -8,18 +8,16 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @Binding var selectedTab: Tab
-       @State private var showAddModal = false
-       let viewModel: AppViewModel
+    @StateObject var viewModel: AppCoordinatorViewModel
 
        var body: some View {
            NavigationStack {
                Group {
-                   switch selectedTab {
+                   switch viewModel.selectedTab {
                    case .repoList:
-                       RepoListView(dataManager: viewModel.dataManager)
+                       RepoListView(viewModel: viewModel.makeRepoListViewModel())
                    case .account:
-                       AccountView(appViewModel: viewModel)
+                       AccountView(viewModel: viewModel.makeAccountViewModel())
                    case .addRepo:
                        EmptyView()
                    }
@@ -27,10 +25,10 @@ struct MainTabView: View {
 
                HStack {
                    TabBarButton( tab: .repoList,
-                                 isSelected: selectedTab == .repoList,
-                                 action: { selectedTab = .repoList }
+                                 isSelected: viewModel.selectedTab == .repoList,
+                                 action: { viewModel.selectedTab = .repoList }
                    )
-                   
+
                    ZStack {
                        RoundedRectangle(cornerRadius: 50)
                            .fill(Color.accentColor.opacity(0.8))
@@ -38,14 +36,14 @@ struct MainTabView: View {
                            .shadow(color: .accentColor.opacity(0.3), radius: 8, x: 0, y: 4)
                        TabBarButton(tab: .addRepo,
                                     isSelected: false,
-                                    action: {showAddModal = true },
+                                    action: {viewModel.showAddModal = true },
                                     color: .buttonWhite
                        )
                    }
 
                    TabBarButton(tab: .account,
-                                isSelected: selectedTab == .account,
-                                action: { selectedTab = .account }
+                                isSelected: viewModel.selectedTab == .account,
+                                action: { viewModel.selectedTab = .account }
                    )
                }
                .padding(.horizontal, 24)
@@ -60,12 +58,21 @@ struct MainTabView: View {
                     )
                )
            }
-           .sheet(isPresented: $showAddModal) {
-               AddRepositoryModal(dataManager: viewModel.dataManager)
+           .sheet(isPresented: $viewModel.showAddModal) {
+               AddRepositoryModal(viewModel: viewModel.makeAddRepoViewModel())
+                   .onDisappear {
+                       viewModel.dismissAddModal()
+                   }
            }
        }
    }
 
 #Preview {
-    MainTabView(selectedTab: .constant(.account), viewModel: PreviewContainer.previewAppViewModel)
+    let appCoordinatorViewModel = AppCoordinatorViewModel(
+        appViewModel: PreviewContainer.previewAppViewModel,
+        viewModelFactory: PreviewContainer.previewViewModelFactory
+    )
+
+    MainTabView(viewModel: appCoordinatorViewModel)
+        .modelContainer(PreviewContainer.container)
 }

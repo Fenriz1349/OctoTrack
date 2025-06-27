@@ -8,9 +8,9 @@
 import SwiftUI
 import SwiftData
 
-@Observable final class UserDataManager {
+final class UserDataManager: ObservableObject {
     var modelContext: ModelContext
-    var isSucess: Bool = false
+    @Published var isSucess: Bool = false
 
     var activeUser: User? {
         try? modelContext.fetch(FetchDescriptor<User>(predicate: #Predicate { $0.isActiveUser })).first
@@ -32,7 +32,6 @@ import SwiftData
         ? activeUser.repoList
         : activeUser.repoList.filter { $0.priority == priority}
     }
-
 
     /// Deactivate all users except the one in parameter
     /// - Parameter user: the user to set as currentUser
@@ -61,7 +60,6 @@ import SwiftData
             activateUser(user)
         }
     }
-
 
     // MARK: - Repository Methods
 
@@ -98,7 +96,7 @@ import SwiftData
         modelContext.insert(newRepo)
         currentUser.repoList.append(newRepo)
         currentUser.lastUpdate = Date()
-        
+
         try modelContext.save()
     }
 

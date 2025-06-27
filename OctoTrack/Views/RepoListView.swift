@@ -9,35 +9,34 @@ import SwiftUI
 import SwiftData
 
 struct RepoListView: View {
-    @State var dataManager: UserDataManager
-    @State var selectedPriority: RepoPriority = .all
-
-    @Query private var allRepositories: [Repository]
-      
-      var selectedRepositories: [Repository] {
-          let userRepositories = allRepositories.filter { repo in
-              dataManager.activeUser?.repoList.contains(where: { $0.id == repo.id }) ?? false
-          }
-          let sortedRepos = userRepositories.sorted { $0.mostRecentUpdate > $1.mostRecentUpdate }
-          
-          return selectedPriority == .all ? sortedRepos
-              : sortedRepos.filter { $0.priority == selectedPriority }
-      }
+    @StateObject var viewModel: RepoListViewModel
+    @State private var headerRefreshID = 0
 
     var body: some View {
         VStack {
-            UserHeader(isCompact: true)
-            PriorityButtonsStack(selectedPriority: $selectedPriority, showAll: true)
+            if let user = viewModel.dataManager.activeUser {
+                UserHeader(
+                    user: user,
+                    repoCount: viewModel.selectedRepositories.count,
+                    refreshID: headerRefreshID,
+                    isCompact: true
+                )
+                .onChange(of: viewModel.selectedRepositories.count) {
+                    headerRefreshID += 1  // ← BOOM, refresh du header !
+                }
+            }
+            PriorityButtonsStack(selectedPriority: $viewModel.selectedPriority, showAll: true)
             List {
-                ForEach(selectedRepositories) { repository in
-                    NavigationLink(destination: RepoDetailView(repository: repository,
-                                                               dataManager: dataManager)) {
+                ForEach(viewModel.selectedRepositories) { repository in
+                    NavigationLink(destination: RepoDetailView(viewModel: viewModel.viewModelFactory
+                        .makeRepoDetailsViewModel(repository: repository))) {
                         RepoRow(repository: repository)
                     }
                     .listRowInsets(EdgeInsets())
                     .swipeActions(edge: .trailing) {
                        Button(role: .destructive) {
-                           try? dataManager.deleteRepository(repository)
+                           viewModel.deleteRepository(repository)
+                           headerRefreshID += 1
                        } label: {
                            CustomButtonIcon(icon: .trash, color: .customRed)
                        }
@@ -51,6 +50,11 @@ struct RepoListView: View {
 }
 
 #Preview {
-    RepoListView(dataManager: PreviewContainer.previewAppViewModel.dataManager)
-        .previewWithContainer()
+    let dataManager = UserDataManager(modelContext: PreviewContainer.container.mainContext)
+    let appViewModel = AppViewModel(dataManager: dataManager)
+    let viewModelFactory = ViewModelFactory(dataManager: dataManager)
+    RepoListView(viewModel: RepoListViewModel(
+        dataManager: PreviewContainer.previewAppViewModel.dataManager, viewModelFactory: viewModelFactory)
+    )
+    .previewWithContainer()
 }

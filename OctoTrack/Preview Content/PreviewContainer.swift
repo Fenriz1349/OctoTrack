@@ -46,6 +46,12 @@ struct PreviewContainer {
     }()
 
     @MainActor
+    static var previewViewModelFactory: ViewModelFactory = {
+        let dataManager = UserDataManager(modelContext: container.mainContext)
+        return ViewModelFactory(dataManager: dataManager)
+    }()
+
+    @MainActor
     static func populateContainer(_ container: ModelContainer) -> (user: User, repositories: [Repository]) {
         let context = container.mainContext
 

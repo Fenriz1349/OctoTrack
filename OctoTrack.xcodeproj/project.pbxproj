@@ -72,6 +72,11 @@
 		685A33122DFC477A007E89AE /* AppViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685A33112DFC477A007E89AE /* AppViewModelTests.swift */; };
 		685A33142DFC4B3A007E89AE /* AuthenticationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685A33132DFC4B3A007E89AE /* AuthenticationViewModelTests.swift */; };
 		685A33162DFC4E0E007E89AE /* RepoDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685A33152DFC4E0E007E89AE /* RepoDetailsViewModelTests.swift */; };
+		685B623A2E0E75D600FB2F52 /* RepoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685B62392E0E75D600FB2F52 /* RepoListViewModel.swift */; };
+		685B623C2E0E7EE000FB2F52 /* ViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685B623B2E0E7EE000FB2F52 /* ViewModelFactory.swift */; };
+		685B623E2E0E811600FB2F52 /* AppCoordinatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685B623D2E0E811600FB2F52 /* AppCoordinatorViewModel.swift */; };
+		685B62402E0E828B00FB2F52 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685B623F2E0E828B00FB2F52 /* AccountViewModel.swift */; };
+		685B62442E0EBE2D00FB2F52 /* UserHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685B62432E0EBE2D00FB2F52 /* UserHeaderViewModel.swift */; };
 		688F20422DC4A95D00AA7194 /* TImelineEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688F20412DC4A95D00AA7194 /* TImelineEvent.swift */; };
 		688F20442DC4AA5200AA7194 /* PullRequestTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688F20432DC4AA5200AA7194 /* PullRequestTimeline.swift */; };
 		688F20482DC4E06300AA7194 /* GithubLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688F20472DC4E06300AA7194 /* GithubLink.swift */; };
@@ -184,6 +189,11 @@
 		685A33112DFC477A007E89AE /* AppViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModelTests.swift; sourceTree = "<group>"; };
 		685A33132DFC4B3A007E89AE /* AuthenticationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModelTests.swift; sourceTree = "<group>"; };
 		685A33152DFC4E0E007E89AE /* RepoDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailsViewModelTests.swift; sourceTree = "<group>"; };
+		685B62392E0E75D600FB2F52 /* RepoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListViewModel.swift; sourceTree = "<group>"; };
+		685B623B2E0E7EE000FB2F52 /* ViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFactory.swift; sourceTree = "<group>"; };
+		685B623D2E0E811600FB2F52 /* AppCoordinatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorViewModel.swift; sourceTree = "<group>"; };
+		685B623F2E0E828B00FB2F52 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
+		685B62432E0EBE2D00FB2F52 /* UserHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderViewModel.swift; sourceTree = "<group>"; };
 		686BFB8D2DA909F100C859C3 /* OctoTrack.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = OctoTrack.xctestplan; sourceTree = "<group>"; };
 		688F20412DC4A95D00AA7194 /* TImelineEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TImelineEvent.swift; sourceTree = "<group>"; };
 		688F20432DC4AA5200AA7194 /* PullRequestTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestTimeline.swift; sourceTree = "<group>"; };
@@ -373,10 +383,15 @@
 		684F7C522D8DAA1A0044367F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				684F7C4C2D8DAA1A0044367F /* AddRepoViewModel.swift */,
 				684F7C4D2D8DAA1A0044367F /* AppViewModel.swift */,
+				685B623F2E0E828B00FB2F52 /* AccountViewModel.swift */,
+				684F7C4C2D8DAA1A0044367F /* AddRepoViewModel.swift */,
 				684F7C4F2D8DAA1A0044367F /* AuthenticationViewModel.swift */,
 				689B15E22DBA6FC80075B3EC /* RepoDetailsViewModel.swift */,
+				685B62392E0E75D600FB2F52 /* RepoListViewModel.swift */,
+				685B623B2E0E7EE000FB2F52 /* ViewModelFactory.swift */,
+				685B623D2E0E811600FB2F52 /* AppCoordinatorViewModel.swift */,
+				685B62432E0EBE2D00FB2F52 /* UserHeaderViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -686,6 +701,9 @@
 				684F7C6D2D8DAA1A0044367F /* PullRequest.swift in Sources */,
 				684F7C6E2D8DAA1A0044367F /* Repository.swift in Sources */,
 				684F7CA12D8DBF8A0044367F /* Owner.swift in Sources */,
+				685B623C2E0E7EE000FB2F52 /* ViewModelFactory.swift in Sources */,
+				685B623E2E0E811600FB2F52 /* AppCoordinatorViewModel.swift in Sources */,
+				685B62442E0EBE2D00FB2F52 /* UserHeaderViewModel.swift in Sources */,
 				684F7C6F2D8DAA1A0044367F /* TextFieldConfig.swift in Sources */,
 				68422C742DE0BE5400F60F71 /* TabBarButton.swift in Sources */,
 				68C02ECB2D9FB7800065027F /* PullRequestMapper.swift in Sources */,
@@ -729,6 +747,7 @@
 				684F7C852D8DAA1A0044367F /* AuthenticationViewModel.swift in Sources */,
 				684F7C882D8DAA1A0044367F /* AccountView.swift in Sources */,
 				68C02ED72D9FD9540065027F /* RepoHeader.swift in Sources */,
+				685B62402E0E828B00FB2F52 /* AccountViewModel.swift in Sources */,
 				68C02ECD2D9FBA360065027F /* PullRequestGetter.swift in Sources */,
 				6826E8392D9580B80048F35A /* AppCoordinator.swift in Sources */,
 				684F7C892D8DAA1A0044367F /* AddRepositoryModal.swift in Sources */,
@@ -741,6 +760,7 @@
 				68C02EC92D9FB2CD0065027F /* PullRequestEndpoint.swift in Sources */,
 				6826E9682D9692710048F35A /* CustomButtonIcon.swift in Sources */,
 				68CCBC3C2DF2CA7800B4DB5A /* LoadingView.swift in Sources */,
+				685B623A2E0E75D600FB2F52 /* RepoListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
