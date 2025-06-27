@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-@Observable final class AddRepoViewModel {
+final class AddRepoViewModel: ObservableObject {
 
     enum Feedback: FeedbackHandler, Equatable {
         case none
@@ -22,7 +22,7 @@ import Foundation
             case .addSuccess(let owner, let repoName):
                 return String(localized: "addSuccess \(owner)/\(repoName)")
             case .alreadyTracked(let owner, let repoName):
-                           return String(localized: "\(owner)/\(repoName) alreadyTracked ")
+                return String(localized: "\(owner)/\(repoName) alreadyTracked ")
             case .addFailed(let owner, let repoName, let error):
                 return String(localized: "addFail \(owner)/\(repoName): \(error)")
             }
@@ -36,18 +36,23 @@ import Foundation
         }
     }
 
-    var owner: String
-    var repoName: String = ""
-    var priority: RepoPriority = .low
+    @Published var owner: String
+    @Published var repoName: String = ""
+    @Published var priority: RepoPriority = .low
+    @Published var feedback: Feedback = .none
+    @Published var isLoading = false
+    @Published var shouldDismissModal = false
+
     let dataManager: UserDataManager
     private let repoGetter: RepoGetter = RepoGetter()
     private let authenticator = GitHubAuthenticator()
 
-    var feedback: Feedback = .none
-    var isLoading = false
-
     var isFormValid: Bool {
         !owner.isEmpty && !repoName.isEmpty
+    }
+
+    var shouldShowFeedback: Bool {
+        feedback != .none
     }
 
     init(dataManager: UserDataManager) {
@@ -58,17 +63,17 @@ import Foundation
     func getRepo() async {
         isLoading = true
 
-        if let currentUser = dataManager.activeUser,
-           currentUser.repoList.contains(where: { $0.name == repoName && $0.owner.login == owner }) {
-            feedback = .alreadyTracked(owner: owner, repoName: repoName)
-            isLoading = false
-            return
-        }
-
         do {
             let token = try await authenticator.retrieveToken()
             let request = try RepoEndpoint.request(owner: owner, repoName: repoName, token: token)
             let repo = try await repoGetter.repoGetter(from: request)
+
+            if let currentUser = dataManager.activeUser,
+               currentUser.repoList.contains(where: { $0.id == repo.id }) {
+                feedback = .alreadyTracked(owner: owner, repoName: repoName)
+                isLoading = false
+                return
+            }
 
             repo.priority = priority
             try dataManager.storeNewRepo(repo)
@@ -78,5 +83,9 @@ import Foundation
             feedback = .addFailed(owner: owner, repoName: repoName, error: error.localizedDescription)
             isLoading = false
         }
+    }
+
+    func resetFeedback() {
+        feedback = .none
     }
 }

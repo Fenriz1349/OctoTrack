@@ -8,12 +8,8 @@
 import SwiftUI
 
 struct AddRepositoryModal: View {
-    @State private var viewModel: AddRepoViewModel
+    @StateObject var viewModel: AddRepoViewModel
     @Environment(\.dismiss) private var dismiss
-
-    init(dataManager: UserDataManager) {
-        self._viewModel = State(initialValue: AddRepoViewModel(dataManager: dataManager))
-    }
 
     var body: some View {
         NavigationView {
@@ -59,7 +55,7 @@ struct AddRepositoryModal: View {
                     .opacity(viewModel.isFormValid ? 1 : 0.6)
                 }
 
-                if viewModel.feedback != .none {
+                if viewModel.shouldShowFeedback {
                     FeedbackLabel(feedback: viewModel.feedback)
                 }
                 Spacer()
@@ -91,6 +87,6 @@ struct AddRepositoryModal: View {
 }
 
 #Preview {
-    AddRepositoryModal(dataManager: PreviewContainer.mockDataManager)
-        .previewWithContainer()
+    AddRepositoryModal(viewModel: AddRepoViewModel(dataManager: PreviewContainer.mockDataManager) )
+    .previewWithContainer()
 }

@@ -7,7 +7,8 @@
 
 import Foundation
 
-@Observable final class AuthenticationViewModel {
+@MainActor
+final class AuthenticationViewModel: ObservableObject {
 
     enum Feedback: FeedbackHandler, Equatable {
         case none
@@ -23,16 +24,22 @@ import Foundation
         var isError: Bool { true }
     }
 
-    var isAuthenticating: Bool = false
-    var feedback: Feedback = .none
+    @Published var isAuthenticating: Bool = false
+    @Published var feedback: Feedback = .none
+    @Published var isAnimating: Bool = false
+    @Published var opacity: Double = 0.0
     private let authenticator = GitHubAuthenticator()
     private let tokenValidator = TokenValidator()
     let onLoginSucceed: (User) -> Void
     let onLogoutCompleted: () -> Void
 
     var authenticationState: AuthenticationState {
-            authenticator.authenticationState
-        }
+        authenticator.authenticationState
+    }
+
+    var shouldShowFeedback: Bool {
+        feedback != .none
+    }
 
     init(onLoginSucceed: @escaping (User) -> Void, onLogoutCompleted: @escaping () -> Void) {
             self.onLoginSucceed = onLoginSucceed

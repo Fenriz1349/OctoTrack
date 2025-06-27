@@ -8,7 +8,7 @@
 import SwiftUI
 
 @MainActor
-@Observable final class RepoDetailsViewModel {
+final class RepoDetailsViewModel: ObservableObject {
 
     enum Feedback: FeedbackHandler, Equatable {
         case none,
@@ -29,19 +29,31 @@ import SwiftUI
     }
 
     let repository: Repository
-    var feedback: Feedback = .none
-    var isLoading = false
+    @Published var feedback: Feedback = .none
+    @Published var isLoading = false
+    @Published var showPriorityPicker = false
     let dataManager: UserDataManager
     private let pullRequestGetter = PullRequestGetter()
     private let authenticator = GitHubAuthenticator()
 
+    var sortedPullRequests: [PullRequest] {
+        repository.pullRequests.sorted { $0.createdAt > $1.createdAt }
+    }
+
+    var shouldShowFeedback: Bool {
+        feedback != .none
+    }
+
     init(repository: Repository, dataManager: UserDataManager) {
         self.repository = repository
         self.dataManager = dataManager
-        Task {
-            await getAllPullRequests()
-        }
     }
+
+    func onViewAppear() {
+           Task {
+               await getAllPullRequests()
+           }
+       }
 
     func updateRepositoryPriority(_ priority: RepoPriority) {
         do {

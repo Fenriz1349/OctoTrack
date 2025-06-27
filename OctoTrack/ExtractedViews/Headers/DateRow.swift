@@ -15,7 +15,7 @@ struct DateRow: View {
     var viewModel: RepoDetailsViewModel?
 
     var body: some View {
-        HStack (alignment: .center, spacing: 8) {
+        HStack(alignment: .center, spacing: 8) {
             VStack(alignment: .center, spacing: 2) {
                 Text("createdAt")
                     .font(.caption)

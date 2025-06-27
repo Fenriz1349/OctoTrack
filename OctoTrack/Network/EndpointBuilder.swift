@@ -7,8 +7,7 @@
 
 import Foundation
 
-/// EndpointBuilder sert à générer uniquement tous les élements qui composeront la requete SQL
-/// Pour chaque cas on peut personalisé l'url, le header et ou le body
+/// EndpointBuilder is only used to build the body and the header of the URL request
 enum EndpointBuilder {
     case user(token: String)
     case repo(owner: String, repoName: String, token: String?)

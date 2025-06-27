@@ -12,6 +12,8 @@ import SwiftData
 struct OctoTrackApp: App {
     @State private var dataManager: UserDataManager
     @State private var appViewModel: AppViewModel
+    @State private var viewModelFactory: ViewModelFactory
+    @State private var appCoordinatorViewModel: AppCoordinatorViewModel
 
     private let sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -30,22 +32,27 @@ struct OctoTrackApp: App {
     }()
 
     init() {
-           let dataManager = UserDataManager(modelContext: self.sharedModelContainer.mainContext)
-           let viewModel = AppViewModel(dataManager: dataManager)
+        let dataManager = UserDataManager(modelContext: self.sharedModelContainer.mainContext)
+        let appViewModel = AppViewModel(dataManager: dataManager)
 
-           self._dataManager = State(initialValue: dataManager)
-           self._appViewModel = State(initialValue: viewModel)
-       }
+        let viewModelFactory = ViewModelFactory(dataManager: dataManager)
+        let appCoordinatorViewModel = AppCoordinatorViewModel(
+            appViewModel: appViewModel,
+            viewModelFactory: viewModelFactory
+        )
+
+        self._dataManager = State(initialValue: dataManager)
+        self._appViewModel = State(initialValue: appViewModel)
+        self._viewModelFactory = State(initialValue: viewModelFactory)
+        self._appCoordinatorViewModel = State(initialValue: appCoordinatorViewModel)
+    }
 
     var body: some Scene {
         WindowGroup {
-            AppCoordinator(viewModel: appViewModel)
+            AppCoordinator(viewModel: appCoordinatorViewModel, appViewModel: appViewModel)
                 .modelContainer(sharedModelContainer)
-                .onAppear {
-                    Task {
-                        await appViewModel.initialize()
-                    }
-                }
+                .environmentObject(dataManager)
+                .environmentObject(viewModelFactory)
         }
     }
 }
