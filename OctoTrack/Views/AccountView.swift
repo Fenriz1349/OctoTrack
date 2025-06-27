@@ -13,14 +13,17 @@ struct AccountView: View {
 
     var body: some View {
         VStack(spacing: 24) {
-            UserHeader(
-                user: viewModel.dataManager.activeUser!,
-                repoCount: viewModel.dataManager.activeUser!.repoList.count,
-                refreshID: headerRefreshID
-            )
-            .onChange(of: viewModel.dataManager.activeUser?.repoList.count) {
-                headerRefreshID += 1
+            if let user = viewModel.dataManager.activeUser {
+                UserHeader(
+                    user: user,
+                    repoCount: viewModel.repositoryCount,
+                    refreshID: headerRefreshID
+                )
+                .onChange(of: viewModel.dataManager.activeUser?.repoList.count) {
+                    headerRefreshID += 1
+                }
             }
+
             VStack(spacing: 16) {
                 Button {
                     viewModel.resetButtonTapped()
@@ -48,7 +51,7 @@ struct AccountView: View {
                         color: .customRed
                     )
                 }
-                if viewModel.shouldShowFeedback{
+                if viewModel.shouldShowFeedback {
                     FeedbackLabel(feedback: viewModel.feedback)
                 }
             }
@@ -65,7 +68,16 @@ struct AccountView: View {
     }
 }
 
-//#Preview {
-//    AccountView(viewModel: AccountViewModel(appViewModel: PreviewContainer.previewAppViewModel) )
-//    .previewWithContainer()
-//}
+#Preview {
+    let appViewModel = PreviewContainer.previewAppViewModel
+    let viewModel = AccountViewModel(
+        dataManager: PreviewContainer.mockDataManager,
+        authenticationViewModel: appViewModel.authenticationViewModel,
+        viewModelFactory: PreviewContainer.previewViewModelFactory
+    )
+
+    NavigationStack {
+        AccountView(viewModel: viewModel)
+    }
+    .modelContainer(PreviewContainer.container)
+}

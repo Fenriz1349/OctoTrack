@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainTabView: View {
     @StateObject var viewModel: AppCoordinatorViewModel
-    
+
        var body: some View {
            NavigationStack {
                Group {
@@ -28,7 +28,7 @@ struct MainTabView: View {
                                  isSelected: viewModel.selectedTab == .repoList,
                                  action: { viewModel.selectedTab = .repoList }
                    )
-                   
+
                    ZStack {
                        RoundedRectangle(cornerRadius: 50)
                            .fill(Color.accentColor.opacity(0.8))
@@ -67,6 +67,12 @@ struct MainTabView: View {
        }
    }
 
-//#Preview {
-//    MainTabView(selectedTab: .constant(.account), viewModel: PreviewContainer.previewAppViewModel)
-//}
+#Preview {
+    let appCoordinatorViewModel = AppCoordinatorViewModel(
+        appViewModel: PreviewContainer.previewAppViewModel,
+        viewModelFactory: PreviewContainer.previewViewModelFactory
+    )
+
+    MainTabView(viewModel: appCoordinatorViewModel)
+        .modelContainer(PreviewContainer.container)
+}

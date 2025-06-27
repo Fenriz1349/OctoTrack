@@ -11,7 +11,7 @@ struct UserHeaderViewModel {
     let user: User
     let repoCount: Int
     let size: CGFloat = 100
-    
+
     var trackedReposText: String {
         switch repoCount {
         case 0: return String(localized: "noTrackedRepos")
@@ -19,11 +19,11 @@ struct UserHeaderViewModel {
         default: return String(localized: "\(repoCount) reposTracked")
         }
     }
-    
+
     var githubLink: String {
         return "https://github.com/\(user.login)"
     }
-    
+
     var formattedLastUpdate: String? {
         guard let lastUpdate = user.lastUpdate else { return nil }
         return "lastUpdate \(lastUpdate.formatted(date: .abbreviated, time: .shortened))"

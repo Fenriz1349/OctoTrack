@@ -44,7 +44,7 @@ final class AppViewModel: ObservableObject {
     @MainActor
     func initialize() async {
             isInitializing = true
-            
+
             do {
                 let authState = authenticationViewModel.authenticationState
 
@@ -57,7 +57,6 @@ final class AppViewModel: ObservableObject {
                     } else {
                         isLogged = false
                     }
-                    
                 case .expired:
                     if await authenticationViewModel.isTokenValid() {
                         try authenticationViewModel.refreshToken()
@@ -66,7 +65,7 @@ final class AppViewModel: ObservableObject {
                     } else {
                         logoutUser()
                     }
-                    
+
                 case .unauthenticated:
                     logoutUser()
                 }

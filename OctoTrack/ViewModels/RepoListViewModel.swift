@@ -11,7 +11,7 @@ import SwiftUI
 final class RepoListViewModel: ObservableObject {
     enum Feedback: FeedbackHandler, Equatable {
         case none
-        case deleteFail(repoName: String, error : String)
+        case deleteFail(repoName: String, error: String)
 
         var message: String? {
             switch self {
@@ -33,17 +33,17 @@ final class RepoListViewModel: ObservableObject {
     let viewModelFactory: ViewModelFactory
     @Published var selectedPriority: RepoPriority = .all
     @Published var feedback: Feedback = .none
-    
+
     init(dataManager: UserDataManager, viewModelFactory: ViewModelFactory) {
             self.dataManager = dataManager
             self.viewModelFactory = viewModelFactory
         }
-    
+
     var selectedRepositories: [Repository] {
         return dataManager.getRepositoryList(with: selectedPriority)
             .sorted { $0.mostRecentUpdate > $1.mostRecentUpdate }
     }
-    
+
     var repositoryCount: Int {
         return selectedRepositories.count
     }
@@ -51,9 +51,8 @@ final class RepoListViewModel: ObservableObject {
     func deleteRepository(_ repository: Repository) {
         do {
             try dataManager.deleteRepository(repository)
-        }catch {
+        } catch {
             feedback = .deleteFail(repoName: repository.name, error: error.localizedDescription)
         }
     }
 }
-

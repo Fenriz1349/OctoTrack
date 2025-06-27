@@ -46,7 +46,7 @@ final class AddRepoViewModel: ObservableObject {
     let dataManager: UserDataManager
     private let repoGetter: RepoGetter = RepoGetter()
     private let authenticator = GitHubAuthenticator()
-    
+
     var isFormValid: Bool {
         !owner.isEmpty && !repoName.isEmpty
     }
@@ -69,7 +69,7 @@ final class AddRepoViewModel: ObservableObject {
             let repo = try await repoGetter.repoGetter(from: request)
 
             if let currentUser = dataManager.activeUser,
-               currentUser.repoList.contains(where: { $0.id == repo.id })  {
+               currentUser.repoList.contains(where: { $0.id == repo.id }) {
                 feedback = .alreadyTracked(owner: owner, repoName: repoName)
                 isLoading = false
                 return

@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 final class AccountViewModel: ObservableObject {
-    
+
     enum Feedback: FeedbackHandler, Equatable {
         case none
         case emptyRepo
@@ -34,21 +34,23 @@ final class AccountViewModel: ObservableObject {
     }
 
     @Published var showingResetAlert = false
-    @Published var feedback : Feedback = .none
+    @Published var feedback: Feedback = .none
     let dataManager: UserDataManager
     let authenticationViewModel: AuthenticationViewModel
     let viewModelFactory: ViewModelFactory
-    
-    init(dataManager: UserDataManager, authenticationViewModel: AuthenticationViewModel, viewModelFactory: ViewModelFactory) {
+
+    init(dataManager: UserDataManager,
+         authenticationViewModel: AuthenticationViewModel,
+         viewModelFactory: ViewModelFactory) {
         self.dataManager = dataManager
         self.authenticationViewModel = authenticationViewModel
         self.viewModelFactory = viewModelFactory
     }
-    
+
     var shouldShowFeedback: Bool {
         feedback != .none
     }
-    
+
     var repositoryCount: Int {
         return dataManager.activeUser?.repoList.count ?? 0
     }
@@ -56,15 +58,15 @@ final class AccountViewModel: ObservableObject {
     func resetButtonTapped() {
         showingResetAlert = checkIfEmptyRepoList()
     }
-    
+
     func signOut() {
         authenticationViewModel.signOut()
     }
-    
+
     func resetFeedback() {
         feedback = .none
     }
-    
+
     func resetUserRepository() {
         do {
             try dataManager.resetAllRepositories()

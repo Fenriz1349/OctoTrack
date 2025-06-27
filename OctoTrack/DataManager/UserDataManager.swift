@@ -33,7 +33,6 @@ final class UserDataManager: ObservableObject {
         : activeUser.repoList.filter { $0.priority == priority}
     }
 
-
     /// Deactivate all users except the one in parameter
     /// - Parameter user: the user to set as currentUser
     func activateUser(_ user: User) {
@@ -61,7 +60,6 @@ final class UserDataManager: ObservableObject {
             activateUser(user)
         }
     }
-
 
     // MARK: - Repository Methods
 
@@ -98,7 +96,7 @@ final class UserDataManager: ObservableObject {
         modelContext.insert(newRepo)
         currentUser.repoList.append(newRepo)
         currentUser.lastUpdate = Date()
-        
+
         try modelContext.save()
     }
 

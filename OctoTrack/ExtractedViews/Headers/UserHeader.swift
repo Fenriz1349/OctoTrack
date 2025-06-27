@@ -5,7 +5,6 @@
 //  Created by Julien Cotte on 14/02/2025.
 //
 
-
 import SwiftUI
 
 struct UserHeader: View {
@@ -13,7 +12,7 @@ struct UserHeader: View {
    let repoCount: Int
    let refreshID: Int
    var isCompact: Bool = false
-   
+
    private var viewModel: UserHeaderViewModel {
        UserHeaderViewModel(user: user, repoCount: repoCount)
    }

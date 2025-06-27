@@ -23,7 +23,7 @@ struct AsyncAvatarImage: View {
                 image = await loadImage(named: avatarName, urlString: avatarUrl)
             }
     }
-    
+
     private func loadImage(named name: String, urlString: String?) async -> UIImage {
         if let localImage = UIImage(named: name) {
             return localImage

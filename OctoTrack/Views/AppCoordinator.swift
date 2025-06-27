@@ -11,9 +11,9 @@ import SwiftData
 struct AppCoordinator: View {
     @StateObject var viewModel: AppCoordinatorViewModel
     @ObservedObject var appViewModel: AppViewModel
-    
+
     var body: some View {
-        
+
         return Group {
             if appViewModel.isInitializing {
                 VStack {
@@ -47,7 +47,7 @@ struct AppCoordinator: View {
         appViewModel: appViewModel,
         viewModelFactory: viewModelFactory
     )
-    
+
     AppCoordinator(viewModel: appCoordinatorViewModel, appViewModel: appViewModel)
         .modelContainer(PreviewContainer.container)
 }

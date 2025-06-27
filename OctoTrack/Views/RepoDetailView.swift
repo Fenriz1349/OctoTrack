@@ -44,6 +44,7 @@ struct RepoDetailView: View {
 }
 
 #Preview {
-    RepoDetailView(viewModel: RepoDetailsViewModel(repository: PreviewContainer.previewRepository, dataManager: PreviewContainer.mockDataManager) )
+    RepoDetailView(viewModel: RepoDetailsViewModel(repository: PreviewContainer.previewRepository,
+                                                   dataManager: PreviewContainer.mockDataManager) )
         .previewWithContainer()
 }
