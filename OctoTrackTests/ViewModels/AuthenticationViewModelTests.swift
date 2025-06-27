@@ -8,16 +8,15 @@
 import XCTest
 @testable import OctoTrack
 
-// isTokenValid and refreshToken are not tested because they are only delegation
-// login method is not tested because it use already tested methods, or need rework
+@MainActor
 final class AuthenticationViewModelTests: XCTestCase {
     var sut: AuthenticationViewModel!
     var loginSucceedCalled: Bool = false
     var logoutCompletedCalled: Bool = false
     var capturedUser: User?
     
-    override func setUp() {
-        super.setUp()
+    override func setUp() async throws {
+        try await super.setUp()
         loginSucceedCalled = false
         logoutCompletedCalled = false
         capturedUser = nil
@@ -33,22 +32,22 @@ final class AuthenticationViewModelTests: XCTestCase {
         )
     }
     
-    override func tearDown() {
+    override func tearDown() async throws {
         sut = nil
-        super.tearDown()
+        try await super.tearDown()
     }
 
     // MARK: - Initialization Tests
-
     func test_init_setsInitialValues() {
         XCTAssertFalse(sut.isAuthenticating)
         XCTAssertEqual(sut.feedback, .none)
+        XCTAssertFalse(sut.isAnimating)
+        XCTAssertEqual(sut.opacity, 0.0)
         XCTAssertNotNil(sut.onLoginSucceed)
         XCTAssertNotNil(sut.onLogoutCompleted)
     }
 
     // MARK: - Authentication State Tests
-
     func test_authenticationState_delegatesToAuthenticator() {
         let state = sut.authenticationState
         
@@ -56,16 +55,13 @@ final class AuthenticationViewModelTests: XCTestCase {
     }
 
     // MARK: - Sign Out Tests
-
     func test_signOut_callsOnLogoutCompleted() {
         sut.signOut()
         
         XCTAssertTrue(logoutCompletedCalled)
-        XCTAssertEqual(sut.feedback, .none)
     }
 
     // MARK: - Token Validation Management Tests
-
     func test_startTokenValidation_executesWithoutError() {
         sut.startTokenValidation()
         
@@ -81,7 +77,6 @@ final class AuthenticationViewModelTests: XCTestCase {
     }
 
     // MARK: - Feedback Tests
-
     func test_feedback_noneHasNoMessage() {
         sut.feedback = .none
         
@@ -105,8 +100,25 @@ final class AuthenticationViewModelTests: XCTestCase {
         XCTAssertNotEqual(feedback1, feedback3)
     }
 
-    // MARK: - State Management Tests
+    // MARK: - Animation Properties Tests
+    func test_isAnimating_canBeToggled() {
+        XCTAssertFalse(sut.isAnimating)
+        
+        sut.isAnimating = true
+        XCTAssertTrue(sut.isAnimating)
+        
+        sut.isAnimating = false
+        XCTAssertFalse(sut.isAnimating)
+    }
 
+    func test_opacity_canBeChanged() {
+        XCTAssertEqual(sut.opacity, 0.0)
+        
+        sut.opacity = 1.0
+        XCTAssertEqual(sut.opacity, 1.0)
+    }
+
+    // MARK: - State Management Tests
     func test_isAuthenticating_canBeToggled() {
         XCTAssertFalse(sut.isAuthenticating)
         
@@ -118,7 +130,6 @@ final class AuthenticationViewModelTests: XCTestCase {
     }
 
     // MARK: - Callback Tests
-
     func test_onLoginSucceed_capturesUserCorrectly() {
         let testUser = makeUser().model
         

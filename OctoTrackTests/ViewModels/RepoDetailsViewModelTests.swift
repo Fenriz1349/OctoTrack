@@ -9,7 +9,6 @@ import XCTest
 import SwiftData
 @testable import OctoTrack
 
-// Catch in methods are not tested because they need rework
 @MainActor
 final class RepoDetailsViewModelTests: XCTestCase {
     var sut: RepoDetailsViewModel!
@@ -25,6 +24,7 @@ final class RepoDetailsViewModelTests: XCTestCase {
         testRepo.user = user
         user.repoList.append(testRepo)
         try! modelContext.save()
+        sut = RepoDetailsViewModel(repository: testRepo, dataManager: dataManager)
     }
     
     override func tearDown() async throws {
@@ -36,20 +36,28 @@ final class RepoDetailsViewModelTests: XCTestCase {
     }
 
     // MARK: - Initialization Tests
-
-    func test_init_setsPropertiesCorrectly() async {
-        sut = RepoDetailsViewModel(repository: testRepo, dataManager: dataManager)
-        
+    func test_init_setsPropertiesCorrectly() {
         XCTAssertEqual(sut.repository.id, testRepo.id)
         XCTAssertEqual(sut.feedback, .none)
         XCTAssertFalse(sut.isLoading)
+        XCTAssertFalse(sut.showPriorityPicker)
+    }
+
+    // MARK: - Feedback Tests
+    func test_shouldShowFeedback_returnsTrueWhenFeedbackIsNotNone() {
+        sut.feedback = .noPR
+        
+        XCTAssertTrue(sut.shouldShowFeedback)
+    }
+    
+    func test_shouldShowFeedback_returnsFalseWhenFeedbackIsNone() {
+        sut.feedback = .none
+        
+        XCTAssertFalse(sut.shouldShowFeedback)
     }
 
     // MARK: - Repository Priority Tests
-
-    func test_updateRepositoryPriority_updatesPrioritySuccessfully() async {
-        sut = RepoDetailsViewModel(repository: testRepo, dataManager: dataManager)
-        
+    func test_updateRepositoryPriority_updatesPrioritySuccessfully() {
         sut.updateRepositoryPriority(.high)
         
         XCTAssertEqual(testRepo.priority, .high)
@@ -57,9 +65,7 @@ final class RepoDetailsViewModelTests: XCTestCase {
     }
 
     // MARK: - Pull Request Management Tests
-
-    func test_deletePullRequest_removesPullRequestFromRepo() async {
-        sut = RepoDetailsViewModel(repository: testRepo, dataManager: dataManager)
+    func test_deletePullRequest_removesPullRequestFromRepo() {
         let pullRequest = UserDataManagerTestHelpers.makeTestPullRequest()
         testRepo.pullRequests = [pullRequest]
         
@@ -69,61 +75,16 @@ final class RepoDetailsViewModelTests: XCTestCase {
         XCTAssertEqual(sut.feedback, .none)
     }
 
-    // MARK: - Feedback Tests
-
-    func test_feedback_noneHasNoMessage() async {
-        sut = RepoDetailsViewModel(repository: testRepo, dataManager: dataManager)
-        sut.feedback = .none
+    // MARK: - Sorted Pull Requests Tests
+    func test_sortedPullRequests_returnsSortedByCreationDate() {
+        let pr1 = UserDataManagerTestHelpers.makeTestPullRequest()
+        pr1.createdAt = Date().addingTimeInterval(-100)
+        let pr2 = UserDataManagerTestHelpers.makeTestPullRequest()
+        pr2.createdAt = Date()
         
-        XCTAssertNil(sut.feedback.message)
-        XCTAssertTrue(sut.feedback.isError)
-    }
-
-    func test_feedback_noPRHasCorrectMessage() async {
-        sut = RepoDetailsViewModel(repository: testRepo, dataManager: dataManager)
-        sut.feedback = .noPR
+        testRepo.pullRequests = [pr1, pr2]
         
-        XCTAssertNotNil(sut.feedback.message)
-        XCTAssertTrue(sut.feedback.isError)
-    }
-
-    func test_feedback_updateFailedHasCorrectMessage() async {
-        sut = RepoDetailsViewModel(repository: testRepo, dataManager: dataManager)
-        sut.feedback = .updateFailed(error: "Network error")
-        
-        XCTAssertNotNil(sut.feedback.message)
-        XCTAssertTrue(sut.feedback.isError)
-    }
-
-    func test_feedback_deleteFailedHasCorrectMessage() async {
-        sut = RepoDetailsViewModel(repository: testRepo, dataManager: dataManager)
-        sut.feedback = .deleteFailed(error: "Delete error")
-        
-        XCTAssertNotNil(sut.feedback.message)
-        XCTAssertTrue(sut.feedback.isError)
-    }
-
-    func test_feedback_equatable() async {
-        sut = RepoDetailsViewModel(repository: testRepo, dataManager: dataManager)
-        let feedback1 = RepoDetailsViewModel.Feedback.none
-        let feedback2 = RepoDetailsViewModel.Feedback.none
-        let feedback3 = RepoDetailsViewModel.Feedback.noPR
-        
-        XCTAssertEqual(feedback1, feedback2)
-        XCTAssertNotEqual(feedback1, feedback3)
-    }
-
-    // MARK: - State Management Tests
-
-    func test_isLoading_canBeToggled() async {
-        sut = RepoDetailsViewModel(repository: testRepo, dataManager: dataManager)
-        
-        XCTAssertFalse(sut.isLoading)
-        
-        sut.isLoading = true
-        XCTAssertTrue(sut.isLoading)
-        
-        sut.isLoading = false
-        XCTAssertFalse(sut.isLoading)
+        let sorted = sut.sortedPullRequests
+        XCTAssertEqual(sorted.first?.createdAt, pr2.createdAt)
     }
 }

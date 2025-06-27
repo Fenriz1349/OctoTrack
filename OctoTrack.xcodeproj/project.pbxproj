@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		6815BF452E0EDCC8007F63DD /* RepoHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815BF442E0EDCC8007F63DD /* RepoHeaderViewModel.swift */; };
+		6815BF472E0EDFFE007F63DD /* AccountViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815BF462E0EDFFE007F63DD /* AccountViewModelTests.swift */; };
+		6815BF492E0EE030007F63DD /* RepoListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815BF482E0EE030007F63DD /* RepoListViewModelTests.swift */; };
+		6815BF4B2E0EE048007F63DD /* UserHeaderViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815BF4A2E0EE048007F63DD /* UserHeaderViewModelTests.swift */; };
+		6815BF4D2E0EE64C007F63DD /* RepoHeaderViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815BF4C2E0EE64C007F63DD /* RepoHeaderViewModelTests.swift */; };
 		6826E8372D9543830048F35A /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826E8362D9543830048F35A /* UserDataManager.swift */; };
 		6826E8392D9580B80048F35A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826E8382D9580B80048F35A /* AppCoordinator.swift */; };
 		6826E9682D9692710048F35A /* CustomButtonIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826E9672D9692710048F35A /* CustomButtonIcon.swift */; };
@@ -124,6 +128,10 @@
 
 /* Begin PBXFileReference section */
 		6815BF442E0EDCC8007F63DD /* RepoHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoHeaderViewModel.swift; sourceTree = "<group>"; };
+		6815BF462E0EDFFE007F63DD /* AccountViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModelTests.swift; sourceTree = "<group>"; };
+		6815BF482E0EE030007F63DD /* RepoListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListViewModelTests.swift; sourceTree = "<group>"; };
+		6815BF4A2E0EE048007F63DD /* UserHeaderViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderViewModelTests.swift; sourceTree = "<group>"; };
+		6815BF4C2E0EE64C007F63DD /* RepoHeaderViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoHeaderViewModelTests.swift; sourceTree = "<group>"; };
 		6826E8362D9543830048F35A /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		6826E8382D9580B80048F35A /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6826E9672D9692710048F35A /* CustomButtonIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonIcon.swift; sourceTree = "<group>"; };
@@ -506,6 +514,10 @@
 				685A33112DFC477A007E89AE /* AppViewModelTests.swift */,
 				685A33132DFC4B3A007E89AE /* AuthenticationViewModelTests.swift */,
 				685A33152DFC4E0E007E89AE /* RepoDetailsViewModelTests.swift */,
+				6815BF462E0EDFFE007F63DD /* AccountViewModelTests.swift */,
+				6815BF482E0EE030007F63DD /* RepoListViewModelTests.swift */,
+				6815BF4A2E0EE048007F63DD /* UserHeaderViewModelTests.swift */,
+				6815BF4C2E0EE64C007F63DD /* RepoHeaderViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -778,7 +790,9 @@
 				68DB04692DCDE486006A4813 /* ASWebAuthenticationSessionMock.swift in Sources */,
 				684F7C992D8DAA210044367F /* UserEndpointTest.swift in Sources */,
 				685A32FB2DFC0778007E89AE /* PullRequestEndpointTests.swift in Sources */,
+				6815BF472E0EDFFE007F63DD /* AccountViewModelTests.swift in Sources */,
 				68CCBC432DF2D41800B4DB5A /* RepoMapperTests.swift in Sources */,
+				6815BF492E0EE030007F63DD /* RepoListViewModelTests.swift in Sources */,
 				685A33092DFC2A26007E89AE /* UserDataManagerTestHelpers.swift in Sources */,
 				68DB046F2DCDE817006A4813 /* GitHubAuthenticatorTests.swift in Sources */,
 				685A33142DFC4B3A007E89AE /* AuthenticationViewModelTests.swift in Sources */,
@@ -792,10 +806,12 @@
 				685A32FD2DFC07AD007E89AE /* PullRequestGetterTests.swift in Sources */,
 				68DB04672DCDE433006A4813 /* KeychainServiceSpy.swift in Sources */,
 				68DB04712DCDEAA3006A4813 /* URLProtocolStub.swift in Sources */,
+				6815BF4B2E0EE048007F63DD /* UserHeaderViewModelTests.swift in Sources */,
 				684F7C9C2D8DAA210044367F /* EndpointBuilderTest.swift in Sources */,
 				684F7C9E2D8DAA210044367F /* HTTPClientStub.swift in Sources */,
 				685A330B2DFC2A93007E89AE /* UserDataManagerTests.swift in Sources */,
 				684F7C9F2D8DAA210044367F /* SharedTestHelpers.swift in Sources */,
+				6815BF4D2E0EE64C007F63DD /* RepoHeaderViewModelTests.swift in Sources */,
 				68DB046D2DCDE73C006A4813 /* GitHubAuthenticationMapperTests.swift in Sources */,
 				68CCBC3F2DF2D3B200B4DB5A /* RepoEndpointTests.swift in Sources */,
 			);
