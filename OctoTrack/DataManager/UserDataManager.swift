@@ -8,9 +8,9 @@
 import SwiftUI
 import SwiftData
 
-@Observable final class UserDataManager {
+final class UserDataManager: ObservableObject {
     var modelContext: ModelContext
-    var isSucess: Bool = false
+    @Published var isSucess: Bool = false
 
     var activeUser: User? {
         try? modelContext.fetch(FetchDescriptor<User>(predicate: #Predicate { $0.isActiveUser })).first

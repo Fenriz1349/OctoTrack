@@ -10,7 +10,7 @@ import SwiftUI
 struct PullRequestDetailView: View {
     let pullRequest: PullRequest
     let repository: Repository
-
+#warning("inserer dans un VM")
     private var link: String {
         "https://github.com/\(repository.owner.login)/\(repository.name)/pull/\(pullRequest.number)"
     }

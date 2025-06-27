@@ -9,31 +9,45 @@ import SwiftUI
 import SwiftData
 
 struct AppCoordinator: View {
-    @State var viewModel: AppViewModel
-    @Environment(\.modelContext) private var modelContext
-    @State private var  tab: Tab = .repoList
-
+    @StateObject var viewModel: AppCoordinatorViewModel
+    @ObservedObject var appViewModel: AppViewModel
+    
     var body: some View {
-        Group {
-            if viewModel.isInitializing {
-                LoadingView()
-                .task {
-                    viewModel.dataManager.modelContext = modelContext
-                    await viewModel.initialize()
+        
+        return Group {
+            if appViewModel.isInitializing {
+                VStack {
+                    LoadingView()
                 }
-            } else if viewModel.isLogged {
-                MainTabView(selectedTab: $tab, viewModel: viewModel)
+                .onAppear {
+                    Task {
+                        await viewModel.initialize()
+                    }
+                }
+            } else if appViewModel.isLogged {
+                VStack {
+                    MainTabView(viewModel: viewModel)
+                }
             } else {
-                AuthenticationView(viewModel: viewModel.authenticationViewModel)
-                    .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),
-                                            removal: .move(edge: .top).combined(with: .opacity)))
+                VStack {
+                    AuthenticationView(viewModel: viewModel.authenticationViewModel)
+                        .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),
+                                                removal: .move(edge: .top).combined(with: .opacity)))
+                }
             }
         }
     }
 }
 
 #Preview {
-    let viewModel = PreviewContainer.previewAppViewModel
-    AppCoordinator(viewModel: viewModel)
-        .previewWithContainer()
+    let dataManager = UserDataManager(modelContext: PreviewContainer.container.mainContext)
+    let appViewModel = AppViewModel(dataManager: dataManager)
+    let viewModelFactory = ViewModelFactory(dataManager: dataManager)
+    let appCoordinatorViewModel = AppCoordinatorViewModel(
+        appViewModel: appViewModel,
+        viewModelFactory: viewModelFactory
+    )
+    
+    AppCoordinator(viewModel: appCoordinatorViewModel, appViewModel: appViewModel)
+        .modelContainer(PreviewContainer.container)
 }

@@ -17,10 +17,7 @@ struct LoadingView: View {
             Text("octotrack")
                 .font(.title)
                 .fontWeight(.bold)
-            Image("AppLogo")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 120, height: 120)
+            AsyncAvatarImage(avatarName: "", avatarUrl: "", size: 150)
                 .scaleEffect(isAnimating ? 1.1 : 1.0)
                 .opacity(opacity)
             

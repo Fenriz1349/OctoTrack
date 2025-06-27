@@ -27,13 +27,6 @@ import SwiftData
 }
 
 extension User {
-    var trackedReposText: String {
-        switch repoList.count {
-        case 0: return String(localized: "noTrackedRepos")
-        case 1: return String(localized: "oneTrackedRepo")
-        default: return String(localized: "\(repoList.count) reposTracked")
-        }
-    }
 
     func toOwner() -> Owner {
         return Owner(id: id, login: login, avatarURL: avatarURL)

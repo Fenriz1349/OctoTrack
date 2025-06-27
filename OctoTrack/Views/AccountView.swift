@@ -8,16 +8,22 @@
 import SwiftUI
 
 struct AccountView: View {
-    @State var appViewModel: AppViewModel
-    @State private var showingResetAlert = false
+    @StateObject var viewModel: AccountViewModel
+    @State private var headerRefreshID = 0
 
     var body: some View {
         VStack(spacing: 24) {
-            UserHeader()
-
+            UserHeader(
+                user: viewModel.dataManager.activeUser!,
+                repoCount: viewModel.dataManager.activeUser!.repoList.count,
+                refreshID: headerRefreshID
+            )
+            .onChange(of: viewModel.dataManager.activeUser?.repoList.count) {
+                headerRefreshID += 1
+            }
             VStack(spacing: 16) {
                 Button {
-                    showingResetAlert = appViewModel.checkIfEmptyRepoList()
+                    viewModel.resetButtonTapped()
                 } label: {
                     CustomButtonLabel(
                         iconLeading: .trash,
@@ -25,16 +31,16 @@ struct AccountView: View {
                         color: .customOrange
                     )
                 }
-                .alert("confirmation", isPresented: $showingResetAlert) {
+                .alert("confirmation", isPresented: $viewModel.showingResetAlert) {
                     Button("cancel", role: .cancel) { }
                     Button("reset", role: .destructive) {
-                        appViewModel.resetUserRepository()
+                        viewModel.resetUserRepository()
                     }
                 } message: {
                     Text("resetAlert")
                 }
                 Button {
-                    appViewModel.authenticationViewModel.signOut()
+                    viewModel.signOut()
                 } label: {
                     CustomButtonLabel(
                         iconLeading: .signOut,
@@ -42,13 +48,13 @@ struct AccountView: View {
                         color: .customRed
                     )
                 }
-                if appViewModel.feedback != .none {
-                    FeedbackLabel(feedback: appViewModel.feedback)
+                if viewModel.shouldShowFeedback{
+                    FeedbackLabel(feedback: viewModel.feedback)
                 }
             }
-            .onChange(of: appViewModel.feedback) {
+            .onChange(of: viewModel.feedback) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    appViewModel.feedback = .none
+                    viewModel.resetFeedback()
                 }
             }
             .padding(.horizontal, 20)
@@ -59,7 +65,7 @@ struct AccountView: View {
     }
 }
 
-#Preview {
-    AccountView(appViewModel: PreviewContainer.previewAppViewModel)
-        .previewWithContainer()
-}
+//#Preview {
+//    AccountView(viewModel: AccountViewModel(appViewModel: PreviewContainer.previewAppViewModel) )
+//    .previewWithContainer()
+//}

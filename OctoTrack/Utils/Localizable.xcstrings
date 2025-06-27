@@ -67,6 +67,16 @@
         }
       }
     },
+    "addFail %@: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "addFail %1$@: %2$@"
+          }
+        }
+      }
+    },
     "addFail %@/%@: %@" : {
       "extractionState" : "manual",
       "localizations" : {
