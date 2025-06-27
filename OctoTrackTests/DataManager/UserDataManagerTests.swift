@@ -130,15 +130,17 @@ final class UserDataManagerTests: XCTestCase {
 
     // MARK: - Repository Methods Tests
 
-    func test_storeNewRepo_createsRepoWithCompositeId() throws {
+    func test_storeNewRepo_createsOwnerWithUniqueId() throws {
         let user = UserDataManagerTestHelpers.createActiveUser(in: modelContext)
         let repo = UserDataManagerTestHelpers.makeTestRepository()
+        let originalOwnerId = repo.owner.id
         
         try sut.storeNewRepo(repo)
         
-        let expectedId = "\(user.id)_\(repo.id)".hashValue
-        XCTAssertTrue(user.repoList.contains(where: { $0.id == expectedId }))
-        XCTAssertEqual(user.repoList.count, 1)
+        let createdRepo = user.repoList.first!
+        XCTAssertNotEqual(createdRepo.owner.id, originalOwnerId)
+        XCTAssertEqual(createdRepo.owner.login, repo.owner.login)
+        XCTAssertEqual(createdRepo.owner.avatarURL, repo.owner.avatarURL)
     }
 
     func test_storeNewRepo_doesNotAddDuplicateRepo() throws {
@@ -151,15 +153,16 @@ final class UserDataManagerTests: XCTestCase {
         XCTAssertEqual(user.repoList.count, 1)
     }
 
-    func test_storeNewRepo_createsOwnerWithCompositeId() throws {
+    func test_storeNewRepo_createsRepoWithUniqueId() throws {
         let user = UserDataManagerTestHelpers.createActiveUser(in: modelContext)
         let repo = UserDataManagerTestHelpers.makeTestRepository()
+        let originalRepoId = repo.id
         
         try sut.storeNewRepo(repo)
         
         let createdRepo = user.repoList.first!
-        let expectedOwnerId = "\(user.id)_\(repo.owner.id)".hashValue
-        XCTAssertEqual(createdRepo.owner.id, expectedOwnerId)
+        XCTAssertNotEqual(createdRepo.id, originalRepoId)
+        XCTAssertEqual(user.repoList.count, 1)
     }
 
     func test_storeNewRepo_linksRepoToUser() throws {

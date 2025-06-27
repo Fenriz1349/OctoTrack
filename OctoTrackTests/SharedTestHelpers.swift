@@ -200,3 +200,56 @@ func makePullRequestListResponse() -> (model: [PullRequest], json: Data) {
 
     return (models, try! JSONSerialization.data(withJSONObject: jsonArray))
 }
+
+// MARK: - ViewModel Test Helpers
+
+@MainActor
+func makeAuthenticationViewModel() -> AuthenticationViewModel {
+    return AuthenticationViewModel(
+        onLoginSucceed: { _ in },
+        onLogoutCompleted: { }
+    )
+}
+
+@MainActor
+func makeAppViewModel() -> AppViewModel {
+    let (dataManager, _) = UserDataManagerTestHelpers.createUserDataManager()
+    return AppViewModel(dataManager: dataManager)
+}
+
+@MainActor
+func makeAccountViewModel() -> AccountViewModel {
+    let (dataManager, _) = UserDataManagerTestHelpers.createUserDataManager()
+    let authViewModel = makeAuthenticationViewModel()
+    let viewModelFactory = ViewModelFactory(dataManager: dataManager)
+    return AccountViewModel(
+        dataManager: dataManager,
+        authenticationViewModel: authViewModel,
+        viewModelFactory: viewModelFactory
+    )
+}
+
+@MainActor
+func makeRepoListViewModel() -> RepoListViewModel {
+    let (dataManager, _) = UserDataManagerTestHelpers.createUserDataManager()
+    let viewModelFactory = ViewModelFactory(dataManager: dataManager)
+    return RepoListViewModel(dataManager: dataManager, viewModelFactory: viewModelFactory)
+}
+
+@MainActor
+func makeRepoDetailsViewModel() -> RepoDetailsViewModel {
+    let (dataManager, _) = UserDataManagerTestHelpers.createUserDataManager()
+    let testRepo = makeTestRepository()
+    return RepoDetailsViewModel(repository: testRepo, dataManager: dataManager)
+}
+
+@MainActor
+func makeAddRepoViewModel() -> AddRepoViewModel {
+    let (dataManager, _) = UserDataManagerTestHelpers.createUserDataManager()
+    return AddRepoViewModel(dataManager: dataManager)
+}
+
+func makeUserHeaderViewModel() -> UserHeaderViewModel {
+    let testUser = makeUser().model
+    return UserHeaderViewModel(user: testUser, repoCount: 3)
+}
