@@ -117,7 +117,7 @@ final class AddRepoViewModelTests: XCTestCase {
         user.repoList.append(existingRepo)
         
         let duplicateRepo = UserDataManagerTestHelpers.makeTestRepository()
-        duplicateRepo.id = 12345  // Même ID
+        duplicateRepo.id = 12345
         
         let isDuplicate = user.repoList.contains(where: { $0.id == duplicateRepo.id })
         
@@ -135,9 +135,7 @@ final class AddRepoViewModelTests: XCTestCase {
             await sut.getRepo()
         }
         
-        // Vérifier immédiatement que isLoading est true au début
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            // Le loading pourrait déjà être false si l'API call échoue rapidement
             expectation.fulfill()
         }
         
@@ -145,7 +143,6 @@ final class AddRepoViewModelTests: XCTestCase {
     }
 
     func test_getRepo_detectsExistingRepoById() {
-        // Test de la logique de détection de doublon uniquement
         let user = dataManager.activeUser!
         let existingRepo = UserDataManagerTestHelpers.makeTestRepository()
         existingRepo.id = 12345

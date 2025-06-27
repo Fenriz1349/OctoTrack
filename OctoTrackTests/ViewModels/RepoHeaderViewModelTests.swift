@@ -104,7 +104,6 @@ final class RepoHeaderViewModelTests: XCTestCase {
     private func makeTestPullRequest(state: Status) -> PullRequest {
         let pr = UserDataManagerTestHelpers.makeTestPullRequest()
         
-        // Simuler l'état en modifiant les dates appropriées
         switch state {
         case .open:
             pr.closedAt = nil
