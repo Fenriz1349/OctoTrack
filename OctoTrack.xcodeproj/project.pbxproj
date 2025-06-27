@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6815BF452E0EDCC8007F63DD /* RepoHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815BF442E0EDCC8007F63DD /* RepoHeaderViewModel.swift */; };
 		6826E8372D9543830048F35A /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826E8362D9543830048F35A /* UserDataManager.swift */; };
 		6826E8392D9580B80048F35A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826E8382D9580B80048F35A /* AppCoordinator.swift */; };
 		6826E9682D9692710048F35A /* CustomButtonIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826E9672D9692710048F35A /* CustomButtonIcon.swift */; };
@@ -122,6 +123,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6815BF442E0EDCC8007F63DD /* RepoHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoHeaderViewModel.swift; sourceTree = "<group>"; };
 		6826E8362D9543830048F35A /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		6826E8382D9580B80048F35A /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6826E9672D9692710048F35A /* CustomButtonIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonIcon.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				685B623B2E0E7EE000FB2F52 /* ViewModelFactory.swift */,
 				685B623D2E0E811600FB2F52 /* AppCoordinatorViewModel.swift */,
 				685B62432E0EBE2D00FB2F52 /* UserHeaderViewModel.swift */,
+				6815BF442E0EDCC8007F63DD /* RepoHeaderViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -747,6 +750,7 @@
 				684F7C852D8DAA1A0044367F /* AuthenticationViewModel.swift in Sources */,
 				684F7C882D8DAA1A0044367F /* AccountView.swift in Sources */,
 				68C02ED72D9FD9540065027F /* RepoHeader.swift in Sources */,
+				6815BF452E0EDCC8007F63DD /* RepoHeaderViewModel.swift in Sources */,
 				685B62402E0E828B00FB2F52 /* AccountViewModel.swift in Sources */,
 				68C02ECD2D9FBA360065027F /* PullRequestGetter.swift in Sources */,
 				6826E8392D9580B80048F35A /* AppCoordinator.swift in Sources */,

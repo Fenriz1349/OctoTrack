@@ -10,23 +10,10 @@ import SwiftUI
 struct RepoHeader: View {
     @Bindable var repository: Repository
     var viewModel: RepoDetailsViewModel?
+    var repoHeaderViewModel :  RepoHeaderViewModel {
+        RepoHeaderViewModel(repository: repository)
+    }
     var isCompact: Bool = false
-
-    private var openPRCount: Int {
-        repository.pullRequests.filter { $0.state == .open }.count
-    }
-
-    private var closedPRCount: Int {
-        repository.pullRequests.filter { $0.state == .closed }.count
-    }
-
-    private var mergedPRCount: Int {
-        repository.pullRequests.filter { $0.state == .merged }.count
-    }
-
-    private var totalPRCount: Int {
-        repository.pullRequests.count
-    }
 
     var body: some View {
         VStack(spacing: 12) {
@@ -42,11 +29,11 @@ struct RepoHeader: View {
             if !isCompact {
                 Divider()
                     .background(Color("DividerColor"))
-                PRCategoryCounterRow(totalCount: totalPRCount,
-                                     openCount: openPRCount,
-                                     closedCount: closedPRCount,
-                                     mergedcount: mergedPRCount,
-                                     language: repository.language)
+                PRCategoryCounterRow(totalCount: repoHeaderViewModel.totalPRCount,
+                                     openCount: repoHeaderViewModel.openPRCount,
+                                     closedCount: repoHeaderViewModel.closedPRCount,
+                                     mergedcount: repoHeaderViewModel.mergedPRCount,
+                                     language: repoHeaderViewModel.repository.language)
                 Divider()
                     .background(Color("DividerColor"))
                 DateRow(creationDate: repository.createdAt,
