@@ -11,7 +11,7 @@ struct RepoHeader: View {
     @Bindable var repository: Repository
     var viewModel: RepoDetailsViewModel?
     var isCompact: Bool = false
-#warning("inserer dans un VM")
+
     private var openPRCount: Int {
         repository.pullRequests.filter { $0.state == .open }.count
     }
