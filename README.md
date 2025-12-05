@@ -171,6 +171,30 @@ OctoTrack integrates with the GitHub REST API v3:
 
 All network requests use modern Swift Concurrency (async/await).
 
+## 📸 Screenshots
+
+Below are a few screenshots showcasing the main modules of Octotrack.
+
+### ↗️ Authentication
+<p align="center">
+  <img src="Screenshots/authentication.png" height="300">
+</p>
+
+### 📁 Repository List
+<p align="center">
+  <img src="Screenshots/repoList.png" height="300">
+</p>
+
+### 🧑‍💻 Repository
+<p align="center">
+  <img src="Screenshots/repository.png"height="300">
+</p>
+
+### 🔎 Pull Request
+<p align="center">
+  <img src="Screenshots/detail.png" height="300">
+</p>
+
 ## 🎨 Customization
 
 ### Priority Colors
@@ -195,16 +219,6 @@ Add new languages by extending `Localizable.xcstrings` with your locale.
 - Token validation requires active network connection
 - Large repository lists may experience slight loading delays
 - OAuth flow requires Safari for authentication
-
-## 🗺 Roadmap
-
-- [ ] GitHub Actions integration
-- [ ] Issue tracking support
-- [ ] Widget support
-- [ ] Apple Watch companion app
-- [ ] Push notifications for PR updates
-- [ ] Commit history visualization
-- [ ] Multiple account support
 
 ## 👨‍💻 Development
 
